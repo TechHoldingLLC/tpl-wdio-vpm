@@ -7,3 +7,4 @@ Webdriver io Setup and Framework intro steps
 4. Answer all the questions that are visible on the terminal while setting up the WDIO and finish up the setup. Make sure to have below mentioned Key features while setting up the project:
  - Typescript
  - Mocha Framework
+5. For executing the scripts use command: **npm run wdio**
