@@ -1,0 +1,19 @@
+{
+
+    "ProductED" : "Tadalafil",
+    "ProductED2" : "Sildenafil",
+    "ProductPE" : "Paroxetine",
+    "ProductHL" : "Finasteride",
+    "ProductGH" : "Acyclovir",
+    "ProductWL" : "Semaglutide",
+
+    "semaglutide_form" : {
+
+        "wl_firstname" : "WdioAutomated",
+        "wl_lastname" : "User" ,
+        "wl_cellnum": 8602949015,
+        "wl_email" : "wdio_auto@gmail.com",
+        "wl_success" : "Thank You!"
+    }
+
+}

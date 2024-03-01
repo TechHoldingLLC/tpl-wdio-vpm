@@ -1,0 +1,15 @@
+{
+    "invalid" : {
+    "email" : "prabhav.joshi+11@techholding.co",
+    "password" : "Test@1234"
+    },
+
+    "valid" : {
+    "email" : "wdio_auto+4@gmail.co",
+    "password" : "Test@123"
+    },
+
+    "toastMessage" : "Invalid Credentials",
+    "successMessage" : "Registration Successful!"
+
+}

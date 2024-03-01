@@ -1,0 +1,12 @@
+{
+    "option" : "Cancel Subscription",
+    "firstname" : "Prabhav",
+    "lastname": "Joshi",
+    "email": "prabhav.joshi@techholding.co",
+    "invalid_email" : "prabhav.joshi@tech",
+    "contactnumber": 8602949015,
+    "description": "This is a sample Contact us form which is submitted via Wdio",
+    "contactSuccessmessage" : "Your message has been sent",
+    "errorMessage" : "Failed to save query"
+
+}
