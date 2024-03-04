@@ -1,9 +1,9 @@
 {
     "option" : "Cancel Subscription",
-    "firstname" : "Prabhav",
-    "lastname": "Joshi",
+    "firstname" : "Wdio",
+    "lastname": "Automation",
     "email": "prabhav.joshi@techholding.co",
-    "invalid_email" : "prabhav.joshi@tech",
+    "invalid_email" : "wdio@tech",
     "contactnumber": 8602949015,
     "description": "This is a sample Contact us form which is submitted via Wdio",
     "contactSuccessmessage" : "Your message has been sent",

@@ -19,7 +19,8 @@ class LoginPage extends Page {
   }
   get invalidAlert() {
     return $(
-      '[class$="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click"]'
+      ".Toastify__toast-body"
+      // "[style$='display: flex; flex-grow: 1; font-size: 15px; padding: 8px 12px;']""
     );
   }
   get hamburgericon() {

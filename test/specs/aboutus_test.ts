@@ -1,18 +1,20 @@
 import { expect } from "@wdio/globals";
 import AboutUsPage from "../pageobjects/aboutus.page";
+import pagetitle from "../data/pageTitles.json";
 
 describe("About Us Feature", () => {
-  before("Open About Us Page", async () => {
+  before("Verify About Us Page", async () => {
     await AboutUsPage.openAboutus();
+    await browser.maximizeWindow();
   });
 
-  it("About Us Page - TC06", async () => {
-    await browser.pause(5000);
-    await expect(browser).toHaveTitle("About Us | Viapromeds");
+  it("Verify About Us Page - TC14", async () => {
+    await browser.pause(7000);
+    await expect(browser).toHaveTitle(pagetitle.pg_title_about_us);
     await expect(AboutUsPage.aboutusContent).toBeDisplayed();
-    await browser.pause(3000);
+    await browser.pause(7000);
     await AboutUsPage.aboutUs();
-    await browser.pause(3000);
+    await browser.pause(7000);
     await expect(AboutUsPage.iconsultIntro).toBeDisplayed();
   });
 });

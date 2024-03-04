@@ -29,8 +29,8 @@ class ProductDetail extends Page {
     return $("[href$='/en/products/Acyclovir']");
   }
 
-  public get productTitle() {
-    return $("h1");
+  public get productfaq() {
+    return $("h3");
   }
 
   public get wlfirstname() {

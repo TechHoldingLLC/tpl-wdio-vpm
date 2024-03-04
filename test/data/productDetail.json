@@ -14,6 +14,11 @@
         "wl_cellnum": 8602949015,
         "wl_email" : "wdio_auto@gmail.com",
         "wl_success" : "Thank You!"
-    }
+    },
 
+    "faq_title_Tadalafil" : "Erectile Dysfunction FAQs",
+    "faq_title_Sildanafil" : "Erectile Dysfunction FAQs",
+    "faq_title_Paroxetine" : "Premature Ejaculation FAQs",
+    "faq_title_Finasteride" : "Hair Loss FAQs",
+    "faq_title_Acyclovir" : "Genital Herpes FAQs"
 }

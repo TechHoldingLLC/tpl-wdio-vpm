@@ -1,16 +1,15 @@
 import homePage from "../pageobjects/home.page";
 import LoginPage from "../pageobjects/vpm_login.page";
+import pagetitle from "../data/pageTitles.json";
 
 describe("HomePage Features", () => {
-  before("Open VPM Site", async () => {
+  before("Verify VPM Homepage", async () => {
     await homePage.openHomepage();
   });
 
-  it("Fetch all hyperlinks from Homepage - TC05", async () => {
-    await browser.pause(5000);
-    // await expect(browser).toHaveTitle(
-    // "Pioneering Latino Health through Cultural Relevance - ViaproMeds"
-    // );
+  it("Verify all hyperlinks on the Homepage - TC05", async () => {
+    await browser.pause(3000);
+    await expect(browser).toHaveTitle(pagetitle.pg_title_home);
     for (let i = 0; i < (await LoginPage.elements.length); i++) {
       const linktext = await (await LoginPage.elements[i]).getText();
       if (linktext !== "") {
@@ -19,15 +18,17 @@ describe("HomePage Features", () => {
     }
   });
 
-  it("Open FAQ Page - TC06", async () => {
+  it("Verify FAQ Page - TC06", async () => {
+    await browser.pause(7000);
     await homePage.faqLink.click();
-    await browser.pause(5000);
-    await expect(browser).toHaveTitle("FAQ | Viapromeds");
+    await browser.pause(7000);
+    await expect(browser).toHaveTitle(pagetitle.pg_title_faq);
   });
 
-  it("How it Works - TC07", async () => {
-    await homePage.howitworksLink.click();
+  it("Verify How it Works Page - TC07", async () => {
     await browser.pause(5000);
-    await expect(browser).toHaveTitle("How It Works | Viapromeds");
+    await homePage.howitworksLink.click();
+    await browser.pause(7000);
+    await expect(browser).toHaveTitle(pagetitle.pg_title_howitworks);
   });
 });
