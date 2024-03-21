@@ -14,7 +14,7 @@ class AboutUsPage extends Page {
     return $('[class$="title"]');
   }
 
-  public async aboutUs() {
+  public async aboutUsPage() {
     await this.productthumbnail.click();
   }
 

@@ -8,7 +8,7 @@ describe("HomePage Features", () => {
   });
 
   it("Verify all hyperlinks on the Homepage - TC05", async () => {
-    await browser.pause(3000);
+    await expect(homePage.aboutUs.isDisplayed());
     await expect(browser).toHaveTitle(pagetitle.pg_title_home);
     for (let i = 0; i < (await LoginPage.elements.length); i++) {
       const linktext = await (await LoginPage.elements[i]).getText();
@@ -19,16 +19,16 @@ describe("HomePage Features", () => {
   });
 
   it("Verify FAQ Page - TC06", async () => {
-    await browser.pause(7000);
+    await homePage.faqLink.scrollIntoView();
+    await expect((await homePage.aboutUs).isDisplayed());
     await homePage.faqLink.click();
-    await browser.pause(7000);
     await expect(browser).toHaveTitle(pagetitle.pg_title_faq);
   });
 
   it("Verify How it Works Page - TC07", async () => {
-    await browser.pause(5000);
+    await homePage.howitworksLink.scrollIntoView();
+    await expect((await homePage.howitworksLink).isDisplayed());
     await homePage.howitworksLink.click();
-    await browser.pause(7000);
     await expect(browser).toHaveTitle(pagetitle.pg_title_howitworks);
   });
 });

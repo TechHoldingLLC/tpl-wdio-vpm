@@ -9,12 +9,9 @@ describe("About Us Feature", () => {
   });
 
   it("Verify About Us Page - TC14", async () => {
-    await browser.pause(7000);
     await expect(browser).toHaveTitle(pagetitle.pg_title_about_us);
     await expect(AboutUsPage.aboutusContent).toBeDisplayed();
-    await browser.pause(7000);
-    await AboutUsPage.aboutUs();
-    await browser.pause(7000);
+    await AboutUsPage.aboutUsPage();
     await expect(AboutUsPage.iconsultIntro).toBeDisplayed();
   });
 });

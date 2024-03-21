@@ -1,15 +1,15 @@
 {
-    "invalid" : {
-    "email" : "wdio.auto+11@techholding.co",
-    "password" : "Test@1234"
+    "login_invalid" : {
+    "login_email" : "wdio.auto+11@techholding.co",
+    "login_password" : "Test@1234"
     },
 
-    "valid" : {
-    "email" : "wdio_auto+4@gmail.co",
-    "password" : "Test@123"
+    "login_valid" : {
+    "login_email" : "wdio_auto+3@gmail.co",
+    "login_password" : "Test@123"
     },
 
-    "toastMessage" : "Invalid Credentials",
-    "successMessage" : "Registration Successful!"
+    "login_toastMessage" : "Invalid Credentials",
+    "login_successMessage" : "Registration Successful!"
 
 }

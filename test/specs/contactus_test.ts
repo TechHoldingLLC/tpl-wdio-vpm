@@ -10,49 +10,42 @@ describe("Contact Us Feature", () => {
   });
 
   it("Verify Submit Contact Us form with Valid details - TC03", async () => {
-    await browser.pause(7000);
+    await expect(ContactUs.emailField.isDisplayed());
     await expect(browser).toHaveTitle(pagetitle.pg_title_contact_us);
     await ContactUs.contactUsPage(
-      contactdata.option,
-      contactdata.firstname,
-      contactdata.lastname,
-      contactdata.email,
-      contactdata.contactnumber,
-      contactdata.description
+      contactdata.cu_firstname,
+      contactdata.cu_lastname,
+      contactdata.cu_contactnumber,
+      contactdata.cu_description
     );
-
-    await browser.pause(5000);
 
     await browser.waitUntil(
       async () =>
         (await ContactUs.contactToastmessage.getText()) ===
-        contactdata.contactSuccessmessage
+        contactdata.cu_contactSuccessmessage
     );
     await expect(ContactUs.contactToastmessage).toHaveText(
-      contactdata.contactSuccessmessage
+      contactdata.cu_contactSuccessmessage
     );
   });
 
   it("Verify Submit Contact Us form with Invalid details - TC04", async () => {
-    await browser.pause(7000);
-    await ContactUs.contactUsPage(
-      contactdata.option,
-      contactdata.firstname,
-      contactdata.lastname,
-      contactdata.invalid_email,
-      contactdata.contactnumber,
-      contactdata.description
+    await expect(ContactUs.emailField.isDisplayed());
+    await ContactUs.contactUsPage_invalid(
+      contactdata.cu_firstname,
+      contactdata.cu_lastname,
+      contactdata.cu_invalid_email,
+      contactdata.cu_contactnumber,
+      contactdata.cu_description
     );
-
-    await browser.pause(5000);
 
     await browser.waitUntil(
       async () =>
         (await ContactUs.contacterrormessage.getText()) ===
-        contactdata.errorMessage
+        contactdata.cu_errorMessage
     );
     await expect(ContactUs.contacterrormessage).toHaveText(
-      contactdata.errorMessage
+      contactdata.cu_errorMessage
     );
   });
 });

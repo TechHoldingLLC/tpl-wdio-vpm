@@ -9,19 +9,27 @@ describe("VPM Login Feature", () => {
   });
 
   it("Verify Login with Invalid credentials - TC01", async () => {
-    await browser.pause(3000);
-    await LoginPage.login(logindata.invalid.email, logindata.invalid.password);
+    await expect(LoginPage.inputUsername).toBeDisplayed();
+    await LoginPage.login(
+      logindata.login_invalid.login_email,
+      logindata.login_invalid.login_password
+    );
     await browser.waitUntil(
       async () =>
-        (await LoginPage.invalidAlert.getText()) === logindata.toastMessage
+        (await LoginPage.invalidAlert.getText()) ===
+        logindata.login_toastMessage
     );
-    await expect(LoginPage.invalidAlert).toHaveText(logindata.toastMessage);
+    await expect(LoginPage.invalidAlert).toHaveText(
+      logindata.login_toastMessage
+    );
   });
 
   it("Verify Login with Valid credentials - TC02", async () => {
-    await browser.pause(3000);
-    await LoginPage.login(logindata.valid.email, logindata.valid.password);
-    await browser.pause(3000);
+    await expect(LoginPage.inputUsername).toBeDisplayed();
+    await LoginPage.login(
+      logindata.login_valid.login_email,
+      logindata.login_valid.login_password
+    );
     await expect(LoginPage.hamburgericon).toBeDisplayed();
   });
 });

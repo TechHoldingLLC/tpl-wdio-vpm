@@ -67,13 +67,14 @@ class ProductDetail extends Page {
   async submitSemaglutideform(
     wl_firstname: string,
     wl_lastname: string,
-    wl_cellnum: number,
-    wl_email: string
+    wl_cellnum: number
   ) {
     await this.wlfirstname.setValue(wl_firstname);
     await this.wllastname.setValue(wl_lastname);
     await this.wlmobilenum.setValue(wl_cellnum);
-    await this.wlemail.setValue(wl_email);
+    await this.wlemail.setValue(
+      `wdio_auto${Math.floor(Math.random() * 1e9)}@gmail.com`
+    );
     await this.wlcheckbox.click();
     await browser.pause(3000);
     await this.btnSubmit.click();

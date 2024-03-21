@@ -1,24 +1,24 @@
 {
 
-    "ProductED" : "Tadalafil",
-    "ProductED2" : "Sildenafil",
-    "ProductPE" : "Paroxetine",
-    "ProductHL" : "Finasteride",
-    "ProductGH" : "Acyclovir",
-    "ProductWL" : "Semaglutide",
+    "product_tadalafil" : "Tadalafil",
+    "product_sildenafil" : "Sildenafil",
+    "product_paroxetine" : "Paroxetine",
+    "product_finasteride" : "Finasteride",
+    "product_acyclovir" : "Acyclovir",
+    "product_semaglutide" : "Semaglutide",
 
-    "semaglutide_form" : {
+    "product_semaglutide_form" : {
 
-        "wl_firstname" : "WdioAutomated",
-        "wl_lastname" : "User" ,
-        "wl_cellnum": 8602949015,
-        "wl_email" : "wdio_auto@gmail.com",
-        "wl_success" : "Thank You!"
+        "product_wl_firstname" : "WdioAutomated",
+        "product_wl_lastname" : "User" ,
+        "product_wl_cellnum": 8602949015,
+        "product_wl_email" : "wdio_auto4@gmail.com",
+        "product_wl_success" : "Thank You!"
     },
 
-    "faq_title_Tadalafil" : "Erectile Dysfunction FAQs",
-    "faq_title_Sildanafil" : "Erectile Dysfunction FAQs",
-    "faq_title_Paroxetine" : "Premature Ejaculation FAQs",
-    "faq_title_Finasteride" : "Hair Loss FAQs",
-    "faq_title_Acyclovir" : "Genital Herpes FAQs"
+    "product_faq_title_Tadalafil" : "Erectile Dysfunction FAQs",
+    "product_faq_title_Sildanafil" : "Erectile Dysfunction FAQs",
+    "product_faq_title_Paroxetine" : "Premature Ejaculation FAQs",
+    "product_faq_title_Finasteride" : "Hair Loss FAQs",
+    "product_faq_title_Acyclovir" : "Genital Herpes FAQs"
 }
