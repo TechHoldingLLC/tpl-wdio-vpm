@@ -9,6 +9,14 @@ class ProductDetail extends Page {
   public get productDropdown() {
     return $('[class$="Header_nav-link__lThrF"]');
   }
+
+  public get languageDropdown() {
+    return $(".Header_lang-item__zDx_0");
+  }
+
+  public get spanishSelection() {
+    return $('[href="/en/products/Semaglutide#"]');
+  }
   public get tadalafilProduct() {
     return $("[href$='/en/products/Tadalafil']");
   }
@@ -27,6 +35,10 @@ class ProductDetail extends Page {
 
   public get acyclovirProduct() {
     return $("[href$='/en/products/Acyclovir']");
+  }
+
+  public get productTitle() {
+    return $("h1");
   }
 
   public get productfaq() {
@@ -58,11 +70,6 @@ class ProductDetail extends Page {
       "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click']"
     );
   }
-
-  //   public async productSelection() {
-  //     await this.productDropdown.click();
-  //     await this.tadalafilProduct.click();
-  //   }
 
   async submitSemaglutideform(
     wl_firstname: string,

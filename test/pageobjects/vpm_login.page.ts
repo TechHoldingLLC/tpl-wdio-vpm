@@ -15,7 +15,7 @@ class LoginPage extends Page {
     return $("#password");
   }
   get btnSubmit() {
-    return $('[value$="Sign In"]');
+    return $('[value$="SIGN IN"]');
   }
   get invalidAlert() {
     return $(

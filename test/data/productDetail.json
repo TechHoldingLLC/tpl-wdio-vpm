@@ -5,6 +5,7 @@
     "product_paroxetine" : "Paroxetine",
     "product_finasteride" : "Finasteride",
     "product_acyclovir" : "Acyclovir",
+    "product_glp_semaglutide": "GLP-1 Semaglutide",
     "product_semaglutide" : "Semaglutide",
 
     "product_semaglutide_form" : {
@@ -13,7 +14,8 @@
         "product_wl_lastname" : "User" ,
         "product_wl_cellnum": 8602949015,
         "product_wl_email" : "wdio_auto4@gmail.com",
-        "product_wl_success" : "Thank You!"
+        "product_wl_success" : "Thank You!",
+        "product_wl_success_esp" : "Gracias"
     },
 
     "product_faq_title_Tadalafil" : "Erectile Dysfunction FAQs",

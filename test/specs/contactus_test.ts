@@ -9,7 +9,7 @@ describe("Contact Us Feature", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify Submit Contact Us form with Valid details - TC03", async () => {
+  it("Verify Submit Contact Us form with Valid details - TC02", async () => {
     await expect(ContactUs.emailField.isDisplayed());
     await expect(browser).toHaveTitle(pagetitle.pg_title_contact_us);
     await ContactUs.contactUsPage(
@@ -29,7 +29,7 @@ describe("Contact Us Feature", () => {
     );
   });
 
-  it("Verify Submit Contact Us form with Invalid details - TC04", async () => {
+  it("Verify Submit Contact Us form with Invalid details - TC03", async () => {
     await expect(ContactUs.emailField.isDisplayed());
     await ContactUs.contactUsPage_invalid(
       contactdata.cu_firstname,

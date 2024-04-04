@@ -7,7 +7,7 @@ describe("HomePage Features", () => {
     await homePage.openHomepage();
   });
 
-  it("Verify all hyperlinks on the Homepage - TC05", async () => {
+  it("Verify all hyperlinks on the Homepage - TC04", async () => {
     await expect(homePage.aboutUs.isDisplayed());
     await expect(browser).toHaveTitle(pagetitle.pg_title_home);
     for (let i = 0; i < (await LoginPage.elements.length); i++) {
@@ -18,14 +18,14 @@ describe("HomePage Features", () => {
     }
   });
 
-  it("Verify FAQ Page - TC06", async () => {
+  it("Verify FAQ Page - TC05", async () => {
     await homePage.faqLink.scrollIntoView();
     await expect((await homePage.aboutUs).isDisplayed());
     await homePage.faqLink.click();
     await expect(browser).toHaveTitle(pagetitle.pg_title_faq);
   });
 
-  it("Verify How it Works Page - TC07", async () => {
+  it("Verify How it Works Page - TC06", async () => {
     await homePage.howitworksLink.scrollIntoView();
     await expect((await homePage.howitworksLink).isDisplayed());
     await homePage.howitworksLink.click();

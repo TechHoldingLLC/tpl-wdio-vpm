@@ -9,7 +9,7 @@ describe("iConsult Features", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify iConsult ED Flow - Tadalafil - TC15", async () => {
+  it("Verify iConsult ED Flow - Tadalafil - TC07", async () => {
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password

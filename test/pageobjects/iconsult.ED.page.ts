@@ -217,6 +217,7 @@ class iConsultFlow extends Page {
     await this.consentCheckbox.scrollIntoView();
     await this.consentCheckbox.click();
     await this.continueBtn.click();
+    await browser.pause(2000);
     await this.iConsultEDselection.click();
     await browser.pause(5000);
     // const problemSelection = $(

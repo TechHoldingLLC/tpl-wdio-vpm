@@ -8,7 +8,7 @@ describe("About Us Feature", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify About Us Page - TC14", async () => {
+  it("Verify About Us Page - TC01", async () => {
     await expect(browser).toHaveTitle(pagetitle.pg_title_about_us);
     await expect(AboutUsPage.aboutusContent).toBeDisplayed();
     await AboutUsPage.aboutUsPage();

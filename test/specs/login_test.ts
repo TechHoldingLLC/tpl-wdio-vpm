@@ -8,7 +8,7 @@ describe("VPM Login Feature", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify Login with Invalid credentials - TC01", async () => {
+  it("Verify Login with Invalid credentials - TC08", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_invalid.login_email,
@@ -24,7 +24,7 @@ describe("VPM Login Feature", () => {
     );
   });
 
-  it("Verify Login with Valid credentials - TC02", async () => {
+  it("Verify Login with Valid credentials - TC09", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_valid.login_email,

@@ -2,46 +2,81 @@ import { expect } from "@wdio/globals";
 import ProductDetail from "../pageobjects/productdetail.page";
 import productDetaildata from "../data/productDetail.json";
 import pagetitle from "../data/pageTitles.json";
+import productdetailPage from "../pageobjects/productdetail.page";
 
 describe("Product Detail Feature", () => {
-  it("Verify Product Detail Page - Tadalafil - TC08", async () => {
+  it("Verify Product Detail Page - Tadalafil - TC10", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_tadalafil);
     await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_tadalafil
+    );
     await expect(ProductDetail.productfaq).toHaveText(
       productDetaildata.product_faq_title_Tadalafil
     );
   });
-  it("Verify Product Detail Page - Sildenafil - TC09", async () => {
+  it("Verify Product Detail Page - Sildenafil - TC11", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_sildenafil);
     await expect(browser).toHaveTitle(pagetitle.pg_title_sildenafil);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_sildenafil
+    );
     await expect(ProductDetail.productfaq).toHaveText(
       productDetaildata.product_faq_title_Sildanafil
     );
   });
-  it("Verify Product Detail Page - Paroxetine - TC10", async () => {
+  it("Verify Product Detail Page - Paroxetine - TC12", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_paroxetine);
     await expect(browser).toHaveTitle(pagetitle.pg_title_paroxetine);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_paroxetine
+    );
     await expect(ProductDetail.productfaq).toHaveText(
       productDetaildata.product_faq_title_Paroxetine
     );
   });
-  it("Verify Product Detail Page - Finasteride - TC11", async () => {
+  it("Verify Product Detail Page - Finasteride - TC13", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_finasteride);
     await expect(browser).toHaveTitle(pagetitle.pg_title_finasteride);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_finasteride
+    );
     await expect(ProductDetail.productfaq).toHaveText(
       productDetaildata.product_faq_title_Finasteride
     );
   });
-  it("Verify Product Detail Page - Acyclovir - TC12", async () => {
+  it("Verify Product Detail Page - Acyclovir - TC14", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_acyclovir);
     await expect(browser).toHaveTitle(pagetitle.pg_title_acyclovir);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_acyclovir
+    );
     await expect(ProductDetail.productfaq).toHaveText(
       productDetaildata.product_faq_title_Acyclovir
     );
   });
-  it("Verify Product Detail Page - GLP-1 Semaglutide - TC13", async () => {
+  it("Verify Product Detail Page - GLP-1 Semaglutide - TC15", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_semaglutide);
     await expect(browser).toHaveTitle(pagetitle.pg_title_semaglutide);
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_glp_semaglutide
+    );
+    await ProductDetail.submitSemaglutideform(
+      productDetaildata.product_semaglutide_form.product_wl_firstname,
+      productDetaildata.product_semaglutide_form.product_wl_lastname,
+      productDetaildata.product_semaglutide_form.product_wl_cellnum
+    );
+    await expect(ProductDetail.wlsuccessmessage).toHaveText(
+      productDetaildata.product_semaglutide_form.product_wl_success
+    );
+  });
+  it.only("Verify Product Detail Page - GLP-1 Semaglutide - Spanish - TC16", async () => {
+    await ProductDetail.openHomepage(productDetaildata.product_semaglutide);
+    await expect(browser).toHaveTitle(pagetitle.pg_title_semaglutide);
+    await browser.url("https://qa.viapromeds.com/products/Semaglutide");
+    await expect(productdetailPage.productTitle).toHaveText(
+      productDetaildata.product_glp_semaglutide
+    );
     await ProductDetail.submitSemaglutideform(
       productDetaildata.product_semaglutide_form.product_wl_firstname,
       productDetaildata.product_semaglutide_form.product_wl_lastname,
