@@ -1,4 +1,4 @@
-import iConsultFlow from "../pageobjects/iconsult.ED.page";
+import iConsultEDFlow from "../pageobjects/iconsult.ED.page";
 import LoginPage from "../pageobjects/vpm_login.page";
 import logindata from "../data/login.json";
 import homePage from "../pageobjects/home.page";
@@ -15,6 +15,6 @@ describe("iConsult Features", () => {
       logindata.login_valid.login_password
     );
     await expect(homePage.aboutUs.isDisplayed());
-    await iConsultFlow.iConsultED();
+    await iConsultEDFlow.iConsultED();
   });
 });

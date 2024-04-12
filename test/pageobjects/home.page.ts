@@ -22,6 +22,10 @@ class HomePage extends Page {
     return $("[href$='/en/howitworks']");
   }
 
+  get hamburgericon() {
+    return $("[class$='btn-rounded Header_btn-user__RSRGo']");
+  }
+
   public openHomepage() {
     return super.open("/en");
   }

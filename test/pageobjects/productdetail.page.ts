@@ -58,7 +58,7 @@ class ProductDetail extends Page {
     return $("#email");
   }
   public get wlcheckbox() {
-    return $("[for$='termsAndConditions']");
+    return $("label[for='termsAndConditions']");
   }
 
   public get btnSubmit() {
@@ -82,6 +82,7 @@ class ProductDetail extends Page {
     await this.wlemail.setValue(
       `wdio_auto${Math.floor(Math.random() * 1e9)}@gmail.com`
     );
+    await browser.pause(3000);
     await this.wlcheckbox.click();
     await browser.pause(3000);
     await this.btnSubmit.click();

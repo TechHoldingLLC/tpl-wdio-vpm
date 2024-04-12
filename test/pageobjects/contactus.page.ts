@@ -67,7 +67,7 @@ class ContactUs extends Page {
     await this.firstNameField.setValue(firstname);
     await this.lastNameField.setValue(lastname);
     await this.emailField.setValue(
-      `wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`
+      `test_wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`
     );
     await this.phoneField.setValue(contactnumber);
     await this.descriptionField.setValue(description);

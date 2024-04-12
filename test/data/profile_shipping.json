@@ -1,0 +1,7 @@
+{
+    "shipping_firstname": "Wdio",
+    "shipping_lastname": "Automation",
+    "shipping_street" : "Test Street Address",
+    "shipping_apartmentName": "Test Apartment Name",
+    "shipping_zipcode": "90035"
+}

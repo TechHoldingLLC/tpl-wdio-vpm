@@ -1,11 +1,13 @@
 {
     "login_invalid" : {
     "login_email" : "wdio.auto+11@techholding.co",
+    "login_invalid_phone_num": 1234567890,
     "login_password" : "Test@1234"
     },
 
     "login_valid" : {
     "login_email" : "wdio_auto+3@gmail.co",
+    "login_valid_phone_num": 3473913410,
     "login_password" : "Test@123"
     },
 

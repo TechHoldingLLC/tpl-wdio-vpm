@@ -1,20 +1,20 @@
-import iConsultFlow from "../pageobjects/iconsult.ED.page";
+import iConsultPEFlow from "../pageobjects/iconsult.PE.page";
 import LoginPage from "../pageobjects/vpm_login.page";
 import logindata from "../data/login.json";
+import homePage from "../pageobjects/home.page";
 
 describe("iConsult Features", () => {
-  before("Open iConsult", async () => {
+  before("Login to the site for iConsult", async () => {
     await LoginPage.openSignin();
     await browser.maximizeWindow();
   });
 
-  it("Verify iConsult Flow - Back Button Scenario - TC17", async () => {
+  it("Verify iConsult PE Flow - Paroxetine - TC08", async () => {
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password
     );
-    await browser.pause(5000);
-    await iConsultFlow.iConsultED();
-    await browser.pause(2000);
+    await expect(homePage.aboutUs.isDisplayed());
+    await iConsultPEFlow.iConsultPE();
   });
 });

@@ -8,7 +8,7 @@ describe("VPM Login Feature", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify Login with Invalid credentials - TC08", async () => {
+  it("Verify Login with Invalid Email - TC09", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_invalid.login_email,
@@ -24,12 +24,41 @@ describe("VPM Login Feature", () => {
     );
   });
 
-  it("Verify Login with Valid credentials - TC09", async () => {
+  it("Verify Login with Valid Email - TC10", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password
     );
     await expect(LoginPage.hamburgericon).toBeDisplayed();
+    await LoginPage.hamburgericon.click();
+    await expect(LoginPage.profile_name).toHaveText("Automated U");
+  });
+
+  it("Verify Login with Invalid Cell number - TC11", async () => {
+    await expect(LoginPage.inputUsername).toBeDisplayed();
+    await LoginPage.login_with_cellnum(
+      logindata.login_invalid.login_invalid_phone_num,
+      logindata.login_invalid.login_password
+    );
+    await browser.waitUntil(
+      async () =>
+        (await LoginPage.invalidAlert.getText()) ===
+        logindata.login_toastMessage
+    );
+    await expect(LoginPage.invalidAlert).toHaveText(
+      logindata.login_toastMessage
+    );
+  });
+
+  it("Verify Login with Valid Cell Number - TC12", async () => {
+    await expect(LoginPage.inputUsername).toBeDisplayed();
+    await LoginPage.login_with_cellnum(
+      logindata.login_valid.login_valid_phone_num,
+      logindata.login_valid.login_password
+    );
+    await expect(LoginPage.hamburgericon).toBeDisplayed();
+    await LoginPage.hamburgericon.click();
+    await expect(LoginPage.profile_name).toHaveText("Automated U");
   });
 });

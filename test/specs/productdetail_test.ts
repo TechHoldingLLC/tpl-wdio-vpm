@@ -5,7 +5,7 @@ import pagetitle from "../data/pageTitles.json";
 import productdetailPage from "../pageobjects/productdetail.page";
 
 describe("Product Detail Feature", () => {
-  it("Verify Product Detail Page - Tadalafil - TC10", async () => {
+  it("Verify Product Detail Page - Tadalafil - TC13", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_tadalafil);
     await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil);
     await expect(productdetailPage.productTitle).toHaveText(
@@ -15,7 +15,7 @@ describe("Product Detail Feature", () => {
       productDetaildata.product_faq_title_Tadalafil
     );
   });
-  it("Verify Product Detail Page - Sildenafil - TC11", async () => {
+  it("Verify Product Detail Page - Sildenafil - TC14", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_sildenafil);
     await expect(browser).toHaveTitle(pagetitle.pg_title_sildenafil);
     await expect(productdetailPage.productTitle).toHaveText(
@@ -25,7 +25,7 @@ describe("Product Detail Feature", () => {
       productDetaildata.product_faq_title_Sildanafil
     );
   });
-  it("Verify Product Detail Page - Paroxetine - TC12", async () => {
+  it("Verify Product Detail Page - Paroxetine - TC15", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_paroxetine);
     await expect(browser).toHaveTitle(pagetitle.pg_title_paroxetine);
     await expect(productdetailPage.productTitle).toHaveText(
@@ -35,7 +35,7 @@ describe("Product Detail Feature", () => {
       productDetaildata.product_faq_title_Paroxetine
     );
   });
-  it("Verify Product Detail Page - Finasteride - TC13", async () => {
+  it("Verify Product Detail Page - Finasteride - TC16", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_finasteride);
     await expect(browser).toHaveTitle(pagetitle.pg_title_finasteride);
     await expect(productdetailPage.productTitle).toHaveText(
@@ -45,7 +45,7 @@ describe("Product Detail Feature", () => {
       productDetaildata.product_faq_title_Finasteride
     );
   });
-  it("Verify Product Detail Page - Acyclovir - TC14", async () => {
+  it("Verify Product Detail Page - Acyclovir - TC17", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_acyclovir);
     await expect(browser).toHaveTitle(pagetitle.pg_title_acyclovir);
     await expect(productdetailPage.productTitle).toHaveText(
@@ -55,25 +55,9 @@ describe("Product Detail Feature", () => {
       productDetaildata.product_faq_title_Acyclovir
     );
   });
-  it("Verify Product Detail Page - GLP-1 Semaglutide - TC15", async () => {
+  it("Verify Product Detail Page - GLP-1 Semaglutide - TC18", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_semaglutide);
     await expect(browser).toHaveTitle(pagetitle.pg_title_semaglutide);
-    await expect(productdetailPage.productTitle).toHaveText(
-      productDetaildata.product_glp_semaglutide
-    );
-    await ProductDetail.submitSemaglutideform(
-      productDetaildata.product_semaglutide_form.product_wl_firstname,
-      productDetaildata.product_semaglutide_form.product_wl_lastname,
-      productDetaildata.product_semaglutide_form.product_wl_cellnum
-    );
-    await expect(ProductDetail.wlsuccessmessage).toHaveText(
-      productDetaildata.product_semaglutide_form.product_wl_success
-    );
-  });
-  it.only("Verify Product Detail Page - GLP-1 Semaglutide - Spanish - TC16", async () => {
-    await ProductDetail.openHomepage(productDetaildata.product_semaglutide);
-    await expect(browser).toHaveTitle(pagetitle.pg_title_semaglutide);
-    await browser.url("https://qa.viapromeds.com/products/Semaglutide");
     await expect(productdetailPage.productTitle).toHaveText(
       productDetaildata.product_glp_semaglutide
     );

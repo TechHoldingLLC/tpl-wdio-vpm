@@ -1,8 +1,8 @@
 import { $ } from "@wdio/globals";
 import Page from "./page";
-import iConsultEDData from "../data/iConsultED.json";
+import iConsultPEData from "../data/iConsultPE.json";
 
-class iConsultEDFlow extends Page {
+class iConsultPEFlow extends Page {
   public get startiConsultbutton() {
     return $("#start-free-iconsult");
   }
@@ -60,45 +60,45 @@ class iConsultEDFlow extends Page {
   public get startNewiConsult() {
     return $('[class$="btn-secondary mw-100 mt-15"]');
   }
-  public get option1forQuestion1() {
+  public get option4forQuestion1() {
     // How long has this problem been present?
-    return $('[for$="option0"]');
+    return $('[for$="option3"]');
   }
-  public get option1forQuestion2() {
+  public get option6forQuestion2() {
     // How did your ED start?
-    return $("[for$='option0']");
-  }
-  public get option4forQuestion3() {
-    // Have you been diagnosed with any of the following?
-    return $("[for$='option2']");
-  }
-  public get option1forQuestion4() {
-    // Are you taking any medication daily?
-    return $("[for$='option0']");
-  }
-  public get option6forQuestion5() {
-    // Do you take any of these medications?
     return $("[for$='option5']");
+  }
+  public get option2forQuestion3() {
+    // Have you been diagnosed with any of the following?
+    return $("[for$='option1']");
+  }
+  public get option2forQuestion4() {
+    // Are you taking any medication daily?
+    return $("[for$='option1']");
+  }
+  public get option4forQuestion5() {
+    // Do you take any of these medications?
+    return $("[for$='option3']");
   }
   public get option5forQuestion5() {
     // Do you take any of these medications?
     return $("[for$='option4']");
   }
-  public get option14forQuestion6() {
+  public get option3forQuestion6() {
     // Have you had or do you have any of these conditions?
-    return $("[for$='option13']");
+    return $("[for$='option2']");
   }
-  public get formforQuestion7() {
+  public get option5forQuestion7() {
     // Please share with Dr. Linares any other medical conditions treated with medications:
-    return $("[class$='form-input ']");
+    return $("[for$='option4']");
   }
-  public get option1forQuestion8() {
+  public get option2forQuestion8() {
     // Are you allergic to any of the following medications?
-    return $("[for$='option0']");
+    return $("[for$='option1']");
   }
-  public get option6forQuestion9() {
+  public get option2forQuestion9() {
     // In the past 3 months have you used, ingested, or smoked any of these substances?
-    return $("[for$='option5']");
+    return $("[for$='option1']");
   }
   public get option3forQuestion10() {
     // How often do you wake up with an erection?
@@ -120,6 +120,7 @@ class iConsultEDFlow extends Page {
   public get recommTitle() {
     return $("h5[class$='title']");
   }
+
   public get recommsubtitle() {
     return $("div[class='ProductRecommendation_product-detail__gH6xf'] p p");
   }
@@ -130,16 +131,16 @@ class iConsultEDFlow extends Page {
     );
   }
   public get fetch_subscription_plan() {
-    return $("label[for='sub-5'] span[class='radio-title']");
+    return $("label[for='sub-21'] span[class='radio-title']");
   }
   public get fetch_subscription_amount() {
     return $(
-      "label[for='sub-5'] span[class='radio-title text-orange-900 text-right']"
+      "label[for='sub-21'] span[class='radio-title text-orange-900 text-right']"
     );
   }
 
   public get subscriptionPlan() {
-    return $("[for$='sub-5']");
+    return $("[for$='sub-21']");
   }
   public get subscriptionContinueBtn() {
     return $("[class$='btn-primary text-uppercase']");
@@ -186,12 +187,11 @@ class iConsultEDFlow extends Page {
   public get upload_save_btn() {
     return $("[class$='btn-primary text-uppercase ']");
   }
-
   public get iConsultSummaryTitle() {
     return $("[class='title aos-init aos-animate']");
   }
   public get prescribed_medicine() {
-    return $("//h4[normalize-space()='Tadalafil']");
+    return $("//h4[normalize-space()='Paroxetine']");
   }
 
   public get choose_card() {
@@ -234,7 +234,7 @@ class iConsultEDFlow extends Page {
   }
 
   public get fetch_medicine_name() {
-    return $("//h4[normalize-space()='Tadalafil']");
+    return $("//h4[normalize-space()='Paroxetine']");
   }
 
   public get fetch_order_Subscriptionplan() {
@@ -244,14 +244,14 @@ class iConsultEDFlow extends Page {
     return $("//span[@class='MyOrder_total-main-price__n2pqe']");
   }
 
-  public async iConsultED() {
+  public async iConsultPE() {
     await this.startiConsultbutton.click();
     await browser.pause(2000);
     await this.consentCheckbox.click();
     await browser.pause(1000);
     await this.continueBtn.click();
     await browser.pause(5000);
-    await this.iConsultEDselection.click();
+    await this.iConsultPEselection.click();
     await browser.pause(10000);
 
     if (await this.startNewiConsult.isDisplayed()) {
@@ -259,42 +259,34 @@ class iConsultEDFlow extends Page {
       await this.startNewiConsult.click();
       await browser.pause(2000);
     }
-    await this.option1forQuestion1.click();
+    await this.option4forQuestion1.click();
     await browser.pause(2000);
     await this.continueBtn.click();
     await browser.pause(2000);
     await browser.pause(2000);
-    await this.option1forQuestion2.click();
+    await this.option6forQuestion2.doubleClick();
     await this.continueBtn.click();
     await browser.pause(2000);
-    await this.option4forQuestion3.doubleClick();
+    await this.option2forQuestion3.click();
     await browser.pause(2000);
     await this.continueBtn.click();
-    await this.option1forQuestion4.click();
+    await this.option2forQuestion4.click();
     await browser.pause(2000);
     await this.continueBtn.click();
-    await this.option6forQuestion5.click();
-    await browser.pause(2000);
-    await this.option5forQuestion5.click();
+    await this.option4forQuestion5.click();
     await browser.pause(2000);
     await this.continueBtn.click();
-    await this.option14forQuestion6.doubleClick();
+    await this.option3forQuestion6.click();
     await browser.pause(2000);
     await this.continueBtn.click();
-    await this.formforQuestion7.setValue(iConsultEDData.iConsultED_fieldText);
+    await this.option5forQuestion7.doubleClick();
     await browser.pause(2000);
     await this.continueBtn.click();
     await browser.pause(2000);
-    await this.option1forQuestion8.click();
+    await this.option2forQuestion8.click();
     await this.continueBtn.click();
     await browser.pause(2000);
-    await this.option6forQuestion9.doubleClick();
-    await this.continueBtn.click();
-    await browser.pause(2000);
-    await this.option3forQuestion10.click();
-    await this.continueBtn.click();
-    await browser.pause(2000);
-    await this.option3forQuestion11.click();
+    await this.option2forQuestion9.click();
     await this.continueBtn.click();
     await browser.pause(2000);
     const Recommendation_medicine_title = await this.recommTitle.getText();
@@ -302,16 +294,14 @@ class iConsultEDFlow extends Page {
       `Recommended Medicine Name: ${Recommendation_medicine_title}`
     );
     await expect(this.recommTitle).toHaveText(
-      iConsultEDData.iConsultED_MedicineName
+      iConsultPEData.iConsultPE_MedicineName
     );
-    await browser.pause(2000);
     await expect(this.recommsubtitle).toHaveText(
-      iConsultEDData.iConsultED_recommSubTitle
+      iConsultPEData.iConsultPE_recommSubTitle
     );
     await this.recommContinueBtn.click();
     await browser.pause(2000);
     await this.subscriptionPlan.click();
-    await browser.pause(2000);
     const iConsult_SubscriptionPlan =
       await this.fetch_subscription_plan.getText();
     const iConsult_SubscriptionPlanAmount =
@@ -325,6 +315,7 @@ class iConsultEDFlow extends Page {
     await browser.pause(2000);
     await this.subscriptionContinueBtn.click();
     await browser.pause(2000);
+
     await this.ship_select_address.click();
     await browser.pause(2000);
     await this.ship_save_btn.click();
@@ -343,12 +334,12 @@ class iConsultEDFlow extends Page {
       "/Users/prabhavjoshi/Documents/Automation/VPM_Automation/Git_VPM_Wdio/tpl-wdio-vpm/test/data/10h6IV-1008052284.jpg";
     await fileInput2.addValue(filePath2);
     await this.upload_save_btn.click();
-    await browser.pause(2000);
+    await browser.pause(5000);
     await expect(this.iConsultSummaryTitle).toHaveText(
-      iConsultEDData.iConsultED_SummaryTitle
+      iConsultPEData.iConsultPE_SummaryTitle
     );
     await expect(this.prescribed_medicine).toHaveText(
-      iConsultEDData.iConsultED_MedicineName
+      iConsultPEData.iConsultPE_SummaryMedicine
     );
     await browser.pause(2000);
     await this.choose_card.click();
@@ -357,9 +348,8 @@ class iConsultEDFlow extends Page {
     await browser.pause(5000);
 
     await expect(this.iConsultCompletedMessage).toHaveText(
-      iConsultEDData.iConsultED_CompletionMsg
+      iConsultPEData.iConsultPE_CompletionMsg
     );
-    await browser.pause(2000);
     await this.get_order_detail_btn.click();
     await browser.pause(2000);
     const orderInformation = await this.fetch_orderId.getText();
@@ -391,4 +381,4 @@ class iConsultEDFlow extends Page {
   }
 }
 
-export default new iConsultEDFlow();
+export default new iConsultPEFlow();

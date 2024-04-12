@@ -1,8 +1,8 @@
 {
-    "cu_firstname" : "Wdio",
-    "cu_lastname": "Automation",
+    "cu_firstname" : "Test",
+    "cu_lastname": "User",
     "cu_invalid_email" : "wdio@tech",
-    "cu_contactnumber": 8602949015,
+    "cu_contactnumber": 3473913410,
     "cu_description": "This is a sample Contact us form which is submitted via Wdio",
     "cu_contactSuccessmessage" : "Your message has been sent",
     "cu_errorMessage" : "Failed to save query"
