@@ -9,7 +9,7 @@ describe("Profile Features", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify Profile - Shipping Address Flow - TC19", async () => {
+  it("Verify Profile - Shipping Address Flow - TC25", async () => {
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password

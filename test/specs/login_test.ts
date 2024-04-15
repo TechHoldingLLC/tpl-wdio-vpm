@@ -8,7 +8,7 @@ describe("VPM Login Feature", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify Login with Invalid Email - TC09", async () => {
+  it("Verify Login with Invalid Email - TC15", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_invalid.login_email,
@@ -24,7 +24,7 @@ describe("VPM Login Feature", () => {
     );
   });
 
-  it("Verify Login with Valid Email - TC10", async () => {
+  it("Verify Login with Valid Email - TC16", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_valid.login_email,
@@ -35,7 +35,7 @@ describe("VPM Login Feature", () => {
     await expect(LoginPage.profile_name).toHaveText("Automated U");
   });
 
-  it("Verify Login with Invalid Cell number - TC11", async () => {
+  it("Verify Login with Invalid Cell number - TC17", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login_with_cellnum(
       logindata.login_invalid.login_invalid_phone_num,
@@ -51,7 +51,7 @@ describe("VPM Login Feature", () => {
     );
   });
 
-  it("Verify Login with Valid Cell Number - TC12", async () => {
+  it("Verify Login with Valid Cell Number - TC18", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login_with_cellnum(
       logindata.login_valid.login_valid_phone_num,

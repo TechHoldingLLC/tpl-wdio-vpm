@@ -9,7 +9,7 @@ describe("iConsult Features", () => {
     await browser.maximizeWindow();
   });
 
-  it("Verify iConsult PE Flow - Paroxetine - TC08", async () => {
+  it("Verify iConsult PE Flow - Paroxetine - TC14", async () => {
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password

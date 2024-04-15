@@ -34,7 +34,7 @@ class profile_shipping extends Page {
     return $("#pincode");
   }
   public get ship_suggestion_field() {
-    return $("[class*='suggestion-active']");
+    return $("li[class*='suggestion-active']");
   }
 
   public get ship_save_address_btn() {
