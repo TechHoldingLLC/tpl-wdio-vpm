@@ -1,5 +1,5 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
+import Page from "./page.js";
 
 class LoginPage extends Page {
   get signinButton() {
@@ -24,7 +24,8 @@ class LoginPage extends Page {
     );
   }
   get hamburgericon() {
-    return $("[class$='btn-rounded Header_btn-user__RSRGo']");
+    //return $("[class$='btn-rounded Header_btn-user__RSRGo']");
+    return $("//a[contains(@class, 'btn-rounded Header_btn-user')]")
   }
 
   get profile_name() {

@@ -1,14 +1,26 @@
 import { expect } from "@wdio/globals";
-import LoginPage from "../pageobjects/vpm_login.page";
-import logindata from "../data/login.json";
+import LoginPage from "../pageobjects/vpm_login.page.js";
+import * as fs from 'fs';
 
 describe("VPM Login Feature", () => {
-  beforeEach("Verify Sign In Page", async () => {
+  // Declare logindata variable with types
+  let logindata: { 
+    login_invalid: { login_email: string; login_password: string; }; 
+    login_toastMessage: string; 
+    login_valid: { login_email: string; login_password: string; }; 
+  }; 
+
+  beforeEach(async () => {
     await LoginPage.openSignin();
     await browser.maximizeWindow();
   });
 
-  it("Verify Login with Invalid Email - TC15", async () => {
+  before(async ()=>{
+    const rawData = fs.readFileSync('./test/data/login.json', 'utf-8');
+    logindata = JSON.parse(rawData);
+  })
+
+  it("Verify Login with Invalid credentials - TC08", async () => {
     await expect(LoginPage.inputUsername).toBeDisplayed();
     await LoginPage.login(
       logindata.login_invalid.login_email,

@@ -1,17 +1,19 @@
 import { expect } from "@wdio/globals";
-import AboutUsPage from "../pageobjects/aboutus.page";
-import pagetitle from "../data/pageTitles.json";
+import aboutUsPage from "../pageobjects/aboutus.page.js";
+import * as fs from 'fs'
 
 describe("About Us Feature", () => {
-  before("Verify About Us Page", async () => {
-    await AboutUsPage.openAboutus();
+  before(async () => {
+    await aboutUsPage.openAboutus();
     await browser.maximizeWindow();
   });
 
   it("Verify About Us Page - TC01", async () => {
-    await expect(browser).toHaveTitle(pagetitle.pg_title_about_us);
-    await expect(AboutUsPage.aboutusContent).toBeDisplayed();
-    await AboutUsPage.aboutUsPage();
-    await expect(AboutUsPage.iconsultIntro).toBeDisplayed();
+    const rawdata = fs.readFileSync('./test/data/pageTitles.json', 'utf-8')
+    const pageTitle = JSON.parse(rawdata)
+    await expect(browser).toHaveTitle(pageTitle.pg_title_about_us);
+    await expect(aboutUsPage.aboutusContent).toBeDisplayed();
+    await aboutUsPage.aboutUsPage();
+    await expect(aboutUsPage.iconsultIntro).toBeDisplayed();
   });
 });

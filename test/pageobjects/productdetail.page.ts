@@ -1,5 +1,5 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
+import Page from "./page.js";
 
 class ProductDetail extends Page {
   public randomProduct = (ProductName: string) => {

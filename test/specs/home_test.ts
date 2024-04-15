@@ -1,15 +1,19 @@
-import homePage from "../pageobjects/home.page";
-import LoginPage from "../pageobjects/vpm_login.page";
-import pagetitle from "../data/pageTitles.json";
-import homePageData from "../data/homePage.json";
+import homePage from "../pageobjects/home.page.js";
+import LoginPage from "../pageobjects/vpm_login.page.js";
+import * as fs from 'fs'
 
 describe("HomePage Features", () => {
+  let pagetitle: any;
+
   before("Verify VPM Homepage", async () => {
     await homePage.openHomepage();
+    const rawData2 = fs.readFileSync('./test/data/pageTitles.json', 'utf-8');
+    pagetitle = JSON.parse(rawData2);
+    await browser.maximizeWindow();
   });
 
   it("Verify all hyperlinks on the Homepage - TC04", async () => {
-    await expect(homePage.aboutUs.isDisplayed());
+    expect(await homePage.aboutUs.isDisplayed());
     await expect(browser).toHaveTitle(pagetitle.pg_title_home);
     for (let i = 0; i < (await LoginPage.elements.length); i++) {
       const linktext = await (await LoginPage.elements[i]).getText();
@@ -21,7 +25,7 @@ describe("HomePage Features", () => {
 
   it("Verify FAQ Page - TC05", async () => {
     await homePage.faqLink.scrollIntoView();
-    await expect((await homePage.aboutUs).isDisplayed());
+    expect((await homePage.aboutUs).isDisplayed());
     await homePage.faqLink.click();
     await browser.pause(1000);
     await expect(browser).toHaveTitle(pagetitle.pg_title_faq);

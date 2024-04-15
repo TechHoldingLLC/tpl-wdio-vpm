@@ -6,5 +6,4 @@
     "cu_description": "This is a sample Contact us form which is submitted via Wdio",
     "cu_contactSuccessmessage" : "Your message has been sent",
     "cu_errorMessage" : "Failed to save query"
-
 }
