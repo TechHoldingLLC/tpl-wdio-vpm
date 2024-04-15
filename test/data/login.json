@@ -12,6 +12,7 @@
     },
 
     "login_toastMessage" : "Invalid Credentials",
-    "login_successMessage" : "Registration Successful!"
+    "login_successMessage" : "Registration Successful!",
+    "login_userName": "Automated U"
 
 }

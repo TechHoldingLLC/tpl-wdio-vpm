@@ -2,6 +2,7 @@ import profile_shipping from "../pageobjects/profile_ShippingAddress.page";
 import LoginPage from "../pageobjects/vpm_login.page";
 import logindata from "../data/login.json";
 import homePage from "../pageobjects/home.page";
+import shippingData from "../data/profile_shipping.json";
 
 describe("Profile Features", () => {
   before("login to site for adding Shipping Address", async () => {
@@ -21,7 +22,7 @@ describe("Profile Features", () => {
     await browser.pause(2000);
     await profile_shipping.addShippingAddress();
     await expect(profile_shipping.ship_success_toast_message).toHaveText(
-      "Address added successfully"
+      shippingData.shipping_address_success_message
     );
   });
 });

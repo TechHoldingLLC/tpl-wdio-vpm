@@ -32,7 +32,7 @@ describe("VPM Login Feature", () => {
     );
     await expect(LoginPage.hamburgericon).toBeDisplayed();
     await LoginPage.hamburgericon.click();
-    await expect(LoginPage.profile_name).toHaveText("Automated U");
+    await expect(LoginPage.profile_name).toHaveText(logindata.login_userName);
   });
 
   it("Verify Login with Invalid Cell number - TC17", async () => {
@@ -59,6 +59,6 @@ describe("VPM Login Feature", () => {
     );
     await expect(LoginPage.hamburgericon).toBeDisplayed();
     await LoginPage.hamburgericon.click();
-    await expect(LoginPage.profile_name).toHaveText("Automated U");
+    await expect(LoginPage.profile_name).toHaveText(logindata.login_userName);
   });
 });
