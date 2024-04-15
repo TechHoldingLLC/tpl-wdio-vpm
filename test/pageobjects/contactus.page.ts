@@ -41,27 +41,67 @@ class ContactUs extends Page {
     );
   }
   public async contactUsPage(
-    option: string,
     firstname: string,
     lastname: string,
-    email: string,
     contactnumber: number,
     description: string
   ) {
-    // const questionOption = $(`[value$='${question}']`);
-    // await this.selectQuestion.click();
-    // for (let j = 0; j < (await questionOption.length); j++) {
-    //   const questiontext = await (await questionOption[j]).getText();
-    //   if (questiontext !== "") {
-    //     console.log("Link Text ::: ", linktext);
-    //   }
-    // }
-    // await questionOption.click();
+    const options = [
+      "Cancel Subscription",
+      "How it Works",
+      "Manage Account",
+      "Medical Question",
+      "Orders and Shipping",
+      "Products",
+      "Other",
+    ];
+    function performClick(option: string): void {
+      console.log(`Selecting ${option} option for Contact us form`);
+    }
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const selectedOption = options[randomIndex];
+    performClick(selectedOption);
+    const cu_value = $(`[value$='${selectedOption}`);
+    await cu_value.click();
 
-    await this.selectQuestion.selectByVisibleText(option);
     await this.firstNameField.setValue(firstname);
     await this.lastNameField.setValue(lastname);
-    await this.emailField.setValue(email);
+    await this.emailField.setValue(
+      `test_wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`
+    );
+    await this.phoneField.setValue(contactnumber);
+    await this.descriptionField.setValue(description);
+    await this.submitButton.click();
+  }
+
+  public async contactUsPage_invalid(
+    firstname: string,
+    lastname: string,
+    invalid_email: string,
+    contactnumber: number,
+    description: string
+  ) {
+    const options = [
+      "Cancel Subscription",
+      "How it Works",
+      "Manage Account",
+      "Medical Question",
+      "Orders and Shipping",
+      "Products",
+      "Other",
+    ];
+    function performClick(option: string): void {
+      console.log(`Selecting ${option} option for Contact us form`);
+    }
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const selectedOption = options[randomIndex];
+    performClick(selectedOption);
+    const cu_value = $(`[value$='${selectedOption}`);
+    await cu_value.click();
+
+    await this.firstNameField.setValue(firstname);
+    await this.lastNameField.setValue(lastname);
+    await this.emailField.setValue(invalid_email);
     await this.phoneField.setValue(contactnumber);
     await this.descriptionField.setValue(description);
     await this.submitButton.click();

@@ -1,12 +1,10 @@
 {
-    "option" : "Cancel Subscription",
-    "firstname" : "Wdio",
-    "lastname": "Automation",
-    "email": "prabhav.joshi@techholding.co",
-    "invalid_email" : "wdio@tech",
-    "contactnumber": 8602949015,
-    "description": "This is a sample Contact us form which is submitted via Wdio",
-    "contactSuccessmessage" : "Your message has been sent",
-    "errorMessage" : "Failed to save query"
+    "cu_firstname" : "Test",
+    "cu_lastname": "User",
+    "cu_invalid_email" : "wdio@tech",
+    "cu_contactnumber": 3473913410,
+    "cu_description": "This is a sample Contact us form which is submitted via Wdio",
+    "cu_contactSuccessmessage" : "Your message has been sent",
+    "cu_errorMessage" : "Failed to save query"
 
 }

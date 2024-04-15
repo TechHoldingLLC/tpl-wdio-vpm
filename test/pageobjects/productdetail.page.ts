@@ -9,6 +9,14 @@ class ProductDetail extends Page {
   public get productDropdown() {
     return $('[class$="Header_nav-link__lThrF"]');
   }
+
+  public get languageDropdown() {
+    return $(".Header_lang-item__zDx_0");
+  }
+
+  public get spanishSelection() {
+    return $('[href="/en/products/Semaglutide#"]');
+  }
   public get tadalafilProduct() {
     return $("[href$='/en/products/Tadalafil']");
   }
@@ -29,6 +37,10 @@ class ProductDetail extends Page {
     return $("[href$='/en/products/Acyclovir']");
   }
 
+  public get productTitle() {
+    return $("h1");
+  }
+
   public get productfaq() {
     return $("h3");
   }
@@ -46,7 +58,7 @@ class ProductDetail extends Page {
     return $("#email");
   }
   public get wlcheckbox() {
-    return $("[for$='termsAndConditions']");
+    return $("label[for='termsAndConditions']");
   }
 
   public get btnSubmit() {
@@ -59,21 +71,18 @@ class ProductDetail extends Page {
     );
   }
 
-  //   public async productSelection() {
-  //     await this.productDropdown.click();
-  //     await this.tadalafilProduct.click();
-  //   }
-
   async submitSemaglutideform(
     wl_firstname: string,
     wl_lastname: string,
-    wl_cellnum: number,
-    wl_email: string
+    wl_cellnum: number
   ) {
     await this.wlfirstname.setValue(wl_firstname);
     await this.wllastname.setValue(wl_lastname);
     await this.wlmobilenum.setValue(wl_cellnum);
-    await this.wlemail.setValue(wl_email);
+    await this.wlemail.setValue(
+      `wdio_auto${Math.floor(Math.random() * 1e9)}@gmail.com`
+    );
+    await browser.pause(3000);
     await this.wlcheckbox.click();
     await browser.pause(3000);
     await this.btnSubmit.click();

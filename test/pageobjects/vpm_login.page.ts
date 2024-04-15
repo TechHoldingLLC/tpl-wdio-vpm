@@ -15,7 +15,7 @@ class LoginPage extends Page {
     return $("#password");
   }
   get btnSubmit() {
-    return $('[value$="Sign In"]');
+    return $('[value$="SIGN IN"]');
   }
   get invalidAlert() {
     return $(
@@ -26,6 +26,10 @@ class LoginPage extends Page {
   get hamburgericon() {
     return $("[class$='btn-rounded Header_btn-user__RSRGo']");
   }
+
+  get profile_name() {
+    return $("//h4[@class='Header_user-name__61MdT']");
+  }
   get signupsuccess() {
     return $(
       "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click']"
@@ -35,9 +39,14 @@ class LoginPage extends Page {
     return $$("//a");
   }
 
-  async login(username: string, password: string) {
-    //await this.signinButton.click();
+  public async login(username: string, password: string) {
     await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.btnSubmit.click();
+  }
+
+  public async login_with_cellnum(cellNum: number, password: string) {
+    await this.inputUsername.setValue(cellNum);
     await this.inputPassword.setValue(password);
     await this.btnSubmit.click();
   }
