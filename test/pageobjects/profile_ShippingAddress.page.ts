@@ -1,6 +1,6 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
-import shippingData from "../data/profile_shipping.json";
+import Page from "./page.js";
+import * as fs from 'fs'
 
 class profile_shipping extends Page {
   public get profile_shippingAddress() {
@@ -46,6 +46,8 @@ class profile_shipping extends Page {
   }
 
   public async addShippingAddress() {
+    const rawData2 = fs.readFileSync('./test/data/profile_shipping.json', 'utf-8');
+    const shippingData = JSON.parse(rawData2);
     await this.profile_shippingAddress.click();
     await browser.pause(2000);
     await this.ship_addBtn.click();

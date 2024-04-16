@@ -116,9 +116,11 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(1500)
 
       await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewAddressButton.click()
-      await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewShippingAddress()
+      await iConsult.ship_select_address.click();
+      await browser.pause(1500)
+      await iConsult.ship_save_btn.scrollIntoView()
+      await iConsult.ship_save_btn.click()
+      await browser.pause(2000)
 
       await iConsult.uploadPhotoIDScreen.waitForDisplayed()
       await iConsult.uploadPhoto(IDProofPath)

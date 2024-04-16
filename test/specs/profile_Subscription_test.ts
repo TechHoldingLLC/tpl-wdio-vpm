@@ -23,10 +23,9 @@ describe('Customer Profile - Subscription menu redirection', () => {
     it('Verify the redirection from the Profile Subscriptions to Subscription Listing details page', async() => {
       await browser.pause(4000)
       await profilesidemenuPage.subscriptionOption.click()
-      await profilesidemenuPage.subscriptionPage.waitForDisplayed()
-      await browser.pause(2000)
+      await browser.pause(4000)
       await expect(profilesidemenuPage.subscriptionPage).toBeDisplayed()
-
+      await browser.pause(3000)
       // Verify the text of the Subscription page
       const subscriptionPageText:string = await profilesidemenuPage.subscriptionPage.getText()
       console.log(`Subscription Page text is "${subscriptionPageText}"`)

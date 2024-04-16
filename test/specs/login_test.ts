@@ -4,11 +4,7 @@ import * as fs from 'fs';
 
 describe("VPM Login Feature", () => {
   // Declare logindata variable with types
-  let logindata: { 
-    login_invalid: { login_email: string; login_password: string; }; 
-    login_toastMessage: string; 
-    login_valid: { login_email: string; login_password: string; }; 
-  }; 
+  let logindata: any
 
   beforeEach(async () => {
     await LoginPage.openSignin();

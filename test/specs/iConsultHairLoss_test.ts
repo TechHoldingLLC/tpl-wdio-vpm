@@ -25,39 +25,55 @@ describe('iConsult feature - End to End flow', () => {
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()
+      await browser.pause(2000)
       await iConsult.consentCheckbox.waitForDisplayed()
       await iConsult.consentCheckbox.click()
+      await browser.pause(1000)
       await iConsult.consentContinueButton.waitForClickable()
       await iConsult.consentContinueButton.click()
       await iConsult.problemAddressQuestionsScreen.waitForDisplayed()
       await iConsult.iConsultHLselection.click()
+      await browser.pause(3000)
       await iConsult.startNewiConsult.waitForDisplayed()
       await iConsult.startNewiConsult.click()
-      await iConsultHairLoss.problemPresentQuestion.waitForDisplayed()
+      await browser.pause(5000)
+      //await iConsultHairLoss.problemPresentQuestion.waitForDisplayed()
+      await iConsultHairLoss.problemPresentOption3to5Year.doubleClick()
+      await browser.pause(2000)
       await iConsultHairLoss.problemPresentOption5PlusYear.click()
+      await browser.pause(2000)
       await iConsultHairLoss.continueButton.click()
-      await browser.pause(1000)
+      await browser.pause(2000)
       await iConsultHairLoss.diagnosedQuestions.waitForDisplayed()
-      //await iConsultFlow.noneOfTheAboveProblem.doubleClick();
-      //await iConsultFlow.noneOfTheAboveProblem.click();
-      await iConsultHairLoss.continueButton.click()
+      if(!await iConsultHairLoss.noneOfTheAboveProblem.isSelected()){
+        await iConsultHairLoss.noneOfTheAboveProblem.doubleClick()
+        await browser.pause(1500);
+        await iConsultHairLoss.continueButton.click()
+        await browser.pause(1000);
+      }else{
+        await browser.pause(1500);
+        await iConsultHairLoss.continueButton.click()
+      }
       await browser.pause(2000)
       await iConsultHairLoss.medicalConditionQuestions.waitForDisplayed()
-      //await iConsultFlow.noneOfTheseApplyMeOption.doubleClick();
-      //await browser.pause(1000);
-      await iConsultHairLoss.continueButton.click()
+      if(!await iConsultHairLoss.noneOfTheseApplyMeOption.isSelected()){
+        await iConsultHairLoss.noneOfTheseApplyMeOption.doubleClick()
+        await browser.pause(1500);
+        await iConsultHairLoss.continueButton.click()
+        await browser.pause(1000);
+      }else{
+        await browser.pause(1500);
+        await iConsultHairLoss.continueButton.click()
+      }
       await browser.pause(2000)
       await iConsultHairLoss.medicationDailyQuestions.waitForDisplayed()
-      //await iConsultFlow.medicationDailyYesAnswer.click();
-      //await browser.pause(1000);
-      //await iConsultFlow.medicationDailyNoAnswer.click();
-      //await browser.pause(2000);
+      await iConsultHairLoss.medicationDailyNoAnswer.click();
+      await browser.pause(2000);
       await iConsultHairLoss.continueButton.click()
       await browser.pause(2000)
       await iConsultHairLoss.allergicMedicationQuestions.waitForDisplayed()
-      //await iConsultFlow.allergicMedicationYesAnswer.click();
-      //await iConsultFlow.allergicMedicationNoAnswer.click();
-      //await browser.pause(2000);
+      await iConsultHairLoss.allergicMedicationNoAnswer.click();
+      await browser.pause(2000);
       await iConsultHairLoss.continueButton.click()
       await browser.pause(5000)
       
@@ -71,9 +87,11 @@ describe('iConsult feature - End to End flow', () => {
       await iConsult.subscriptionPlanContinueButton.click()
       await iConsult.stateResideOption.waitForDisplayed()
       await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewAddressButton.click()
-      await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewShippingAddress()
+      await iConsult.ship_select_address.click();
+      await browser.pause(1500)
+      await iConsult.ship_save_btn.scrollIntoView()
+      await iConsult.ship_save_btn.click()
+      await browser.pause(2000)
 
       await iConsult.uploadPhotoIDScreen.waitForDisplayed()
       await iConsult.uploadPhoto(IDProofPath)

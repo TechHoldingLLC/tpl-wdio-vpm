@@ -61,7 +61,7 @@ class iConsultGenitalHerpesPage extends Page{
     }
 
     public get noneOfTheAboveSelection(){
-        return $("//label[@for='option5']")
+        return $("//label[@for='option3']")
     }
 
     /*

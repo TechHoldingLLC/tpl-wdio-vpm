@@ -1,4 +1,4 @@
-import iConsultFlow from "../pageobjects/iconsult.ED.page.js";
+import iConsultEDFlow from "../pageobjects/iconsult.ED.page.js";
 import LoginPage from "../pageobjects/vpm_login.page.js";
 import homePage from "../pageobjects/home.page.js";
 import * as fs from 'fs';

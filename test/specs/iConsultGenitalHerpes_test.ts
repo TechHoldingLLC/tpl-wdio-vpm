@@ -53,19 +53,17 @@ describe('iConsult feature- End to End flow', () => {
       console.log("Flag value: "+flag)
 
       if(!await iConsultGHPage.noneOfTheseApplyMeOption.isSelected()){
-        // Code block executed if the checkbox is not selected
         await iConsultGHPage.noneOfTheseApplyMeOption.doubleClick()
         await browser.pause(1500);
         await iConsultGHPage.continueButton.click()
         await browser.pause(1000);
       }else{
-        // Code block executed if the checkbox is selected
         await browser.pause(1500);
         await iConsultGHPage.continueButton.click()
       }
 
       await iConsultGHPage.herpeslocationQuestion.waitForDisplayed()
-      //await iConsultGHPage.noneOfTheAboveSelection.scrollIntoView()
+      await iConsultGHPage.noneOfTheAboveSelection.scrollIntoView()
       await iConsultGHPage.noneOfTheAboveSelection.waitForExist()
       if(! await iConsultGHPage.noneOfTheAboveSelection.isSelected()){
         await iConsultGHPage.noneOfTheAboveSelection.doubleClick()
@@ -94,23 +92,23 @@ describe('iConsult feature- End to End flow', () => {
       await iConsultGHPage.allergicMedicationNoAnswer.click()
       await browser.pause(1500);
       await iConsultGHPage.continueButton.click()
-      await browser.pause(1000);
+      await browser.pause(2000);
 
       await iConsultGHPage.anyMedicationInPastQuestion.waitForDisplayed()
       await iConsultGHPage.noneOfTheseMedicationAnswer.doubleClick()
-      await browser.pause(1000)
+      await browser.pause(1500)
       await iConsultGHPage.continueButton.click()
       await browser.pause(1500);
 
       await iConsultGHPage.reasonForPrescriptionTodayQuestion.waitForDisplayed()
       await iConsultGHPage.believeOutBreakRightNow.click()
-      await browser.pause(1000)
+      await browser.pause(1500)
       await iConsultGHPage.continueButton.click()
-      //await browser.pause(1000);
+      await browser.pause(1500);
 
       await iConsultGHPage.outBreaksQuestion.waitForDisplayed()
       await iConsultGHPage.onceAYearOutBreak.click()
-      await browser.pause(1000)
+      await browser.pause(1500)
       await iConsultGHPage.continueButton.click()
       await browser.pause(2000);
 
@@ -131,10 +129,11 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(1500)
 
       await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewAddressButton.click()
-      await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.addNewShippingAddress()
-
+      await iConsult.ship_select_address.click();
+      await browser.pause(1500)
+      await iConsult.ship_save_btn.scrollIntoView()
+      await iConsult.ship_save_btn.click()
+      await browser.pause(2000)
       await iConsult.uploadPhotoIDScreen.waitForDisplayed()
       await iConsult.uploadPhoto(IDProofPath)
       await iConsult.uploadOrTakePhotoScreen.waitForDisplayed()

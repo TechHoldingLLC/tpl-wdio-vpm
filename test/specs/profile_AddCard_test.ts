@@ -24,7 +24,7 @@ describe('Customer Profile - Saved Cards page', () => {
     it('Verify the redirection from the Profile Saved Cards to Saved Card Listing details page', async() => {
       await browser.pause(2000)
       await profilesidemenuPage.savedCardOption.click()
-      await browser.pause(2000)
+      await browser.pause(5000)
       expect(await profilesidemenuPage.savedCardsPage).toBeDisplayed()
       const savedCardsPage:string = await profilesidemenuPage.savedCardsPage.getText()
       console.log(`Saved Cards Page text is ${savedCardsPage}`)
@@ -43,7 +43,7 @@ describe('Customer Profile - Saved Cards page', () => {
       await profileCardPage.addCardDetails("4111 1111 1111 1111", "12/28")
       
       await browser.switchToParentFrame()
-      await browser.pause(2000)
+      await browser.pause(3000)
       await profileCardPage.cardAddMessage.waitForExist()
       const toastMessageText = await profileCardPage.cardAddMessage.getText()
       console.log("Toast Message:", toastMessageText)

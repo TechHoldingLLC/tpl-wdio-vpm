@@ -36,31 +36,39 @@ export const config: Options.Testrunner = {
       './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/iConsultGenitalHerpes_test.ts',
       './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts',
       './test/specs/login_test.ts',
       './test/specs/productdetail_test.ts',
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_Orders_test.ts',
       './test/specs/profile_Subscription_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsult_test.ts'
+      './test/specs/profile_ShippingAddress_test.ts'
   ],
   suites:{
     Profile:[
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_Orders_test.ts',
       './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_UserProfile_test.ts'
+      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts'
     ],
     iConsult:[
       './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts'
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts'
     ],
     HomePageTest:[
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
       './test/specs/home_test.ts',
       './test/specs/productdetail_test.ts'
+    ],
+    Login:[
+      './test/specs/login_test.ts'
     ]
   },
   // Patterns to exclude.

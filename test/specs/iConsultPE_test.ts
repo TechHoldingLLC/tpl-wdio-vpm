@@ -1,7 +1,7 @@
-import iConsultPEFlow from "../pageobjects/iconsult.PE.page";
-import LoginPage from "../pageobjects/vpm_login.page";
-import logindata from "../data/login.json";
-import homePage from "../pageobjects/home.page";
+import iConsultPEFlow from "../pageobjects/iconsult.PE.page.js";
+import LoginPage from "../pageobjects/vpm_login.page.js";
+import homePage from "../pageobjects/home.page.js";
+import * as fs from 'fs'
 
 describe("iConsult Features", () => {
   before("Login to the site for iConsult", async () => {
@@ -10,6 +10,8 @@ describe("iConsult Features", () => {
   });
 
   it("Verify iConsult PE Flow - Paroxetine - TC14", async () => {
+    const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8');
+    const logindata = JSON.parse(rawdata);
     await LoginPage.login(
       logindata.login_valid.login_email,
       logindata.login_valid.login_password

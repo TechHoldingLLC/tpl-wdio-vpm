@@ -4,11 +4,14 @@ import * as fs from 'fs'
 
 describe("HomePage Features", () => {
   let pagetitle: any;
+  let homePageData: any;
 
   before("Verify VPM Homepage", async () => {
     await homePage.openHomepage();
     const rawData2 = fs.readFileSync('./test/data/pageTitles.json', 'utf-8');
     pagetitle = JSON.parse(rawData2);
+    const rawData3 = fs.readFileSync('./test/data/homePage.json', 'utf-8');
+    homePageData = JSON.parse(rawData3);
     await browser.maximizeWindow();
   });
 
