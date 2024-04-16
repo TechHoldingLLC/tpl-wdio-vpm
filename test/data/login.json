@@ -10,7 +10,10 @@
     "login_valid_phone_num": 3473913410,
     "login_password" : "Test@123"
     },
-
+    "stage_login_valid" : {
+        "login_email" : "prabhav.joshi+8@techholding.co",
+        "login_password" : "Test@123"
+    },
     "login_toastMessage" : "Invalid Credentials",
     "login_successMessage" : "Registration Successful!",
     "login_userName": "Automated U"

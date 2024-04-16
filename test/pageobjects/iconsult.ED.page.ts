@@ -1,6 +1,7 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
-import iConsultEDData from "../data/iConsultED.json";
+import Page from "./page.js";
+import * as path from 'path'
+import * as fs from 'fs'
 
 class iConsultEDFlow extends Page {
   public get startiConsultbutton() {
@@ -8,7 +9,7 @@ class iConsultEDFlow extends Page {
   }
 
   public get consentCheckbox() {
-    return $("label[class$='label-checkbox']");
+    return $('label[id$="termsAndConditions"]');
   }
 
   public get continueBtn() {
@@ -20,9 +21,7 @@ class iConsultEDFlow extends Page {
   }
 
   public get countryContinueBtn() {
-    return $(
-      "[class$='btn-primary btn-sm text-uppercase aos-init aos-animate'"
-    );
+    return $('input[value="Continue"]')
   }
 
   public get dobSelector() {
@@ -144,8 +143,8 @@ class iConsultEDFlow extends Page {
   public get subscriptionContinueBtn() {
     return $("[class$='btn-primary text-uppercase']");
   }
-  public get addAddressBtn() {
-    return $("[class$='btn-secondary mw-100 text-uppercase']");
+  public get addNewAddressButton() {
+    return $('a[href="/en/addaddress"] button');
   }
 
   public get ship_fn_field() {
@@ -176,11 +175,12 @@ class iConsultEDFlow extends Page {
   }
 
   public get ship_select_address() {
-    return $(".custom-field .radio-label:nth-last-child(1 of .radio-label)");
+    //return $(".custom-field .radio-label:nth-last-child(1 of .radio-label)");
+    return $('//h5[@data-aos="fade"]//ancestor::div/li')
   }
 
   public get ship_save_btn() {
-    return $("[class$='btn-primary text-uppercase']");
+    return $('input[value="Save And Continue"]');
   }
 
   public get upload_save_btn() {
@@ -195,7 +195,8 @@ class iConsultEDFlow extends Page {
   }
 
   public get choose_card() {
-    return $("[class$='custom-field Subscriptions_custom-field__d6rRh']");
+    //return $("[class$='custom-field Subscriptions_custom-field__d6rRh']");
+    return $('//div[contains(@class,"Subscriptions_cards-derails-list")]/div')
   }
 
   public get add_card_btn() {
@@ -216,7 +217,8 @@ class iConsultEDFlow extends Page {
     );
   }
   public get submit_order() {
-    return $("[class$='btn-primary btn-sm mw-100 text-uppercase']");
+    //return $("[class$='btn-primary btn-sm mw-100 text-uppercase']");
+    return $('a[href="/en/iconsult/summary#"]')
   }
 
   public get iConsultCompletedMessage() {
@@ -245,6 +247,8 @@ class iConsultEDFlow extends Page {
   }
 
   public async iConsultED() {
+    const rawData = fs.readFileSync('./test/data/iConsultED.json', 'utf-8');
+    const iConsultEDData = JSON.parse(rawData);
     await this.startiConsultbutton.click();
     await browser.pause(2000);
     await this.consentCheckbox.click();
@@ -331,17 +335,17 @@ class iConsultEDFlow extends Page {
     await browser.pause(2000);
 
     const fileInput = await browser.$("[type$='file']");
-    const filePath =
-      "/Users/prabhavjoshi/Documents/Automation/VPM_Automation/Git_VPM_Wdio/tpl-wdio-vpm/test/data/10h6IV-1008052284.jpg";
-    await fileInput.addValue(filePath);
+    const filePath: string = "./test/data/IDProof.png";
+    const file1 = path.join(process.cwd(), filePath);
+    await fileInput.addValue(file1);
     await browser.pause(5000);
     await this.upload_save_btn.click();
     await browser.pause(5000);
 
     const fileInput2 = await browser.$("[type$='file']");
-    const filePath2 =
-      "/Users/prabhavjoshi/Documents/Automation/VPM_Automation/Git_VPM_Wdio/tpl-wdio-vpm/test/data/10h6IV-1008052284.jpg";
-    await fileInput2.addValue(filePath2);
+    const filePath2 = "./test/data/Photo.jpg";
+    const file = path.join(process.cwd(), filePath2);
+    await fileInput2.addValue(file);
     await this.upload_save_btn.click();
     await browser.pause(2000);
     await expect(this.iConsultSummaryTitle).toHaveText(

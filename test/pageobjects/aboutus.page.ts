@@ -1,5 +1,5 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
+import Page from "./page.js";
 
 class AboutUsPage extends Page {
   public get productthumbnail() {

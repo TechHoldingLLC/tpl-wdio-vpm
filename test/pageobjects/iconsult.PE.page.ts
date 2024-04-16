@@ -1,6 +1,7 @@
 import { $ } from "@wdio/globals";
-import Page from "./page";
-import iConsultPEData from "../data/iConsultPE.json";
+import Page from "./page.js";
+import * as path from 'path'
+import * as fs from 'fs'
 
 class iConsultPEFlow extends Page {
   public get startiConsultbutton() {
@@ -245,6 +246,8 @@ class iConsultPEFlow extends Page {
   }
 
   public async iConsultPE() {
+    const rawData = fs.readFileSync('./test/data/iConsultPE.json', 'utf-8');
+    const iConsultPEData = JSON.parse(rawData);
     await this.startiConsultbutton.click();
     await browser.pause(2000);
     await this.consentCheckbox.click();
@@ -322,17 +325,17 @@ class iConsultPEFlow extends Page {
     await browser.pause(2000);
 
     const fileInput = await browser.$("[type$='file']");
-    const filePath =
-      "/Users/prabhavjoshi/Documents/Automation/VPM_Automation/Git_VPM_Wdio/tpl-wdio-vpm/test/data/10h6IV-1008052284.jpg";
-    await fileInput.addValue(filePath);
+    const filePath: string = "./test/data/IDProof.png";
+    const file1 = path.join(process.cwd(), filePath);
+    await fileInput.addValue(file1);
     await browser.pause(5000);
     await this.upload_save_btn.click();
     await browser.pause(5000);
 
     const fileInput2 = await browser.$("[type$='file']");
-    const filePath2 =
-      "/Users/prabhavjoshi/Documents/Automation/VPM_Automation/Git_VPM_Wdio/tpl-wdio-vpm/test/data/10h6IV-1008052284.jpg";
-    await fileInput2.addValue(filePath2);
+    const filePath2 = "./test/data/Photo.jpg";
+    const file = path.join(process.cwd(), filePath2);
+    await fileInput2.addValue(file);
     await this.upload_save_btn.click();
     await browser.pause(5000);
     await expect(this.iConsultSummaryTitle).toHaveText(

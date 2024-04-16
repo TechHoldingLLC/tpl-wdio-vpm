@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "moduleResolution": "node",
-        "target": "ESNext",
+        "module": "ESNext",
+        "target": "es2022",
         "lib": [
             "es2022",
             "dom"
@@ -14,6 +15,7 @@
         ],
         "skipLibCheck": true,
         "noEmit": true,
+        "allowImportingTsExtensions": true,
         "esModuleInterop": true,
         "strict": false,
         "resolveJsonModule": true,

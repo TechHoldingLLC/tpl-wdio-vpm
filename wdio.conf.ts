@@ -29,7 +29,48 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["./test/specs/**/*.ts"],
+  specs: [
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
+      './test/specs/home_test.ts',
+      './test/specs/iConsultEDSildenafil_test.ts',
+      './test/specs/iConsultGenitalHerpes_test.ts',
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts',
+      './test/specs/login_test.ts',
+      './test/specs/productdetail_test.ts',
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_Orders_test.ts',
+      './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts'
+  ],
+  suites:{
+    Profile:[
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_Orders_test.ts',
+      './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts'
+    ],
+    iConsult:[
+      './test/specs/iConsultEDSildenafil_test.ts',
+      './test/specs/iConsultGenitalHerpes_test.ts',
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts'
+    ],
+    HomePageTest:[
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
+      './test/specs/home_test.ts',
+      './test/specs/productdetail_test.ts'
+    ],
+    Login:[
+      './test/specs/login_test.ts'
+    ]
+  },
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -59,6 +100,9 @@ export const config: Options.Testrunner = {
   capabilities: [
     {
       browserName: "chrome",
+      'goog:chromeOptions': {
+        args: ['--disable-cache'] // disable cache for Chrome
+      },
       browserVersion: "dev",
     },
   ],
@@ -97,7 +141,7 @@ export const config: Options.Testrunner = {
   // baseUrl: 'http://localhost:8080',
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 10000,
+  waitforTimeout: 15000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response

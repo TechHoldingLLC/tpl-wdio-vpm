@@ -1,11 +1,21 @@
-import { expect } from "@wdio/globals";
-import ProductDetail from "../pageobjects/productdetail.page";
-import productDetaildata from "../data/productDetail.json";
-import pagetitle from "../data/pageTitles.json";
-import productdetailPage from "../pageobjects/productdetail.page";
+import { expect } from "@wdio/globals"
+import ProductDetail from "../pageobjects/productdetail.page.js"
+import productdetailPage from "../pageobjects/productdetail.page.js"
+import * as fs from 'fs'
 
 describe("Product Detail Feature", () => {
-  it("Verify Product Detail Page - Tadalafil - TC19", async () => {
+
+  let productDetaildata: any;
+  let pagetitle: any;
+
+  before(async ()=>{
+    const rawData = fs.readFileSync('./test/data/productDetail.json', 'utf-8');
+    productDetaildata = JSON.parse(rawData);
+    const rawData2 = fs.readFileSync('./test/data/pageTitles.json', 'utf-8');
+    pagetitle = JSON.parse(rawData2);
+    await browser.maximizeWindow();
+  })
+  it("Verify Product Detail Page - Tadalafil - TC10", async () => {
     await ProductDetail.openHomepage(productDetaildata.product_tadalafil);
     await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil);
     await expect(productdetailPage.productTitle).toHaveText(
