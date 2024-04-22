@@ -17,11 +17,18 @@ describe('iConsult feature- End to End flow', () => {
 
       const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
       const logindata = JSON.parse(rawdata)
+      const url= await browser.getUrl()
+      if(url.includes('qa')){
       await LoginPage.login(
         logindata.login_valid.login_email,
-        logindata.login_valid.login_password
-      )
-      expect(await homePage.aboutUs.isDisplayed())
+        logindata.login_valid.login_password)
+      } else{
+      await LoginPage.login(
+        logindata.stage_login_valid.login_email,
+        logindata.stage_login_valid.login_password)
+      }
+      await browser.pause(3000)
+      await expect(await homePage.aboutUs.isDisplayed()).toBe(true)
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()
@@ -45,7 +52,7 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(1000)
 
       await iConsultEDS.diagnosedWithAnyOfTheFollowing.waitForDisplayed()
-      await iConsultEDS.noneOfTheAboveSelection.doubleClick();
+      await iConsultEDS.noneOfTheAboveSelection.doubleClick()
       await iConsultEDS.continueButton.click()
       await browser.pause(1500)
 
@@ -60,11 +67,11 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(1500)
 
       await iConsultEDS.haveYouHadAnyOfConditionsQuestions.waitForDisplayed()
-      await iConsultEDS.continueButton.scrollIntoView();
+      await iConsultEDS.continueButton.scrollIntoView()
       await iConsultEDS.continueButton.click()
       await browser.pause(1500)
 
-      await iConsultEDS.shareWithDoctorAnyMedication.waitForDisplayed();
+      await iConsultEDS.shareWithDoctorAnyMedication.waitForDisplayed()
       await iConsultEDS.shareWithDoctorAnyMedicationTextBox.setValue("Automation Testing");
       await iConsultEDS.continueButton.click()
       await browser.pause(1500)
@@ -73,7 +80,7 @@ describe('iConsult feature- End to End flow', () => {
       await iConsultEDS.continueButton.click()
       await browser.pause(1500)
 
-      await iConsultEDS.past3MonthsUsedAnySubstancesQuestions.waitForDisplayed();
+      await iConsultEDS.past3MonthsUsedAnySubstancesQuestions.waitForDisplayed()
       await iConsultEDS.continueButton.click()
       await browser.pause(1500)
 
@@ -96,9 +103,8 @@ describe('iConsult feature- End to End flow', () => {
       await iConsultEDS.medicationAgainYes.click()
       await iConsultEDS.continueButton.click()
       await browser.pause(5000)
-      console.log("success")
 
-      await iConsult.recommendationPills.waitForDisplayed();
+      await iConsult.recommendationPills.waitForDisplayed()
       expect(iConsult.pillName).toHaveText('Sildenafil')
       expect(iConsult.productDescription).toHaveText("An erectile dysfunction medication that's FDA approved and clinically proven to treat ED, sildenafil has the same active ingredient as Viagra®. Better sex, at a lower price")    
       await iConsultEDS.dosageStrengthHundredMG.click()
@@ -166,5 +172,5 @@ describe('iConsult feature- End to End flow', () => {
       const orderedProductTotalPrice: string = await iConsult.orderDetailsProductTotalPrice.getText();
       console.log(`Order Details: Product Total Price is: ${orderedProductTotalPrice}`)
       expect(await iConsult.orderDetailsProductTotalPrice).toHaveText('$285.00')
-    });
-});
+    })
+})

@@ -151,7 +151,7 @@ class iConsult extends Page{
     }
     
     public get ship_save_btn() {
-        return $('input[value="Save And Continue"]')
+        return $('input[type="submit"]')
     }
 
     public async addNewShippingAddress(){
@@ -217,7 +217,7 @@ class iConsult extends Page{
     }
 
     public get submitOrder() {
-        return $('a[href="/en/iconsult/summary#"]')
+        return $('a[href*="/iconsult/summary#"]')
     }
     
     public get iConsultCompletionScreen(){
@@ -225,7 +225,7 @@ class iConsult extends Page{
     }
 
     public get viewOrderDetailsButton() {
-        return $('//a[@href="/en/orders?from=/iconsult/complete"]')
+        return $("//a[contains(@href,'iconsult/complete')]")
     }
     
     public get orderDetailsScreen(){
@@ -258,6 +258,30 @@ class iConsult extends Page{
 
     public get orderDetailsProductTotalPrice(){
         return $("//div[contains(@class,'text-right MyOrder_total-price')]/span[contains(@class,'MyOrder_total-main-price')]")
+    }
+
+    public async getLanguageFromUrl(url: string): Promise<string> {
+        return url.includes('/en/') ? 'en' : 'es';
+    }
+
+    public async getOrderInformation(): Promise<{
+        productName: string;
+        subscriptionPlan: string;
+        totalPrice: string;
+    }> {
+        const productName: string = await this.orderDetailProductName.getText();
+        const subscriptionPlan: string = await this.orderDetailsProductSubscriptionPlan.getText();
+        const totalPrice: string = await this.orderDetailsProductTotalPrice.getText();
+    
+        console.log(`Order Product Name is: "${productName}"`);
+        console.log(`Order Details: Product Subscription Plan is: "${subscriptionPlan}"`);
+        console.log(`Order Details: Product Total Price is: "${totalPrice}"`);
+    
+        return {
+            productName,
+            subscriptionPlan,
+            totalPrice
+        };
     }
 }
 

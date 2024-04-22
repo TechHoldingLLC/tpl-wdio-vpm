@@ -51,6 +51,10 @@ class SideMenuPage extends Page {
   async openProfileMenu() {
     await this.sideMenuProfileLink.click();
   }
+
+  async getCurrentUrl(){
+    return await browser.getUrl();
+  }
 }
 
 export default new SideMenuPage();

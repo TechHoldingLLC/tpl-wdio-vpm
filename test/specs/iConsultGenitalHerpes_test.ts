@@ -17,11 +17,18 @@ describe('iConsult feature- End to End flow', () => {
 
       const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
       const logindata = JSON.parse(rawdata)
+      const url= await browser.getUrl()
+      if(url.includes('qa')){
       await LoginPage.login(
         logindata.login_valid.login_email,
-        logindata.login_valid.login_password
-      )
-      expect(await homePage.aboutUs.isDisplayed())
+        logindata.login_valid.login_password)
+      } else{
+      await LoginPage.login(
+        logindata.stage_login_valid.login_email,
+        logindata.stage_login_valid.login_password)
+      }
+      await browser.pause(3000)
+      //await expect(await homePage.aboutUs.isDisplayed()).toBe(true)
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()
@@ -75,7 +82,6 @@ describe('iConsult feature- End to End flow', () => {
         await iConsultGHPage.continueButton.click()
       }
 
-      
       await iConsultGHPage.notTakingMedicineGHOutBreakQuestion.waitForDisplayed()
       await iConsultGHPage.GHOutBreakNo.click()
       await browser.pause(1500);
@@ -154,31 +160,34 @@ describe('iConsult feature- End to End flow', () => {
       expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount)
 
       await iConsult.addNewCard.scrollIntoView()
-      //await iConsultFlow.addNewCard.click();
       await iConsult.cardSelection.click()
       await browser.pause(1000)
       await iConsult.submitOrder.click()
       await iConsult.iConsultCompletionScreen.waitForDisplayed()
+
+      const currentUrl: string = await browser.getUrl()
+      await iConsult.getLanguageFromUrl(currentUrl)
       const iConsultCompletionMessage:string = await iConsult.iConsultCompletionScreen.getText()
-      console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
-      expect(iConsult.iConsultCompletionScreen).toHaveText("Your iConsult is successfully completed")
-      await iConsult.viewOrderDetailsButton.click()
-      await iConsult.orderDetailsScreen.waitForDisplayed()
-      await iConsult.orderListTab.waitForDisplayed()
-      const orderId: string = await iConsult.getOrderID()
-      console.log(`My Order ID is: ${orderId}`)
+      if(currentUrl.includes('en')){
+        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
+        expect(await iConsult.iConsultCompletionScreen).toHaveText("Your iConsult is successfully completed")
+      } else{
+        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
+        expect(iConsult.iConsultCompletionScreen).toHaveText("¡Genial, su receta de iConsult se completó con éxito!")
+      }
+        await iConsult.viewOrderDetailsButton.click()
+        await iConsult.orderDetailsScreen.waitForDisplayed()
+        await iConsult.orderListTab.waitForDisplayed()
+        
+        const orderId: string = await iConsult.getOrderID()
+        console.log(`My Order ID is: ${orderId}`)
 
-      const orderProductName: string= await iConsult.orderDetailProductName.getText()
-      console.log(`Order Product Name is: "${orderProductName}"`)
-      expect(await iConsult.orderDetailProductName).toHaveText('Acyclovir')
-
-      const orderProductSubscriptionPlan: string = await iConsult.orderDetailsProductSubscriptionPlan.getText()
-      console.log(`Order Details: Product Subscription Plan is: "${orderProductSubscriptionPlan}"`)
-      expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText('6 Months');
-
-      const orderedProductTotalPrice: string = await iConsult.orderDetailsProductTotalPrice.getText();
-      console.log(`Order Details: Product Total Price is: "${orderedProductTotalPrice}"`)
-      expect(await iConsult.orderDetailsProductTotalPrice).toHaveText('$135.00')
-      
-    });
-});
+        const orderInformation = await iConsult.getOrderInformation();
+        console.log(`Order Product Name is: "${orderInformation.productName}"`)
+        expect(await iConsult.orderDetailProductName).toHaveText('Acyclovir')
+        console.log(`Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`)
+        expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText('6');
+        console.log(`Order Details: Product Total Price is: "${orderInformation.totalPrice}"`)
+        expect(await iConsult.orderDetailsProductTotalPrice).toHaveText('$135.00')
+    })
+})

@@ -10,13 +10,23 @@ describe("iConsult Features", () => {
   });
 
   it("Verify iConsult PE Flow - Paroxetine - TC14", async () => {
-    const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8');
-    const logindata = JSON.parse(rawdata);
-    await LoginPage.login(
-      logindata.login_valid.login_email,
-      logindata.login_valid.login_password
-    );
-    await expect(homePage.aboutUs.isDisplayed());
-    await iConsultPEFlow.iConsultPE();
-  });
-});
+    const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
+    const logindata = JSON.parse(rawdata)
+    const url= await browser.getUrl()
+    if(url.includes('qa')){
+      await LoginPage.login(
+        logindata.login_valid.login_email,
+        logindata.login_valid.login_password
+      )
+    }
+    else{
+      await LoginPage.login(
+        logindata.stage_login_valid.login_email,
+        logindata.stage_login_valid.login_password
+      )
+    }
+    await browser.pause(3000)
+    await expect(await homePage.aboutUs.isDisplayed()).toBe(true)
+    await iConsultPEFlow.iConsultPE()
+  })
+})

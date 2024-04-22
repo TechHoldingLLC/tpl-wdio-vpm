@@ -17,11 +17,18 @@ describe('iConsult feature - End to End flow', () => {
 
       const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
       const logindata = JSON.parse(rawdata)
+      const url= await browser.getUrl()
+      if(url.includes('qa')){
       await LoginPage.login(
         logindata.login_valid.login_email,
-        logindata.login_valid.login_password
-      )
-      expect(await homePage.aboutUs.isDisplayed())
+        logindata.login_valid.login_password)
+      } else{
+      await LoginPage.login(
+        logindata.stage_login_valid.login_email,
+        logindata.stage_login_valid.login_password)
+      }
+      await browser.pause(3000)
+      await expect(await homePage.aboutUs.isDisplayed()).toBe(true)
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()

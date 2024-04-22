@@ -42,7 +42,7 @@ class profile_shipping extends Page {
   }
 
   public get ship_success_toast_message() {
-    return $("[class*=Toastify__toast-body]");
+    return $("[class*=Toastify__toast-body] div:nth-child(2) div");
   }
 
   public async addShippingAddress() {
