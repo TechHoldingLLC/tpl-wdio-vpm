@@ -1,52 +1,60 @@
-import { $ } from "@wdio/globals";
-import Page from "./page.js";
+import { $ } from "@wdio/globals"
+import Page from "./page.js"
 
 class ContactUs extends Page {
   public get selectQuestion() {
-    return $("select");
+    return $("select")
   }
 
   public get firstNameField() {
-    return $("#firstName");
+    return $("#firstName")
   }
 
   public get lastNameField() {
-    return $("#lastName");
+    return $("#lastName")
   }
 
   public get emailField() {
-    return $("#email");
+    return $("#email")
   }
 
   public get phoneField() {
-    return $("#phone");
+    return $("#phone")
   }
   public get descriptionField() {
-    return $("#description");
+    return $("#description")
   }
 
   public get submitButton() {
-    return $("[type$='submit']");
+    return $("[type$='submit']")
   }
 
   public get contactToastmessage() {
     return $(
       "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click']"
-    );
+    )
   }
 
   get contacterrormessage() {
     return $(
-      "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click']"
-    );
+      "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click']")
+  }
+
+  private async selectRandomOption(options: string[]): Promise<void> {
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const selectedOption = options[randomIndex];
+    console.log(`Selecting '${selectedOption}' option for Contact us form`);
+    const cu_value = $(`[value$='${selectedOption}']`);
+    await cu_value.click();
   }
   public async contactUsPage(
     firstname: string,
     lastname: string,
     contactnumber: number,
-    description: string
-  ) {
-    const options = [
+    description: string,
+    language: string
+  ): Promise<void> {
+  const options = (language === 'en') ? [
       "Cancel Subscription",
       "How it Works",
       "Manage Account",
@@ -54,24 +62,23 @@ class ContactUs extends Page {
       "Orders and Shipping",
       "Products",
       "Other",
-    ];
-    function performClick(option: string): void {
-      console.log(`Selecting ${option} option for Contact us form`);
-    }
-    const randomIndex = Math.floor(Math.random() * options.length);
-    const selectedOption = options[randomIndex];
-    performClick(selectedOption);
-    const cu_value = $(`[value$='${selectedOption}`);
-    await cu_value.click();
-
-    await this.firstNameField.setValue(firstname);
-    await this.lastNameField.setValue(lastname);
-    await this.emailField.setValue(
-      `test_wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`
-    );
-    await this.phoneField.setValue(contactnumber);
-    await this.descriptionField.setValue(description);
-    await this.submitButton.click();
+  ] : [
+      "Cancelar suscripción",
+      "Cómo funciona",
+      "Administrar cuenta",
+      "Pregunta médica",
+      "Pedidos y envíos",
+      "Productos",
+      "Otro"
+  ]
+    await this.selectRandomOption(options)
+    // Filling the form
+    await this.firstNameField.setValue(firstname)
+    await this.lastNameField.setValue(lastname)
+    await this.emailField.setValue(`test_wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`)
+    await this.phoneField.setValue(contactnumber)
+    await this.descriptionField.setValue(description)
+    await this.submitButton.click()
   }
 
   public async contactUsPage_invalid(
@@ -79,9 +86,10 @@ class ContactUs extends Page {
     lastname: string,
     invalid_email: string,
     contactnumber: number,
-    description: string
-  ) {
-    const options = [
+    description: string,
+    language: string
+  ): Promise<void> {
+  const options = (language === 'en') ? [
       "Cancel Subscription",
       "How it Works",
       "Manage Account",
@@ -89,27 +97,41 @@ class ContactUs extends Page {
       "Orders and Shipping",
       "Products",
       "Other",
-    ];
-    function performClick(option: string): void {
-      console.log(`Selecting ${option} option for Contact us form`);
-    }
-    const randomIndex = Math.floor(Math.random() * options.length);
-    const selectedOption = options[randomIndex];
-    performClick(selectedOption);
-    const cu_value = $(`[value$='${selectedOption}`);
-    await cu_value.click();
+  ] : [
+      "Cancelar suscripción",
+      "Cómo funciona",
+      "Administrar cuenta",
+      "Pregunta médica",
+      "Pedidos y envíos",
+      "Productos",
+      "Otro"
+  ]
+  await this.selectRandomOption(options)
+  // Filling the form
+  await this.firstNameField.setValue(firstname)
+  await this.lastNameField.setValue(lastname)
+  await this.emailField.setValue(invalid_email)
+  await this.phoneField.setValue(contactnumber)
+  await this.descriptionField.setValue(description)
+  await this.submitButton.click()
+  }
 
-    await this.firstNameField.setValue(firstname);
-    await this.lastNameField.setValue(lastname);
-    await this.emailField.setValue(invalid_email);
-    await this.phoneField.setValue(contactnumber);
-    await this.descriptionField.setValue(description);
-    await this.submitButton.click();
+  public get contactUsBanner(){
+    return $('h2')
+  }
+
+  public get contactUsForProblem(){
+    return $("//div[contains(@class,'ContactUs_contact-title-wrapper')]/div")
+  }
+
+  public async getLanguageFromUrl(url: string): Promise<string> {
+    return url.includes('/en/') ? 'en' : 'es';
   }
 
   public openContactus() {
-    return super.open("/en/contactus");
+    return super.open("contactus")
   }
+
 }
 
-export default new ContactUs();
+export default new ContactUs()

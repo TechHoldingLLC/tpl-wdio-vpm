@@ -1,5 +1,5 @@
 import LoginPage from "../pageobjects/vpm_login.page.js"
-import * as fs from 'fs'
+import fs from 'fs'
 import homePage from "../pageobjects/home.page.js"
 import vpm_loginPage from "../pageobjects/vpm_login.page.js"
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js"
@@ -15,17 +15,23 @@ describe('Profile Menu Options and Redirection from Orders', () => {
     it('Verify the profile menu options', async() => {
       const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
       const logindata = JSON.parse(rawdata)
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password
-      )
+      const url: string= await browser.getUrl()
+      if(url.includes('qa')){
+        await LoginPage.login(
+          logindata.login_valid.login_email,
+          logindata.login_valid.login_password)
+      } else {
+        await LoginPage.login(
+          logindata.stage_login_valid.login_email,
+          logindata.stage_login_valid.login_password)
+      }
       expect(await homePage.aboutUs.isDisplayed())
       await vpm_loginPage.hamburgericon.waitForClickable()
       await vpm_loginPage.hamburgericon.click()
       await browser.pause(5000)
       const validateProfileSubMenus = await profilesidemenuPage.validateProfileSideMenuList()
-      expect(validateProfileSubMenus).to.be.true;
-    });
+      expect(validateProfileSubMenus).to.be.true
+    })
 
     it('Verify the redirection from the Profile Orders to Order Listing details page', async() => {
       // Click on the Orders option in the profile side menu

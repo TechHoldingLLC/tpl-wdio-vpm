@@ -1,5 +1,5 @@
 import LoginPage from "../pageobjects/vpm_login.page.js"
-import * as fs from 'fs'
+import fs from 'fs'
 import homePage from "../pageobjects/home.page.js"
 import vpm_loginPage from "../pageobjects/vpm_login.page.js"
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js"
@@ -11,10 +11,16 @@ describe('Customer Profile - Subscription menu redirection', () => {
       await browser.maximizeWindow()
       const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
       const logindata = JSON.parse(rawdata)
-      await LoginPage.login(
+      const url: string= await browser.getUrl()
+      if(url.includes('qa')){
+        await LoginPage.login(
           logindata.login_valid.login_email,
-          logindata.login_valid.login_password
-      )
+          logindata.login_valid.login_password)
+      } else{
+        await LoginPage.login(
+          logindata.stage_login_valid.login_email,
+          logindata.stage_login_valid.login_password)
+      }
       expect(await homePage.aboutUs.isDisplayed())
       await vpm_loginPage.hamburgericon.waitForClickable()
       await vpm_loginPage.hamburgericon.click()

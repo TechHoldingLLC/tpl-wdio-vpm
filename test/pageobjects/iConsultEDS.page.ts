@@ -150,7 +150,7 @@ class iConsultEDSlidenafil extends Page{
     }
 
     public get dosageStrengthHundredMG(){
-        return $('label[for="dosage-option-4-1"]')
+        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[2]')
     }
 
 

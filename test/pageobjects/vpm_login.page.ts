@@ -3,19 +3,18 @@ import Page from "./page.js";
 
 class LoginPage extends Page {
   get signinButton() {
-    return $(
-      '[class$="btn-primary text-uppercase btn-sm Header_btn-signin__3W_xI"]'
-    );
+    return $("//a[contains(@class,'btn-primary text-uppercase btn-sm Header_btn-signin')]")
   }
 
   get inputUsername() {
     return $("#userName");
   }
+
   get inputPassword() {
     return $("#password");
   }
   get btnSubmit() {
-    return $('[value$="SIGN IN"]');
+    return $("input[type='submit']");
   }
   get invalidAlert() {
     return $(
@@ -24,12 +23,11 @@ class LoginPage extends Page {
     );
   }
   get hamburgericon() {
-    //return $("[class$='btn-rounded Header_btn-user__RSRGo']");
     return $("//a[contains(@class, 'btn-rounded Header_btn-user')]")
   }
 
   get profile_name() {
-    return $("//h4[@class='Header_user-name__61MdT']");
+    return $("//h4[contains(@class,'Header_user-name')]")
   }
   get signupsuccess() {
     return $(
@@ -40,7 +38,15 @@ class LoginPage extends Page {
     return $$("//a");
   }
 
-  public async login(username: string, password: string) {
+  public get requiredFieldvalidationMessageForMobileOrEmail(){
+    return $("(//div[contains(@class,'postal-code-error TextError_errorText')])[1]")
+  }
+
+  public get requiredFieldvalidationMessageForPassword(){
+    return $("(//div[contains(@class,'postal-code-error TextError_errorText')])[2]")
+  }
+
+  public async login(username: string, password: string, env?:string) {
     await this.inputUsername.setValue(username);
     await this.inputPassword.setValue(password);
     await this.btnSubmit.click();
@@ -53,7 +59,8 @@ class LoginPage extends Page {
   }
 
   public openSignin() {
-    return super.open("/en/auth/signin");
+    return super.open("/auth/signin");
+    //return super.open("/auth/signin");
   }
 }
 

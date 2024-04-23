@@ -69,6 +69,42 @@ export const config: Options.Testrunner = {
     ],
     Login:[
       './test/specs/login_test.ts'
+    ],
+    Sanity:[
+      './test/specs/home_test.ts',
+      './test/specs/productdetail_test.ts',
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
+      './test/specs/login_test.ts',
+      './test/specs/sidemenu_test.ts',
+      './test/specs/profile_Orders_test.ts',
+      './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts',
+      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/iConsultEDSildenafil_test.ts',
+      './test/specs/iConsultGenitalHerpes_test.ts',
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts',
+    ],
+    SanitySpanish:[
+      './test/specs/home_test.ts',
+      './test/specs/productdetail_test.ts',
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
+      './test/specs/login_test.ts',
+      './test/specs/sidemenu_test.ts',
+      './test/specs/profile_Orders_test.ts',
+      './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts',
+      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/iConsultEDSildenafil_test.ts',
+      './test/specs/iConsultGenitalHerpes_test.ts',
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultPE_test.ts',
     ]
   },
   // Patterns to exclude.
@@ -139,6 +175,7 @@ export const config: Options.Testrunner = {
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
   // baseUrl: 'http://localhost:8080',
+  //baseUrl: "https://qa.viapromeds.com",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 15000,
@@ -177,7 +214,11 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: ["spec", ['allure', {
+    outputDir: 'allure-results',
+    disableWebdriverStepsReporting: false,
+    disableWebdriverScreenshotsReporting: false,
+}]],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/

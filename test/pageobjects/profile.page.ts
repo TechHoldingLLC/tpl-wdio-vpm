@@ -17,9 +17,6 @@ class ProfilePage extends Page{
     public get emailInput(){
         return $('#email')
     }
-
-    
-
 }
 
 export default new ProfilePage()
