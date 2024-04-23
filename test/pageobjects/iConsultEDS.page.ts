@@ -146,11 +146,11 @@ class iConsultEDSlidenafil extends Page{
     }
 
     public get dosageStrengthFiftyMG(){
-        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[2]')
+        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[1]')
     }
 
     public get dosageStrengthHundredMG(){
-        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[1]')
+        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[2]')
     }
 
 

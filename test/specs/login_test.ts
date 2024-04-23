@@ -7,6 +7,7 @@ describe("VPM Login Feature", () => {
 
   beforeEach(async () => {
     await LoginPage.openSignin()
+    //await browser.url("/auth/signin")
     await browser.maximizeWindow()
   })
 

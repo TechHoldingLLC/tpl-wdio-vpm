@@ -1,5 +1,4 @@
 import LoginPage from "../pageobjects/vpm_login.page.js"
-import homePage from "../pageobjects/home.page.js"
 import iConsult from "../pageobjects/iConsult.page.js"
 import iConsultGHPage from "../pageobjects/iConsult.GH.page.js"
 import * as fs from 'fs'
@@ -28,8 +27,6 @@ describe('iConsult feature- End to End flow', () => {
         logindata.stage_login_valid.login_password)
       }
       await browser.pause(3000)
-      //await expect(await homePage.aboutUs.isDisplayed()).toBe(true)
-
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()
       await iConsult.consentCheckbox.waitForDisplayed()
