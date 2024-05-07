@@ -7,7 +7,6 @@ describe('Admin Panel features', () => {
     before(async() => {
         await adminPage.launchAdminPortal()
         await adminPage.header.waitForDisplayed()
-        await browser.maximizeWindow()
     })
 
     it('C29664 Verify iConsult completed orders in the Admin Panel Pending Tab', async() => {

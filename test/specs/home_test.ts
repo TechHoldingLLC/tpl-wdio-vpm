@@ -9,7 +9,6 @@ describe("HomePage Features", () => {
     await homePage.openHomepage()
     pagetitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
     homePageData = JSON.parse(fs.readFileSync('./test/data/homePage.json', 'utf-8'))
-    await browser.maximizeWindow()
   })
 
   it("C29672 Verify Landing Page opens error free", async () => {
@@ -38,6 +37,7 @@ describe("HomePage Features", () => {
         console.error("Error occurred while fetching link text:", error)
       }
     }
+    console.log("Visible Links on the HomePage are: " + actualLinks)
     expect(actualLinks).toEqual(expectedLinks)
   })
 })

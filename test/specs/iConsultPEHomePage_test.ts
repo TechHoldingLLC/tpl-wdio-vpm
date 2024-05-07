@@ -18,7 +18,7 @@ describe('iConsult feature- End to End flow', () => {
         await browser.maximizeWindow()
     })
     
-    it('iConsultPE flow from HomePage without Sign In', async() => {
+    it('C29655 iConsultPE flow from HomePage without Sign In', async() => {
         const IDProofPath: string = "./test/data/IDProof.png"
         const photoPath: string = "./test/data/Photo.jpg"
         let loginData: any

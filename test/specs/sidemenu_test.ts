@@ -22,7 +22,7 @@ describe("Side Menu Options", () => {
     language = await SideMenuPage.getLanguageFromUrl(url)
   })
 
-  it("C29657 Verify side menu links not broken", async () => {
+  it("C29658 Verify side menu links not broken", async () => {
     const orderMenu: string = language === 'en' ? "Orders" : "Órdenes"
     const subscriptionMenu: string = language === 'en' ? "Subscriptions" : "Suscripciones"
     const savedCardsMenu: string = language === 'en' ? "Saved Cards" : "Tarjetas Guardadas"

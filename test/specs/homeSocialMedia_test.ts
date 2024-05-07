@@ -10,7 +10,6 @@ describe('Home Page Footer- Social Media Link verification', () => {
     before(async () => {
         await homePage.openHomepage()
         pagetitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
-        await browser.maximizeWindow()
         originalWindowHandle = await browser.getWindowHandle()
     })
 

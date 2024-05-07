@@ -9,7 +9,6 @@ describe("Profile Features", () => {
 
   before(async () => {
     await LoginPage.openSignin()
-    await browser.maximizeWindow()
     shippingData = JSON.parse(fs.readFileSync('./test/data/profile_shipping.json', 'utf-8'))
     logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
   })

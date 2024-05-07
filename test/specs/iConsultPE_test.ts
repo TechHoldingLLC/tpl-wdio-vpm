@@ -6,7 +6,6 @@ import fs from 'fs'
 describe("iConsult Features", () => {
   before(async () => {
     await LoginPage.openSignin()
-    await browser.maximizeWindow()
   })
 
   it("C29655 Verify iConsult PE Flow - Paroxetine", async () => {

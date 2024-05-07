@@ -8,7 +8,6 @@ describe('Admin Panel features', () => {
         // For stage, kindly change URL in the function - launchAdminPortal
         await adminPage.launchAdminPortal()
         await adminPage.header.waitForDisplayed()
-        await browser.maximizeWindow()
     })
 
     /*

@@ -8,7 +8,6 @@ describe('Customer Profile - Subscription menu redirection', () => {
 
     before(async () => {
       await LoginPage.openSignin()
-      await browser.maximizeWindow()
     })
 
     it('C29661 Verify the redirection from the Profile Subscriptions to Subscription Listing details page', async() => {

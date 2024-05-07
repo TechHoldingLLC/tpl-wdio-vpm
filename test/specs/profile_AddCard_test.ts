@@ -9,7 +9,6 @@ describe('Customer Profile - Saved Cards page', () => {
 
     before(async () => {
       await LoginPage.openSignin()
-      await browser.maximizeWindow()
       const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
       const url: string = await browser.getUrl()
       let selectedLoginData: any

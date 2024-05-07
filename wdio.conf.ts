@@ -50,46 +50,33 @@ export const config: Options.Testrunner = {
   // of the config file unless it's absolute.
   //
   specs: [
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
-      './test/specs/home_test.ts',
-      './test/specs/homeFooter_test.ts',
-      './test/specs/homeSocialMedia_test.ts',
-      './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts',
-      './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultPE_test.ts',
-      './test/specs/login_test.ts',
-      './test/specs/productdetail_test.ts',
-      './test/specs/profile_AddCard_test.ts',
-      './test/specs/profile_Orders_test.ts',
-      './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_UserProfile_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts'
+      './test/specs/*.ts',
   ],
   suites:{
     Profile:[
-      './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_Orders_test.ts',
       './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts'
+      './test/specs/sidemenu_test.ts'
     ],
     iConsult:[
       './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/iConsultGenitalHerpes_test.ts',
       './test/specs/iConsultHairLoss_test.ts',
       './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultPE_test.ts'
+      './test/specs/iConsultPE_test.ts',
+      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/iConsultPEHomePage_test.ts'
     ],
     HomePageTest:[
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
       './test/specs/home_test.ts',
       './test/specs/homeFooter_test.ts',
       './test/specs/homeSocialMedia_test.ts',
-      './test/specs/productdetail_test.ts'
+      './test/specs/productdetail_test.ts',
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
     ],
     Login:[
       './test/specs/login_test.ts'
@@ -107,16 +94,17 @@ export const config: Options.Testrunner = {
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_ShippingAddress_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      // './test/specs/iConsultEDSildenafil_test.ts',
-      // './test/specs/iConsultGenitalHerpes_test.ts',
-      // './test/specs/iConsultHairLoss_test.ts',
-      // './test/specs/iConsultED_test.ts',
-      // './test/specs/iConsultPE_test.ts',
+      './test/specs/iConsultGenitalHerpes_test.ts',
+      './test/specs/iConsultHairLoss_test.ts',
+      './test/specs/iConsultED_test.ts',
+      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/adminPanel_test.ts',
+      './test/specs/iConsultPEHomePage_test.ts',
+      './test/specs/adminOrderDeclined_test.ts'
     ],
     SanitySpanish:[
       './test/specs/home_test.ts',
       './test/specs/homeFooter_test.ts',
-      './test/specs/homeSocialMedia_test.ts',
       './test/specs/productdetail_test.ts',
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
@@ -127,11 +115,17 @@ export const config: Options.Testrunner = {
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_ShippingAddress_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/iConsultGenitalHerpes_test.ts',
       './test/specs/iConsultHairLoss_test.ts',
       './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultPE_test.ts',
+      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/adminPanel_test.ts',
+      './test/specs/iConsultPEHomePage_test.ts',
+      './test/specs/adminOrderDeclined_test.ts'
+    ],
+    AdminOrderApproved:[
+      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/adminPanel_test.ts'
     ],
     AdminOrderDeclined:[
       './test/specs/iConsultPEHomePage_test.ts',
@@ -170,7 +164,7 @@ export const config: Options.Testrunner = {
       'goog:chromeOptions': {
         args: ['--disable-cache'] // disable cache for Chrome
       },
-      browserVersion: "dev",
+      browserVersion: "stable",
     },
     // { browserName: 'firefox'},
     // { browserName: 'safari'},
@@ -257,20 +251,20 @@ export const config: Options.Testrunner = {
     disableWebdriverScreenshotsReporting: false,
     }
   ], 
-  ['testrail', {
-                projectId: 22,
-                suiteId: 81,
-                domain: 'techholding.testrail.io',
-                //username: process.env.TESTRAIL_USERNAME,
-                username: "dhrumil.soni@techholding.co",
-                //apiToken: process.env.TESTRAIL_API_TOKEN,
-                apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-                runName: 'Dhrumil_Sample_Test_Execution_English',
-                oneReport: true,
-                includeAll: true,
-                caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
-              }
-  ]
+  // ['testrail', {
+  //               projectId: 22,
+  //               suiteId: 81,
+  //               domain: 'techholding.testrail.io',
+  //               //username: process.env.TESTRAIL_USERNAME,
+  //               username: "dhrumil.soni@techholding.co",
+  //               //apiToken: process.env.TESTRAIL_API_TOKEN,
+  //               apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+  //               runName: 'Dhrumil_Sample_Test_Execution_Spanish',
+  //               oneReport: true,
+  //               includeAll: true,
+  //               caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
+  //             }
+  // ]
 ],
 //reporterSyncTimeout: 30000,
 

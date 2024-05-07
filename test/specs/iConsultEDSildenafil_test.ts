@@ -7,7 +7,6 @@ describe('iConsult feature- End to End flow', () => {
     
     before(async () => {
         await LoginPage.openSignin()
-        await browser.maximizeWindow()
     })
 
     it('C29654 Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {

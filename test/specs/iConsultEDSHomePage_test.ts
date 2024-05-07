@@ -15,10 +15,9 @@ describe('iConsult feature- End to End flow', () => {
         pagetitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
         logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
         iConsultEDSData = JSON.parse(fs.readFileSync('./test/data/iConsultEDS.json', 'utf-8'))
-        await browser.maximizeWindow()
     })
     
-    it('iConsult from HomePage without Sign In', async() => {
+    it('iConsult EDS flow from HomePage without Sign In', async() => {
         const IDProofPath: string = "./test/data/IDProof.png"
         const photoPath: string = "./test/data/Photo.jpg"
 
@@ -32,20 +31,20 @@ describe('iConsult feature- End to End flow', () => {
         expect(await browser.getTitle()).toEqual(expectedPageTitle)
 
         await homePage.edTreatmentProduct.scrollIntoView()
-        await homePage.edTreatmentProduct.click()
-        /*
-        await productElement.moveTo()
+        //await homePage.edTreatmentProduct.click()
+        
+        await homePage.edTreatmentProduct.moveTo()
         const startIConsult = await $("//div[@class='treatment-btn']//a[@href='/start-iconsult']")
         console.log("Text is : " + await startIConsult.getText())
         await startIConsult.click()
-        */
         await browser.pause(5000)
+
         await iConsult.consentCheckbox.waitForDisplayed()
         await iConsult.consentCheckbox.click()
         await iConsult.consentContinueButton.waitForClickable()
         await iConsult.consentContinueButton.click()
         await browser.pause(5000)
-        await iConsult.iConsultEDselection.click()
+        // await iConsult.iConsultEDselection.click()
         await iConsult.dobPage.waitForDisplayed()
         const actualDOBPageText: string = await iConsult.dobPage.getText()
         console.log(actualDOBPageText)
@@ -62,6 +61,7 @@ describe('iConsult feature- End to End flow', () => {
         await iConsult.dobContinueButton.waitForClickable()
         await iConsult.dobContinueButton.click()
 
+        
         await iConsult.iConsultEligibilityText.waitForDisplayed()
         const expectedEligibilityText: string = language === 'en' ? iConsultEDSData.iConsultEDS_EligibilityText : iConsultEDSData.iConsultEDS_EligibilityText_es
         const actualEligibilityText: string = await iConsult.iConsultEligibilityText.getText()

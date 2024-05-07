@@ -9,7 +9,6 @@ describe('Customer Profile - Saved Cards page', () => {
 
     before(async () => {
       await LoginPage.openSignin()
-      await browser.maximizeWindow() 
     })
 
     it('C29663 Verify the redirection from the Profile to Profile Settings page', async () => {
@@ -30,7 +29,8 @@ describe('Customer Profile - Saved Cards page', () => {
         await vpm_loginPage.hamburgericon.waitForClickable()
         await vpm_loginPage.hamburgericon.click()
           
-        await browser.pause(1000)
+        await browser.pause(2500)
+        await profilesidemenuPage.profileOption.scrollIntoView()
         await profilesidemenuPage.profileOption.click()
         await browser.pause(3000)
         await profilePage.profileSettings.waitForDisplayed()
