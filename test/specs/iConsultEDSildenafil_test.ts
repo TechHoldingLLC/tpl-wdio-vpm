@@ -1,7 +1,7 @@
 import LoginPage from "../pageobjects/vpm_login.page.js"
 import iConsult from "../pageobjects/iConsult.page.js"
 import iConsultEDS from "../pageobjects/iConsultEDS.page.js"
-import * as fs from 'fs'
+import fs from 'fs'
 
 describe('iConsult feature- End to End flow', () => {
     
@@ -10,22 +10,24 @@ describe('iConsult feature- End to End flow', () => {
         await browser.maximizeWindow()
     })
 
-    it('Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {
+    it('C29654 Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {
       const IDProofPath: string = "./test/data/IDProof.png"
       const photoPath: string = "./test/data/Photo.jpg"
-
-      const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-      const logindata = JSON.parse(rawdata)
-      const url= await browser.getUrl()
+      const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
+      const iConsultEDSData = JSON.parse(fs.readFileSync('./test/data/iConsultEDS.json', 'utf-8'))
+      
+      const url:string = await browser.getUrl()
+      const language:string = await iConsult.getLanguageFromUrl(url)
+      
+      let loginData: any
       if(url.includes('qa')){
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password)
-      } else{
-      await LoginPage.login(
-        logindata.stage_login_valid.login_email,
-        logindata.stage_login_valid.login_password)
+        loginData = logindata.login_valid
+      } else if(url.includes('stage')){
+        loginData = logindata.stage_login_valid
+      } else {
+        loginData = logindata.prod_login_valid
       }
+      await LoginPage.login(loginData.login_email, loginData.login_password)
       await browser.pause(3000)
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
@@ -40,71 +42,16 @@ describe('iConsult feature- End to End flow', () => {
       if(await iConsult.startNewiConsult.isDisplayed()){
         await iConsult.startNewiConsult.click()
       }
-      await iConsultEDS.problemPresentQuestion.waitForDisplayed()
-      await iConsultEDS.problemPresentOption5PlusYear.click()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1000)
-      await iConsultEDS.EDStartQuestions.waitForDisplayed()
-      //await iConsultEDS.EDStartGradually.click()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1000)
-
-      await iConsultEDS.diagnosedWithAnyOfTheFollowing.waitForDisplayed()
-      await iConsultEDS.noneOfTheAboveSelection.doubleClick()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.medicationDailyQuestions.waitForDisplayed()
-      await iConsultEDS.medicationNo.click()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.takeAnyMedicationsQuestions.waitForDisplayed() 
-      await iConsultEDS.noneOfTheAboveSelectionForMedications.doubleClick()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.haveYouHadAnyOfConditionsQuestions.waitForDisplayed()
-      await iConsultEDS.continueButton.scrollIntoView()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.shareWithDoctorAnyMedication.waitForDisplayed()
-      await iConsultEDS.shareWithDoctorAnyMedicationTextBox.setValue("Automation Testing");
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.allergicToAnyMedications.waitForDisplayed()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.past3MonthsUsedAnySubstancesQuestions.waitForDisplayed()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.wakeUpWithErectionOptions.waitForDisplayed()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.anyMedicationBeforeQuestions.waitForDisplayed()
-      await iConsultEDS.sildenafilMedicationOption.click()
-      await browser.pause(1000)
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.dosageYouTakeOptions.waitForDisplayed()
-      await iConsultEDS.hundredMgOption.click()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(1500)
-
-      await iConsultEDS.medicationAgainQuestion.waitForDisplayed()
-      await iConsultEDS.medicationAgainYes.click()
-      await iConsultEDS.continueButton.click()
-      await browser.pause(5000)
+      await iConsultEDS.iConsultEDSQuestionsandAnswers()
 
       await iConsult.recommendationPills.waitForDisplayed()
-      expect(iConsult.pillName).toHaveText('Sildenafil')
-      expect(iConsult.productDescription).toHaveText("An erectile dysfunction medication that's FDA approved and clinically proven to treat ED, sildenafil has the same active ingredient as Viagra®. Better sex, at a lower price")    
+      const Recommendation_medicine_title = await iConsult.pillName.getText()
+      console.log(`Recommended Medicine Name: ${Recommendation_medicine_title}`)
+      expect(Recommendation_medicine_title).toEqual(iConsultEDSData.iConsultEDS_MedicineName)
+      
+      const expectedMedicineDescription = language === 'en' ? iConsultEDSData.iConsultEDS_MedicineDescription : iConsultEDSData.iConsultEDS_MedicineDescription_es
+      expect(await iConsult.productDescription.getText()).toEqual(expectedMedicineDescription)
+    
       await iConsultEDS.dosageStrengthHundredMG.click()
       await iConsult.productContinueButton.waitForClickable()
       await iConsult.productContinueButton.click()
@@ -120,23 +67,21 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(1500)
 
       await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.ship_select_address.click();
+      await iConsult.ship_select_address.click()
       await browser.pause(1500)
       await iConsult.ship_save_btn.scrollIntoView()
       await iConsult.ship_save_btn.click()
       await browser.pause(2000)
 
-      await iConsult.uploadPhotoIDScreen.waitForDisplayed()
-      await iConsult.uploadPhoto(IDProofPath)
-      await iConsult.uploadOrTakePhotoScreen.waitForDisplayed()
-      await iConsult.uploadPhoto(photoPath)
+      await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath)
       await iConsult.iConsultPage.waitForDisplayed()
-      expect(iConsult.iConsultPage).toHaveText('iConsult Summary')
+      expect(iConsult.iConsultPage).toHaveText(iConsultEDSData.iConsultEDS_Summary)
       await browser.pause(5000)
 
       const actualProductName: string = await iConsult.productName.getText()
       console.log(`Actual Product Name: ${actualProductName}`)
-      expect(iConsult.productName).toHaveText('Sildenafil')
+      expect(iConsult.productName).toHaveText(iConsultEDSData.iConsultEDS_SummaryMedicine)
+      
       const prodSubscriptionPlan:string = await iConsult.productSubscriptionPlan.getText()
       console.log(`prodSubscriptionPlan is : ${prodSubscriptionPlan}`)
       expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue)
@@ -149,29 +94,41 @@ describe('iConsult feature- End to End flow', () => {
       await iConsult.cardSelection.click()
       await browser.pause(1000)
       await iConsult.submitOrder.click()
+      await browser.pause(2000)
       await iConsult.iConsultCompletionScreen.waitForDisplayed()
-      const currentUrl: string = await browser.getUrl()
-      await iConsult.getLanguageFromUrl(currentUrl)
+
+      const completionMsg = language === 'en' ? iConsultEDSData.iConsultEDS_CompletionMsg : iConsultEDSData.iConsultEDS_CompletionMsg_es
       const iConsultCompletionMessage:string = await iConsult.iConsultCompletionScreen.getText()
-      if(currentUrl.includes('en')){
-        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
-        expect(await iConsult.iConsultCompletionScreen).toHaveText("Your iConsult is successfully completed")
-      } else{
-        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
-        expect(iConsult.iConsultCompletionScreen).toHaveText("¡Genial, su receta de iConsult se completó con éxito!")
-      }
+      console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
+      expect(await iConsult.iConsultCompletionScreen.getText()).toEqual(completionMsg)
+      await browser.pause(2000)
+  
       await iConsult.viewOrderDetailsButton.click()
       await iConsult.orderDetailsScreen.waitForDisplayed()
       await iConsult.orderListTab.waitForDisplayed()
 
       const orderId: string = await iConsult.getOrderID()
       console.log(`My Order ID is: ${orderId}`)
-      const orderInformation = await iConsult.getOrderInformation();
+
+      const jsonFilePath = './test/data/generatedOrderDetails.json'
+      const clearOrderDetails = () => {
+        fs.writeFileSync(jsonFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
+        console.log(`Order details have been cleared from ${jsonFilePath}`)
+      }
+
+      const orderDetails: Record<string, string> = {}
+      orderDetails[Recommendation_medicine_title] = orderId
+      
+      //const jsonFilePath = './test/testdata/orderDetails.json'
+      fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4))
+      console.log('Order details have been written to orderDetails.json')
+
+      const orderInformation = await iConsult.getOrderInformation()
       console.log(`Order Product Name is: "${orderInformation.productName}"`)
-      expect(await iConsult.orderDetailProductName.getText()).toEqual('Sildenafil')
+      expect(await iConsult.orderDetailProductName.getText()).toEqual(Recommendation_medicine_title)
       console.log(`Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`)
-      expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText('6');
+      expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(subscriptionPlanDurationValue)
       console.log(`Order Details: Product Total Price is: "${orderInformation.totalPrice}"`)
-      expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual('$285.00')
+      expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(subscriptionPlanAmount)
     })
 })

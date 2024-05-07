@@ -12,7 +12,7 @@ class iConsultEDFlow extends Page {
     return $('label[id$="termsAndConditions"]');
   }
 
-  public get continueBtn() {
+  public get continueButton() {
     return $('[class$="btn-primary btn-sm text-uppercase"]');
   }
 
@@ -246,6 +246,47 @@ class iConsultEDFlow extends Page {
     return $("//span[@class='MyOrder_total-main-price__n2pqe']");
   }
 
+  public async iConsultEDQuestionsandAnswer() {
+    await this.option1forQuestion1.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await browser.pause(3000)
+    await this.option1forQuestion2.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option4forQuestion3.doubleClick()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option1forQuestion4.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option6forQuestion5.click()
+    await browser.pause(2000)
+    await this.option5forQuestion5.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option14forQuestion6.doubleClick()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.formforQuestion7.setValue("Automation Testing")
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option1forQuestion8.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option6forQuestion9.doubleClick()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option3forQuestion10.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option3forQuestion11.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+  }
+
+  /*
   public async iConsultED() {
     const rawData = fs.readFileSync('./test/data/iConsultED.json', 'utf-8');
     const iConsultEDData = JSON.parse(rawData);
@@ -389,6 +430,7 @@ class iConsultEDFlow extends Page {
     await expect(iConsult_SubscriptionPlanAmount).toEqual(Order_Summary_Total);
     await browser.pause(2000);
   }
+  */
 
   public openiConsult() {
     return super.open("en/start-iconsult");

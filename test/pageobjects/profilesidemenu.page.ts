@@ -8,10 +8,8 @@ class ProfileSideMenuPage extends Page{
         return $$("//div[contains(@class,'Header_sidebar-body')]/div[3]/a/div/div/span[1]")
     }
 
-    public async validateProfileSideMenuList(): Promise<boolean>{
-        const expectedProfileSubMenuList: string[] =  ['Orders', 'Subscriptions', 'Saved Cards', 'Shipping Address', 'Profile']
+    public async validateProfileSideMenuList(expectedProfileSubMenuList: string[]): Promise<boolean>{
         const profileMenuList = await this.profileMenuOptions
-
         if (profileMenuList.length === 0) {
           console.error("Profile menu options not found.");
           return false;

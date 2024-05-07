@@ -1,5 +1,5 @@
-import { $ } from "@wdio/globals";
-import Page from "./page.js";
+import { $ } from "@wdio/globals"
+import Page from "./page.js"
 
 class LoginPage extends Page {
   get signinButton() {
@@ -7,20 +7,20 @@ class LoginPage extends Page {
   }
 
   get inputUsername() {
-    return $("#userName");
+    return $("#userName")
   }
 
   get inputPassword() {
-    return $("#password");
+    return $("#password")
   }
   get btnSubmit() {
-    return $("input[type='submit']");
+    return $("input[type='submit']")
   }
   get invalidAlert() {
     return $(
       ".Toastify__toast-body"
       // "[style$='display: flex; flex-grow: 1; font-size: 15px; padding: 8px 12px;']""
-    );
+    )
   }
   get hamburgericon() {
     return $("//a[contains(@class, 'btn-rounded Header_btn-user')]")
@@ -32,10 +32,10 @@ class LoginPage extends Page {
   get signupsuccess() {
     return $(
       "[class$='Toastify__toast Toastify__toast-theme--colored Toastify__toast--success Toastify__toast--close-on-click']"
-    );
+    )
   }
-  get elements() {
-    return $$("//a");
+  get links() {
+    return $$("//a")
   }
 
   public get requiredFieldvalidationMessageForMobileOrEmail(){
@@ -47,21 +47,20 @@ class LoginPage extends Page {
   }
 
   public async login(username: string, password: string, env?:string) {
-    await this.inputUsername.setValue(username);
-    await this.inputPassword.setValue(password);
-    await this.btnSubmit.click();
+    await this.inputUsername.setValue(username)
+    await this.inputPassword.setValue(password)
+    await this.btnSubmit.click()
   }
 
   public async login_with_cellnum(cellNum: number, password: string) {
-    await this.inputUsername.setValue(cellNum);
-    await this.inputPassword.setValue(password);
-    await this.btnSubmit.click();
+    await this.inputUsername.setValue(cellNum)
+    await this.inputPassword.setValue(password)
+    await this.btnSubmit.click()
   }
 
   public openSignin() {
-    return super.open("/auth/signin");
-    //return super.open("/auth/signin");
+    return super.open("/auth/signin")
   }
 }
 
-export default new LoginPage();
+export default new LoginPage()

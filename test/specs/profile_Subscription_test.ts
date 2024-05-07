@@ -9,36 +9,52 @@ describe('Customer Profile - Subscription menu redirection', () => {
     before(async () => {
       await LoginPage.openSignin()
       await browser.maximizeWindow()
-      const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-      const logindata = JSON.parse(rawdata)
-      const url: string= await browser.getUrl()
-      if(url.includes('qa')){
-        await LoginPage.login(
-          logindata.login_valid.login_email,
-          logindata.login_valid.login_password)
-      } else{
-        await LoginPage.login(
-          logindata.stage_login_valid.login_email,
-          logindata.stage_login_valid.login_password)
+    })
+
+    it('C29661 Verify the redirection from the Profile Subscriptions to Subscription Listing details page', async() => {
+      const loginDataPath: string = './test/data/login.json'
+      let selectedLoginData: any
+      
+      try{
+        const logindata = JSON.parse(fs.readFileSync(loginDataPath, 'utf-8'))
+        const url: string = await browser.getUrl()
+        const language: string = await profilesidemenuPage.getLanguageFromUrl(url)
+          
+        // Select the appropriate login data based on the environment
+        if (url.includes('qa')) {
+          selectedLoginData = logindata.login_valid
+        } else if (url.includes('stage')) {
+          selectedLoginData = logindata.stage_login_valid
+        } else {
+          selectedLoginData = logindata.prod_login_valid
+        }
+        await LoginPage.login(selectedLoginData.login_email, selectedLoginData.login_password)
+        await browser.pause(2000)
+        await homePage.aboutUs.waitForDisplayed()
+        expect(await homePage.aboutUs.isDisplayed()).toBe(true)
+        await vpm_loginPage.hamburgericon.waitForClickable()
+        await vpm_loginPage.hamburgericon.click()
+        
+        await browser.pause(4000)
+        await profilesidemenuPage.subscriptionOption.click()
+        await browser.pause(4000)
+        await expect(profilesidemenuPage.subscriptionPage).toBeDisplayed()
+        await browser.pause(3000)
+        const subscriptionPageText:string = await profilesidemenuPage.subscriptionPage.getText()
+        console.log(`Subscription Page text is "${subscriptionPageText}"`)
+  
+        // Define the expected subscription page text based on the language
+        const expectedSubscriptionText = language === 'en' ? 'Subscriptions' : 'Suscripciones'
+        
+        // Verify that the subscription page text matches the expected text
+        expect(subscriptionPageText).toEqual(expectedSubscriptionText)
+        
+        // Log the subscription count for the user
+        const subscriptionCount = await profilesidemenuPage.getSubscriptionsCount()
+        console.log(`Subscription Count for the user is: "${subscriptionCount}"`)
+      } catch (error) {
+        console.error("Error occurred while verifying subscription menu redirection:", error)
+        throw error
       }
-      expect(await homePage.aboutUs.isDisplayed())
-      await vpm_loginPage.hamburgericon.waitForClickable()
-      await vpm_loginPage.hamburgericon.click()
     })
-
-    it('Verify the redirection from the Profile Subscriptions to Subscription Listing details page', async() => {
-      await browser.pause(4000)
-      await profilesidemenuPage.subscriptionOption.click()
-      await browser.pause(4000)
-      await expect(profilesidemenuPage.subscriptionPage).toBeDisplayed()
-      await browser.pause(3000)
-      // Verify the text of the Subscription page
-      const subscriptionPageText:string = await profilesidemenuPage.subscriptionPage.getText()
-      console.log(`Subscription Page text is "${subscriptionPageText}"`)
-      expect(subscriptionPageText).toEqual('Subscriptions')
-
-      // Log the subscription count for the user
-      const subscriptionCount = await profilesidemenuPage.getSubscriptionsCount()
-      console.log(`Subscription Count for the user is: "${subscriptionCount}"`)
-    })
-})
+  })

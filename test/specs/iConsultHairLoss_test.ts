@@ -7,25 +7,26 @@ describe('iConsult feature - End to End flow', () => {
 
     before(async () => {
         await LoginPage.openSignin()
-        await browser.maximizeWindow()
     })
 
-    it('Verify iConsult flow for HairLoss', async () => {
+    it('C29656 Verify iConsult flow for HairLoss', async () => {
       const IDProofPath: string = "./test/data/IDProof.png"
       const photoPath: string = "./test/data/Photo.jpg"
+      const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
+      const iConsultHLData = JSON.parse(fs.readFileSync('./test/data/iConsultHL.json', 'utf-8'))
+      let loginData: any
 
-      const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-      const logindata = JSON.parse(rawdata)
-      const url= await browser.getUrl()
+      const url:string = await browser.getUrl()
+      const language:string = await iConsult.getLanguageFromUrl(url)
+      
       if(url.includes('qa')){
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password)
-      } else{
-      await LoginPage.login(
-        logindata.stage_login_valid.login_email,
-        logindata.stage_login_valid.login_password)
+        loginData = logindata.login_valid
+      } else if(url.includes('stage')){
+        loginData = logindata.stage_login_valid
+      } else {
+        loginData = logindata.prod_login_valid
       }
+      await LoginPage.login(loginData.login_email, loginData.login_password)
       await browser.pause(3000)
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
@@ -42,106 +43,92 @@ describe('iConsult feature - End to End flow', () => {
       await iConsult.startNewiConsult.waitForDisplayed()
       await iConsult.startNewiConsult.click()
       await browser.pause(5000)
-      await iConsultHairLoss.problemPresentOption3to5Year.doubleClick()
-      await browser.pause(2000)
-      await iConsultHairLoss.problemPresentOption5PlusYear.click()
-      await browser.pause(2000)
-      await iConsultHairLoss.continueButton.click()
-      await browser.pause(2000)
-      await iConsultHairLoss.diagnosedQuestions.waitForDisplayed()
-      if(!await iConsultHairLoss.noneOfTheAboveProblem.isSelected()){
-        await iConsultHairLoss.noneOfTheAboveProblem.doubleClick()
-        await browser.pause(1500);
-        await iConsultHairLoss.continueButton.click()
-        await browser.pause(1000);
-      }else{
-        await browser.pause(1500);
-        await iConsultHairLoss.continueButton.click()
-      }
-      await browser.pause(2000)
-      await iConsultHairLoss.medicalConditionQuestions.waitForDisplayed()
-      if(!await iConsultHairLoss.noneOfTheseApplyMeOption.isSelected()){
-        await iConsultHairLoss.noneOfTheseApplyMeOption.doubleClick()
-        await browser.pause(1500);
-        await iConsultHairLoss.continueButton.click()
-        await browser.pause(1000);
-      }else{
-        await browser.pause(1500);
-        await iConsultHairLoss.continueButton.click()
-      }
-      await browser.pause(2000)
-      await iConsultHairLoss.medicationDailyQuestions.waitForDisplayed()
-      await iConsultHairLoss.medicationDailyNoAnswer.click();
-      await browser.pause(2000);
-      await iConsultHairLoss.continueButton.click()
-      await browser.pause(2000)
-      await iConsultHairLoss.allergicMedicationQuestions.waitForDisplayed()
-      await iConsultHairLoss.allergicMedicationNoAnswer.click();
-      await browser.pause(2000);
-      await iConsultHairLoss.continueButton.click()
-      await browser.pause(4000)
-      
+
+      await iConsultHairLoss.iConsultHLQuestionsandAnswers()
+
       await iConsult.recommendationPills.waitForDisplayed()
-      const currentUrl: string = await browser.getUrl()
-      await iConsult.getLanguageFromUrl(currentUrl)
-      expect(iConsult.pillName).toHaveText('Finasteride')
-      if(currentUrl.includes('en')){
-        expect(iConsult.productDescription.getText()).toEqual("Finasteride is a once-a-day pill that is clinically proven to reduce hair-loss and increase regrowth by blocking the body's production of a male hormone in the scalp that stops hair growth.")    
-      } else {
-        expect(await iConsult.productDescription.getText()).toEqual("El finasteride es una pastilla diaria clínicamente comprobada para reducir la pérdida de cabello y aumentar el crecimiento bloqueando la producción de una hormona masculina en el cuero cabelludo que detiene el crecimiento del cabello.")
-      }
+      const Recommendation_medicine_title = await iConsult.pillName.getText()
+      console.log(`Recommended Medicine Name: ${Recommendation_medicine_title}`)
+      expect(Recommendation_medicine_title).toEqual(iConsultHLData.iConsultHL_MedicineName)
+      
+      const expectedMedicineDescription = language === 'en' ? iConsultHLData.iConsultHL_MedicineDescription : iConsultHLData.iConsultHL_MedicineDescription_es
+      expect(await iConsult.productDescription.getText()).toEqual(expectedMedicineDescription)
       await iConsult.productContinueButton.waitForClickable()
       await iConsult.productContinueButton.click()
+
       await iConsult.subscriptionPlanOptions.waitForDisplayed()
       await iConsult.subscriptionSixMonthOption.click()
+      const subscriptionPlanDurationValue:string = await iConsult.subscriptionSixMonthOptionText.getText()
+      console.log(`Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`)
+      const subscriptionPlanAmount: string = await iConsult.subscriptionSixMonthOptionValue.getText()
+      console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`)
+      await browser.pause(1000)
       await iConsult.subscriptionPlanContinueButton.click()
+      await browser.pause(1500)
+
       await iConsult.stateResideOption.waitForDisplayed()
       await iConsult.shippingAddressOptions.waitForDisplayed()
-      await iConsult.ship_select_address.click();
+      await iConsult.ship_select_address.click()
       await browser.pause(1500)
       await iConsult.ship_save_btn.scrollIntoView()
       await iConsult.ship_save_btn.click()
       await browser.pause(2000)
 
-      await iConsult.uploadPhotoIDScreen.waitForDisplayed()
-      await iConsult.uploadPhoto(IDProofPath)
-      await iConsult.uploadOrTakePhotoScreen.waitForDisplayed()
-      await iConsult.uploadPhoto(photoPath)
+      await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath)
+
       await iConsult.iConsultPage.waitForDisplayed()
-      expect(iConsult.iConsultPage).toHaveText('iConsult Summary')
+      expect(iConsult.iConsultPage).toHaveText(iConsultHLData.iConsultHL_SummaryTitle)
       await browser.pause(3000)
 
       const actualProductName: string = await iConsult.productName.getText()
       console.log(`Actual Product Name: ${actualProductName}`)
-      expect(await iConsult.productName.getText()).toEqual('Finasteride')
+      expect(iConsult.productName).toHaveText(iConsultHLData.iConsultHL_SummaryMedicine)
+      
       const prodSubscriptionPlan:string = await iConsult.productSubscriptionPlan.getText()
       console.log(`prodSubscriptionPlan is : ${prodSubscriptionPlan}`)
+      expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue)
+
+      const prodSubscriptionPrice:string = await iConsult.productSubscriptionPrice.getText()
+      console.log(`Product Subscription Price: ${prodSubscriptionPrice}`)
+      expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount)
+
       await iConsult.addNewCard.scrollIntoView()
       await iConsult.cardSelection.click()
       await browser.pause(1000)
       await iConsult.submitOrder.click()
       await iConsult.iConsultCompletionScreen.waitForDisplayed()
 
+      const completionMsg = language === 'en' ? iConsultHLData.iConsultHL_CompletionMsg : iConsultHLData.iConsultHL_CompletionMsg_es
+      await browser.pause(1500)
       const iConsultCompletionMessage:string = await iConsult.iConsultCompletionScreen.getText()
-      if(currentUrl.includes('en')){
-        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
-        expect(await iConsult.iConsultCompletionScreen).toHaveText("Your iConsult is successfully completed")
-      } else{
-        console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
-        expect(iConsult.iConsultCompletionScreen).toHaveText("¡Genial, su receta de iConsult se completó con éxito!")
-      }
+      console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
+      expect(await iConsult.iConsultCompletionScreen.getText()).toEqual(completionMsg)
+      await browser.pause(2000)
+    
       await iConsult.viewOrderDetailsButton.click()
       await iConsult.orderDetailsScreen.waitForDisplayed()
       await iConsult.orderListTab.waitForDisplayed()
       const orderId: string = await iConsult.getOrderID()
       console.log(`My Order ID is: ${orderId}`)
 
-      const orderInformation = await iConsult.getOrderInformation();
+      const jsonOrderFilePath = './test/data/generatedOrderDetails.json'
+      const clearOrderDetails = () => {
+        fs.writeFileSync(jsonOrderFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
+        console.log(`Order details have been cleared from ${jsonOrderFilePath}`)
+      }
+
+      const orderDetails: Record<string, string> = {}
+      orderDetails[Recommendation_medicine_title] = orderId
+      
+      fs.writeFileSync(jsonOrderFilePath, JSON.stringify(orderDetails, null, 4))
+      console.log('Order details have been written to orderDetails.json')
+
+      const orderInformation = await iConsult.getOrderInformation()
       console.log(`Order Product Name is: "${orderInformation.productName}"`)
-      expect(await iConsult.orderDetailProductName.getText()).toEqual('Finasteride')
+      expect(await iConsult.orderDetailProductName.getText()).toEqual(Recommendation_medicine_title)
       console.log(`Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`)
-      expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText('6');
+      expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(subscriptionPlanDurationValue)
       console.log(`Order Details: Product Total Price is: "${orderInformation.totalPrice}"`)
-      expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual('$180.00')
-      })
+      expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(subscriptionPlanAmount)
+    })
 })

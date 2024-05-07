@@ -9,44 +9,73 @@ describe('Profile Menu Options and Redirection from Orders', () => {
 
     before(async () => {
         await LoginPage.openSignin()
-        await browser.maximizeWindow()
     })
 
     it('Verify the profile menu options', async() => {
-      const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-      const logindata = JSON.parse(rawdata)
-      const url: string= await browser.getUrl()
-      if(url.includes('qa')){
-        await LoginPage.login(
-          logindata.login_valid.login_email,
-          logindata.login_valid.login_password)
-      } else {
-        await LoginPage.login(
-          logindata.stage_login_valid.login_email,
-          logindata.stage_login_valid.login_password)
+      const loginDataPath: string = './test/data/login.json'
+      let selectedLoginData: any
+
+      try{
+        const logindata = JSON.parse(fs.readFileSync(loginDataPath, 'utf-8'))
+        const url: string = await browser.getUrl()
+        const language: string = await profilesidemenuPage.getLanguageFromUrl(url)
+        
+        // Select the appropriate login data based on the environment
+        if (url.includes('qa')) {
+          selectedLoginData = logindata.login_valid
+        } else if (url.includes('stage')) {
+          selectedLoginData = logindata.stage_login_valid
+        } else {
+          selectedLoginData = logindata.prod_login_valid
+        }
+
+        // Perform login with the selected credentials
+        await LoginPage.login(selectedLoginData.login_email, selectedLoginData.login_password)
+        await browser.pause(2000)
+        await homePage.aboutUs.waitForDisplayed()
+        expect(await homePage.aboutUs.isDisplayed())
+        await vpm_loginPage.hamburgericon.waitForClickable()
+        await vpm_loginPage.hamburgericon.click()
+        await browser.pause(5000)
+        
+        // Define the expected profile sub-menu list based on the language
+        let expectedProfileSubMenuList: string[] = language === 'en' ?
+        ['Orders', 'Subscriptions', 'Saved Cards', 'Shipping Address', 'Profile'] :
+        ['Órdenes', 'Suscripciones', 'Tarjetas Guardadas', 'Dirección De Envío', 'Perfil']
+  
+        // Validate that the profile sub-menu list matches the expected list
+        const validateProfileSubMenus = await profilesidemenuPage.validateProfileSideMenuList(expectedProfileSubMenuList)
+        expect(validateProfileSubMenus).to.be.true
+      } catch (error) {
+        console.error("Error occurred while verifying profile menu options:", error)
+        throw error
       }
-      expect(await homePage.aboutUs.isDisplayed())
-      await vpm_loginPage.hamburgericon.waitForClickable()
-      await vpm_loginPage.hamburgericon.click()
-      await browser.pause(5000)
-      const validateProfileSubMenus = await profilesidemenuPage.validateProfileSideMenuList()
-      expect(validateProfileSubMenus).to.be.true
+      
     })
 
-    it('Verify the redirection from the Profile Orders to Order Listing details page', async() => {
-      // Click on the Orders option in the profile side menu
+    it('C29660 Verify the redirection from the Profile Orders to Order Listing details page', async() => {
+      await browser.pause(3000)
       await profilesidemenuPage.ordersOption.click()
-
-      // Wait for the My Orders page to be displayed and verify its text
       await profilesidemenuPage.myOrdersPage.waitForDisplayed()
-      const ordersPageText:string = await profilesidemenuPage.myOrdersPage.getText()
-      console.log(`Orders Page text is "${ordersPageText}"`)
-      expect(ordersPageText).to.be.equal('My Orders')
 
-      // Wait for the Order List to be displayed and verify its text
-      await profilesidemenuPage.myOrderList.waitForDisplayed()
+      // Get text of orders page and list
+      const ordersPageText:string = await profilesidemenuPage.myOrdersPage.getText()
       const ordersListText:string = await profilesidemenuPage.myOrderList.getText()
+
+      // Get language from URL
+      const url = await browser.getUrl()
+      const language: string = await profilesidemenuPage.getLanguageFromUrl(url)
+      
+      // Define expected texts based on language
+      const expectedOrderPageText: string= language === 'en' ? 'My Orders' : 'Mis Pedidos'
+      const expectedOrderListText: string= language === 'en' ? 'Orders list' : 'Lista de Pedidos'
+      
+      // Log texts
+      console.log(`Orders Page text is "${ordersPageText}"`)
       console.log(`Orders List text is "${ordersListText}"`)
-      expect(ordersListText).to.be.equal('Orders list')
+
+      // Assert expected texts
+      expect(ordersPageText).to.be.equal(expectedOrderPageText)
+      expect(ordersListText).to.be.equal(expectedOrderListText)
     })
 })

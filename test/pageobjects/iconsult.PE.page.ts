@@ -12,7 +12,7 @@ class iConsultPEFlow extends Page {
     return $("label[class$='label-checkbox']");
   }
 
-  public get continueBtn() {
+  public get continueButton() {
     return $('[class$="btn-primary btn-sm text-uppercase"]');
   }
 
@@ -245,6 +245,39 @@ class iConsultPEFlow extends Page {
     return $("//span[@class='MyOrder_total-main-price__n2pqe']");
   }
 
+  public async iConsultPEQuestionsandAnswer() {
+    await this.option4forQuestion1.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await browser.pause(3000)
+    await this.option6forQuestion2.doubleClick()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option2forQuestion3.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option2forQuestion4.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option4forQuestion5.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option3forQuestion6.click()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await this.option5forQuestion7.doubleClick()
+    await browser.pause(2000)
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option2forQuestion8.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+    await this.option2forQuestion9.click()
+    await this.continueButton.click()
+    await browser.pause(2000)
+  }
+
+  /*
   public async iConsultPE() {
     const rawData = fs.readFileSync('./test/data/iConsultPE.json', 'utf-8');
     const iConsultPEData = JSON.parse(rawData);
@@ -378,6 +411,7 @@ class iConsultPEFlow extends Page {
     await expect(iConsult_SubscriptionPlanAmount).toEqual(Order_Summary_Total);
     await browser.pause(2000);
   }
+  */
 
   public openiConsult() {
     return super.open("en/start-iconsult");

@@ -91,14 +91,47 @@ class iConsultHairLossPage extends Page{
         return $('label[for="option1"]')
     }
 
-    // Continue button
-
-
-
-
-
-
-
+    public async iConsultHLQuestionsandAnswers(): Promise<void> {
+        await this.problemPresentOption3to5Year.doubleClick()
+        await browser.pause(2000)
+        await this.problemPresentOption5PlusYear.click()
+        await browser.pause(2000)
+        await this.continueButton.click()
+        await browser.pause(2000)
+        await this.diagnosedQuestions.waitForDisplayed()
+        if(!await this.noneOfTheAboveProblem.isSelected()){
+            await this.noneOfTheAboveProblem.doubleClick()
+            await browser.pause(1500)
+            await this.continueButton.click()
+            await browser.pause(1000)
+        }else{
+            await browser.pause(1500)
+            await this.continueButton.click()
+        }
+        await browser.pause(2000)
+        await this.medicalConditionQuestions.waitForDisplayed()
+        if(!await this.noneOfTheseApplyMeOption.isSelected()){
+            await this.noneOfTheseApplyMeOption.doubleClick()
+            await browser.pause(1500)
+            await this.continueButton.click()
+            await browser.pause(1000)
+        }else{
+            await browser.pause(1500)
+            await this.continueButton.click()
+        }
+        await browser.pause(2000)
+        await this.medicationDailyQuestions.waitForDisplayed()
+        await this.medicationDailyNoAnswer.click()
+        await browser.pause(2000)
+        await this.continueButton.click()
+        await browser.pause(2000)
+        await this.allergicMedicationQuestions.waitForDisplayed()
+        await this.allergicMedicationNoAnswer.click()
+        await browser.pause(2000)
+        await this.continueButton.click()
+        await browser.pause(4000)
+    }
+    
 }
 
 export default new iConsultHairLossPage();

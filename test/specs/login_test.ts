@@ -7,96 +7,104 @@ describe("VPM Login Feature", () => {
 
   beforeEach(async () => {
     await LoginPage.openSignin()
-    //await browser.url("/auth/signin")
-    await browser.maximizeWindow()
   })
 
   before(async ()=>{
-    const rawData = fs.readFileSync('./test/data/login.json', 'utf-8')
-    logindata = JSON.parse(rawData)
+    logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
   })
 
-  it("Verify Login without entering email and password fields", async ()=>{
+  it("C29652 Verify User unable to Sign In with invalid email, mobile, or password", async()=>{
+    
+    // Verify validation message when do login without entering username & password 
+    
     await expect(LoginPage.inputUsername).toBeDisplayed()
+
+    const url:string = await browser.getUrl()
+    const language: string = await LoginPage.getLanguageFromUrl(url)
+
+    const expectedEmailFieldValidationMessage = language === 'en' ? logindata.login_email_required_message : logindata.login_email_required_message_es
+    const expectedPasswordFieldValidationMessage = language === 'en' ? logindata.login_password_required_message : logindata.login_password_required_message_es
+  
     await LoginPage.btnSubmit.click()
     const emailFieldValidationMessage: string = await LoginPage.requiredFieldvalidationMessageForMobileOrEmail.getText()
-    expect(emailFieldValidationMessage).toEqual(logindata.login_email_required_message)
     const PasswordFieldValidationMessage: string = await LoginPage.requiredFieldvalidationMessageForPassword.getText()
-    expect(PasswordFieldValidationMessage).toEqual(logindata.login_password_required_message)
+    expect(emailFieldValidationMessage).toEqual(expectedEmailFieldValidationMessage)
+    expect(PasswordFieldValidationMessage).toEqual(expectedPasswordFieldValidationMessage)
+
+    // Verify toast message when do login with invalid credentials
+    
+    const loginData = logindata.login_invalid
+    let expectedToastMessage: string = language === 'en' ? logindata.login_toastMessage : logindata.login_toastMessage_es
+
+    await LoginPage.login(loginData.login_email, loginData.login_password)
+    await browser.pause(2000)
+    await LoginPage.invalidAlert.waitForDisplayed()
+    const actualToastMessage = await LoginPage.invalidAlert.getText()
+    expect(actualToastMessage).toEqual(expectedToastMessage)
+
+    await browser.pause(2000)
+    await browser.refresh()
+
+    // Verify toast message when do login with invalid mobile 
+       
+    await expect(LoginPage.inputUsername).toBeDisplayed()
+    await LoginPage.login_with_cellnum(loginData.login_invalid_phone_num, loginData.login_password)
+    await browser.pause(2000)
+    await LoginPage.invalidAlert.waitForDisplayed()
+
+    const ToastMessage = await LoginPage.invalidAlert.getText()
+    expect(ToastMessage).toEqual(expectedToastMessage)
   })
 
-  it("Verify Login with Invalid credentials - TC08", async () => {
+  it("C29650 Verify User Sign In with valid email and password", async () => {
+    const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
-    await LoginPage.login(
-      logindata.login_invalid.login_email,
-      logindata.login_invalid.login_password
-    )
-    await browser.waitUntil(
-      async () =>
-        (await LoginPage.invalidAlert.getText()) ===
-        logindata.login_toastMessage
-    )
-    await expect(LoginPage.invalidAlert).toHaveText(
-      logindata.login_toastMessage
-    )
-  })
+    let loginData: any
+    let expectedUserName: string
 
-  it("Verify Login with Valid Email - TC16", async () => {
-    const url: string= await browser.getUrl()
-    await expect(LoginPage.inputUsername).toBeDisplayed()
-    if(url.includes('qa')){
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password)
-      await expect(LoginPage.hamburgericon).toBeDisplayed()
-      await LoginPage.hamburgericon.click()
-      await expect(LoginPage.profile_name).toHaveText(logindata.login_userName)
+    if (url.includes('qa')) {
+        loginData = logindata.login_valid
+        expectedUserName = logindata.login_userName;
+    } else if (url.includes('stage')) {
+        loginData = logindata.stage_login_valid
+        expectedUserName = logindata.stage_login_userName;
+    } else {
+        loginData = logindata.prod_login_valid
+        expectedUserName = logindata.prod_login_userName;
     }
-    else{
-      await LoginPage.login(
-        logindata.stage_login_valid.login_email,
-        logindata.stage_login_valid.login_password)
-      await expect(LoginPage.hamburgericon).toBeDisplayed()
-      await LoginPage.hamburgericon.click()
-      await expect(LoginPage.profile_name).toHaveText(logindata.stage_login_userName)
-    }
+
+    await LoginPage.login(loginData.login_email, loginData.login_password)
+    await expect(LoginPage.hamburgericon).toBeDisplayed()
+    await LoginPage.hamburgericon.click()
+
+    await expect(LoginPage.profile_name).toHaveText(expectedUserName)
   })
 
-  it("Verify Login with Invalid Cell number - TC17", async () => {
+  it("C29651 Verify User Sign In with valid mobile and password", async () => {
+    const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
+    let loginData: any
+    let expectedUserName: string
+
+    if (url.includes('qa')) {
+      loginData = logindata.login_valid
+      expectedUserName = logindata.login_userName
+    } else if (url.includes('stage')) {
+      loginData = logindata.stage_login_valid
+      expectedUserName = logindata.stage_login_userName
+    } else {
+      loginData = logindata.prod_login_valid
+      expectedUserName = logindata.prod_login_userName
+    }
+
     await LoginPage.login_with_cellnum(
-      logindata.login_invalid.login_invalid_phone_num,
-      logindata.login_invalid.login_password
+        loginData.login_valid_phone_num,
+        loginData.login_password
     )
-    await browser.waitUntil(
-      async () =>
-        (await LoginPage.invalidAlert.getText()) ===
-        logindata.login_toastMessage
-    )
-    await expect(LoginPage.invalidAlert).toHaveText(
-      logindata.login_toastMessage
-    )
-  })
 
-  it("Verify Login with Valid Cell Number - TC18", async () => {
-    const url: string= await browser.getUrl()
-    await expect(LoginPage.inputUsername).toBeDisplayed()
-    if(url.includes('qa')){
-      await LoginPage.login_with_cellnum(
-        logindata.login_valid.login_valid_phone_num,
-        logindata.login_valid.login_password
-      )
+    await browser.pause(2000)
     await expect(LoginPage.hamburgericon).toBeDisplayed()
     await LoginPage.hamburgericon.click()
-    await expect(LoginPage.profile_name).toHaveText(logindata.login_userName)
-    } else{
-      await LoginPage.login_with_cellnum(
-        logindata.stage_login_valid.login_valid_phone_num,
-        logindata.stage_login_valid.login_password
-    )
-    await expect(LoginPage.hamburgericon).toBeDisplayed()
-    await LoginPage.hamburgericon.click()
-    await expect(LoginPage.profile_name).toHaveText(logindata.stage_login_userName)
-    }
+    await expect(LoginPage.profile_name).toHaveText(expectedUserName)
   })
 })

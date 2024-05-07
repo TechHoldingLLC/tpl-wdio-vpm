@@ -3,49 +3,55 @@ import ContactUs from "../pageobjects/contactus.page.js"
 import fs from 'fs'
 
 describe("Contact Us Feature", () => {
+
+  let pageTitle: any
+  let contactdata: any
+
   before(async () => {
     await ContactUs.openContactus()
-    await browser.maximizeWindow()
-  });
+    pageTitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
+    contactdata = JSON.parse(fs.readFileSync('./test/data/contactus.json', 'utf-8'))
+  })
 
-  it("Verify Submit Contact Us form with Valid details - TC02", async () => {
-    const pageTitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
-    const contactdata = JSON.parse(fs.readFileSync('./test/data/contactus.json', 'utf-8'))
-    const currentUrl = await browser.getUrl()
-    const language = await ContactUs.getLanguageFromUrl(currentUrl)
-    expect(await ContactUs.emailField.isDisplayed())
-    if(language === 'en'){
-      await expect(browser).toHaveTitle(pageTitle.pg_title_contact_us)
+  it('C29673 Verify Contact Us Page opens error free', async () => {
+    expect(await browser.getUrl()).toContain('contactus')
+    const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
+    
+    const title: string = language === 'en' ? pageTitle.pg_title_contact_us : pageTitle.pg_title_contact_us_spanish
+    const bannerMessage: string = language === 'en' ? contactdata.cu_bannerMessage : contactdata.cu_bannerMessage_spanish
+    const contactUsProblemText: string = language === 'en' ? contactdata.cu_problemMessage : contactdata.cu_problemMessage_spanish
+
+    await expect(browser).toHaveTitle(title)
     console.log(await ContactUs.contactUsBanner.getText())
-    expect(await ContactUs.contactUsBanner.getText()).toHaveText(contactdata.cu_bannerMessage)
+    expect(await ContactUs.contactUsBanner.getText()).toContain(bannerMessage)
     console.log(await ContactUs.contactUsForProblem.getText())
-    expect(await ContactUs.contactUsForProblem.getText()).toHaveText(contactdata.cu_problemMessage)
-    await ContactUs.contactUsPage(
-      contactdata.cu_firstname,
-      contactdata.cu_lastname,
-      contactdata.cu_contactnumber,
-      contactdata.cu_description, "en"
-    )
-    await browser.waitUntil(
-      async () =>
-        (await ContactUs.contactToastmessage.getText()) ===
-        contactdata.cu_contactSuccessmessage
-    )
-    await expect(ContactUs.contactToastmessage).toHaveText(
-      contactdata.cu_contactSuccessmessage)
-    } else{
-      console.log(await browser.getTitle())
-      expect(await browser.getTitle()).toEqual(pageTitle.pg_title_contact_us_spanish)
-      console.log(await ContactUs.contactUsBanner.getText())
-      expect(await ContactUs.contactUsBanner.getText()).toHaveText(contactdata.cu_bannerMessage_spanish)
-      expect(await ContactUs.contactUsForProblem.getText()).toHaveText(contactdata.cu_problemMessage_spanish)
+    expect(await ContactUs.contactUsForProblem.getText()).toContain(contactUsProblemText)
+  })
+
+  it("C29675 Verify Submit Contact Us form with Valid details", async () => {
+    const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
+    expect(await ContactUs.emailField.isDisplayed()).toBeTruthy()
+
+    if(language === 'en'){
       await ContactUs.contactUsPage(
         contactdata.cu_firstname,
         contactdata.cu_lastname,
         contactdata.cu_contactnumber,
-        contactdata.cu_description,
-        ''
+        contactdata.cu_description, "en"
       )
+      await browser.waitUntil(async () =>
+        (await ContactUs.contactToastmessage.getText()) ===
+        contactdata.cu_contactSuccessmessage
+      )
+      await expect(ContactUs.contactToastmessage).toHaveText(
+        contactdata.cu_contactSuccessmessage)
+      } else {
+        await ContactUs.contactUsPage(
+          contactdata.cu_firstname,
+          contactdata.cu_lastname,
+          contactdata.cu_contactnumber,
+          contactdata.cu_description, ''
+        )
       await browser.pause(2000)
       const message = await ContactUs.contactToastmessage
       await expect(message).toHaveText(
@@ -53,12 +59,9 @@ describe("Contact Us Feature", () => {
     }
   })
 
-  it("Verify Submit Contact Us form with Invalid details - TC03", async () => {
-    const raw = fs.readFileSync('./test/data/contactus.json', 'utf-8')
-    const contactdata = JSON.parse(raw)
-    const currentUrl = await browser.getUrl()
-    const language = await ContactUs.getLanguageFromUrl(currentUrl)
-    expect(await ContactUs.emailField.isDisplayed())
+  it("C29674 Verify Submit Contact Us form with Invalid details", async () => {
+    const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
+    expect(await ContactUs.emailField.isDisplayed()).toBeTruthy()
     if(language === 'en'){
       await ContactUs.contactUsPage_invalid(
         contactdata.cu_firstname,

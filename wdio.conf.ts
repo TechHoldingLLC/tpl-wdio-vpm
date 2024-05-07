@@ -1,4 +1,24 @@
-import type { Options } from "@wdio/types";
+import type { Options } from "@wdio/types"
+import allure from 'allure-commandline'
+// wdio.conf.js
+
+// let baseUrl: string
+// let env = process.env.Env
+// let language = process.env.language
+
+// let urls = {
+//   "QA": "https://qa.viapromeds.com/",
+//   "STAGE": "https://stage.viapromeds.com/",
+// }
+
+// if(Object.keys(urls).includes(env)){
+//   baseUrl = language && language.trim()!== "" ? `${urls[env]}${language}` : urls[env]
+//   console.log('Base URL:', baseUrl)
+// }else {
+//   console.log("Can't Run Tests, Use command like - Env=QA/STAGE npx wdio wdio.conf.ts")
+//   process.exit()
+// }
+
 export const config: Options.Testrunner = {
   //
   // ====================
@@ -33,6 +53,8 @@ export const config: Options.Testrunner = {
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
       './test/specs/home_test.ts',
+      './test/specs/homeFooter_test.ts',
+      './test/specs/homeSocialMedia_test.ts',
       './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/iConsultGenitalHerpes_test.ts',
       './test/specs/iConsultHairLoss_test.ts',
@@ -65,13 +87,36 @@ export const config: Options.Testrunner = {
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
       './test/specs/home_test.ts',
+      './test/specs/homeFooter_test.ts',
+      './test/specs/homeSocialMedia_test.ts',
       './test/specs/productdetail_test.ts'
     ],
     Login:[
       './test/specs/login_test.ts'
     ],
-    Sanity:[
+    SanityEnglish:[
       './test/specs/home_test.ts',
+      './test/specs/homeFooter_test.ts',
+      './test/specs/productdetail_test.ts',
+      './test/specs/aboutus_test.ts',
+      './test/specs/contactus_test.ts',
+      './test/specs/login_test.ts',
+      './test/specs/sidemenu_test.ts',
+      './test/specs/profile_Orders_test.ts',
+      './test/specs/profile_Subscription_test.ts',
+      './test/specs/profile_AddCard_test.ts',
+      './test/specs/profile_ShippingAddress_test.ts',
+      './test/specs/profile_UserProfile_test.ts',
+      // './test/specs/iConsultEDSildenafil_test.ts',
+      // './test/specs/iConsultGenitalHerpes_test.ts',
+      // './test/specs/iConsultHairLoss_test.ts',
+      // './test/specs/iConsultED_test.ts',
+      // './test/specs/iConsultPE_test.ts',
+    ],
+    SanitySpanish:[
+      './test/specs/home_test.ts',
+      './test/specs/homeFooter_test.ts',
+      './test/specs/homeSocialMedia_test.ts',
       './test/specs/productdetail_test.ts',
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
@@ -88,23 +133,9 @@ export const config: Options.Testrunner = {
       './test/specs/iConsultED_test.ts',
       './test/specs/iConsultPE_test.ts',
     ],
-    SanitySpanish:[
-      './test/specs/home_test.ts',
-      './test/specs/productdetail_test.ts',
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
-      './test/specs/login_test.ts',
-      './test/specs/sidemenu_test.ts',
-      './test/specs/profile_Orders_test.ts',
-      './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_AddCard_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts',
-      './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts',
-      './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultPE_test.ts',
+    AdminOrderDeclined:[
+      './test/specs/iConsultPEHomePage_test.ts',
+      './test/specs/adminOrderDeclined_test.ts'
     ]
   },
   // Patterns to exclude.
@@ -141,6 +172,9 @@ export const config: Options.Testrunner = {
       },
       browserVersion: "dev",
     },
+    // { browserName: 'firefox'},
+    // { browserName: 'safari'},
+    // { browserName: 'MicrosoftEdge'}
   ],
 
   //
@@ -176,6 +210,7 @@ export const config: Options.Testrunner = {
   // gets prepended directly.
   // baseUrl: 'http://localhost:8080',
   //baseUrl: "https://qa.viapromeds.com",
+  //baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 15000,
@@ -214,11 +249,30 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec", ['allure', {
+  reporters: 
+  ["spec", 
+  ['allure', {
     outputDir: 'allure-results',
     disableWebdriverStepsReporting: false,
     disableWebdriverScreenshotsReporting: false,
-}]],
+    }
+  ], 
+  ['testrail', {
+                projectId: 22,
+                suiteId: 81,
+                domain: 'techholding.testrail.io',
+                //username: process.env.TESTRAIL_USERNAME,
+                username: "dhrumil.soni@techholding.co",
+                //apiToken: process.env.TESTRAIL_API_TOKEN,
+                apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+                runName: 'Dhrumil_Sample_Test_Execution_English',
+                oneReport: true,
+                includeAll: true,
+                caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
+              }
+  ]
+],
+//reporterSyncTimeout: 30000,
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -297,8 +351,11 @@ export const config: Options.Testrunner = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: function (test, context) {
-  // },
+  beforeTest: async function () {
+    await browser.maximizeWindow()
+    //await browser.setWindowSize(1000,1000);
+    await browser.pause(1000)
+  },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -321,8 +378,11 @@ export const config: Options.Testrunner = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-  // },
+  afterTest: async function({ error }) {
+    if(error){
+      await browser.takeScreenshot()
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
@@ -364,8 +424,25 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+    onComplete: function(): Promise<void> {
+      const reportError = new Error('Could not generate Allure report')
+      const generation = allure(['generate', 'allure-results', '--clean'])
+      return new Promise((resolve, reject) => {
+          const generationTimeout = setTimeout(
+              () => reject(reportError),
+              5000)
+
+          generation.on('exit', function(exitCode) {
+              clearTimeout(generationTimeout)
+
+              if (exitCode !== 0) {
+                  return reject(reportError)
+              }
+              console.log('Allure report successfully generated')
+              resolve()
+          })
+      })
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

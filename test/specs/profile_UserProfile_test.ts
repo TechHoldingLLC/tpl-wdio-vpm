@@ -9,43 +9,45 @@ describe('Customer Profile - Saved Cards page', () => {
 
     before(async () => {
       await LoginPage.openSignin()
-      await browser.maximizeWindow()
-      const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-      const logindata = JSON.parse(rawdata)
-      const url: string = await browser.getUrl()
-      if(url.includes('qa')){
-        await LoginPage.login(
-          logindata.login_valid.login_email,
-          logindata.login_valid.login_password)
-      } else{
-        await LoginPage.login(
-          logindata.stage_login_valid.login_email,
-          logindata.stage_login_valid.login_password)
-      }
-      expect(await homePage.aboutUs.isDisplayed())
-      await vpm_loginPage.hamburgericon.waitForClickable()
-      await vpm_loginPage.hamburgericon.click()
+      await browser.maximizeWindow() 
     })
 
-    it('Verify the redirection from the Profile to Profile Settings page', async () => {
+    it('C29663 Verify the redirection from the Profile to Profile Settings page', async () => {
+        const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
+        const url: string = await browser.getUrl()
+        const language: string = await profilePage.getLanguageFromUrl(url)
+        let loginData: any
+        if (url.includes('qa')) {
+            loginData = logindata.login_valid
+        } else if (url.includes('stage')) {
+            loginData = logindata.stage_login_valid
+        } else {
+            loginData = logindata.prod_login_valid
+        }
+        await LoginPage.login(loginData.login_email, loginData.login_password)
+        await homePage.aboutUs.waitForDisplayed()
+        expect(await homePage.aboutUs.isDisplayed()).toBe(true)
+        await vpm_loginPage.hamburgericon.waitForClickable()
+        await vpm_loginPage.hamburgericon.click()
+          
         await browser.pause(1000)
         await profilesidemenuPage.profileOption.click()
-        await profilePage.profileSettings.waitForExist()
-        expect(await profilePage.profileSettings).toHaveText("Profile Settings")
-        expect(await profilePage.userDetails).toHaveText("User Details")
-        expect(await profilePage.credentials).toHaveText("Credentials")
-  
+        await browser.pause(3000)
+        await profilePage.profileSettings.waitForDisplayed()
+
+        // Verify Profile Settings page elements based on language
+        const expectedProfileSettingsText = language === 'en' ? 'Profile Settings' : 'Configuración de perfil'
+        const expectedUserDetailsText = language === 'en' ? 'User Details' : 'Detalles del Usuario'
+        const expectedCredentialsText = language === 'en' ? 'Credentials' : 'Credenciales'
+
+        expect(await profilePage.profileSettings.getText()).toEqual(expectedProfileSettingsText)
+        expect(await profilePage.userDetails.getText()).toEqual(expectedUserDetailsText)
+        expect(await profilePage.credentials.getText()).toEqual(expectedCredentialsText)
+
         try {
-            const rawdata = fs.readFileSync('./test/data/login.json', 'utf-8')
-            const userData = JSON.parse(rawdata)
-            const url: string = await browser.getUrl()
-            if(url.includes('qa')){
-                const emailValue: string = await profilePage.emailInput.getAttribute('value')
-                expect(emailValue).toEqual(userData.login_valid.login_email)
-            } else{
-                const emailValue: string = await profilePage.emailInput.getAttribute('value')
-                expect(emailValue).toEqual(userData.stage_login_valid.login_email)
-            }
+            const expectedEmail = loginData.login_email
+            const emailValue: string = await profilePage.emailInput.getAttribute('value')
+            expect(emailValue).toEqual(expectedEmail)
         } catch (error) {
             console.error("Error occurred while retrieving email value:", error)
             throw error

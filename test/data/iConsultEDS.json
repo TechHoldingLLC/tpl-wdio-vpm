@@ -1,0 +1,14 @@
+{
+  "iConsultEDS_DOBPageText": "What is your date of birth?",
+  "iConsultEDS_DOBPageText_es": "¿Cuál es tu fecha de nacimiento?",
+  "iConsultEDS_EligibilityText":"Congratulations! You are eligible to continue with the consultation.",
+  "iConsultEDS_EligibilityText_es": "¡Felicidades! Eres elegible para continuar con la consulta.",
+  "iConsultEDS_fieldText": "Automation Testing",
+  "iConsultEDS_MedicineName": "Sildenafil",
+  "iConsultEDS_MedicineDescription": "An erectile dysfunction medication that's FDA approved and clinically proven to treat ED, sildenafil has the same active ingredient as Viagra®. Better sex, at a lower price",
+  "iConsultEDS_MedicineDescription_es":"Un medicamento para la disfunción eréctil aprobado por la FDA y clínicamente comprobado para tratar la DE, el sildenafil tiene el mismo ingrediente activo que el Viagra®. Mejor sexo a un precio más bajo.",
+  "iConsultEDS_Summary": "iConsult Summary",
+  "iConsultEDS_SummaryMedicine": "Sildenafil",
+  "iConsultEDS_CompletionMsg": "Your iConsult is successfully completed",
+  "iConsultEDS_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!"
+}

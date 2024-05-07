@@ -1,27 +1,33 @@
 {
     "login_invalid" : {
-    "login_email" : "wdio.auto+11@techholding.co",
-    "login_invalid_phone_num": 1234567890,
-    "login_password" : "Test@1234"
+        "login_email" : "wdio.auto+11@techholding.co",
+        "login_invalid_phone_num": 1234567890,
+        "login_password" : "Test@1234"
     },
 
     "login_valid" : {
-    "login_email" : "wdio_auto+3@gmail.co",
-    "login_valid_phone_num": 3473913410,
-    "login_password" : "Test@123"
+        "login_email" : "wdio_auto+3@gmail.co",
+        "login_valid_phone_num": 3473913410,
+        "login_password" : "Test@123"
     },
     "stage_login_valid" : {
         "login_email" : "prabhav.joshi+8@techholding.co",
         "login_valid_phone_num": 3312762635,
         "login_password" : "Test@123"
     },
+    "prod_login_valid" : {
+        "login_email" : "prabhav.joshi+15@techholding.co",
+        "login_valid_phone_num": 7652399487,
+        "login_password" : "Test@123"
+    },
     "login_toastMessage" : "Invalid Credentials",
+    "login_toastMessage_es" : "Credenciales no válidas",
     "login_successMessage" : "Registration Successful!",
     "login_userName": "Automated U",
     "stage_login_userName": "Test u",
+    "prod_login_userName":"Prabhav t",
     "login_email_required_message":"*Email or Mobile Number is required",
     "login_password_required_message": "*Password is required",
-    "login_email_required_spanish_message" : "*Se requiere correo electrónico o número de teléfono móvil",
-    "login_password_required_spanish_message" : "*Se requiere contraseña"
-
+    "login_email_required_message_es" : "*Se requiere correo electrónico o número de teléfono móvil",
+    "login_password_required_message_es" : "*Se requiere contraseña"
 }
