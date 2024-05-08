@@ -227,7 +227,7 @@ class iConsult extends Page{
         const fileInput = await browser.$('[type$="file"]')
         const file = path.join(process.cwd(), filePath)
         await fileInput.addValue(file)
-        await browser.pause(5000)
+        await browser.pause(2000)
         await this.uploadSaveAndContinueButton.click()
     }
 

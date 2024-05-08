@@ -130,5 +130,6 @@ describe('iConsult feature - End to End flow', () => {
       expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(subscriptionPlanDurationValue)
       console.log(`Order Details: Product Total Price is: "${orderInformation.totalPrice}"`)
       expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(subscriptionPlanAmount)
+      
     })
 })

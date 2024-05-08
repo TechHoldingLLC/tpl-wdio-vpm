@@ -94,7 +94,7 @@ class iConsultHairLossPage extends Page{
     public async iConsultHLQuestionsandAnswers(): Promise<void> {
         await this.problemPresentOption3to5Year.doubleClick()
         await browser.pause(2000)
-        await this.problemPresentOption5PlusYear.click()
+        await this.problemPresentOption5PlusYear.doubleClick()
         await browser.pause(2000)
         await this.continueButton.click()
         await browser.pause(2000)

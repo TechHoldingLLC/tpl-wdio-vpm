@@ -20,7 +20,11 @@ import allure from 'allure-commandline'
 // }
 
 export const config: Options.Testrunner = {
-  //
+  // ==========================
+  // Browserstack Configuration
+  // ========================== 
+  // user: process.env.BROWSERSTACK_USERNAME,
+  // key: process.env.BROWSERSTACK_ACCESS_KEY,
   // ====================
   // Runner Configuration
   // ====================
@@ -166,9 +170,25 @@ export const config: Options.Testrunner = {
       },
       browserVersion: "stable",
     },
-    // { browserName: 'firefox'},
-    // { browserName: 'safari'},
-    // { browserName: 'MicrosoftEdge'}
+    /*
+    // ===================================
+    // Cross Browser Testing configuration
+    // ===================================
+    { browserName: 'firefox'},
+    { browserName: 'safari'},
+    { browserName: 'MicrosoftEdge'}
+    // ===========================
+    // BrowserStack Configuration
+    // ===========================
+    {
+      browserName: 'Chrome',
+      'bstack:options': {
+        browserVersion: 'latest',
+        os: 'OS X',
+        osVersion: 'Sonoma'
+      }
+    }
+    */
   ],
 
   //
@@ -220,7 +240,7 @@ export const config: Options.Testrunner = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  // services: [],
+  // services: ['browserstack'],
   //
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -251,22 +271,22 @@ export const config: Options.Testrunner = {
     disableWebdriverScreenshotsReporting: false,
     }
   ], 
-  // ['testrail', {
-  //               projectId: 22,
-  //               suiteId: 81,
-  //               domain: 'techholding.testrail.io',
-  //               //username: process.env.TESTRAIL_USERNAME,
-  //               username: "dhrumil.soni@techholding.co",
-  //               //apiToken: process.env.TESTRAIL_API_TOKEN,
-  //               apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-  //               runName: 'Dhrumil_Sample_Test_Execution_Spanish',
-  //               oneReport: true,
-  //               includeAll: true,
-  //               caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
-  //             }
-  // ]
+  ['testrail', {
+                projectId: 22,
+                suiteId: 81,
+                domain: 'techholding.testrail.io',
+                //username: process.env.TESTRAIL_USERNAME,
+                username: "dhrumil.soni@techholding.co",
+                //apiToken: process.env.TESTRAIL_API_TOKEN,
+                apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+                runName: 'Dhrumil_Automation_Demo_English',
+                oneReport: true,
+                includeAll: true,
+                caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
+              }
+  ]
 ],
-//reporterSyncTimeout: 30000,
+reporterSyncTimeout: 30000,
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/

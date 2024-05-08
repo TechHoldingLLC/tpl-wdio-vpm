@@ -36,7 +36,7 @@ describe("Side Menu Options", () => {
       const currentUrl = await SideMenuPage.getCurrentUrl()
       await expect(currentUrl).toContain(expectedUrlPart)
       await browser.back()
-      await browser.pause(2000)
+      await browser.pause(4000)
     }
 
     await checkMenuLink(orderMenu, 'orders')
