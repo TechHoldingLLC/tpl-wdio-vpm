@@ -62,19 +62,21 @@ export const config: Options.Testrunner = {
       './test/specs/profile_Subscription_test.ts',
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_ShippingAddress_test.ts',
-      './test/specs/profile_UserProfile_test.ts',
+      './test/specs/profile_UserProfile_test.ts'
+    ],
+    SideMenu:[
       './test/specs/sidemenu_test.ts'
     ],
     iConsult:[
       './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts',
-      './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultPE_test.ts',
-      './test/specs/iConsultEDSHomePage_test.ts',
-      './test/specs/iConsultPEHomePage_test.ts'
+      './test/specs/iConsultGHAcyclovir_test.ts',
+      './test/specs/iConsultHLFinasteride_test.ts',
+      './test/specs/iConsultEDTadalafil_test.ts',
+      './test/specs/iConsultPEParoxetine_test.ts',
+      //'./test/specs/iConsultEDSHomePage_test.ts',
+      //'./test/specs/iConsultPEHomePage_test.ts'
     ],
-    HomePageTest:[
+    WebsiteMainPages:[
       './test/specs/home_test.ts',
       './test/specs/homeFooter_test.ts',
       './test/specs/homeSocialMedia_test.ts',
@@ -83,7 +85,7 @@ export const config: Options.Testrunner = {
       './test/specs/contactus_test.ts',
     ],
     Login:[
-      './test/specs/login_test.ts'
+      './test/specs/signIn_test.ts'
     ],
     SanityEnglish:[
       './test/specs/home_test.ts',
@@ -91,19 +93,19 @@ export const config: Options.Testrunner = {
       './test/specs/productdetail_test.ts',
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
-      './test/specs/login_test.ts',
+      './test/specs/signIn_test.ts',
       './test/specs/sidemenu_test.ts',
       './test/specs/profile_Orders_test.ts',
       './test/specs/profile_Subscription_test.ts',
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_ShippingAddress_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts',
-      './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/iConsultGHAcyclovir_test.ts',
+      './test/specs/iConsultHLFinasteride_test.ts',
+      './test/specs/iConsultEDTadalafil_test.ts',
+      './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/adminPanel_test.ts',
-      './test/specs/iConsultPEHomePage_test.ts',
+      './test/specs/iConsultPEParoxetine_test.ts',
       './test/specs/adminOrderDeclined_test.ts'
     ],
     SanitySpanish:[
@@ -112,19 +114,19 @@ export const config: Options.Testrunner = {
       './test/specs/productdetail_test.ts',
       './test/specs/aboutus_test.ts',
       './test/specs/contactus_test.ts',
-      './test/specs/login_test.ts',
+      './test/specs/signIn_test.ts',
       './test/specs/sidemenu_test.ts',
       './test/specs/profile_Orders_test.ts',
       './test/specs/profile_Subscription_test.ts',
       './test/specs/profile_AddCard_test.ts',
       './test/specs/profile_ShippingAddress_test.ts',
       './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultGenitalHerpes_test.ts',
-      './test/specs/iConsultHairLoss_test.ts',
-      './test/specs/iConsultED_test.ts',
-      './test/specs/iConsultEDSHomePage_test.ts',
+      './test/specs/iConsultGHAcyclovir_test.ts',
+      './test/specs/iConsultHLFinasteride_test.ts',
+      './test/specs/iConsultEDTadalafil_test.ts',
+      './test/specs/iConsultEDSildenafil_test.ts',
       './test/specs/adminPanel_test.ts',
-      './test/specs/iConsultPEHomePage_test.ts',
+      './test/specs/iConsultPEParoxetine_test.ts',
       './test/specs/adminOrderDeclined_test.ts'
     ],
     AdminOrderApproved:[
@@ -279,7 +281,7 @@ export const config: Options.Testrunner = {
                 username: "dhrumil.soni@techholding.co",
                 //apiToken: process.env.TESTRAIL_API_TOKEN,
                 apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-                runName: 'Dhrumil_Automation_Demo_English',
+                runName: 'Test Run 20240508 - Minor_Stage_ESP',
                 oneReport: true,
                 includeAll: true,
                 caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios

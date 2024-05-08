@@ -13,7 +13,7 @@ describe("Contact Us Feature", () => {
     contactdata = JSON.parse(fs.readFileSync('./test/data/contactus.json', 'utf-8'))
   })
 
-  it('C29673 Verify Contact Us Page opens error free', async () => {
+  it('C29673 Website Main Pages: Verify Contact Us Page opens error-free', async () => {
     expect(await browser.getUrl()).toContain('contactus')
     const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
     
@@ -28,7 +28,7 @@ describe("Contact Us Feature", () => {
     expect(await ContactUs.contactUsForProblem.getText()).toContain(contactUsProblemText)
   })
 
-  it("C29675 Verify Submit Contact Us form with Valid details", async () => {
+  it("C29675 Website Main Pages: Verify Submit Contact Us form with Valid details", async () => {
     const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
     expect(await ContactUs.emailField.isDisplayed()).toBeTruthy()
 
@@ -59,7 +59,7 @@ describe("Contact Us Feature", () => {
     }
   })
 
-  it("C29674 Verify Submit Contact Us form with Invalid details", async () => {
+  it("C29674 Website Main Pages: Verify Submit Contact Us form with Invalid details", async () => {
     const language = await ContactUs.getLanguageFromUrl(await browser.getUrl())
     expect(await ContactUs.emailField.isDisplayed()).toBeTruthy()
     if(language === 'en'){

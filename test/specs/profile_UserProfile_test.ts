@@ -5,13 +5,13 @@ import vpm_loginPage from "../pageobjects/vpm_login.page.js"
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js"
 import profilePage from "../pageobjects/profile.page.js"
 
-describe('Customer Profile - Saved Cards page', () => {
+describe('Customer Profile page', () => {
 
     before(async () => {
       await LoginPage.openSignin()
     })
 
-    it('C29663 Verify the redirection from the Profile to Profile Settings page', async () => {
+    it('C29663 Profile: Verify User Profile page has user detail', async () => {
         const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
         const url: string = await browser.getUrl()
         const language: string = await profilePage.getLanguageFromUrl(url)

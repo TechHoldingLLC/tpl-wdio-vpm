@@ -8,7 +8,7 @@ describe("iConsult Features", () => {
     await LoginPage.openSignin()
   })
 
-  it("C29653 Verify iConsult flow for Erectile dysfunction - Tadalafil Medicine", async () => {
+  it("C29653 iConsult: Verify iConsult flow for Erectile dysfunction - Tadalafil Medicine", async () => {
     const IDProofPath: string = "./test/data/IDProof.png"
     const photoPath: string = "./test/data/Photo.jpg"
     const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))

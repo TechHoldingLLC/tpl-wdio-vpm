@@ -26,7 +26,7 @@ describe('Customer Profile - Saved Cards page', () => {
       await vpm_loginPage.hamburgericon.click()
     })
 
-    it('C29662 Verify the redirection from the Profile Saved Cards to Saved Card Listing details page', async() => {
+    it('C29662 Profile: Verify adding card to Saved Card Listing Details page', async() => {
       await browser.pause(2000)
       await profilesidemenuPage.savedCardOption.click()
       await profilesidemenuPage.savedCardsPage.waitForDisplayed()

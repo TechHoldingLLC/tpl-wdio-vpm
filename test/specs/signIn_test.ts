@@ -2,7 +2,7 @@ import { expect } from "@wdio/globals"
 import LoginPage from "../pageobjects/vpm_login.page.js"
 import fs from 'fs'
 
-describe("VPM Login Feature", () => {
+describe("VPM Sign In Features", () => {
   let logindata: any
 
   beforeEach(async () => {
@@ -13,7 +13,7 @@ describe("VPM Login Feature", () => {
     logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
   })
 
-  it("C29652 Verify User unable to Sign In with invalid email, mobile, or password", async()=>{
+  it("C29652 Sign In: Verify User unable to Sign In with invalid email, mobile, or password", async()=>{
     
     // Verify validation message when do login without entering username & password 
     
@@ -56,7 +56,7 @@ describe("VPM Login Feature", () => {
     expect(ToastMessage).toEqual(expectedToastMessage)
   })
 
-  it("C29650 Verify User Sign In with valid email and password", async () => {
+  it("C29650 Sign In: Verify User Sign In with valid email and password", async () => {
     const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
     let loginData: any
@@ -80,7 +80,7 @@ describe("VPM Login Feature", () => {
     await expect(LoginPage.profile_name).toHaveText(expectedUserName)
   })
 
-  it("C29651 Verify User Sign In with valid mobile and password", async () => {
+  it("C29651 Sign In: Verify User Sign In with valid mobile and password", async () => {
     const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
     let loginData: any

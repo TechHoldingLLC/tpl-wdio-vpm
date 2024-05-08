@@ -9,7 +9,7 @@ describe('iConsult feature- End to End flow', () => {
         await LoginPage.openSignin()
     })
 
-    it('C29654 Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {
+    it('C29654 iConsult: Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {
       const IDProofPath: string = "./test/data/IDProof.png"
       const photoPath: string = "./test/data/Photo.jpg"
       const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))

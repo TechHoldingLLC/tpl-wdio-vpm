@@ -7,7 +7,7 @@ describe("About Us Feature", () => {
     await aboutUsPage.openAboutus()
   })
 
-  it("C29680 Verify About Us Page", async () => {
+  it("C29680 Website Main Pages: Verify About Us page opens error-free", async () => {
 
     try {
       const pageTitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))

@@ -13,7 +13,7 @@ describe("Product Details Feature", () => {
     pagetitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
   })
 
-  it("C29676 Verify Tadalafil Product page opens error free", async () => {
+  it("C29676 Website Main Pages: Verify Tadalafil Product page opens error-free", async () => {
     try{
       await ProductDetail.openHomepage(productDetaildata.product_tadalafil)
       const url: string = await browser.getUrl()
@@ -43,7 +43,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("C29677 Verify Sildenafil Products page opens error free", async () => {
+  it("C29677 Website Main Pages: Verify Sildenafil Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_sildenafil)
       const url: string = await browser.getUrl()
@@ -73,7 +73,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("C29752 Verify Paroxetine Products page opens error free", async () => {
+  it("C29752 Website Main Pages: Verify Paroxetine Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_paroxetine)
       const url: string = await browser.getUrl()
@@ -103,7 +103,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("C29678 Verify Finasteride Products page opens error free", async () => {
+  it("C29678 Website Main Pages: Verify Finasteride Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_finasteride)
       const url: string = await browser.getUrl()
@@ -133,7 +133,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("C29679 Verify Acyclovir Product page opens error free", async () => {
+  it("C29679 Website Main Pages: Verify Acyclovir Product page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_acyclovir)
       const url: string = await browser.getUrl()

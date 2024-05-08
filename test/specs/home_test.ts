@@ -11,7 +11,7 @@ describe("HomePage Features", () => {
     homePageData = JSON.parse(fs.readFileSync('./test/data/homePage.json', 'utf-8'))
   })
 
-  it("C29672 Verify Landing Page opens error free", async () => {
+  it("C29672 Website Main Pages: Verify Landing Page opens error-free", async () => {
     //Verify all hyperlinks on the Homepage
     expect(await homePage.aboutUs.isDisplayed()).toBe(true)
     await browser.pause(2000)

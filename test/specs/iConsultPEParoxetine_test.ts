@@ -8,7 +8,7 @@ describe("iConsult Features", () => {
     await LoginPage.openSignin()
   })
 
-  it("C29655 Verify iConsult PE Flow - Paroxetine", async () => {
+  it("C29655 iConsult: Verify iConsult flow for Premature ejaculation - Paroxetine medicine", async () => {
     const IDProofPath: string = "./test/data/IDProof.png"
     const photoPath: string = "./test/data/Photo.jpg"
     const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))

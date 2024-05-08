@@ -9,7 +9,7 @@ describe('Admin Panel features', () => {
         await adminPage.header.waitForDisplayed()
     })
 
-    it('C29664 Verify iConsult completed orders in the Admin Panel Pending Tab', async() => {
+    it('C29664 Admin Panel: Verify iConsult completed orders in the Admin Panel Pending Tab', async() => {
         expect(browser).toHaveUrl("https://admin.qa.viapromeds.com/")
         expect(await adminPage.header.getText()).toEqual("Admin")
         await adminPage.loginToAdminPanel()
@@ -34,7 +34,7 @@ describe('Admin Panel features', () => {
         expect(searchedOrderData.orderStatus).toEqual("Medication pending")
     })
 
-    it('C29665 Verify that User is able to send Order to EHR', async() => {
+    it('C29665 Admin Panel: Verify that User is able to send Order to EHR', async() => {
         await adminPage.selectOrderCheckBox.click()
         await browser.pause(1000)
         console.log("Order selected successfully")

@@ -37,17 +37,17 @@ describe('Home Page Footer- Social Media Link verification', () => {
         await expect(browser).toHaveUrl(expect.stringContaining(urlContains))
     }
 
-    it("Verify FB Redirection Page", async () => {
+    it("Website Main Pages: Verify FB Redirection Page", async () => {
         await verifySocialMediaRedirection(homePage.FBLink, 'pg_title_FB', 'facebook')
         expect(browser).toHaveUrl(expect.stringContaining('viapromeds'))
     })
 
-    it("Verify Youtube Redirection Page", async () => {
+    it("Website Main Pages: Verify Youtube Redirection Page", async () => {
         await verifySocialMediaRedirection(homePage.YouTubeLink, 'pg_title_YouTube', 'youtube')
         expect(browser).toHaveUrl(expect.stringContaining('viapromeds'))
     })
     
-    it("Verify Instagram Redirection Page", async () => {
+    it("Website Main Pages: Verify Instagram Redirection Page", async () => {
         await verifySocialMediaRedirection(homePage.InstaLink, 'pg_title_Instagram', 'instagram')
         expect(browser).toHaveUrl(expect.stringContaining('viapromeds'))
     })

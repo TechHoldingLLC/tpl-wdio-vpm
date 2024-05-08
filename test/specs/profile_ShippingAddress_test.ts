@@ -13,7 +13,7 @@ describe("Profile Features", () => {
     logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
   })
 
-  it("C29659 Verify Profile - Shipping Address Flow", async () => {
+  it("C29659 Profile: Verify adding Shipping Address Flow", async () => {
     const url: string = await browser.getUrl()
     const language: string = await ProfileShipping.getLanguageFromUrl(url)
     let loginData: any

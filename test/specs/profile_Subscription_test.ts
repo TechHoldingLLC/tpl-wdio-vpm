@@ -10,7 +10,7 @@ describe('Customer Profile - Subscription menu redirection', () => {
       await LoginPage.openSignin()
     })
 
-    it('C29661 Verify the redirection from the Profile Subscriptions to Subscription Listing details page', async() => {
+    it('C29661 Profile: Verify viewing Subscription Listing Details page', async() => {
       const loginDataPath: string = './test/data/login.json'
       let selectedLoginData: any
       

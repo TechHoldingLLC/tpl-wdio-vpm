@@ -11,7 +11,7 @@ describe('Profile Menu Options and Redirection from Orders', () => {
         await LoginPage.openSignin()
     })
 
-    it('Verify the profile menu options', async() => {
+    it('Profile: Verify the profile menu options', async() => {
       const loginDataPath: string = './test/data/login.json'
       let selectedLoginData: any
 
@@ -53,7 +53,7 @@ describe('Profile Menu Options and Redirection from Orders', () => {
       
     })
 
-    it('C29660 Verify the redirection from the Profile Orders to Order Listing details page', async() => {
+    it('C29660 Profile: Verify viewing Order Listing Details page', async() => {
       await browser.pause(3000)
       await profilesidemenuPage.ordersOption.click()
       await profilesidemenuPage.myOrdersPage.waitForDisplayed()
