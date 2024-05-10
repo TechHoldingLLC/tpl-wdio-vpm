@@ -160,10 +160,6 @@ class ProductDetail extends Page {
     return $("(//div[contains(@class,'postal-code-error TextError_errorText')])[4]")
   }
 
-  public async getLanguageFromUrl(url: string): Promise<string> {
-    return url.includes('/en/') ? 'en' : 'es';
-  }
-
   public openHomepage(Product: string) {
     return super.open(`/products/${Product}`)
   }

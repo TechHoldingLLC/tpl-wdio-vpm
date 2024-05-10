@@ -4,59 +4,47 @@ import fs from 'fs'
 
 describe("Side Menu Options", () => {
 
-  beforeEach(async () => {
+  let language: string
+  let loginData: any
+
+  before(async () => {
     await LoginPage.openSignin()
-    await browser.maximizeWindow()
-    const rawData = fs.readFileSync('./test/data/login.json', 'utf-8')
-    const logindata = JSON.parse(rawData)
+    const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
     const url: string = await browser.getUrl()
-    if(url.includes('qa')){
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password)  
+    if (url.includes('qa')) {
+      loginData = logindata.login_valid
+    } else if (url.includes('stage')) {
+      loginData = logindata.stage_login_valid
+    } else {
+      loginData = logindata.prod_login_valid
     }
-    else{
-      await LoginPage.login(
-        logindata.stage_login_valid.login_email, 
-        logindata.stage_login_valid.login_password)  
-    }
+    await LoginPage.login(loginData.login_email, loginData.login_password)
+    language = await SideMenuPage.getLanguageFromUrl(url)
+  })
+
+  it("C29658 SideMenu: Verify side menu links are not broken", async () => {
+    const orderMenu: string = language === 'en' ? "Orders" : "Órdenes"
+    const subscriptionMenu: string = language === 'en' ? "Subscriptions" : "Suscripciones"
+    const savedCardsMenu: string = language === 'en' ? "Saved Cards" : "Tarjetas Guardadas"
+    const shippingAddressMenu: string = language === 'en' ? "Shipping Address" : "Dirección De Envío"
+    const profileMenu: string = language === 'en' ? "Profile" : "Perfil"
+    
+    const checkMenuLink = async (menuName: string, expectedUrlPart: string) => {
       await browser.pause(2000)
       await SideMenuPage.openSideMenu()
+      await SideMenuPage.openMenu(menuName)
+      await browser.pause(4000)
+      const currentUrl = await SideMenuPage.getCurrentUrl()
+      await expect(currentUrl).toContain(expectedUrlPart)
+      //await browser.back()
       await browser.pause(2000)
-  });
+    }
 
-  it("Verify Side Menu - Orders Link", async () => {
-    await SideMenuPage.openOrdersMenu()
-    await browser.pause(2000)
-    const url = await SideMenuPage.getCurrentUrl();
-    await expect(url).toContain('orders')
-  });
+    await checkMenuLink(orderMenu, 'orders')
+    await checkMenuLink(subscriptionMenu, 'subscription')
+    await checkMenuLink(savedCardsMenu, 'savedcards')
+    await checkMenuLink(shippingAddressMenu, 'shippingaddress')
+    await checkMenuLink(profileMenu, 'profile')
+  })
 
-  it("Verify Side Menu - Subscriptions Link", async () => {
-    await SideMenuPage.openSubscriptionsMenu()
-    await browser.pause(2000)
-    const url = await SideMenuPage.getCurrentUrl()
-    await expect(url).toContain('subscription')
-   })
-   
-  it("Verify Side Menu - Saved Cards Link", async () => {
-    await SideMenuPage.openSavedCardsMenu()
-    await browser.pause(2000)
-    const url = await SideMenuPage.getCurrentUrl()
-    await expect(url).toContain('savedcards')
-   })
-
-  it("Verify Side Menu - Shipping Address Link", async () => {
-    await SideMenuPage.openShippingAddressMenu()
-    await browser.pause(2000)
-    const url = await SideMenuPage.getCurrentUrl()
-    await expect(url).toContain('shippingaddress')
-   })
-
-  it("Verify Side Menu - Profile Link", async () => {
-    await SideMenuPage.openProfileMenu()
-    await browser.pause(2000)
-    const url = await SideMenuPage.getCurrentUrl()
-    await expect(url).toContain('profile')
-   })
 })

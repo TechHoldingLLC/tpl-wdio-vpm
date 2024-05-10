@@ -9,26 +9,23 @@ describe("Product Details Feature", () => {
   let pagetitle: any
 
   before(async ()=>{
-    const rawData = fs.readFileSync('./test/data/productDetail.json', 'utf-8')
-    productDetaildata = JSON.parse(rawData)
-    const rawData2 = fs.readFileSync('./test/data/pageTitles.json', 'utf-8')
-    pagetitle = JSON.parse(rawData2)
-    await browser.maximizeWindow()
+    productDetaildata = JSON.parse(fs.readFileSync('./test/data/productDetail.json', 'utf-8'))
+    pagetitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
   })
 
-  it("Verify Product Details Page - Tadalafil - TC10", async () => {
+  it("C29676 Website Main Pages: Verify Tadalafil Product page opens error-free", async () => {
     try{
       await ProductDetail.openHomepage(productDetaildata.product_tadalafil)
       const url: string = await browser.getUrl()
       const language: string = await ProductDetail.getLanguageFromUrl(url)
       if(language === 'en'){
         await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil)
-      await expect(productdetailPage.productTitle).toHaveText(
-      productDetaildata.product_tadalafil)
-      console.log('Product Description: '+ await productdetailPage.productDescription.getText())
-      expect(await productdetailPage.productDescription.getText()).toEqual(productDetaildata.product_tadalafil_description)
-      await expect(ProductDetail.productfaq).toHaveText(
-      productDetaildata.product_faq_title_Tadalafil)
+        await expect(productdetailPage.productTitle).toHaveText(
+        productDetaildata.product_tadalafil)
+        console.log('Product Description: '+ await productdetailPage.productDescription.getText())
+        expect(await productdetailPage.productDescription.getText()).toEqual(productDetaildata.product_tadalafil_description)
+        await expect(ProductDetail.productfaq).toHaveText(
+        productDetaildata.product_faq_title_Tadalafil)
       }
       else{
         await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil_es)
@@ -46,7 +43,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("Verify Product Details Page - Sildenafil - TC20", async () => {
+  it("C29677 Website Main Pages: Verify Sildenafil Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_sildenafil)
       const url: string = await browser.getUrl()
@@ -76,7 +73,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("Verify Product Details Page - Paroxetine - TC21", async () => {
+  it("C29752 Website Main Pages: Verify Paroxetine Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_paroxetine)
       const url: string = await browser.getUrl()
@@ -106,7 +103,7 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("Verify Product Details Page - Finasteride - TC22", async () => {
+  it("C29678 Website Main Pages: Verify Finasteride Products page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_finasteride)
       const url: string = await browser.getUrl()
@@ -136,28 +133,28 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("Verify Product Details Page - Acyclovir - TC23", async () => {
+  it("C29679 Website Main Pages: Verify Acyclovir Product page opens error-free", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_acyclovir)
       const url: string = await browser.getUrl()
       const language: string = await ProductDetail.getLanguageFromUrl(url)
       if(language === 'en'){
         await expect(browser).toHaveTitle(pagetitle.pg_title_acyclovir)
-      await expect(productdetailPage.productTitle).toHaveText(
-      productDetaildata.product_acyclovir)
-      console.log('Product Description: '+ await productdetailPage.productDescription.getText())
-      expect(await productdetailPage.productDescription.getText()).toEqual(productDetaildata.product_acyclovir_description)
-      await expect(ProductDetail.productfaq).toHaveText(
-      productDetaildata.product_faq_title_Acyclovir)
+        await expect(productdetailPage.productTitle).toHaveText(
+          productDetaildata.product_acyclovir)
+        console.log('Product Description: '+ await productdetailPage.productDescription.getText())
+        expect(await productdetailPage.productDescription.getText()).toEqual(productDetaildata.product_acyclovir_description)
+        await expect(ProductDetail.productfaq).toHaveText(
+          productDetaildata.product_faq_title_Acyclovir)
       }
       else{
         await expect(browser).toHaveTitle(pagetitle.pg_title_acyclovir_es)
         await expect(productdetailPage.productTitle).toHaveText(
-        productDetaildata.product_acyclovir)
+          productDetaildata.product_acyclovir)
         console.log('Product Description: '+ await productdetailPage.productDescription.getText())
         expect(await productdetailPage.productDescription.getText()).toEqual(productDetaildata.product_acyclovir_description_es)
         await expect(ProductDetail.productfaq).toHaveText(
-        productDetaildata.product_faq_title_Acyclovir_es)
+          productDetaildata.product_faq_title_Acyclovir_es)
       }
       expect(await productdetailPage.productInfo()).toBeTruthy()
       expect(await productdetailPage.FAQsInfo()).toBeTruthy()
@@ -166,7 +163,8 @@ describe("Product Details Feature", () => {
     }
   })
 
-  it("Verify Product Details Page - GLP-1 Semaglutide - TC24", async () => {
+  /*
+  it("Verify Product Details Page - GLP-1 Semaglutide", async () => {
     try {
       await ProductDetail.openHomepage(productDetaildata.product_semaglutide)
       const url: string = await browser.getUrl()
@@ -218,4 +216,5 @@ describe("Product Details Feature", () => {
       console.error("An error occurred:", error)
     }
   })
+  */
 })

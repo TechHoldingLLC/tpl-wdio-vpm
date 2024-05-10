@@ -35,6 +35,49 @@ class iConsult extends Page{
         return $('[for$="question4"]')
     }
 
+    public get dobPage(){
+        return $("//h5[contains(text(), '¿Cuál es tu fecha de nacimiento?') or contains(text(), 'What is your date of birth?')]")
+    }
+
+    public get dobInput(){
+        return $("input[name$='dateOfBirth']")
+    }
+
+    public get dobContinueButton(){
+        return $("//input[@type='submit']")
+    }
+
+    public async enterDOB(dob: string){
+        await this.dobInput.waitForDisplayed()
+        await browser.pause(2000)
+        await this.dobInput.click()
+        await browser.keys(["ArrowLeft"])
+        await this.dobInput.addValue(dob)
+        await browser.pause(1000)
+        await this.dobContinueButton.waitForClickable()
+        await this.dobContinueButton.click()
+    }
+
+    public get iConsultEligibilityText(){
+        return $("//h5[contains(text(),'Congratulations') or contains(text(),'Felicidades')]")
+    }
+
+    public get iConsultEligibilityContinueBtn(){
+        return $("//a[contains(@href,'eligibility')]")
+    }
+
+    public get iConsultPageSignIn(){
+        return $("//a[contains(@href, 'auth/signin')]")
+    }
+
+    public get iConsultRegisterSignUpPage(){
+        return $("//div[contains(@class,'Register_signup-step-text')]")
+    }
+
+    public get iConsultLetsGetStartScreen(){
+        return $("h5[data-aos='fade']")
+    }
+
     public get startNewiConsult() {
         return $('[class$="btn-secondary mw-100 mt-15"]')
     }
@@ -184,8 +227,15 @@ class iConsult extends Page{
         const fileInput = await browser.$('[type$="file"]')
         const file = path.join(process.cwd(), filePath)
         await fileInput.addValue(file)
-        await browser.pause(5000)
+        await browser.pause(2000)
         await this.uploadSaveAndContinueButton.click()
+    }
+
+    public async uploadPhotoIDProofs(IDProof:string, PhotoProof:string){
+        await this.uploadPhotoIDScreen.waitForDisplayed()
+        await this.uploadPhoto(IDProof)
+        await this.uploadOrTakePhotoScreen.waitForDisplayed()
+        await this.uploadPhoto(PhotoProof)
     }
 
     public get uploadOrTakePhotoScreen(){
@@ -211,6 +261,31 @@ class iConsult extends Page{
     public get addNewCard(){
         return $('//div[contains(@class,"Summary_card-number")]/a')
     }
+
+    public get cardIframe(){
+        return $("[name$='instamed']")
+    }
+    
+    public get cardNumberInput(){
+        return $('//input[@name="CreditCardNumber"]')
+    }
+
+    public get expirationDateInput(){
+        return $('//input[@data-componentid="FormPatientPayment_ExpDate"]')
+    }
+
+    public get submitButton(){
+        return $('//div[@data-componentid="FormPatientPayment_container"]/div/div[3]')
+    }
+    
+    public async addCardDetails(cardNumber:string, expirationDate: string){
+        await this.cardNumberInput.waitForClickable()
+        await this.cardNumberInput.setValue(cardNumber)
+        await this.expirationDateInput.waitForClickable()
+        await this.expirationDateInput.setValue(expirationDate)
+        await this.submitButton.waitForClickable()
+        await this.submitButton.click()
+    }
     
     public get cardSelection(){
         return $('//div[contains(@class,"Subscriptions_cards-derails")]/div[1]')
@@ -221,7 +296,7 @@ class iConsult extends Page{
     }
     
     public get iConsultCompletionScreen(){
-        return $('h5[data-aos="fade"]')
+        return $("//h5[contains(text(), '¡Genial, su receta de iConsult se completó con éxito!') or contains(text(), 'Your iConsult is successfully completed')]")
     }
 
     public get viewOrderDetailsButton() {
@@ -260,10 +335,6 @@ class iConsult extends Page{
         return $("//div[contains(@class,'text-right MyOrder_total-price')]/span[contains(@class,'MyOrder_total-main-price')]")
     }
 
-    public async getLanguageFromUrl(url: string): Promise<string> {
-        return url.includes('/en/') ? 'en' : 'es';
-    }
-
     public async getOrderInformation(): Promise<{
         productName: string;
         subscriptionPlan: string;
@@ -272,10 +343,6 @@ class iConsult extends Page{
         const productName: string = await this.orderDetailProductName.getText();
         const subscriptionPlan: string = await this.orderDetailsProductSubscriptionPlan.getText();
         const totalPrice: string = await this.orderDetailsProductTotalPrice.getText();
-    
-        console.log(`Order Product Name is: "${productName}"`);
-        console.log(`Order Details: Product Subscription Plan is: "${subscriptionPlan}"`);
-        console.log(`Order Details: Product Total Price is: "${totalPrice}"`);
     
         return {
             productName,

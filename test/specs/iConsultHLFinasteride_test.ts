@@ -1,24 +1,24 @@
 import LoginPage from "../pageobjects/vpm_login.page.js"
 import iConsult from "../pageobjects/iConsult.page.js"
-import iConsultEDS from "../pageobjects/iConsultEDS.page.js"
+import iConsultHairLoss from "../pageobjects/iConsult.HL.page.js"
 import fs from 'fs'
 
-describe('iConsult feature- End to End flow', () => {
-    
+describe('iConsult feature - End to End flow', () => {
+
     before(async () => {
         await LoginPage.openSignin()
     })
-
-    it('C29654 iConsult: Verify iConsult flow for Erectile dysfunction- Sildenafil medicine', async () => {
+    
+    it('C29656 iConsult: Verify iConsult flow for Hair loss - Finasteride medicine', async () => {
       const IDProofPath: string = "./test/data/IDProof.png"
       const photoPath: string = "./test/data/Photo.jpg"
       const logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
-      const iConsultEDSData = JSON.parse(fs.readFileSync('./test/data/iConsultEDS.json', 'utf-8'))
-      
+      const iConsultHLData = JSON.parse(fs.readFileSync('./test/data/iConsultHL.json', 'utf-8'))
+      let loginData: any
+
       const url:string = await browser.getUrl()
       const language:string = await iConsult.getLanguageFromUrl(url)
       
-      let loginData: any
       if(url.includes('qa')){
         loginData = logindata.login_valid
       } else if(url.includes('stage')){
@@ -31,27 +31,28 @@ describe('iConsult feature- End to End flow', () => {
 
       await iConsult.startFreeiConsultbutton.waitForClickable()
       await iConsult.startFreeiConsultbutton.click()
+      await browser.pause(2000)
       await iConsult.consentCheckbox.waitForDisplayed()
       await iConsult.consentCheckbox.click()
+      await browser.pause(1000)
       await iConsult.consentContinueButton.waitForClickable()
       await iConsult.consentContinueButton.click()
+      await iConsult.problemAddressQuestionsScreen.waitForDisplayed()
+      await iConsult.iConsultHLselection.click()
+      await browser.pause(3000)
+      await iConsult.startNewiConsult.waitForDisplayed()
+      await iConsult.startNewiConsult.click()
       await browser.pause(5000)
-      await iConsult.iConsultEDselection.click()
-      await browser.pause(10000)
-      if(await iConsult.startNewiConsult.isDisplayed()){
-        await iConsult.startNewiConsult.click()
-      }
-      await iConsultEDS.iConsultEDSQuestionsandAnswers()
+
+      await iConsultHairLoss.iConsultHLQuestionsandAnswers()
 
       await iConsult.recommendationPills.waitForDisplayed()
       const Recommendation_medicine_title = await iConsult.pillName.getText()
       console.log(`Recommended Medicine Name: ${Recommendation_medicine_title}`)
-      expect(Recommendation_medicine_title).toEqual(iConsultEDSData.iConsultEDS_MedicineName)
+      expect(Recommendation_medicine_title).toEqual(iConsultHLData.iConsultHL_MedicineName)
       
-      const expectedMedicineDescription = language === 'en' ? iConsultEDSData.iConsultEDS_MedicineDescription : iConsultEDSData.iConsultEDS_MedicineDescription_es
+      const expectedMedicineDescription = language === 'en' ? iConsultHLData.iConsultHL_MedicineDescription : iConsultHLData.iConsultHL_MedicineDescription_es
       expect(await iConsult.productDescription.getText()).toEqual(expectedMedicineDescription)
-    
-      await iConsultEDS.dosageStrengthHundredMG.click()
       await iConsult.productContinueButton.waitForClickable()
       await iConsult.productContinueButton.click()
 
@@ -65,6 +66,7 @@ describe('iConsult feature- End to End flow', () => {
       await iConsult.subscriptionPlanContinueButton.click()
       await browser.pause(1500)
 
+      await iConsult.stateResideOption.waitForDisplayed()
       await iConsult.shippingAddressOptions.waitForDisplayed()
       await iConsult.ship_select_address.click()
       await browser.pause(1500)
@@ -73,13 +75,14 @@ describe('iConsult feature- End to End flow', () => {
       await browser.pause(2000)
 
       await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath)
+
       await iConsult.iConsultPage.waitForDisplayed()
-      expect(iConsult.iConsultPage).toHaveText(iConsultEDSData.iConsultEDS_Summary)
-      await browser.pause(5000)
+      expect(iConsult.iConsultPage).toHaveText(iConsultHLData.iConsultHL_SummaryTitle)
+      await browser.pause(3000)
 
       const actualProductName: string = await iConsult.productName.getText()
       console.log(`Actual Product Name: ${actualProductName}`)
-      expect(iConsult.productName).toHaveText(iConsultEDSData.iConsultEDS_SummaryMedicine)
+      expect(iConsult.productName).toHaveText(iConsultHLData.iConsultHL_SummaryMedicine)
       
       const prodSubscriptionPlan:string = await iConsult.productSubscriptionPlan.getText()
       console.log(`prodSubscriptionPlan is : ${prodSubscriptionPlan}`)
@@ -93,33 +96,31 @@ describe('iConsult feature- End to End flow', () => {
       await iConsult.cardSelection.click()
       await browser.pause(1000)
       await iConsult.submitOrder.click()
-      await browser.pause(2000)
       await iConsult.iConsultCompletionScreen.waitForDisplayed()
 
-      const completionMsg = language === 'en' ? iConsultEDSData.iConsultEDS_CompletionMsg : iConsultEDSData.iConsultEDS_CompletionMsg_es
+      const completionMsg = language === 'en' ? iConsultHLData.iConsultHL_CompletionMsg : iConsultHLData.iConsultHL_CompletionMsg_es
+      await browser.pause(1500)
       const iConsultCompletionMessage:string = await iConsult.iConsultCompletionScreen.getText()
       console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`)
       expect(await iConsult.iConsultCompletionScreen.getText()).toEqual(completionMsg)
       await browser.pause(2000)
-  
+    
       await iConsult.viewOrderDetailsButton.click()
       await iConsult.orderDetailsScreen.waitForDisplayed()
       await iConsult.orderListTab.waitForDisplayed()
-
       const orderId: string = await iConsult.getOrderID()
       console.log(`My Order ID is: ${orderId}`)
 
-      const jsonFilePath = './test/data/generatedOrderDetails.json'
+      const jsonOrderFilePath = './test/data/generatedOrderDetails.json'
       const clearOrderDetails = () => {
-        fs.writeFileSync(jsonFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
-        console.log(`Order details have been cleared from ${jsonFilePath}`)
+        fs.writeFileSync(jsonOrderFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
+        console.log(`Order details have been cleared from ${jsonOrderFilePath}`)
       }
 
       const orderDetails: Record<string, string> = {}
       orderDetails[Recommendation_medicine_title] = orderId
       
-      //const jsonFilePath = './test/testdata/orderDetails.json'
-      fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4))
+      fs.writeFileSync(jsonOrderFilePath, JSON.stringify(orderDetails, null, 4))
       console.log('Order details have been written to orderDetails.json')
 
       const orderInformation = await iConsult.getOrderInformation()
@@ -129,5 +130,6 @@ describe('iConsult feature- End to End flow', () => {
       expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(subscriptionPlanDurationValue)
       console.log(`Order Details: Product Total Price is: "${orderInformation.totalPrice}"`)
       expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(subscriptionPlanAmount)
+      
     })
 })

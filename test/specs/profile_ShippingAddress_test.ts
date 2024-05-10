@@ -1,4 +1,4 @@
-import profile_shipping from "../pageobjects/profile_ShippingAddress.page.js"
+import ProfileShipping from "../pageobjects/ProfileShippingAddress.page.js"
 import LoginPage from "../pageobjects/vpm_login.page.js"
 import homePage from "../pageobjects/home.page.js"
 import fs from 'fs'
@@ -8,32 +8,31 @@ describe("Profile Features", () => {
   let logindata: any
 
   before(async () => {
-    await LoginPage.openSignin();
-    await browser.maximizeWindow();
-    const rawData2 = fs.readFileSync('./test/data/profile_shipping.json', 'utf-8');
-    shippingData = JSON.parse(rawData2);
-    const rawData = fs.readFileSync('./test/data/login.json', 'utf-8');
-    logindata = JSON.parse(rawData);
+    await LoginPage.openSignin()
+    shippingData = JSON.parse(fs.readFileSync('./test/data/profile_shipping.json', 'utf-8'))
+    logindata = JSON.parse(fs.readFileSync('./test/data/login.json', 'utf-8'))
   })
 
-  it("Verify Profile - Shipping Address Flow - TC25", async () => {
+  it("C29659 Profile: Verify adding Shipping Address Flow", async () => {
     const url: string = await browser.getUrl()
-    if(url.includes('qa')){
-      await LoginPage.login(
-        logindata.login_valid.login_email,
-        logindata.login_valid.login_password)
+    const language: string = await ProfileShipping.getLanguageFromUrl(url)
+    let loginData: any
+    if (url.includes('qa')) {
+        loginData = logindata.login_valid
+    } else if (url.includes('stage')) {
+        loginData = logindata.stage_login_valid
     } else {
-        await LoginPage.login(
-          logindata.stage_login_valid.login_email,
-          logindata.stage_login_valid.login_password)
-      }
-    await browser.pause(2000)
+        loginData = logindata.prod_login_valid
+    }
+    await LoginPage.login(loginData.login_email, loginData.login_password)
+    await homePage.hamburgericon.waitForDisplayed()
     expect(await homePage.hamburgericon.isDisplayed()).toBe(true)
-    await browser.pause(2000)
     await homePage.hamburgericon.click()
     await browser.pause(2000)
-    await profile_shipping.addShippingAddress()
-    expect(await profile_shipping.ship_success_toast_message).toHaveText(
-      shippingData.shipping_address_success_message)
+    await ProfileShipping.addShippingAddress()
+    const expectedSuccessToastMessage: string = language === 'en' ? shippingData.shipping_address_success_message : shippingData.shipping_address_success_message_es
+    await ProfileShipping.ship_success_toast_message.waitForDisplayed()
+    expect(await ProfileShipping.ship_success_toast_message).toHaveText(
+      expectedSuccessToastMessage)
   })
 })

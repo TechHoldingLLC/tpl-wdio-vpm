@@ -55,10 +55,6 @@ class AboutUsPage extends Page {
     await this.productthumbnail.click()
   }
 
-  public async getLanguageFromUrl(url: string): Promise<string> {
-    return url.includes('/en/') ? 'en' : 'es';
-  }
-
   public openAboutus() {
     return super.open("/aboutus")
   }

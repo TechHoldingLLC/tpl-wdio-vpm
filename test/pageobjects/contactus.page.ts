@@ -124,10 +124,6 @@ class ContactUs extends Page {
     return $("//div[contains(@class,'ContactUs_contact-title-wrapper')]/div")
   }
 
-  public async getLanguageFromUrl(url: string): Promise<string> {
-    return url.includes('/en/') ? 'en' : 'es';
-  }
-
   public openContactus() {
     return super.open("contactus")
   }

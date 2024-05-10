@@ -1,4 +1,4 @@
-import Page from "./page.js";
+import Page from "./page.js"
 
 class iConsultEDSlidenafil extends Page{
 /*
@@ -86,7 +86,7 @@ class iConsultEDSlidenafil extends Page{
 
     public get shareWithDoctorAnyMedicationTextBox() {
         // Please share with Dr. Linares any other medical conditions treated with medications:
-        return $("[class$='form-input ']");
+        return $("[class$='form-input ']")
     }
 
     public get allergicToAnyMedications(){
@@ -146,20 +146,76 @@ class iConsultEDSlidenafil extends Page{
     }
 
     public get dosageStrengthFiftyMG(){
-        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[1]')
+        return $("//span[normalize-space()='50mg']")
     }
 
     public get dosageStrengthHundredMG(){
-        return $('(//div[contains(@class,"ProductRecommendation_dosage-strength")]/ul/li)[2]')
+        return $("//span[normalize-space()='100mg']")
     }
 
+    public async iConsultEDSQuestionsandAnswers():Promise<void>{
+        await this.problemPresentQuestion.waitForDisplayed()
+        await this.problemPresentOption5PlusYear.click()
+        await this.continueButton.click()
+        await browser.pause(1000)
+        await this.EDStartQuestions.waitForDisplayed()
+        //await iConsultEDS.EDStartGradually.click()
+        await this.continueButton.click()
+        await browser.pause(1000)
 
+        await this.diagnosedWithAnyOfTheFollowing.waitForDisplayed()
+        await this.noneOfTheAboveSelection.doubleClick()
+        await this.continueButton.click()
+        await browser.pause(1500)
 
+        await this.medicationDailyQuestions.waitForDisplayed()
+        await this.medicationNo.click()
+        await this.continueButton.click()
+        await browser.pause(1500)
 
+        await this.takeAnyMedicationsQuestions.waitForDisplayed() 
+        await this.noneOfTheAboveSelectionForMedications.doubleClick()
+        await this.continueButton.click()
+        await browser.pause(1500)
 
+        await this.haveYouHadAnyOfConditionsQuestions.waitForDisplayed()
+        await this.continueButton.scrollIntoView()
+        await this.continueButton.click()
+        await browser.pause(1500)
 
-    
-    
+        await this.shareWithDoctorAnyMedication.waitForDisplayed()
+        await this.shareWithDoctorAnyMedicationTextBox.setValue("Automation Testing");
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.allergicToAnyMedications.waitForDisplayed()
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.past3MonthsUsedAnySubstancesQuestions.waitForDisplayed()
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.wakeUpWithErectionOptions.waitForDisplayed()
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.anyMedicationBeforeQuestions.waitForDisplayed()
+        await this.sildenafilMedicationOption.click()
+        await browser.pause(1000)
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.dosageYouTakeOptions.waitForDisplayed()
+        await this.hundredMgOption.click()
+        await this.continueButton.click()
+        await browser.pause(1500)
+
+        await this.medicationAgainQuestion.waitForDisplayed()
+        await this.medicationAgainYes.click()
+        await this.continueButton.click()
+        await browser.pause(5000)
+    }
 
 }
 

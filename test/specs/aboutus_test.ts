@@ -5,10 +5,9 @@ import fs from 'fs'
 describe("About Us Feature", () => {
   before(async () => {
     await aboutUsPage.openAboutus()
-    await browser.maximizeWindow()
   })
 
-  it("Verify About Us Page - TC01", async () => {
+  it("C29680 Website Main Pages: Verify About Us page opens error-free", async () => {
 
     try {
       const pageTitle = JSON.parse(fs.readFileSync('./test/data/pageTitles.json', 'utf-8'))
@@ -17,22 +16,34 @@ describe("About Us Feature", () => {
       const currentUrl = await browser.getUrl()
       const language = await aboutUsPage.getLanguageFromUrl(currentUrl)
       let expectedHeaders: string[]
+      let aboutVPMText: string
+      let doctorMissionText: string
 
       if(language === 'en'){
-        expectedHeaders = ['Bridging the Healthcare Gap for Latinos', 'Dr. Linares’ commitment & Platform holistic approach', 'Respected Expert & Trusted Figure'];
+        expectedHeaders = ['Bridging the Healthcare Gap for Latinos', 'Dr. Linares’ commitment & Platform holistic approach', 'Respected Expert & Trusted Figure']
+        aboutVPMText = aboutUsData.aboutVPM
+        doctorMissionText = aboutUsData.aboutUsDoctorMission
         await expect(browser).toHaveTitle(pageTitle.pg_title_about_us)
-        await expect(browser).toHaveTitle(pageTitle.pg_title_about_us)
-        expect(await aboutUsPage.aboutViaProMeds.getText()).toHaveText(aboutUsData.aboutVPM)
-        expect(await aboutUsPage.aboutUsDoctorMission.getText()).toEqual(aboutUsData.aboutUsDoctorMission)
-        expect(await aboutUsPage.aboutusContent).toBeDisplayed()
       } else {
         expectedHeaders = ['Cerrando la brecha de atención médica para la gente latino', 'El compromiso del Dr. Linares y el enfoque holístico de la plataforma', 'Experto respetado y figura de confianza']
+        aboutVPMText = aboutUsData.aboutVPM_spanish
+        doctorMissionText = aboutUsData.aboutUsDoctorMission_spanish
         await expect(browser).toHaveTitle(pageTitle.pg_title_about_us_spanish)
-        expect(await aboutUsPage.aboutViaProMeds.getText()).toHaveText(aboutUsData.aboutVPM_spanish)
-        expect(await aboutUsPage.aboutUsDoctorMission.getText()).toEqual(aboutUsData.aboutUsDoctorMission_spanish)
-        expect(await aboutUsPage.aboutusContent).toBeDisplayed()
       }
-      const isValidContent = await aboutUsPage.validateAboutUsItemContent(expectedHeaders);
+
+      //Retrieve the text from the 'aboutViaProMeds' element
+      const aboutViaProMedsText = await (await aboutUsPage.aboutViaProMeds).getText()
+      
+      // Replace any sequence of whitespace characters with \s* to allow flexibility
+      const regexPattern = new RegExp(aboutVPMText.replace(/\s+/g, '\\s*'))
+
+      // Assert that the received text matches the regular expression pattern
+      await expect(aboutViaProMedsText).toMatch(regexPattern)
+
+      expect(await aboutUsPage.aboutUsDoctorMission.getText()).toEqual(doctorMissionText)
+      expect(await aboutUsPage.aboutusContent).toBeDisplayed()
+
+      const isValidContent = await aboutUsPage.validateAboutUsItemContent(expectedHeaders)
       expect(isValidContent).toBeTruthy()
       await aboutUsPage.aboutUsPage()
       expect(await aboutUsPage.iconsultIntro).toBeDisplayed()

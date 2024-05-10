@@ -17,6 +17,10 @@ class ProfilePage extends Page{
     public get emailInput(){
         return $('#email')
     }
+
+    public async getLanguageFromUrl(url: string): Promise<string> {
+        return url.includes('/en/') ? 'en' : 'es'
+    }
 }
 
 export default new ProfilePage()
