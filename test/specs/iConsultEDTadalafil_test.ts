@@ -93,6 +93,18 @@ describe("iConsult Features", () => {
     const orderId: string = await iConsult.getOrderID()
     console.log(`My Order ID is: ${orderId}`)
 
+    const jsonFilePath = './test/data/generatedOrderDetails.json'
+    const clearOrderDetails = () => {
+      fs.writeFileSync(jsonFilePath, JSON.stringify({}, null, 4)) // Write an empty object to the file
+      console.log(`Order details have been cleared from ${jsonFilePath}`)
+    }
+
+    const orderDetails: Record<string, string> = {}
+    orderDetails[Recommendation_medicine_title] = orderId
+        
+    fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4))
+    console.log('Order details have been written to orderDetails.json')
+
     const orderInformation = await iConsult.getOrderInformation()
     console.log(`Order Product Name is: "${orderInformation.productName}"`)
     expect(await iConsult.orderDetailProductName.getText()).toEqual(Recommendation_medicine_title)

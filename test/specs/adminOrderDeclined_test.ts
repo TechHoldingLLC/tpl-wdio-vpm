@@ -52,7 +52,7 @@ describe('Admin Panel features', () => {
         expect(searchedOrderData.orderStatus).toEqual("Medication pending")
     })
 
-    it('C29671 Verify that Admin is not able to send Order to EHR', async() => {
+    it('C29964 Verify that Admin is not able to send Order to EHR', async() => {
         await adminPage.selectOrderCheckBox.click()
         await browser.pause(1000)
         console.log("Order selected successfully")

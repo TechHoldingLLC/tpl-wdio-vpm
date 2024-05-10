@@ -30,13 +30,14 @@ describe("Side Menu Options", () => {
     const profileMenu: string = language === 'en' ? "Profile" : "Perfil"
     
     const checkMenuLink = async (menuName: string, expectedUrlPart: string) => {
+      await browser.pause(2000)
       await SideMenuPage.openSideMenu()
       await SideMenuPage.openMenu(menuName)
-      await browser.pause(2000)
+      await browser.pause(4000)
       const currentUrl = await SideMenuPage.getCurrentUrl()
       await expect(currentUrl).toContain(expectedUrlPart)
-      await browser.back()
-      await browser.pause(4000)
+      //await browser.back()
+      await browser.pause(2000)
     }
 
     await checkMenuLink(orderMenu, 'orders')

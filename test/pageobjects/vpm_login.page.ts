@@ -59,7 +59,7 @@ class LoginPage extends Page {
   }
 
   public openSignin() {
-    return super.open("/auth/signin")
+    return super.open("auth/signin")
   }
 }
 

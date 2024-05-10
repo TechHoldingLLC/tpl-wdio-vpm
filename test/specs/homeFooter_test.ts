@@ -12,7 +12,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         homePageData = JSON.parse(fs.readFileSync('./test/data/homePage.json', 'utf-8'))
     })
 
-    it("Website Main Pages: Verify the Headers options available in the Home Page Footer.", async()=>{
+    it("C29963 Website Main Pages: Verify the Headers options available in the Home Page Footer.", async()=>{
         const language = await homePage.getLanguageFromUrl(await browser.getUrl())
         const expectedFooterHeaders: string[] = language === 'en' ? ["PRODUCTS", "LEGAL", "SUPPORT"] : ["PRODUCTOS", "LEGAL", "APOYO"]
         await homePage.navigateToFooter()
@@ -25,7 +25,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         expect(actualFooterHeaders).toEqual(expectedFooterHeaders)
     })
 
-    it('Website Main Pages: Verify the Product options available in the Home Page Footer.', async() => {
+    it('C29962 Website Main Pages: Verify the Product options available in the Home Page Footer.', async() => {
         const expectedProducts: string[]= ['Tadalafil', 'Sildenafil', 'Paroxetine', 'Finasteride', 'Acyclovir']
         const listOfProducts = await homePage.productList
         const actualProducts: string[] = []
@@ -36,7 +36,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         expect(actualProducts).toEqual(expectedProducts)
     })
 
-    it('Website Main Pages: Verify the Legal options available in the Home Page Footer.',async() => {
+    it('C29961 Website Main Pages: Verify the Legal options available in the Home Page Footer.',async() => {
         const language = await homePage.getLanguageFromUrl(await browser.getUrl())
         const expectedLegalOptions: string[] = language === "en" ? ["Terms of Use", "Telehealth Consent", "Privacy Notice"] : ["Términos y Condiciones", "Consentimiento de Telemedicina", "Política de Privacidad"]
         const listOfLegalOptions = await homePage.legalList
@@ -48,7 +48,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         expect(actualLegalOptions).toEqual(expectedLegalOptions)
     })
 
-    it('Website Main Pages: Verify the Support options available in the Home Page Footer.', async() => {
+    it('C29960 Website Main Pages: Verify the Support options available in the Home Page Footer.', async() => {
         const language = await homePage.getLanguageFromUrl(await browser.getUrl())
         const expectedSupportOptions: string[] = language === "en" ? ["About Us", "Contact Us", "How It Works", "FAQ", "Blog"] : ["Sobre Nosotros", "Contáctenos", "Cómo funciona", "Preguntas Frecuentes", "Blog"]
         const listOfSupportOptions = await homePage.supportList
@@ -139,7 +139,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         expect(validateHowItWorksOptions).toBeTruthy()
     })
     
-    it("Website Main Pages: Verify the Terms of Use Page from the Home Page Footer.", async () => {
+    it("C29959 Website Main Pages: Verify the Terms of Use Page from the Home Page Footer.", async () => {
         await homePage.TermsOfUseLink.scrollIntoView()
         await homePage.TermsOfUseLink.click()
         const url: string = await browser.getUrl()
@@ -167,7 +167,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         await browser.pause(3000)
     })
     
-    it("Website Main Pages: Verify the Telehealth Consent Page from the Home Page Footer.", async () => {
+    it("C29958 Website Main Pages: Verify the Telehealth Consent Page from the Home Page Footer.", async () => {
         await homePage.TeleHealthConsentLink.scrollIntoView()
         await homePage.TeleHealthConsentLink.click()
       
@@ -194,7 +194,7 @@ describe('Home Page Footer Links and Page Redirection', () => {
         await browser.pause(2000)
     })
     
-    it("Website Main Pages: Verify the Privacy Policy Page from the Home Page Footer.", async () => {
+    it("C29957 Website Main Pages: Verify the Privacy Policy Page from the Home Page Footer.", async () => {
         await homePage.PrivacyPolicyLink.scrollIntoView()
         await homePage.PrivacyPolicyLink.click()
         const windowHandles = await browser.getWindowHandles()

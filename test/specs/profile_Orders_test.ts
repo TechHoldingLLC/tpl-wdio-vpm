@@ -11,7 +11,7 @@ describe('Profile Menu Options and Redirection from Orders', () => {
         await LoginPage.openSignin()
     })
 
-    it('Profile: Verify the profile menu options', async() => {
+    it('C29953 Profile: Verify the profile menu options', async() => {
       const loginDataPath: string = './test/data/login.json'
       let selectedLoginData: any
 
@@ -44,7 +44,7 @@ describe('Profile Menu Options and Redirection from Orders', () => {
         ['Órdenes', 'Suscripciones', 'Tarjetas Guardadas', 'Dirección De Envío', 'Perfil']
   
         // Validate that the profile sub-menu list matches the expected list
-        const validateProfileSubMenus = await profilesidemenuPage.validateProfileSideMenuList(expectedProfileSubMenuList)
+        const validateProfileSubMenus: boolean = await profilesidemenuPage.validateProfileSideMenuList(expectedProfileSubMenuList)
         expect(validateProfileSubMenus).to.be.true
       } catch (error) {
         console.error("Error occurred while verifying profile menu options:", error)

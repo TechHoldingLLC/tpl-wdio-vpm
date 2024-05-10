@@ -1,4 +1,6 @@
 import fs from 'fs'
+import pkg from 'lodash'
+const { isEqual } = pkg
 
 class AdminPage{
 
@@ -62,7 +64,7 @@ class AdminPage{
     public async validateiConsultApprovalListTab(): Promise<boolean>{
         const tabList = await this.iConsultApprovalListTabOptions
         const actualTabsOptions: string[] = []
-        const expectedTableTabList: string[] = ["Pending", "In Progress"]
+        const expectedTableTabList: string[] = ["Pending", "In Progress", "Completed"]
 
         for(const el of tabList){
             actualTabsOptions.push(await el.getText())
@@ -147,6 +149,86 @@ class AdminPage{
 
     public get orderStatusInProgressTab(){
         return $("//table/tbody/tr/td[8]/span")
+    }
+
+    public get orderDetailsButton(){
+        return $("//span[normalize-space()='Order Details']")
+    }
+
+    public get orderDetailsPageHeader(){
+        return $('h5')
+    }
+
+    public async getOrderInformation(): Promise<string>{
+        const orderId = await $("//span[contains(@class, 'MyOrder_order-id')]")
+        const actualOrderId: string = await orderId.getText()
+        const order: string = actualOrderId.split(":")[1].trim()
+        return order
+    }
+
+    public get medicineName(){
+        return $("//div[contains(@class,'MyOrder_cart-item')]/div/h4")
+    }
+
+    public get orderPaymentTotalStatus(){
+        return $("//div[contains(@class,'MyOrder_total-pay')]/div[@class='title-badge']/span[2]")
+    }
+
+    public get orderedElement(){
+        return $("//li[contains(.,'Ordered')]")
+    }
+
+    public async validateTrackHistoryOptions(){
+        const trackHistoryOptions = await $$('//li[contains(@class, "progress-step")]//h4');
+        const expectedOptions = ['Ordered', 'Approved', 'Prescribed', 'Shipped', 'Delivered'];
+        let actualOptions: string[] = []
+        if (trackHistoryOptions.length === 0) {
+            console.error("trackHistory options are not found.")
+            return false
+        }
+        for(const option of trackHistoryOptions){
+            const optionText= await option.getText()
+            actualOptions.push(optionText)
+        }
+        console.log(actualOptions)
+        if (isEqual(actualOptions.sort(), expectedOptions.sort())) {
+            return true
+        }
+        return false
+    }
+
+    public get orderDetailsCloseIcon(){
+        return $("//span[contains(@class,'MyOrder_close-icon')]")
+    }
+
+    public get progressMakerElement(){
+        return $('//li[@class="progress-step is-complete"]//div[@class="progress-marker"]')
+    }
+
+    public async isElementBackgroundColorGreen(): Promise<boolean> {
+        const element = await this.progressMakerElement
+    
+        const getComputedStyleJs = `
+            const elem = arguments[0];
+            const afterPseudoElement = getComputedStyle(elem, '::after');
+            return afterPseudoElement.getPropertyValue('background-color');
+        `;
+    
+        const backgroundColor = await browser.execute(getComputedStyleJs, element)
+        console.log(backgroundColor)
+    
+        // Convert RGB to Hex
+        const rgbValues = (backgroundColor as string).match(/\d+/g)
+        const hexColor = `#${(rgbValues ?? []).map((value) => parseInt(value, 10).toString(16).padStart(2, '0')).join('')}`
+        console.log(hexColor) // Output: #1C7E0C
+    
+        // Validate that the color is a shade of green
+        const isGreen: boolean =
+            hexColor.startsWith('#') &&
+            parseInt(hexColor.substring(1, 3), 16) < 80 &&
+            parseInt(hexColor.substring(3, 5), 16) > 100;
+    
+    return isGreen
     }
 
 }

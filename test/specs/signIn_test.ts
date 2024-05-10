@@ -1,6 +1,7 @@
 import { expect } from "@wdio/globals"
 import LoginPage from "../pageobjects/vpm_login.page.js"
 import fs from 'fs'
+import allureReporter from '@wdio/allure-reporter'
 
 describe("VPM Sign In Features", () => {
   let logindata: any
@@ -14,8 +15,11 @@ describe("VPM Sign In Features", () => {
   })
 
   it("C29652 Sign In: Verify User unable to Sign In with invalid email, mobile, or password", async()=>{
-    
     // Verify validation message when do login without entering username & password 
+    allureReporter.addSeverity("Medium")
+    allureReporter.addDescription("<b>Sign In: Invalid Username & Password</b>", 'html')
+    allureReporter.addFeature("Invalid Sign IN")
+    allureReporter.addArgument("Platform", "MacOS")
     
     await expect(LoginPage.inputUsername).toBeDisplayed()
 
@@ -32,7 +36,6 @@ describe("VPM Sign In Features", () => {
     expect(PasswordFieldValidationMessage).toEqual(expectedPasswordFieldValidationMessage)
 
     // Verify toast message when do login with invalid credentials
-    
     const loginData = logindata.login_invalid
     let expectedToastMessage: string = language === 'en' ? logindata.login_toastMessage : logindata.login_toastMessage_es
 
@@ -46,7 +49,6 @@ describe("VPM Sign In Features", () => {
     await browser.refresh()
 
     // Verify toast message when do login with invalid mobile 
-       
     await expect(LoginPage.inputUsername).toBeDisplayed()
     await LoginPage.login_with_cellnum(loginData.login_invalid_phone_num, loginData.login_password)
     await browser.pause(2000)
@@ -57,6 +59,9 @@ describe("VPM Sign In Features", () => {
   })
 
   it("C29650 Sign In: Verify User Sign In with valid email and password", async () => {
+    allureReporter.addSeverity("Critical")
+    allureReporter.addFeature("Valid Sign IN")
+
     const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
     let loginData: any
@@ -81,6 +86,9 @@ describe("VPM Sign In Features", () => {
   })
 
   it("C29651 Sign In: Verify User Sign In with valid mobile and password", async () => {
+    allureReporter.addSeverity("Critical")
+    allureReporter.addFeature("Valid Sign IN")
+
     const url: string = await browser.getUrl()
     await expect(LoginPage.inputUsername).toBeDisplayed()
     let loginData: any

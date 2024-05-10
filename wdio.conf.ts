@@ -1,5 +1,7 @@
 import type { Options } from "@wdio/types"
-import allure from 'allure-commandline'
+import allure  from 'allure-commandline'
+import * as fs from 'fs-extra'
+import allureReporter from '@wdio/allure-reporter';
 // wdio.conf.js
 
 // let baseUrl: string
@@ -254,10 +256,10 @@ export const config: Options.Testrunner = {
 
   //
   // The number of times to retry the entire specfile when it fails as a whole
-  // specFileRetries: 1,
+  //specFileRetries: 1,
   //
   // Delay in seconds between the spec file retry attempts
-  // specFileRetriesDelay: 0,
+  //specFileRetriesDelay: 5000,
   //
   // Whether or not retried spec files should be retried immediately or deferred to the end of the queue
   // specFileRetriesDeferred: false,
@@ -269,19 +271,22 @@ export const config: Options.Testrunner = {
   ["spec", 
   ['allure', {
     outputDir: 'allure-results',
-    disableWebdriverStepsReporting: false,
+    disableWebdriverStepsReporting: true,
     disableWebdriverScreenshotsReporting: false,
     }
   ], 
+  
   ['testrail', {
-                projectId: 22,
-                suiteId: 81,
+                projectId: 22, 
+                suiteId: 81, 
                 domain: 'techholding.testrail.io',
                 //username: process.env.TESTRAIL_USERNAME,
                 username: "dhrumil.soni@techholding.co",
                 //apiToken: process.env.TESTRAIL_API_TOKEN,
-                apiToken: "gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-                runName: 'Test Run 20240508 - Minor_Stage_ESP',
+                apiToken: "pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk",
+                //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+                //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
+                runName: 'Dhrumil_Automation_Demo_English',
                 oneReport: true,
                 includeAll: true,
                 caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
@@ -312,6 +317,23 @@ reporterSyncTimeout: 30000,
    */
   // onPrepare: function (config, capabilities) {
   // },
+  onPrepare: async () => {
+    // Remove allure-results directory
+    try {
+        await fs.remove('./allure-results');
+        console.log('allure-results directory removed successfully');
+    } catch (err) {
+        console.error('Error removing allure-results directory:', err);
+    }
+
+    // Remove allure-report directory
+    try {
+        await fs.remove('./allure-report');
+        console.log('allure-report directory removed successfully');
+    } catch (err) {
+        console.error('Error removing allure-report directory:', err);
+    }
+},
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -369,7 +391,6 @@ reporterSyncTimeout: 30000,
    */
   beforeTest: async function () {
     await browser.maximizeWindow()
-    //await browser.setWindowSize(1000,1000);
     await browser.pause(1000)
   },
   /**
@@ -394,9 +415,17 @@ reporterSyncTimeout: 30000,
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: async function({ error }) {
-    if(error){
-      await browser.takeScreenshot()
+  // afterTest: async function({ error }) {
+  //   if(error){
+  //     await browser.takeScreenshot()
+  //   }
+  // },
+
+  afterTest: async (_test, _context, { error }) => {
+    if (error) {
+      const browser = global.browser;
+      const screenshotData = await browser.takeScreenshot();
+      allureReporter.addAttachment('Failed Test Screenshot', Buffer.from(screenshotData, 'base64'), 'image/png');
     }
   },
 
@@ -443,7 +472,7 @@ reporterSyncTimeout: 30000,
     onComplete: function(): Promise<void> {
       const reportError = new Error('Could not generate Allure report')
       const generation = allure(['generate', 'allure-results', '--clean'])
-      return new Promise((resolve, reject) => {
+      return new Promise<void>((resolve, reject) => {
           const generationTimeout = setTimeout(
               () => reject(reportError),
               5000)

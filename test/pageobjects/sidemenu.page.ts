@@ -4,11 +4,12 @@ import Page from "./page.js"
 class SideMenuPage extends Page {
 
   public get sideMenu() {
-    return $("//div[contains(@class, 'Header_navbar-collapse')]/ul[contains(@class,'Header_navbar-nav-right')]/li[3]/a")
+    return $("//div[contains(@class, 'Header_navbar-collapse')]/ul[contains(@class,'Header_navbar-nav-right')]/li[3]")
   }
 
   public async openSideMenu() {
     await this.sideMenu.waitForDisplayed()
+    await this.sideMenu.waitForClickable()
     await this.sideMenu.click()
   }
 
