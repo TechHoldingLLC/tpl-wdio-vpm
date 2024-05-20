@@ -1,7 +1,7 @@
-import type { Options } from "@wdio/types"
-import allure  from 'allure-commandline'
-import * as fs from 'fs-extra'
-import allureReporter from '@wdio/allure-reporter';
+import type { Options } from "@wdio/types";
+import allure from "allure-commandline";
+import * as fs from "fs-extra";
+import allureReporter from "@wdio/allure-reporter";
 // wdio.conf.js
 
 // let baseUrl: string
@@ -24,7 +24,7 @@ import allureReporter from '@wdio/allure-reporter';
 export const config: Options.Testrunner = {
   // ==========================
   // Browserstack Configuration
-  // ========================== 
+  // ==========================
   // user: process.env.BROWSERSTACK_USERNAME,
   // key: process.env.BROWSERSTACK_ACCESS_KEY,
   // ====================
@@ -55,90 +55,84 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: [
-      './test/specs/*.ts',
-  ],
-  suites:{
-    Profile:[
-      './test/specs/profile_Orders_test.ts',
-      './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_AddCard_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts',
-      './test/specs/profile_UserProfile_test.ts'
+  specs: ["./test/specs/*.ts"],
+  suites: {
+    Profile: [
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_ShippingAddress_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
     ],
-    SideMenu:[
-      './test/specs/sidemenu_test.ts'
-    ],
-    iConsult:[
-      './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/iConsultGHAcyclovir_test.ts',
-      './test/specs/iConsultHLFinasteride_test.ts',
-      './test/specs/iConsultEDTadalafil_test.ts',
-      './test/specs/iConsultPEParoxetine_test.ts',
+    SideMenu: ["./test/specs/sidemenu_test.ts"],
+    iConsult: [
+      "./test/specs/iConsultEDSildenafil_test.ts",
+      "./test/specs/iConsultGHAcyclovir_test.ts",
+      "./test/specs/iConsultHLFinasteride_test.ts",
+      "./test/specs/iConsultEDTadalafil_test.ts",
+      "./test/specs/iConsultPEParoxetine_test.ts",
       //'./test/specs/iConsultEDSHomePage_test.ts',
       //'./test/specs/iConsultPEHomePage_test.ts'
     ],
-    WebsiteMainPages:[
-      './test/specs/home_test.ts',
-      './test/specs/homeFooter_test.ts',
-      './test/specs/homeSocialMedia_test.ts',
-      './test/specs/productdetail_test.ts',
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
+    WebsiteMainPages: [
+      "./test/specs/home_test.ts",
+      "./test/specs/homeFooter_test.ts",
+      "./test/specs/homeSocialMedia_test.ts",
+      "./test/specs/productdetail_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/contactus_test.ts",
     ],
-    Login:[
-      './test/specs/signIn_test.ts'
+    Login: ["./test/specs/signIn_test.ts"],
+    SanityEnglish: [
+      "./test/specs/home_test.ts",
+      "./test/specs/homeFooter_test.ts",
+      "./test/specs/productdetail_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/contactus_test.ts",
+      "./test/specs/signIn_test.ts",
+      "./test/specs/sidemenu_test.ts",
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_ShippingAddress_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
+      "./test/specs/iConsultGHAcyclovir_test.ts",
+      "./test/specs/iConsultHLFinasteride_test.ts",
+      "./test/specs/iConsultEDTadalafil_test.ts",
+      "./test/specs/iConsultEDSildenafil_test.ts",
+      "./test/specs/adminPanel_test.ts",
+      "./test/specs/iConsultPEParoxetine_test.ts",
+      "./test/specs/adminOrderDeclined_test.ts",
     ],
-    SanityEnglish:[
-      './test/specs/home_test.ts',
-      './test/specs/homeFooter_test.ts',
-      './test/specs/productdetail_test.ts',
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
-      './test/specs/signIn_test.ts',
-      './test/specs/sidemenu_test.ts',
-      './test/specs/profile_Orders_test.ts',
-      './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_AddCard_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts',
-      './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultGHAcyclovir_test.ts',
-      './test/specs/iConsultHLFinasteride_test.ts',
-      './test/specs/iConsultEDTadalafil_test.ts',
-      './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/adminPanel_test.ts',
-      './test/specs/iConsultPEParoxetine_test.ts',
-      './test/specs/adminOrderDeclined_test.ts'
+    SanitySpanish: [
+      "./test/specs/home_test.ts",
+      "./test/specs/homeFooter_test.ts",
+      "./test/specs/productdetail_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/contactus_test.ts",
+      "./test/specs/signIn_test.ts",
+      "./test/specs/sidemenu_test.ts",
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_ShippingAddress_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
+      "./test/specs/iConsultGHAcyclovir_test.ts",
+      "./test/specs/iConsultHLFinasteride_test.ts",
+      "./test/specs/iConsultEDTadalafil_test.ts",
+      "./test/specs/iConsultEDSildenafil_test.ts",
+      "./test/specs/adminPanel_test.ts",
+      "./test/specs/iConsultPEParoxetine_test.ts",
+      "./test/specs/adminOrderDeclined_test.ts",
     ],
-    SanitySpanish:[
-      './test/specs/home_test.ts',
-      './test/specs/homeFooter_test.ts',
-      './test/specs/productdetail_test.ts',
-      './test/specs/aboutus_test.ts',
-      './test/specs/contactus_test.ts',
-      './test/specs/signIn_test.ts',
-      './test/specs/sidemenu_test.ts',
-      './test/specs/profile_Orders_test.ts',
-      './test/specs/profile_Subscription_test.ts',
-      './test/specs/profile_AddCard_test.ts',
-      './test/specs/profile_ShippingAddress_test.ts',
-      './test/specs/profile_UserProfile_test.ts',
-      './test/specs/iConsultGHAcyclovir_test.ts',
-      './test/specs/iConsultHLFinasteride_test.ts',
-      './test/specs/iConsultEDTadalafil_test.ts',
-      './test/specs/iConsultEDSildenafil_test.ts',
-      './test/specs/adminPanel_test.ts',
-      './test/specs/iConsultPEParoxetine_test.ts',
-      './test/specs/adminOrderDeclined_test.ts'
+    AdminOrderApproved: [
+      "./test/specs/iConsultEDSHomePage_test.ts",
+      "./test/specs/adminPanel_test.ts",
     ],
-    AdminOrderApproved:[
-      './test/specs/iConsultEDSHomePage_test.ts',
-      './test/specs/adminPanel_test.ts'
+    AdminOrderDeclined: [
+      "./test/specs/iConsultPEHomePage_test.ts",
+      "./test/specs/adminOrderDeclined_test.ts",
     ],
-    AdminOrderDeclined:[
-      './test/specs/iConsultPEHomePage_test.ts',
-      './test/specs/adminOrderDeclined_test.ts'
-    ]
   },
   // Patterns to exclude.
   exclude: [
@@ -169,8 +163,8 @@ export const config: Options.Testrunner = {
   capabilities: [
     {
       browserName: "chrome",
-      'goog:chromeOptions': {
-        args: ['--disable-cache'] // disable cache for Chrome
+      "goog:chromeOptions": {
+        args: ["--disable-cache"], // disable cache for Chrome
       },
       browserVersion: "stable",
     },
@@ -267,33 +261,37 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: 
-  ["spec", 
-  ['allure', {
-    outputDir: 'allure-results',
-    disableWebdriverStepsReporting: true,
-    disableWebdriverScreenshotsReporting: false,
-    }
-  ], 
-  
-  ['testrail', {
-                projectId: 22, 
-                suiteId: 81, 
-                domain: 'techholding.testrail.io',
-                //username: process.env.TESTRAIL_USERNAME,
-                username: "dhrumil.soni@techholding.co",
-                //apiToken: process.env.TESTRAIL_API_TOKEN,
-                apiToken: "pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk",
-                //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-                //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-                runName: 'Dhrumil_Automation_Demo_English',
-                oneReport: true,
-                includeAll: true,
-                caseIdTagPrefix: '' // used only for multi-platform Cucumber Scenarios
-              }
-  ]
-],
-reporterSyncTimeout: 30000,
+  reporters: [
+    "spec",
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
+
+    [
+      "testrail",
+      {
+        projectId: 22,
+        suiteId: 81,
+        domain: "techholding.testrail.io",
+        //username: process.env.TESTRAIL_USERNAME,
+        username: "dhrumil.soni@techholding.co",
+        //apiToken: process.env.TESTRAIL_API_TOKEN,
+        apiToken: "pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk",
+        //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+        //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
+        runName: "Dhrumil_Automation_Demo_English",
+        oneReport: true,
+        includeAll: true,
+        caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+      },
+    ],
+  ],
+  reporterSyncTimeout: 30000,
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -320,20 +318,20 @@ reporterSyncTimeout: 30000,
   onPrepare: async () => {
     // Remove allure-results directory
     try {
-        await fs.remove('./allure-results');
-        console.log('allure-results directory removed successfully');
+      await fs.remove("./allure-results");
+      console.log("allure-results directory removed successfully");
     } catch (err) {
-        console.error('Error removing allure-results directory:', err);
+      console.error("Error removing allure-results directory:", err);
     }
 
     // Remove allure-report directory
     try {
-        await fs.remove('./allure-report');
-        console.log('allure-report directory removed successfully');
+      await fs.remove("./allure-report");
+      console.log("allure-report directory removed successfully");
     } catch (err) {
-        console.error('Error removing allure-report directory:', err);
+      console.error("Error removing allure-report directory:", err);
     }
-},
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -390,8 +388,8 @@ reporterSyncTimeout: 30000,
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
   beforeTest: async function () {
-    await browser.maximizeWindow()
-    await browser.pause(1000)
+    await browser.maximizeWindow();
+    await browser.pause(1000);
   },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -425,7 +423,11 @@ reporterSyncTimeout: 30000,
     if (error) {
       const browser = global.browser;
       const screenshotData = await browser.takeScreenshot();
-      allureReporter.addAttachment('Failed Test Screenshot', Buffer.from(screenshotData, 'base64'), 'image/png');
+      allureReporter.addAttachment(
+        "Failed Test Screenshot",
+        Buffer.from(screenshotData, "base64"),
+        "image/png"
+      );
     }
   },
 
@@ -469,24 +471,22 @@ reporterSyncTimeout: 30000,
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-    onComplete: function(): Promise<void> {
-      const reportError = new Error('Could not generate Allure report')
-      const generation = allure(['generate', 'allure-results', '--clean'])
-      return new Promise<void>((resolve, reject) => {
-          const generationTimeout = setTimeout(
-              () => reject(reportError),
-              5000)
+  onComplete: function (): Promise<void> {
+    const reportError = new Error("Could not generate Allure report");
+    const generation = allure(["generate", "allure-results", "--clean"]);
+    return new Promise<void>((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), 5000);
 
-          generation.on('exit', function(exitCode) {
-              clearTimeout(generationTimeout)
+      generation.on("exit", function (exitCode) {
+        clearTimeout(generationTimeout);
 
-              if (exitCode !== 0) {
-                  return reject(reportError)
-              }
-              console.log('Allure report successfully generated')
-              resolve()
-          })
-      })
+        if (exitCode !== 0) {
+          return reject(reportError);
+        }
+        console.log("Allure report successfully generated");
+        resolve();
+      });
+    });
   },
   /**
    * Gets executed when a refresh happens.

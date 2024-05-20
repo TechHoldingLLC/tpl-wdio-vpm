@@ -1,7 +1,7 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
-import * as path from 'path'
-import * as fs from 'fs'
+import * as path from "path";
+import * as fs from "fs";
 
 class iConsultPEFlow extends Page {
   public get startiConsultbutton() {
@@ -131,12 +131,15 @@ class iConsultPEFlow extends Page {
       "[class$='btn-primary text-uppercase btn-sm mw-100 text-uppercase']"
     );
   }
+  public get subscriptionOneMonthOption() {
+    return $("label[for='sub-17']");
+  }
   public get fetch_subscription_plan() {
-    return $("label[for='sub-21'] span[class='radio-title']");
+    return $("label[for='sub-17'] span[class='radio-title']");
   }
   public get fetch_subscription_amount() {
     return $(
-      "label[for='sub-21'] span[class='radio-title text-orange-900 text-right']"
+      "label[for='sub-17'] span[class='radio-title text-orange-900 text-right']"
     );
   }
 
@@ -246,35 +249,35 @@ class iConsultPEFlow extends Page {
   }
 
   public async iConsultPEQuestionsandAnswer() {
-    await this.option4forQuestion1.click()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await browser.pause(3000)
-    await this.option6forQuestion2.doubleClick()
-    await this.continueButton.click()
-    await browser.pause(2000)
-    await this.option2forQuestion3.click()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await this.option2forQuestion4.click()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await this.option4forQuestion5.click()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await this.option3forQuestion6.click()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await this.option5forQuestion7.doubleClick()
-    await browser.pause(2000)
-    await this.continueButton.click()
-    await browser.pause(2000)
-    await this.option2forQuestion8.click()
-    await this.continueButton.click()
-    await browser.pause(2000)
-    await this.option2forQuestion9.click()
-    await this.continueButton.click()
-    await browser.pause(2000)
+    await this.option4forQuestion1.click();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await browser.pause(3000);
+    await this.option6forQuestion2.doubleClick();
+    await this.continueButton.click();
+    await browser.pause(2000);
+    await this.option2forQuestion3.click();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await this.option2forQuestion4.click();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await this.option4forQuestion5.click();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await this.option3forQuestion6.click();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await this.option5forQuestion7.doubleClick();
+    await browser.pause(2000);
+    await this.continueButton.click();
+    await browser.pause(2000);
+    await this.option2forQuestion8.click();
+    await this.continueButton.click();
+    await browser.pause(2000);
+    await this.option2forQuestion9.click();
+    await this.continueButton.click();
+    await browser.pause(2000);
   }
 
   /*
