@@ -263,33 +263,43 @@ export const config: Options.Testrunner = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
+    // [
+    //   "allure",
+    //   {
+    //     outputDir: "allure-results",
+    //     disableWebdriverStepsReporting: true,
+    //     disableWebdriverScreenshotsReporting: false,
+    //   },
+    // ],
     [
-      "allure",
+      "junit",
       {
-        outputDir: "allure-results",
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false,
+        outputDir: "junit-reports",
+        outputFileFormat: function (options) {
+          return `results-${new Date().getTime()}.xml`;
+          //return `results-${options.cid}.${options.capabilities}.xml`;
+        },
       },
     ],
 
-    [
-      "testrail",
-      {
-        projectId: 22,
-        suiteId: 81,
-        domain: "techholding.testrail.io",
-        //username: process.env.TESTRAIL_USERNAME,
-        username: "dhrumil.soni@techholding.co",
-        //apiToken: process.env.TESTRAIL_API_TOKEN,
-        apiToken: "pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk",
-        //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-        //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-        runName: "Dhrumil_Automation_Demo_English",
-        oneReport: true,
-        includeAll: true,
-        caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
-      },
-    ],
+    // [
+    //   "testrail",
+    //   {
+    //     projectId: 22,
+    //     suiteId: 81,
+    //     domain: "techholding.testrail.io",
+    //     //username: process.env.TESTRAIL_USERNAME,
+    //     username: "dhrumil.soni@techholding.co",
+    //     //apiToken: process.env.TESTRAIL_API_TOKEN,
+    //     apiToken: "pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk",
+    //     //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+    //     //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
+    //     runName: "Dhrumil_Automation_Demo_English",
+    //     oneReport: true,
+    //     includeAll: true,
+    //     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+    //   },
+    // ],
   ],
   reporterSyncTimeout: 30000,
 
