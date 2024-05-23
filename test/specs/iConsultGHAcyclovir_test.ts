@@ -100,7 +100,7 @@ describe("iConsult feature- End to End flow", () => {
 
     const prodSubscriptionPlan: string =
       await iConsult.productSubscriptionPlan.getText();
-    console.log(`prodSubscriptionPlan is : ${prodSubscriptionPlan}`);
+    console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
     expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
 
     const prodSubscriptionPrice: string =
