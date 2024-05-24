@@ -40,7 +40,7 @@ describe("Customer Profile - Subscription menu redirection", () => {
 
       await browser.pause(4000);
       await profilesidemenuPage.subscriptionOption.click();
-      await browser.pause(8000);
+      await browser.pause(12000);
       // await expect(profilesidemenuPage.subscriptionPage).toBeDisplayed()
       const subscriptionPageText: string =
         await profilesidemenuPage.subscriptionPage.getText();
