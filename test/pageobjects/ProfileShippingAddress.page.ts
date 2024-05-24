@@ -54,7 +54,7 @@ class ProfileShippingAddress extends Page {
       fs.readFileSync("./test/data/profile_shipping.json", "utf-8")
     );
     await this.profile_shippingAddress.click();
-    await browser.pause(2000);
+    await browser.pause(5000);
     await this.ship_addBtn.click();
     await browser.pause(2000);
     await this.ship_fn_field.setValue(shippingData.shipping_firstname);
