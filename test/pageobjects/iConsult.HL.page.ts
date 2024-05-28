@@ -97,7 +97,6 @@ class iConsultHairLossPage extends Page {
     await browser.pause(2000);
     await this.continueButton.click();
     await browser.pause(2500);
-    //await this.diagnosedQuestions.waitForDisplayed()
     if (!(await this.noneOfTheAboveProblem.isSelected())) {
       await this.noneOfTheAboveProblem.doubleClick();
       await browser.pause(1500);

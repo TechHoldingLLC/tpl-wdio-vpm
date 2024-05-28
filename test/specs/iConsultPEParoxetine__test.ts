@@ -30,11 +30,8 @@ describe("iConsult Features", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
 
     await browser.pause(3000);
-    await iConsult.startFreeiConsultbutton.waitForClickable();
     await iConsult.startFreeiConsultbutton.click();
-    await iConsult.consentCheckbox.waitForDisplayed();
     await iConsult.consentCheckbox.click();
-    await iConsult.consentContinueButton.waitForClickable();
     await iConsult.consentContinueButton.click();
     await browser.pause(5000);
     await iConsult.iConsultPEselection.click();
@@ -64,7 +61,6 @@ describe("iConsult Features", () => {
       );
     }
 
-    await iConsult.productContinueButton.waitForClickable();
     await iConsult.productContinueButton.click();
     await browser.pause(2000);
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
@@ -84,7 +80,6 @@ describe("iConsult Features", () => {
     await iConsult.shippingAddressOptions.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
-    await iConsult.ship_save_btn.scrollIntoView();
     await iConsult.ship_save_btn.click();
     await browser.pause(2000);
 
@@ -97,7 +92,6 @@ describe("iConsult Features", () => {
     await expect(iConsultPEFlow.prescribed_medicine).toHaveText(
       iConsultPEData.iConsultPE_MedicineName
     );
-    await iConsult.addNewCard.scrollIntoView();
     await iConsult.cardSelection.click();
     await browser.pause(1000);
     await iConsult.submitOrder.click();

@@ -6,5 +6,12 @@
   "iConsultED_SummaryTitle": "iConsult Summary",
   "iConsultED_SummaryMedicine": "Tadalafil",
   "iConsultED_CompletionMsg": "Your iConsult is successfully completed",
-  "iConsultED_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!"
+  "iConsultED_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!",
+  "iConsultED_InvalidAgeMessage_en": "Sorry, you’re not eligible to continue with the iConsult",
+  "iConsultED_InvalidAgeMessage_es": "Lo sentimos, no eres elegible para continuar con iConsulta",
+  "iConsultED_ValidAgeMessage_en": "Congratulations! You are eligible to continue with the consultation.",
+  "iConsultED_ValidAgeMessage_es": "¡Felicidades! Eres elegible para continuar con la consulta.",
+  "letsGetStarted_en": "Lets get started!",
+  "letsGetStarted_es": "¡Empecemos!"
+
 }

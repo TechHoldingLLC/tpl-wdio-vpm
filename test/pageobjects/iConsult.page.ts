@@ -85,6 +85,30 @@ class iConsult extends Page {
     return $('[class$="btn-secondary mw-100 mt-15"]');
   }
 
+  public get insertAge() {
+    return $("(//input[@id=':r0:'])[1]");
+  }
+
+  public get ageContinue() {
+    return $("[class$='btn-primary btn-sm text-uppercase']");
+  }
+
+  public get ageTitleMessage() {
+    return $("//h5[@class='title aos-init aos-animate']");
+  }
+
+  public get ageSuccessContinuebtn() {
+    return $(
+      "//a[@class='btn-primary btn-sm mt-15 text-uppercase aos-init aos-animate']"
+    );
+  }
+
+  public get backtoHomebtn() {
+    return $(
+      "//a[@class='btn btn-secondary mt-15 w-100 mw-100 text-uppercase']"
+    );
+  }
+
   public get resumeiConsult() {
     return $('//button[@class="btn-primary  mw-100 mt-10"]');
   }
@@ -220,7 +244,6 @@ class iConsult extends Page {
     await this.ship_continue_btn.click();
     await this.ship_select_address.click();
     await browser.pause(1500);
-    await this.ship_save_btn.scrollIntoView();
     await this.ship_save_btn.click();
     await browser.pause(2000);
   }
