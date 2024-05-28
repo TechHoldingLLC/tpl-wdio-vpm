@@ -172,7 +172,6 @@ class iConsultGenitalHerpesPage extends Page {
     await browser.pause(1000);
 
     await this.medicalConditionQuestions.waitForDisplayed();
-    //await this.noneOfTheseApplyMeOption.waitForExist()
     const flag = await this.noneOfTheseApplyMeOption.isSelected();
     console.log("Flag value: " + flag);
 
@@ -187,7 +186,6 @@ class iConsultGenitalHerpesPage extends Page {
     }
 
     await this.herpeslocationQuestion.waitForDisplayed();
-    await this.noneOfTheAboveSelection.scrollIntoView();
     await this.noneOfTheAboveSelection.waitForExist();
     if (!(await this.noneOfTheAboveSelection.isSelected())) {
       await this.noneOfTheAboveSelection.doubleClick();

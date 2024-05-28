@@ -32,15 +32,12 @@ describe("iConsult feature- End to End flow", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
     await browser.pause(3000);
 
-    await iConsult.startFreeiConsultbutton.waitForClickable();
     await iConsult.startFreeiConsultbutton.click();
-    await iConsult.consentCheckbox.waitForDisplayed();
     await iConsult.consentCheckbox.click();
-    await iConsult.consentContinueButton.waitForClickable();
     await iConsult.consentContinueButton.click();
     await browser.pause(5000);
     await iConsult.iConsultEDselection.click();
-    await browser.pause(10000);
+    await browser.pause(5000);
     if (await iConsult.startNewiConsult.isDisplayed()) {
       await iConsult.startNewiConsult.click();
     }
@@ -62,7 +59,6 @@ describe("iConsult feature- End to End flow", () => {
     );
 
     await iConsultEDS.dosageStrengthHundredMG.click();
-    await iConsult.productContinueButton.waitForClickable();
     await iConsult.productContinueButton.click();
 
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
@@ -84,7 +80,6 @@ describe("iConsult feature- End to End flow", () => {
     await iConsult.shippingAddressOptions.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
-    await iConsult.ship_save_btn.scrollIntoView();
     await iConsult.ship_save_btn.click();
     await browser.pause(2000);
 
@@ -111,7 +106,6 @@ describe("iConsult feature- End to End flow", () => {
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
-    await iConsult.addNewCard.scrollIntoView();
     await iConsult.cardSelection.click();
     await browser.pause(1000);
     await iConsult.submitOrder.click();

@@ -176,7 +176,6 @@ class iConsultEDSlidenafil extends Page {
     await this.continueButton.click();
     await browser.pause(1000);
     await this.EDStartQuestions.waitForDisplayed();
-    //await iConsultEDS.EDStartGradually.click()
     await this.continueButton.click();
     await browser.pause(1000);
 
@@ -196,7 +195,6 @@ class iConsultEDSlidenafil extends Page {
     await browser.pause(2500);
 
     await this.haveYouHadAnyOfConditionsQuestions.waitForDisplayed();
-    await this.continueButton.scrollIntoView();
     await this.continueButton.click();
     await browser.pause(3500);
 

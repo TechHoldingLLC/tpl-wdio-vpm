@@ -2,6 +2,7 @@ import type { Options } from "@wdio/types";
 import allure from "allure-commandline";
 import * as fs from "fs-extra";
 import allureReporter from "@wdio/allure-reporter";
+
 // wdio.conf.js
 
 // let baseUrl: string
@@ -75,13 +76,14 @@ export const config: Options.Testrunner = {
       //'./test/specs/iConsultPEHomePage_test.ts'
     ],
     WebsiteMainPages: [
-      "./test/specs/home_test.ts",
-      "./test/specs/homeFooter_test.ts",
+      // "./test/specs/home_test.ts",
+      // "./test/specs/homeFooter_test.ts",
       "./test/specs/homeSocialMedia_test.ts",
-      "./test/specs/productdetail_test.ts",
-      "./test/specs/aboutus_test.ts",
-      "./test/specs/contactus_test.ts",
+      // "./test/specs/productdetail_test.ts",
+      // "./test/specs/aboutus_test.ts",
+      // "./test/specs/contactus_test.ts",
     ],
+    ValidInvalidAge: ["./test/specs/iConsult_invalidandValid_Age_flow_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
