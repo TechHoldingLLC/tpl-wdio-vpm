@@ -8,7 +8,7 @@ describe("iConsult feature- End to End flow", () => {
     await homePage.openHomepage();
   });
 
-  it("iConsult: Verify iConsult flow for invalid Age", async () => {
+  it("C29979 iConsult: Verify iConsult flow for invalid Age", async () => {
     const iConsultEDData = JSON.parse(
       fs.readFileSync("./test/data/iConsultED.json", "utf-8")
     );
@@ -65,7 +65,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(2000);
   });
 
-  it("iConsult: Verify iConsult flow for valid Age", async () => {
+  it("C29979 iConsult: Verify iConsult flow for valid Age", async () => {
     const iConsultEDData = JSON.parse(
       fs.readFileSync("./test/data/iConsultED.json", "utf-8")
     );
@@ -115,7 +115,7 @@ describe("iConsult feature- End to End flow", () => {
         : iConsultEDData.iConsultED_ValidAgeMessage_es;
     const iConsultValidAgeMessage: string =
       await iConsult.ageTitleMessage.getText();
-    await console.log(`iConsultValidAgeMessage is: ${iConsultValidAgeMessage}`);
+    console.log(`iConsultValidAgeMessage is: ${iConsultValidAgeMessage}`);
     expect(await iConsult.ageTitleMessage.getText()).toEqual(validAgeMsg);
     await browser.pause(2000);
     await iConsult.ageSuccessContinuebtn.click();

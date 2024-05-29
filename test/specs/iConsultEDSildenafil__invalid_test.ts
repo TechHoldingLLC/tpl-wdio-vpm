@@ -30,8 +30,8 @@ describe("iConsult feature- End to End flow", () => {
       loginData = logindata.prod_login_valid;
     }
     await LoginPage.login(loginData.login_email, loginData.login_password);
-    await browser.pause(3000);
 
+    await browser.pause(3000);
     await iConsult.startFreeiConsultbutton.click();
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
@@ -42,7 +42,6 @@ describe("iConsult feature- End to End flow", () => {
       await iConsult.startNewiConsult.click();
     }
     await iConsultEDS.iConsultEDSQuestionsandAnswers();
-
     await iConsult.recommendationPills.waitForDisplayed();
     const Recommendation_medicine_title = await iConsult.pillName.getText();
     console.log(`Recommended Medicine Name: ${Recommendation_medicine_title}`);
