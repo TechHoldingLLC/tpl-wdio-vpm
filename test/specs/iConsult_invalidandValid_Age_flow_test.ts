@@ -8,7 +8,7 @@ describe("iConsult feature- End to End flow", () => {
     await homePage.openHomepage();
   });
 
-  it("C29979 iConsult: Verify iConsult flow for invalid Age", async () => {
+  it("C29979 iConsult: Verify iConsult flow with Invalid Age", async () => {
     const iConsultEDData = JSON.parse(
       fs.readFileSync("./test/data/iConsultED.json", "utf-8")
     );
@@ -35,13 +35,12 @@ describe("iConsult feature- End to End flow", () => {
       .toISOString()
       .split("T")[0];
 
-    console.log(dobLessThan25Years);
     const convertDateFormat = (date: string): string =>
       date.split("-").reverse().slice(0, 2).reverse().join("-") +
       "-" +
       date.split("-")[0];
     const myDate = convertDateFormat(dobLessThan25Years);
-    console.log(myDate);
+    console.log(`Date of birth Less than 25 Years: ${myDate}`);
     await browser.pause(2000);
     const arrValue = [...myDate];
     for (let i = 0; i < arrValue.length; i++) {
@@ -65,7 +64,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(2000);
   });
 
-  it("C29979 iConsult: Verify iConsult flow for valid Age", async () => {
+  it("C29980 iConsult: Verify iConsult flow with Valid Age", async () => {
     const iConsultEDData = JSON.parse(
       fs.readFileSync("./test/data/iConsultED.json", "utf-8")
     );
@@ -92,13 +91,12 @@ describe("iConsult feature- End to End flow", () => {
       .toISOString()
       .split("T")[0];
 
-    console.log(dobMoreThan25Years);
     const convertDateFormat = (date: string): string =>
       date.split("-").reverse().slice(0, 2).reverse().join("-") +
       "-" +
       date.split("-")[0];
     const myDate = convertDateFormat(dobMoreThan25Years);
-    console.log(myDate);
+    console.log(`Date of birth More than 25 Years: ${myDate}`);
     await browser.pause(2000);
     const arrValue = [...myDate];
     for (let i = 0; i < arrValue.length; i++) {

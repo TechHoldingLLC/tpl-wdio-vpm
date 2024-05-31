@@ -9,7 +9,6 @@
     "@wdio/allure-reporter": "^8.36.1",
     "@wdio/browserstack-service": "^8.36.1",
     "@wdio/cli": "^8.32.3",
-    "@wdio/junit-reporter": "^8.36.1",
     "@wdio/local-runner": "^8.32.3",
     "@wdio/mocha-framework": "^8.32.3",
     "@wdio/spec-reporter": "^8.32.2",
@@ -24,6 +23,7 @@
     "allure-report": "allure generate --clean allure-results && allure open"
   },
   "dependencies": {
+    "@wdio/types": "^8.37.0",
     "allure-commandline": "^2.28.0",
     "fs-extra": "^11.2.0"
   }

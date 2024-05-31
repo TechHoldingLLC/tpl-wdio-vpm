@@ -60,8 +60,8 @@ class ProfileShippingAddress extends Page {
     await this.ship_fn_field.setValue(shippingData.shipping_firstname);
     await this.ship_ln_field.setValue(shippingData.shipping_lastname);
     await this.ship_street_field.setValue(shippingData.shipping_street);
-    // await this.ship_apt_field.setValue(shippingData.shipping_apartmentName);
-    // await this.ship_pin_field.setValue(shippingData.shipping_zipcode);
+    await this.ship_apt_field.setValue(shippingData.shipping_apartmentName);
+    await this.ship_pin_field.setValue(shippingData.shipping_zipcode);
     await browser.pause(5000);
     await this.ship_suggestion_field.click();
     await browser.pause(5000);

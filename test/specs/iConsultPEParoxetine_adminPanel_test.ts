@@ -9,7 +9,7 @@ describe("Admin Panel features", () => {
     await adminPage.header.waitForDisplayed();
   });
 
-  it("C29664 Admin Panel: Verify iConsult completed orders in the Admin Panel Pending Tab", async () => {
+  it("Admin Panel: Verify iConsult completed orders in the Admin Panel Pending Tab", async () => {
     expect(browser).toHaveUrl(/^https:\/\/admin\./);
     expect(await adminPage.header.getText()).toEqual("Admin");
     await adminPage.loginToAdminPanel();
@@ -62,9 +62,6 @@ describe("Admin Panel features", () => {
     await orderedElement.waitForDisplayed();
     expect(orderedElement).toHaveElementClass("is-complete");
 
-    const isTrackingOptions: boolean =
-      await adminPage.validateTrackHistoryOptions();
-    expect(isTrackingOptions).toBeTruthy();
     const isGreen = await adminPage.isElementBackgroundColorGreen();
     expect(isGreen).toBeTruthy();
     await browser.pause(2000);
@@ -97,5 +94,66 @@ describe("Admin Panel features", () => {
     console.log("Medication sent to EHR successfully");
   });
 
-  it("C29687 Admin Panel: Verify In Progress Tab Order Detail action works", async () => {});
+  it("C29666 Admin Panel: Verify collecting payment", async () => {
+    await adminPage.actionButton.click();
+    await browser.pause(2000);
+    await adminPage.actionOrderDetailsBtn.click();
+    await adminPage.orderDetailsPageHeader.waitForDisplayed();
+    const orderDetailsHeaderText: string =
+      await adminPage.orderDetailsPageHeader.getText();
+    console.log(orderDetailsHeaderText);
+    expect(orderDetailsHeaderText).toEqual("Order Details");
+    expect(await adminPage.getOrderInformation()).toEqual(orderID);
+
+    const actualMedicineName: string = await adminPage.medicineName.getText();
+    console.log(actualMedicineName);
+    const orderDetails = await adminPage.orderDetails();
+    expectedMedicineName = orderDetails.productName;
+    expect(actualMedicineName).toEqual(expectedMedicineName);
+
+    const paymentStatus: string =
+      await adminPage.orderPaymentTotalStatus.getText();
+    expect(paymentStatus).toEqual("Paid");
+    await browser.pause(1000);
+    console.log("Payment Collected Successfully");
+    await adminPage.orderDetailsCloseIcon.click();
+    await browser.pause(1000);
+  });
+
+  it("C29687 Admin Panel: Verify In Progress Tab Order Detail action works", async () => {
+    await adminPage.actionButton.click();
+    await browser.pause(2000);
+    await adminPage.actionOrderDetailsBtn.click();
+    await adminPage.orderDetailsPageHeader.waitForDisplayed();
+    const orderDetailsHeaderText: string =
+      await adminPage.orderDetailsPageHeader.getText();
+    console.log(orderDetailsHeaderText);
+    expect(orderDetailsHeaderText).toEqual("Order Details");
+    expect(await adminPage.getOrderInformation()).toEqual(orderID);
+
+    const actualMedicineName: string = await adminPage.medicineName.getText();
+    console.log(actualMedicineName);
+    const orderDetails = await adminPage.orderDetails();
+    expectedMedicineName = orderDetails.productName;
+    expect(actualMedicineName).toEqual(expectedMedicineName);
+
+    const paymentStatus: string =
+      await adminPage.orderPaymentTotalStatus.getText();
+    expect(paymentStatus).toEqual("Paid");
+
+    const orderedElement = await adminPage.approvedElement;
+    await orderedElement.waitForExist();
+    await orderedElement.waitForDisplayed();
+    expect(orderedElement).toHaveElementClass("is-complete");
+
+    const isTrackingOptions: boolean =
+      await adminPage.validateTrackHistoryOptions();
+    expect(isTrackingOptions).toBeTruthy();
+    const isGreen = await adminPage.isElementBackgroundColorGreen();
+    expect(isGreen).toBeTruthy();
+    await browser.pause(2000);
+    console.log("Order Detail for In Progress Tab Verified successfully");
+    await adminPage.orderDetailsCloseIcon.click();
+    await browser.pause(1000);
+  });
 });
