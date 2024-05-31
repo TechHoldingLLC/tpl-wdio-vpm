@@ -64,7 +64,7 @@ describe("Home Page Footer- Social Media Link verification", () => {
   it("C29956 Website Main Pages: Verify Instagram Redirection Page", async () => {
     await verifySocialMediaRedirection(
       homePage.InstaLink,
-      "pg_title_Insta",
+      "pg_title_Instagram",
       "instagram"
     );
     expect(browser).toHaveUrl(expect.stringContaining("viapromeds"));

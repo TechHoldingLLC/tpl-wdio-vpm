@@ -18,7 +18,7 @@ describe("Admin Panel features", () => {
         is "0000 0000 0000 0000" and on sending order to EHR, it will be declined
     */
 
-  it("Verify iConsult completed orders in the Admin Panel Pending Tab", async () => {
+  it("C29664 Admin Panel: Verify iConsult completed orders in the Admin Panel Pending Tab", async () => {
     const url = await browser.getUrl();
     if (url.includes("qa")) {
       expect(browser).toHaveUrl("https://admin.qa.viapromeds.com/");

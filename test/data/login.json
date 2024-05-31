@@ -6,8 +6,8 @@
     },
 
     "login_valid" : {
-        "login_email" : "wdio_auto+3@gmail.co",
-        "login_valid_phone_num": 3473913410,
+        "login_email" : "prabhav.joshi@techholding.co",
+        "login_valid_phone_num": 6789296795,
         "login_password" : "Test@123"
     },
     "stage_login_valid" : {
@@ -23,7 +23,7 @@
     "login_toastMessage" : "Invalid Credentials",
     "login_toastMessage_es" : "Credenciales no válidas",
     "login_successMessage" : "Registration Successful!",
-    "login_userName": "Automated U",
+    "login_userName": "Prabhav J",
     "stage_login_userName": "Test u",
     "prod_login_userName":"PriyaTest t",
     "login_email_required_message":"*Email or Mobile Number is required",

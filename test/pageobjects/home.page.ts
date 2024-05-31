@@ -22,7 +22,7 @@ class HomePage extends Page {
 
   public get faqLink() {
     return $(
-      "//a[contains(@class, 'Footer_footer-link') and contains(@href, 'faq')]"
+      "body > div:nth-child(2) > div:nth-child(4) > footer:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)"
     );
   }
 

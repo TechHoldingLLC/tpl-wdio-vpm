@@ -71,7 +71,7 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsultGHAcyclovir_test.ts",
       "./test/specs/iConsultHLFinasteride_test.ts",
       "./test/specs/iConsultEDTadalafil_test.ts",
-      "./test/specs/iConsultPEParoxetine_test.ts",
+      "./test/specs/iConsultPEParoxetine__test.ts",
       //'./test/specs/iConsultEDSHomePage_test.ts',
       //'./test/specs/iConsultPEHomePage_test.ts'
     ],
@@ -84,6 +84,10 @@ export const config: Options.Testrunner = {
       "./test/specs/contactus_test.ts",
     ],
     ValidInvalidAge: ["./test/specs/iConsult_invalidandValid_Age_flow_test.ts"],
+    test: [
+      "./test/specs/iConsultPEParoxetine__test.ts",
+      "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
+    ],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
@@ -170,7 +174,7 @@ export const config: Options.Testrunner = {
     {
       browserName: "chrome",
       "goog:chromeOptions": {
-        args: ["--disable-cache"], // disable cache for Chrome
+        args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
       },
       browserVersion: "stable",
     },
@@ -277,16 +281,16 @@ export const config: Options.Testrunner = {
     //     disableWebdriverScreenshotsReporting: false,
     //   },
     // ],
-    [
-      "junit",
-      {
-        outputDir: "junit-reports",
-        outputFileFormat: function (options) {
-          return `results-${new Date().getTime()}.xml`;
-          //return `results-${options.cid}.${options.capabilities}.xml`;
-        },
-      },
-    ],
+    // [
+    //   "junit",
+    //   {
+    //     outputDir: "junit-reports",
+    //     outputFileFormat: function (options) {
+    //       return `results-${new Date().getTime()}.xml`;
+    //       //return `results-${options.cid}.${options.capabilities}.xml`;
+    //     },
+    //   },
+    // ],
 
     [
       "testrail",
@@ -300,7 +304,7 @@ export const config: Options.Testrunner = {
         apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
         //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
         //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-        runName: "Test_Run_Trial_SP",
+        runName: "TestRun_Testrail_trial",
         oneReport: true,
         includeAll: true,
         caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
