@@ -5,7 +5,7 @@ const { isEqual } = pkg;
 class AdminPage {
   public async launchAdminPortal() {
     await browser.url("https://admin.qa.viapromeds.com/");
-    // await browser.url("https://admin.stage.viapromeds.com/")
+    //await browser.url("https://admin.stage.viapromeds.com/");
   }
 
   public get header() {
@@ -33,19 +33,44 @@ class AdminPage {
   }
 
   public async loginToAdminPanel() {
+    const url: string = await browser.getUrl();
     await this.signInWithSSOButton.waitForClickable();
     await this.signInWithSSOButton.click();
     await browser.pause(5000);
-    await this.EHRUserNameField.waitForDisplayed();
-    await this.EHRUserNameField.setValue("vipul123");
-    await this.EHRContinueButton.waitForClickable();
-    await this.EHRContinueButton.click();
-    await browser.pause(3000);
-    await this.EHRPasswordField.waitForDisplayed();
-    await this.EHRPasswordField.setValue("Tech@123456@2");
-    await this.EHRLoginButton.waitForClickable();
-    await this.EHRLoginButton.click();
-    await browser.pause(4000);
+    if (url.includes("qa")) {
+      await this.EHRUserNameField.waitForDisplayed();
+      await this.EHRUserNameField.setValue("vipul123");
+      await this.EHRContinueButton.waitForClickable();
+      await this.EHRContinueButton.click();
+      await browser.pause(3000);
+      await this.EHRPasswordField.waitForDisplayed();
+      await this.EHRPasswordField.setValue("Tech@123456@2");
+      await this.EHRLoginButton.waitForClickable();
+      await this.EHRLoginButton.click();
+      await browser.pause(5000);
+    } else if (url.includes("stage")) {
+      await this.EHRUserNameField.waitForDisplayed();
+      await this.EHRUserNameField.setValue("DLinares");
+      await this.EHRContinueButton.waitForClickable();
+      await this.EHRContinueButton.click();
+      await browser.pause(3000);
+      await this.EHRPasswordField.waitForDisplayed();
+      await this.EHRPasswordField.setValue("Valley@9312");
+      await this.EHRLoginButton.waitForClickable();
+      await this.EHRLoginButton.click();
+      await browser.pause(5000);
+    } else {
+      await this.EHRUserNameField.waitForDisplayed();
+      await this.EHRUserNameField.setValue("DLinares");
+      await this.EHRContinueButton.waitForClickable();
+      await this.EHRContinueButton.click();
+      await browser.pause(3000);
+      await this.EHRPasswordField.waitForDisplayed();
+      await this.EHRPasswordField.setValue("Valley@9312");
+      await this.EHRLoginButton.waitForClickable();
+      await this.EHRLoginButton.click();
+      await browser.pause(5000);
+    }
   }
 
   public get iConsultApprovalList() {

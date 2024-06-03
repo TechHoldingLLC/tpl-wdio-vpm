@@ -19,7 +19,6 @@ describe("HomePage Features", () => {
     //Verify all hyperlinks on the Homepage
     await browser.pause(5000);
     //expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-    await browser.pause(5000);
 
     const url: string = await browser.getUrl();
     const language: string = await homePage.getLanguageFromUrl(url);

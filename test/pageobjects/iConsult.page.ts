@@ -33,6 +33,9 @@ class iConsult extends Page {
   public get iConsultGHselection() {
     return $('[for$="question4"]');
   }
+  public get sidemenuCloseButton() {
+    return $('[class="btn-rounded Header_close-btn__rNA2L"]');
+  }
 
   public get dobPage() {
     return $(

@@ -27,12 +27,12 @@ describe("Customer Profile page", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
     await homePage.aboutUs.waitForDisplayed();
     expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-    await vpm_loginPage.hamburgericon.waitForClickable();
-    await vpm_loginPage.hamburgericon.click();
+    // await vpm_loginPage.hamburgericon.waitForClickable();
+    // await vpm_loginPage.hamburgericon.click();
 
     await browser.pause(2500);
     await profilesidemenuPage.profileOption.click();
-    await browser.pause(3000);
+    await browser.pause(5000);
     await profilePage.profileSettings.waitForDisplayed();
 
     // Verify Profile Settings page elements based on language

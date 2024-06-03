@@ -32,7 +32,10 @@ describe("iConsult feature- End to End flow", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
 
     await browser.pause(3000);
+    await iConsult.sidemenuCloseButton.click();
+    await browser.pause(2000);
     await iConsult.startFreeiConsultbutton.click();
+    await browser.pause(3000);
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
     await browser.pause(5000);

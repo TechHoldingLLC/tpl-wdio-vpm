@@ -26,8 +26,8 @@ describe("Customer Profile - Saved Cards page", () => {
     );
     await browser.pause(5000);
     //expect(await homePage.aboutUs.isDisplayed()).toBe(true)
-    await vpm_loginPage.hamburgericon.waitForClickable();
-    await vpm_loginPage.hamburgericon.click();
+    // await vpm_loginPage.hamburgericon.waitForClickable();
+    // await vpm_loginPage.hamburgericon.click();
   });
 
   it("C29662 Profile: Verify adding card to Saved Card Listing Details page", async () => {
