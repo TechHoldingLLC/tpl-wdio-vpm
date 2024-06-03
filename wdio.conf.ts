@@ -84,10 +84,7 @@ export const config: Options.Testrunner = {
       "./test/specs/contactus_test.ts",
     ],
     ValidInvalidAge: ["./test/specs/iConsult_invalidandValid_Age_flow_test.ts"],
-    test: [
-      "./test/specs/iConsultPEParoxetine__test.ts",
-      "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
-    ],
+    test: ["./test/specs/home_test.ts", "./test/specs/sidemenu_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
@@ -292,24 +289,24 @@ export const config: Options.Testrunner = {
     //   },
     // ],
 
-    [
-      "testrail",
-      {
-        projectId: 22,
-        suiteId: 81,
-        domain: "techholding.testrail.io",
-        //username: process.env.TESTRAIL_USERNAME,
-        username: "prabhav.joshi@techholding.co",
-        //apiToken: process.env.TESTRAIL_API_TOKEN,
-        apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
-        //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-        //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-        runName: "TestRun_Testrail_trial",
-        oneReport: true,
-        includeAll: true,
-        caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
-      },
-    ],
+    // [
+    //   "testrail",
+    //   {
+    //     projectId: 22,
+    //     suiteId: 81,
+    //     domain: "techholding.testrail.io",
+    //     //username: process.env.TESTRAIL_USERNAME,
+    //     username: "prabhav.joshi@techholding.co",
+    //     //apiToken: process.env.TESTRAIL_API_TOKEN,
+    //     apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
+    //     //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+    //     //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
+    //     runName: "TestRun_Testrail_trial",
+    //     oneReport: true,
+    //     includeAll: true,
+    //     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+    //   },
+    // ],
   ],
   reporterSyncTimeout: 30000,
 

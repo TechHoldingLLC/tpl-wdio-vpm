@@ -51,6 +51,7 @@ describe("Admin Panel features", () => {
 
     const searchedOrderData = await adminPage.searchedOrderDetails();
     expect(searchedOrderData.orderId).toEqual(orderDetails.orderNumber);
+    await browser.pause(3000);
     expect(searchedOrderData.orderPaymentStatus).toEqual("Pending");
     expect(searchedOrderData.orderStatus).toEqual("Medication pending");
   });
