@@ -1,0 +1,10 @@
+pipeline{
+  agent any
+    stages{
+        stage('Slack') {
+            steps {
+                 slackSend(channel: '#jenkins-alert', message: "test message")
+            }
+        }
+    }
+}

@@ -69,7 +69,7 @@ describe("Admin Panel features", () => {
     await browser.pause(1000);
   });
 
-  xit("C29665 Admin Panel: Verify that User is able to send Order to EHR", async () => {
+  it("C29665 Admin Panel: Verify that User is able to send Order to EHR", async () => {
     await adminPage.selectOrderCheckBox.click();
     await browser.pause(1000);
     console.log("Order selected successfully");
@@ -94,7 +94,7 @@ describe("Admin Panel features", () => {
     console.log("Medication sent to EHR successfully");
   });
 
-  xit("C29666 Admin Panel: Verify collecting payment", async () => {
+  it("C29666 Admin Panel: Verify collecting payment", async () => {
     await adminPage.actionButton.click();
     await browser.pause(2000);
     await adminPage.actionOrderDetailsBtn.click();
@@ -120,7 +120,7 @@ describe("Admin Panel features", () => {
     await browser.pause(1000);
   });
 
-  xit("C29687 Admin Panel: Verify In Progress Tab Order Detail action works", async () => {
+  it("C29687 Admin Panel: Verify In Progress Tab Order Detail action works", async () => {
     await adminPage.actionButton.click();
     await browser.pause(2000);
     await adminPage.actionOrderDetailsBtn.click();

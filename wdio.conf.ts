@@ -72,8 +72,6 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsultHLFinasteride_test.ts",
       "./test/specs/iConsultEDTadalafil_test.ts",
       "./test/specs/iConsultPEParoxetine__test.ts",
-      //'./test/specs/iConsultEDSHomePage_test.ts',
-      //'./test/specs/iConsultPEHomePage_test.ts'
     ],
     WebsiteMainPages: [
       "./test/specs/home_test.ts",
@@ -83,7 +81,6 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    ValidInvalidAge: ["./test/specs/iConsult_invalidandValid_Age_flow_test.ts"],
     test: ["./test/specs/home_test.ts", "./test/specs/sidemenu_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
@@ -133,12 +130,12 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
     ],
     AdminOrderApproved: [
-      "./test/specs/iConsultEDSHomePage_test.ts",
-      "./test/specs/adminPanel_test.ts",
+      "./test/specs/iConsultPEParoxetine__test.ts",
+      "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
     ],
     AdminOrderDeclined: [
-      "./test/specs/iConsultPEHomePage_test.ts",
-      "./test/specs/adminOrderDeclined_test.ts",
+      "./test/specs/iConsultEDSildenafil__invalid_test.ts",
+      "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
     ],
   },
   // Patterns to exclude.
