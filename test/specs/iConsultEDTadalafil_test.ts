@@ -5,7 +5,10 @@ import fs from "fs";
 
 describe("iConsult Features", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29653 iConsult: Verify iConsult flow for Erectile dysfunction - Tadalafil Medicine", async () => {

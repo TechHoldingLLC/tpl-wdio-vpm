@@ -7,7 +7,10 @@ describe("Side Menu Options", () => {
   let loginData: any;
 
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
     const logindata = JSON.parse(
       fs.readFileSync("./test/data/login.json", "utf-8")
     );
@@ -35,13 +38,11 @@ describe("Side Menu Options", () => {
 
     const checkMenuLink = async (menuName: string, expectedUrlPart: string) => {
       await browser.pause(2000);
-      //await SideMenuPage.openSideMenu()
       await SideMenuPage.openMenu(menuName);
       await browser.pause(4000);
       const currentUrl = await SideMenuPage.getCurrentUrl();
       await expect(currentUrl).toContain(expectedUrlPart);
       await SideMenuPage.openSideMenu();
-      //await browser.back()
       await browser.pause(2000);
     };
 

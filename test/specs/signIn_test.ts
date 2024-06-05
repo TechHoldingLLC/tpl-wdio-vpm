@@ -7,7 +7,11 @@ describe("VPM Sign In Features", () => {
   let logindata: any;
 
   beforeEach(async () => {
-    await LoginPage.openSignin();
+    await browser.pause(2000);
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   before(async () => {
@@ -100,10 +104,10 @@ describe("VPM Sign In Features", () => {
     }
 
     await LoginPage.login(loginData.login_email, loginData.login_password);
-    // await expect(LoginPage.hamburgericon).toBeDisplayed()
-    // await LoginPage.hamburgericon.click()
-
     await expect(LoginPage.profile_name).toHaveText(expectedUserName);
+    await browser.pause(2000);
+    await LoginPage.signOutButton.click();
+    await browser.pause(2000);
   });
 
   it("C29651 Sign In: Verify User Sign In with valid mobile and password", async () => {
@@ -132,8 +136,9 @@ describe("VPM Sign In Features", () => {
     );
 
     await browser.pause(2000);
-    // await expect(LoginPage.hamburgericon).toBeDisplayed()
-    // await LoginPage.hamburgericon.click()
     await expect(LoginPage.profile_name).toHaveText(expectedUserName);
+    await browser.pause(2000);
+    await LoginPage.signOutButton.click();
+    await browser.pause(2000);
   });
 });

@@ -1,11 +1,11 @@
 import iConsult from "../pageobjects/iConsult.page.js";
-import homePage from "../pageobjects/home.page.js";
 import { Key } from "webdriverio";
 import fs from "fs";
 
 describe("iConsult feature- End to End flow", () => {
   beforeEach(async () => {
-    await homePage.openHomepage();
+    await browser.url("");
+    await browser.pause(2000);
   });
 
   it("C29979 iConsult: Verify iConsult flow with Invalid Age", async () => {
@@ -19,7 +19,7 @@ describe("iConsult feature- End to End flow", () => {
     await iConsult.startFreeiConsultbutton.click();
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
-    await browser.pause(5000);
+    await browser.pause(8000);
     await iConsult.iConsultEDselection.click();
     await browser.pause(2000);
     await iConsult.insertAge.click();

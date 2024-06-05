@@ -3,9 +3,7 @@ import Page from "./page.js";
 
 class LoginPage extends Page {
   get signinButton() {
-    return $(
-      "//a[contains(@class,'btn-primary text-uppercase btn-sm Header_btn-signin')]"
-    );
+    return $(".btn-primary.text-uppercase.btn-sm.Header_btn-signin__3W_xI");
   }
 
   get inputUsername() {
@@ -49,6 +47,10 @@ class LoginPage extends Page {
     );
   }
 
+  public get signOutButton() {
+    return $(".btn-secondary.btn-sm.btn-square.Header_btn-logout__9iZ0I");
+  }
+
   public async login(username: string, password: string, env?: string) {
     await this.inputUsername.setValue(username);
     await this.inputPassword.setValue(password);
@@ -59,10 +61,6 @@ class LoginPage extends Page {
     await this.inputUsername.setValue(cellNum);
     await this.inputPassword.setValue(password);
     await this.btnSubmit.click();
-  }
-
-  public openSignin() {
-    return super.open("auth/signin");
   }
 }
 

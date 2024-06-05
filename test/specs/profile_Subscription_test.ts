@@ -1,12 +1,14 @@
 import LoginPage from "../pageobjects/vpm_login.page.js";
 import fs from "fs";
 import homePage from "../pageobjects/home.page.js";
-import vpm_loginPage from "../pageobjects/vpm_login.page.js";
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
 
 describe("Customer Profile - Subscription menu redirection", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29661 Profile: Verify viewing Subscription Listing Details page", async () => {
@@ -35,8 +37,6 @@ describe("Customer Profile - Subscription menu redirection", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-      // await vpm_loginPage.hamburgericon.waitForClickable();
-      // await vpm_loginPage.hamburgericon.click();
 
       await browser.pause(4000);
       await profilesidemenuPage.subscriptionOption.click();

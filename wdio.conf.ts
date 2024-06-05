@@ -3,24 +3,18 @@ import allure from "allure-commandline";
 import * as fs from "fs-extra";
 import allureReporter from "@wdio/allure-reporter";
 
-// wdio.conf.js
+let baseUrl: string;
+let env = process.env.Env;
+let url = {
+  QA_en: "https://qa.viapromeds.com/en",
+  STAGE_en: "https://stage.viapromeds.com/en",
+  PROD_en: "https://viapromeds.com/en",
+  QA_es: "https://qa.viapromeds.com/",
+  STAGE_es: "https://stage.viapromeds.com/",
+  Prod_es: "https://viapromeds.com/",
+};
 
-// let baseUrl: string
-// let env = process.env.Env
-// let language = process.env.language
-
-// let urls = {
-//   "QA": "https://qa.viapromeds.com/",
-//   "STAGE": "https://stage.viapromeds.com/",
-// }
-
-// if(Object.keys(urls).includes(env)){
-//   baseUrl = language && language.trim()!== "" ? `${urls[env]}${language}` : urls[env]
-//   console.log('Base URL:', baseUrl)
-// }else {
-//   console.log("Can't Run Tests, Use command like - Env=QA/STAGE npx wdio wdio.conf.ts")
-//   process.exit()
-// }
+baseUrl = url[env];
 
 export const config: Options.Testrunner = {
   // ==========================
@@ -41,7 +35,6 @@ export const config: Options.Testrunner = {
     },
   },
 
-  //
   // ==================
   // Specify Test Files
   // ==================
@@ -55,7 +48,6 @@ export const config: Options.Testrunner = {
   //
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
-  //
   specs: ["./test/specs/*.ts"],
   suites: {
     Profile: [
@@ -81,7 +73,7 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    test: ["./test/specs/home_test.ts", "./test/specs/sidemenu_test.ts"],
+    test: ["./test/specs/testurls_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
@@ -227,6 +219,7 @@ export const config: Options.Testrunner = {
   // baseUrl: 'http://localhost:8080',
   //baseUrl: "https://qa.viapromeds.com",
   //baseUrl: baseUrl,
+  baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 15000,
