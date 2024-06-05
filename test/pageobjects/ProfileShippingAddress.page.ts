@@ -66,7 +66,6 @@ class ProfileShippingAddress extends Page {
     await this.ship_suggestion_field.click();
     await browser.pause(5000);
     await this.ship_save_address_btn.click();
-    //await browser.pause(2000);
   }
 
   public async getLanguageFromUrl(url: string): Promise<string> {

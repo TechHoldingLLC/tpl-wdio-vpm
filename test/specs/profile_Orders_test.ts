@@ -1,13 +1,15 @@
 import LoginPage from "../pageobjects/vpm_login.page.js";
 import fs from "fs";
 import homePage from "../pageobjects/home.page.js";
-import vpm_loginPage from "../pageobjects/vpm_login.page.js";
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
 import { expect } from "chai";
 
 describe("Profile Menu Options and Redirection from Orders", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29953 Profile: Verify the profile menu options", async () => {
@@ -38,8 +40,6 @@ describe("Profile Menu Options and Redirection from Orders", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed());
-      // await vpm_loginPage.hamburgericon.waitForClickable()
-      // await vpm_loginPage.hamburgericon.click()
       await browser.pause(5000);
 
       // Define the expected profile sub-menu list based on the language
