@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="1" errors="1" skipped="0">
+  <testsuite name="HomePage Features" timestamp="2024-05-31T18:21:32" time="7.957" tests="1" failures="1" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="HomePage Features"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/home_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.HomePage_Features" name="C29672 Website Main Pages Verify Landing Page opens error free" time="5.213">
+      <failure/>
+      <error message="expect(received).toEqual(expected) // deep equality&#xA;&#xA;- Expected  - 0&#xA;+ Received  + 2&#xA;&#xA;  Array [&#xA;    &quot;Productos&quot;,&#xA;    &quot;Sobre Nosotros&quot;,&#xA;    &quot;Contáctenos&quot;,&#xA;    &quot;INICIE iCONSULTA GRATIS&quot;,&#xA;    &quot;INICIAR SESIÓN&quot;,&#xA;    &quot;EMPIEZA CON iCONSULT&quot;,&#xA;    &quot;Impotencia&quot;,&#xA;    &quot;Eyaculación precoz&quot;,&#xA;+   &quot;EMPIEZA CON iCONSULT&quot;,&#xA;+   &quot;Aprende más&quot;,&#xA;    &quot;Alopecia&quot;,&#xA;    &quot;Herpes Genital&quot;,&#xA;    &quot;INICIE iCONSULTA GRATIS&quot;,&#xA;    &quot;Conozca más sobre Viapromeds y el Dr. Daniel Linares, MD.&quot;,&#xA;    &quot;Tadalafil&quot;,&#xA;    &quot;Sildenafil&quot;,&#xA;    &quot;Paroxetine&quot;,&#xA;    &quot;Finasteride&quot;,&#xA;    &quot;Acyclovir&quot;,&#xA;    &quot;Términos y Condiciones&quot;,&#xA;    &quot;Consentimiento de Telemedicina&quot;,&#xA;    &quot;Política de Privacidad&quot;,&#xA;    &quot;Sobre Nosotros&quot;,&#xA;    &quot;Contáctenos&quot;,&#xA;    &quot;Cómo funciona&quot;,&#xA;    &quot;Preguntas Frecuentes&quot;,&#xA;    &quot;Blog&quot;,&#xA;  ]"/>
+      <system-out><![CDATA[
+COMMAND: POST /session/c733019b15b22be4bf0752c4fce4d02d/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/c733019b15b22be4bf0752c4fce4d02d/element - {"using":"xpath","value":"//a[contains(@class, 'Header_nav-link') and contains(@href, '/aboutus')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Header_nav-link') and contains(@href, '/aboutus')]"}
+COMMAND: POST /session/c733019b15b22be4bf0752c4fce4d02d/execute/sync - {"script":"return (function isElementDisplayed(element) {\n    function nodeIsElement(node) {\n        if (!node) {\n            return false;\n        }\n        switch (node.nodeType) {\n            case Node.ELEMEN ... (8289 more bytes)","args":[{"element-6066-11e4-a52e-4f735466cecf":"f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.46","ELEMENT":"f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.46"}]}
+RESULT: {"script":"return (function isElementDisplayed(element) {\n    function nodeIsElement(node) {\n        if (!node) {\n            return false;\n        }\n        switch (node.nodeType) {\n            case Node.ELEMEN ... (8289 more bytes)","args":[{"element-6066-11e4-a52e-4f735466cecf":"f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.46","ELEMENT":"f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.46"}]}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/url - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/title - {}
+RESULT: {}
+COMMAND: POST /session/c733019b15b22be4bf0752c4fce4d02d/elements - {"using":"xpath","value":"//a"}
+RESULT: {"using":"xpath","value":"//a"}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.54/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.55/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.56/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.57/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.58/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.59/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.60/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.46/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.61/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.62/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.63/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.11/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.64/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.65/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.66/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.67/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.68/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.69/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.70/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.71/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.72/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.73/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.74/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.75/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.19/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.76/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.77/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.78/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.79/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.80/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.81/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.82/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.83/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.84/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.85/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.86/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.87/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.88/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.89/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.90/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.91/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.92/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.93/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.94/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.95/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.96/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.97/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.98/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.99/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.100/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.101/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.102/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.103/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.104/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.105/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.106/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.107/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.108/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.109/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.110/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.111/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/element/f.40C0A13999B5096D08D8EC2C156185BC.d.F934E6ADE6B98A4AC68193F6CB19E99D.e.112/text - {}
+RESULT: {}
+COMMAND: GET /session/c733019b15b22be4bf0752c4fce4d02d/screenshot - {}
+RESULT: {}
+COMMAND: DELETE /session/c733019b15b22be4bf0752c4fce4d02d - {}
+RESULT: {}
+]]></system-out>
+      <system-err><![CDATA[
+Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 0
++ Received  + 2
+
+  Array [
+    "Productos",
+    "Sobre Nosotros",
+    "Contáctenos",
+    "INICIE iCONSULTA GRATIS",
+    "INICIAR SESIÓN",
+    "EMPIEZA CON iCONSULT",
+    "Impotencia",
+    "Eyaculación precoz",
++   "EMPIEZA CON iCONSULT",
++   "Aprende más",
+    "Alopecia",
+    "Herpes Genital",
+    "INICIE iCONSULTA GRATIS",
+    "Conozca más sobre Viapromeds y el Dr. Daniel Linares, MD.",
+    "Tadalafil",
+    "Sildenafil",
+    "Paroxetine",
+    "Finasteride",
+    "Acyclovir",
+    "Términos y Condiciones",
+    "Consentimiento de Telemedicina",
+    "Política de Privacidad",
+    "Sobre Nosotros",
+    "Contáctenos",
+    "Cómo funciona",
+    "Preguntas Frecuentes",
+    "Blog",
+  ]
+    at Context.<anonymous> (file:///Users/priyankashah/Documents/VPM_WDIO_Automation/tpl-wdio-vpm/test/specs/home_test.ts:35:29)
+]]></system-err>
+    </testcase>
+  </testsuite>
+</testsuites>

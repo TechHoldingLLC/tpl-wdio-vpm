@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="2" failures="0" errors="0" skipped="0">
+  <testsuite name="Home Page Footer Links and Page Redirection" timestamp="2024-05-31T19:14:10" time="16.506" tests="2" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Home Page Footer Links and Page Redirection"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/homeFooter_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29959 Website Main Pages Verify the Terms of Use Page from the Home Page Footer" time="8.861">
+      <system-out><![CDATA[
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element - {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element/f.8A4EA4765EB5F8849EFCEE55FE4684E1.d.7C296779DC8B672DE81F612F32BF81AE.e.42/click - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/url - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/window/handles - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/window - {"handle":"FEE0B1832ECF9A136F7C1A89D07B0433"}
+RESULT: {"handle":"FEE0B1832ECF9A136F7C1A89D07B0433"}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/url - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/title - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element - {"using":"css selector","value":"h2"}
+RESULT: {"using":"css selector","value":"h2"}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/element/f.FEE0B1832ECF9A136F7C1A89D07B0433.d.3DCDA87BCAA1224109E123FE780FAD91.e.6/text - {}
+RESULT: {}
+COMMAND: DELETE /session/6c3b80b3c0ddf7ff892bc55072c1505e/window - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/window - {"handle":"8A4EA4765EB5F8849EFCEE55FE4684E1"}
+RESULT: {"handle":"8A4EA4765EB5F8849EFCEE55FE4684E1"}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/url - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29958 Website Main Pages Verify the Telehealth Consent Page from the Home Page Footer" time="2.638">
+      <system-out><![CDATA[
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element - {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'telehealth-consent')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'telehealth-consent')]"}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element/f.8A4EA4765EB5F8849EFCEE55FE4684E1.d.7C296779DC8B672DE81F612F32BF81AE.e.73/click - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/window/handles - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/window - {"handle":"906F8B397162A126F0C507520485E012"}
+RESULT: {"handle":"906F8B397162A126F0C507520485E012"}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/url - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/url - {}
+RESULT: {}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/title - {}
+RESULT: {}
+COMMAND: POST /session/6c3b80b3c0ddf7ff892bc55072c1505e/element - {"using":"css selector","value":"h2"}
+RESULT: {"using":"css selector","value":"h2"}
+COMMAND: GET /session/6c3b80b3c0ddf7ff892bc55072c1505e/element/f.906F8B397162A126F0C507520485E012.d.546EDA41010ED3DDED07AFC7FF4C2CF8.e.7/text - {}
+COMMAND: DELETE /session/6c3b80b3c0ddf7ff892bc55072c1505e - {}
+RESULT: {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

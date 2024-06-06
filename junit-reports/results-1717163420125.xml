@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="0" errors="0" skipped="0">
+  <testsuite name="Home Page Footer Links and Page Redirection" timestamp="2024-05-31T19:20:23" time="22.446" tests="6" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Home Page Footer Links and Page Redirection"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/homeFooter_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29963 Website Main Pages Verify the Headers options available in the Home Page Footer" time="3.092">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/elements - {"using":"xpath","value":"//div[contains(@class, 'Footer_footer-menu')]/h5"}
+RESULT: {"using":"xpath","value":"//div[contains(@class, 'Footer_footer-menu')]/h5"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.50/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.51/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.52/text - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29962 Website Main Pages Verify the Product options available in the Home Page Footer" time="1.074">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/elements - {"using":"xpath","value":"//h5[contains(text(), 'PRODUCTS') or contains(text(), 'PRODUCTOS')]/parent::div/ul/li"}
+RESULT: {"using":"xpath","value":"//h5[contains(text(), 'PRODUCTS') or contains(text(), 'PRODUCTOS')]/parent::div/ul/li"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.53/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.54/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.55/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.56/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.57/text - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29961 Website Main Pages Verify the Legal options available in the Home Page Footer" time="1.049">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/elements - {"using":"xpath","value":"//h5[contains(text(), 'LEGAL')]/parent::div/ul/li"}
+RESULT: {"using":"xpath","value":"//h5[contains(text(), 'LEGAL')]/parent::div/ul/li"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.61/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.62/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.63/text - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29960 Website Main Pages Verify the Support options available in the Home Page Footer" time="1.066">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/elements - {"using":"xpath","value":"//h5[contains(text(), 'SUPPORT') or contains(text(), 'APOYO')]/parent::div/ul/li"}
+RESULT: {"using":"xpath","value":"//h5[contains(text(), 'SUPPORT') or contains(text(), 'APOYO')]/parent::div/ul/li"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.64/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.65/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.66/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.67/text - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.68/text - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29959 Website Main Pages Verify the Terms of Use Page from the Home Page Footer" time="7.82">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element - {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.69/click - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/window/handles - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window - {"handle":"3F74BA2786824B603DA8F01CD7D0FA81"}
+RESULT: {"handle":"3F74BA2786824B603DA8F01CD7D0FA81"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/title - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element - {"using":"css selector","value":"h2"}
+RESULT: {"using":"css selector","value":"h2"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.3F74BA2786824B603DA8F01CD7D0FA81.d.61D7B4DAA0A6A4F3B7DF979B248E7202.e.18/text - {}
+RESULT: {}
+COMMAND: DELETE /session/f4e45bf7a72c4c722111dc6275f9557f/window - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window - {"handle":"A67A53127A696D49D9A8B3561D1FBDF0"}
+RESULT: {"handle":"A67A53127A696D49D9A8B3561D1FBDF0"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29958 Website Main Pages Verify the Telehealth Consent Page from the Home Page Footer" time="2.708">
+      <system-out><![CDATA[
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element - {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'telehealth-consent')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'telehealth-consent')]"}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.A67A53127A696D49D9A8B3561D1FBDF0.d.9B901CE988529D9F76F0B31F52479A55.e.77/click - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/window/handles - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/window - {"handle":"6B6A0310261E9BC4F64864D9772367F4"}
+RESULT: {"handle":"6B6A0310261E9BC4F64864D9772367F4"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/url - {}
+RESULT: {}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/title - {}
+RESULT: {}
+COMMAND: POST /session/f4e45bf7a72c4c722111dc6275f9557f/element - {"using":"css selector","value":"h2"}
+RESULT: {"using":"css selector","value":"h2"}
+COMMAND: GET /session/f4e45bf7a72c4c722111dc6275f9557f/element/f.6B6A0310261E9BC4F64864D9772367F4.d.50CDBB09A8DBEC851CD96B4C03769D22.e.7/text - {}
+COMMAND: DELETE /session/f4e45bf7a72c4c722111dc6275f9557f - {}
+RESULT: {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

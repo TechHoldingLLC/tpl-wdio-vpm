@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="1" errors="1" skipped="0">
+  <testsuite name="Customer Profile page" timestamp="2024-05-31T13:34:42" time="16.79" tests="1" failures="1" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Customer Profile page"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/profile_UserProfile_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.Customer_Profile_page" name="C29663 Profile Verify User Profile page has user detail" time="16.787">
+      <failure/>
+      <error message="Can't call setValue on element with selector &quot;#userName&quot; because element wasn't found"/>
+      <system-out><![CDATA[
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/window/maximize - {}
+RESULT: {}
+COMMAND: GET /session/577a98db535007b680e7c662f152df8e/url - {}
+RESULT: {}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/element - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: POST /session/577a98db535007b680e7c662f152df8e/elements - {"using":"css selector","value":"#userName"}
+RESULT: {"using":"css selector","value":"#userName"}
+COMMAND: GET /session/577a98db535007b680e7c662f152df8e/screenshot - {}
+RESULT: {}
+COMMAND: DELETE /session/577a98db535007b680e7c662f152df8e - {}
+RESULT: {}
+]]></system-out>
+      <system-err><![CDATA[
+Error: Can't call setValue on element with selector "#userName" because element wasn't found
+    at async LoginPage.login (file:///Users/priyankashah/Documents/VPM_WDIO_Automation/tpl-wdio-vpm/test/pageobjects/vpm_login.page.ts:38:9)
+    at async Context.<anonymous> (file:///Users/priyankashah/Documents/VPM_WDIO_Automation/tpl-wdio-vpm/test/specs/profile_UserProfile_test.ts:25:9)
+]]></system-err>
+    </testcase>
+  </testsuite>
+</testsuites>

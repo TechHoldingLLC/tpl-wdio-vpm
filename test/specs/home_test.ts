@@ -28,9 +28,18 @@ describe("HomePage Features", () => {
     expect(await browser.getTitle()).toEqual(expectedPageTitle);
 
     const linkElements = await homePage.links;
-    const expectedLinks: string[] =
-      language === "en" ? homePageData.englishLinks : homePageData.spanishLinks;
-
+    let expectedLinks: string[];
+    
+    if(url.includes("qa") || url.includes("stage"))
+      { expectedLinks = 
+        language === "en" ? homePageData.englishLinks : homePageData.spanishLinks;
+      }
+      else
+      {
+        expectedLinks = 
+        language === "en" ? homePageData.englishLinks_prod : homePageData.spanishLinks_prod;
+      }
+  
     const actualLinks: string[] = [];
     for (const element of linkElements) {
       try {

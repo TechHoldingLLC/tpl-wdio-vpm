@@ -69,8 +69,13 @@ describe("Home Page Footer Links and Page Redirection", () => {
 
   it("C29960 Website Main Pages: Verify the Support options available in the Home Page Footer.", async () => {
     const language = await homePage.getLanguageFromUrl(await browser.getUrl());
-    const expectedSupportOptions: string[] =
-      language === "en"
+    const url: string = await browser.getUrl();
+    let expectedSupportOptions: string[];
+
+     if(url.includes("qa") || url.includes("stage"))
+    {
+     expectedSupportOptions =
+      (language === "en")
         ? ["About Us", "Contact Us", "How It Works", "FAQ", "Blog"]
         : [
             "Sobre Nosotros",
@@ -79,6 +84,19 @@ describe("Home Page Footer Links and Page Redirection", () => {
             "Preguntas Frecuentes",
             "Blog",
           ];
+    }
+    else 
+    {
+      expectedSupportOptions =
+      (language === "en")
+        ? ["About Us", "Contact Us", "How It Works", "FAQ"]
+        : [
+            "Sobre Nosotros",
+            "Contáctenos",
+            "Cómo funciona",
+            "Preguntas Frecuentes"
+          ];
+    }
     const listOfSupportOptions = await homePage.supportList;
     const actualSupportOptions: string[] = [];
     for (const supportOption of listOfSupportOptions) {
@@ -87,6 +105,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
     console.log(actualSupportOptions);
     expect(actualSupportOptions).toEqual(expectedSupportOptions);
   });
+
   it("C29959 Website Main Pages: Verify the Terms of Use Page from the Home Page Footer.", async () => {
     await homePage.TermsOfUseLink.click();
     const url: string = await browser.getUrl();

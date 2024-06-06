@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" errors="0" skipped="0">
+  <testsuite name="Home Page Footer Links and Page Redirection" timestamp="2024-05-31T19:12:39" time="14.426" tests="1" failures="0" errors="0" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="Home Page Footer Links and Page Redirection"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/homeFooter_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.Home_Page_Footer_Links_and_Page_Redirection" name="C29959 Website Main Pages Verify the Terms of Use Page from the Home Page Footer" time="8.92">
+      <system-out><![CDATA[
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/window/maximize - {}
+RESULT: {}
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/element - {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+RESULT: {"using":"xpath","value":"//a[contains(@class, 'Footer_footer-link') and contains(@href, 'terms-conditions')]"}
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/element/f.6527F126E57CB7DA4803AB543874C714.d.CF59E0D22879DB8C7E386317F3A4155A.e.51/click - {}
+RESULT: {}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/url - {}
+RESULT: {}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/window/handles - {}
+RESULT: {}
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/window - {"handle":"63F97BC2415315FDF8CBF102B485A8EA"}
+RESULT: {"handle":"63F97BC2415315FDF8CBF102B485A8EA"}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/url - {}
+RESULT: {}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/title - {}
+RESULT: {}
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/element - {"using":"css selector","value":"h2"}
+RESULT: {"using":"css selector","value":"h2"}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/element/f.63F97BC2415315FDF8CBF102B485A8EA.d.FF34291F1A36B23FE1503CCD0851551A.e.6/text - {}
+RESULT: {}
+COMMAND: DELETE /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/window - {}
+RESULT: {}
+COMMAND: POST /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/window - {"handle":"6527F126E57CB7DA4803AB543874C714"}
+RESULT: {"handle":"6527F126E57CB7DA4803AB543874C714"}
+COMMAND: GET /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99/url - {}
+RESULT: {}
+COMMAND: DELETE /session/a9ee8ca5f4a2b4fa72b06d2bb9a19a99 - {}
+RESULT: {}
+]]></system-out>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="1" errors="1" skipped="0">
+  <testsuite name="HomePage Features" timestamp="2024-05-31T19:07:58" time="5.252" tests="1" failures="1" errors="1" skipped="0">
+    <properties>
+      <property name="specId" value="0"/>
+      <property name="suiteName" value="HomePage Features"/>
+      <property name="capabilities" value="chrome.125_0_6422_141.mac"/>
+      <property name="file" value="file://./test/specs/home_test.ts"/>
+    </properties>
+    <testcase classname="chrome.125_0_6422_141.mac.HomePage_Features" name="C29672 Website Main Pages Verify Landing Page opens error free" time="0.055">
+      <failure/>
+      <error message="no such window: target window already closed&#xA;from unknown error: web view not found&#xA;  (Session info: chrome=125.0.6422.141)"/>
+      <system-out><![CDATA[
+COMMAND: POST /session/47ea9f58b993a0a950daafdadb5c0140/window/maximize - {}
+COMMAND: POST /session/47ea9f58b993a0a950daafdadb5c0140/element - {"using":"xpath","value":"//a[contains(@class, 'Header_nav-link') and contains(@href, '/aboutus')]"}
+COMMAND: GET /session/47ea9f58b993a0a950daafdadb5c0140/screenshot - {}
+COMMAND: DELETE /session/47ea9f58b993a0a950daafdadb5c0140 - {}
+RESULT: {}
+]]></system-out>
+      <system-err><![CDATA[
+no such window: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=125.0.6422.141)
+    at async Context.<anonymous> (file:///Users/priyankashah/Documents/VPM_WDIO_Automation/tpl-wdio-vpm/test/specs/home_test.ts:13:16)
+]]></system-err>
+    </testcase>
+  </testsuite>
+</testsuites>
