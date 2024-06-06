@@ -38,11 +38,13 @@ describe("Side Menu Options", () => {
 
     const checkMenuLink = async (menuName: string, expectedUrlPart: string) => {
       await browser.pause(2000);
+      //await SideMenuPage.openSideMenu()
       await SideMenuPage.openMenu(menuName);
       await browser.pause(4000);
       const currentUrl = await SideMenuPage.getCurrentUrl();
       await expect(currentUrl).toContain(expectedUrlPart);
       await SideMenuPage.openSideMenu();
+      //await browser.back()
       await browser.pause(2000);
     };
 

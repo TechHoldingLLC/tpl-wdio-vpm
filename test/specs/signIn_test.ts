@@ -7,7 +7,6 @@ describe("VPM Sign In Features", () => {
   let logindata: any;
 
   beforeEach(async () => {
-    await browser.pause(2000);
     await browser.url("");
     await browser.pause(2000);
     await LoginPage.signinButton.click();

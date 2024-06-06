@@ -36,11 +36,11 @@ describe("Customer Profile page", () => {
     await profilePage.profileSettings.waitForDisplayed();
 
     // Verify Profile Settings page elements based on language
-    const expectedProfileSettingsText =
+    const expectedProfileSettingsText: string =
       language === "en" ? "Profile Settings" : "Configuración de perfil";
-    const expectedUserDetailsText =
+    const expectedUserDetailsText: string =
       language === "en" ? "User Details" : "Detalles del Usuario";
-    const expectedCredentialsText =
+    const expectedCredentialsText: string =
       language === "en" ? "Credentials" : "Credenciales";
 
     expect(await profilePage.profileSettings.getText()).toEqual(

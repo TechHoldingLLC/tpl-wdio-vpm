@@ -57,15 +57,14 @@ class AboutUsPage extends Page {
   public get iconsultIntro() {
     return $('[class$="title"]');
   }
-
-  public async aboutUsPage() {
-    await this.productthumbnail.click();
-  }
-
   public get aboutUslink() {
     return $(
       "body > div:nth-child(2) > nav:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(2) > a:nth-child(1)"
     );
+  }
+
+  public async aboutUsPage() {
+    await this.productthumbnail.click();
   }
 }
 

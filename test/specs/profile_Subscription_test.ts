@@ -37,6 +37,8 @@ describe("Customer Profile - Subscription menu redirection", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed()).toBe(true);
+      // await vpm_loginPage.hamburgericon.waitForClickable();
+      // await vpm_loginPage.hamburgericon.click();
 
       await browser.pause(4000);
       await profilesidemenuPage.subscriptionOption.click();

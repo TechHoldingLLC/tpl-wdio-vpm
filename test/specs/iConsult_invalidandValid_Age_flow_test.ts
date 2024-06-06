@@ -19,7 +19,7 @@ describe("iConsult feature- End to End flow", () => {
     await iConsult.startFreeiConsultbutton.click();
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
-    await browser.pause(8000);
+    await browser.pause(5000);
     await iConsult.iConsultEDselection.click();
     await browser.pause(2000);
     await iConsult.insertAge.click();

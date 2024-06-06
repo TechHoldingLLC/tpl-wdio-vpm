@@ -35,6 +35,7 @@ export const config: Options.Testrunner = {
     },
   },
 
+  //
   // ==================
   // Specify Test Files
   // ==================
@@ -48,6 +49,7 @@ export const config: Options.Testrunner = {
   //
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
+  //
   specs: ["./test/specs/*.ts"],
   suites: {
     Profile: [
@@ -73,7 +75,7 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    test: ["./test/specs/testurls_test.ts"],
+    test: ["./test/specs/aboutus_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
@@ -218,7 +220,6 @@ export const config: Options.Testrunner = {
   // gets prepended directly.
   // baseUrl: 'http://localhost:8080',
   //baseUrl: "https://qa.viapromeds.com",
-  //baseUrl: baseUrl,
   baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.

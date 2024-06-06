@@ -6,6 +6,10 @@ class LoginPage extends Page {
     return $(".btn-primary.text-uppercase.btn-sm.Header_btn-signin__3W_xI");
   }
 
+  public get signOutButton() {
+    return $(".btn-secondary.btn-sm.btn-square.Header_btn-logout__9iZ0I");
+  }
+
   get inputUsername() {
     return $("#userName");
   }
@@ -45,10 +49,6 @@ class LoginPage extends Page {
     return $(
       "(//div[contains(@class,'postal-code-error TextError_errorText')])[2]"
     );
-  }
-
-  public get signOutButton() {
-    return $(".btn-secondary.btn-sm.btn-square.Header_btn-logout__9iZ0I");
   }
 
   public async login(username: string, password: string, env?: string) {
