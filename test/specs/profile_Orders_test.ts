@@ -40,6 +40,8 @@ describe("Profile Menu Options and Redirection from Orders", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed());
+      // await vpm_loginPage.hamburgericon.waitForClickable()
+      // await vpm_loginPage.hamburgericon.click()
       await browser.pause(5000);
 
       // Define the expected profile sub-menu list based on the language
