@@ -1,5 +1,4 @@
 import type { Options } from "@wdio/types";
-import allure from "allure-commandline";
 import * as fs from "fs-extra";
 import allureReporter from "@wdio/allure-reporter";
 
@@ -239,7 +238,7 @@ export const config: Options.Testrunner = {
   baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 15000,
+  waitforTimeout: 20000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
@@ -296,24 +295,24 @@ export const config: Options.Testrunner = {
     //   },
     // ],
 
-    // [
-    //   "testrail",
-    //   {
-    //     projectId: 22,
-    //     suiteId: 81,
-    //     domain: "techholding.testrail.io",
-    //     //username: process.env.TESTRAIL_USERNAME,
-    //     username: "prabhav.joshi@techholding.co",
-    //     //apiToken: process.env.TESTRAIL_API_TOKEN,
-    //     apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
-    //     //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-    //     //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-    //     runName: "TestRun_Testrail_trial",
-    //     oneReport: true,
-    //     includeAll: true,
-    //     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
-    //   },
-    // ],
+    [
+      "testrail",
+      {
+        projectId: 22,
+        suiteId: 81,
+        domain: "techholding.testrail.io",
+        //username: process.env.TESTRAIL_USERNAME,
+        username: "prabhav.joshi@techholding.co",
+        //apiToken: process.env.TESTRAIL_API_TOKEN,
+        apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
+        //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
+        //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
+        runName: "TestRun_Testrail_Stage_Minor_Or_Major_release",
+        oneReport: true,
+        includeAll: true,
+        caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+      },
+    ],
   ],
   reporterSyncTimeout: 30000,
 

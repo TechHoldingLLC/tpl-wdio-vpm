@@ -172,7 +172,6 @@ class iConsultGenitalHerpesPage extends Page {
     await browser.pause(1000);
 
     await this.medicalConditionQuestions.waitForDisplayed();
-    const flag = await this.noneOfTheseApplyMeOption.isSelected();
 
     if (!(await this.noneOfTheseApplyMeOption.isSelected())) {
       await this.noneOfTheseApplyMeOption.doubleClick();
