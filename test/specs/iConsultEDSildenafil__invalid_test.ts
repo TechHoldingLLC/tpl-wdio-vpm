@@ -41,7 +41,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(3000);
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
-    await browser.pause(5000);
+    await browser.pause(7000);
     await iConsult.iConsultEDselection.click();
     await browser.pause(5000);
     if (await iConsult.startNewiConsult.isDisplayed()) {
