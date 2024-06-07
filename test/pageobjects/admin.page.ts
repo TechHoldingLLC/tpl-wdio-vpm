@@ -4,8 +4,8 @@ const { isEqual } = pkg;
 
 class AdminPage {
   public async launchAdminPortal() {
-    await browser.url("https://admin.qa.viapromeds.com/");
-    //await browser.url("https://admin.stage.viapromeds.com/");
+    //await browser.url("https://admin.qa.viapromeds.com/");
+    await browser.url("https://admin.stage.viapromeds.com/");
   }
 
   public get header() {
