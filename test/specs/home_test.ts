@@ -25,24 +25,70 @@ describe("HomePage Features", () => {
     const expectedPageTitle: string =
       language === "en" ? pagetitle.pg_title_home : pagetitle.pg_title_home_es;
     expect(await browser.getTitle()).toEqual(expectedPageTitle);
+    await browser.pause(2000);
+    if (url.includes("qa")) {
+      const linkElements = await homePage.links;
+      const expectedLinks: string[] =
+        language === "en"
+          ? homePageData.englishLinks
+          : homePageData.spanishLinks;
 
-    const linkElements = await homePage.links;
-    const expectedLinks: string[] =
-      language === "en" ? homePageData.englishLinks : homePageData.spanishLinks;
-
-    const actualLinks: string[] = [];
-    for (const element of linkElements) {
-      try {
-        let linkText = await element.getText();
-        linkText = linkText.trim();
-        if (linkText) {
-          actualLinks.push(linkText);
+      const actualLinks: string[] = [];
+      for (const element of linkElements) {
+        try {
+          let linkText = await element.getText();
+          linkText = linkText.trim();
+          if (linkText) {
+            actualLinks.push(linkText);
+          }
+        } catch (error) {
+          console.error("Error occurred while fetching link text:", error);
         }
-      } catch (error) {
-        console.error("Error occurred while fetching link text:", error);
       }
+      console.log("Visible Links on the HomePage are: " + actualLinks);
+      expect(await actualLinks).toEqual(expectedLinks);
+    } else if (url.includes("stage")) {
+      const linkElements = await homePage.links;
+      const expectedLinks: string[] =
+        language === "en"
+          ? homePageData.englishLinks
+          : homePageData.spanishLinks;
+
+      const actualLinks: string[] = [];
+      for (const element of linkElements) {
+        try {
+          let linkText = await element.getText();
+          linkText = linkText.trim();
+          if (linkText) {
+            actualLinks.push(linkText);
+          }
+        } catch (error) {
+          console.error("Error occurred while fetching link text:", error);
+        }
+      }
+      console.log("Visible Links on the HomePage are: " + actualLinks);
+      expect(await actualLinks).toEqual(expectedLinks);
+    } else {
+      const linkElements = await homePage.links;
+      const expectedLinks: string[] =
+        language === "en"
+          ? homePageData.englishLinks_prod
+          : homePageData.spanishLinks_prod;
+
+      const actualLinks: string[] = [];
+      for (const element of linkElements) {
+        try {
+          let linkText = await element.getText();
+          linkText = linkText.trim();
+          if (linkText) {
+            actualLinks.push(linkText);
+          }
+        } catch (error) {
+          console.error("Error occurred while fetching link text:", error);
+        }
+      }
+      console.log("Visible Links on the HomePage are: " + actualLinks);
+      expect(await actualLinks).toEqual(expectedLinks);
     }
-    console.log("Visible Links on the HomePage are: " + actualLinks);
-    expect(await actualLinks).toEqual(expectedLinks);
   });
 });

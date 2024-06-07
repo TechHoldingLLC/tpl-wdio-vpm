@@ -70,23 +70,61 @@ describe("Home Page Footer Links and Page Redirection", () => {
 
   it("C29960 Website Main Pages: Verify the Support options available in the Home Page Footer.", async () => {
     const language = await homePage.getLanguageFromUrl(await browser.getUrl());
-    const expectedSupportOptions: string[] =
-      language === "en"
-        ? ["About Us", "Contact Us", "How It Works", "FAQ", "Blog"]
-        : [
-            "Sobre Nosotros",
-            "Contáctenos",
-            "Cómo funciona",
-            "Preguntas Frecuentes",
-            "Blog",
-          ];
-    const listOfSupportOptions = await homePage.supportList;
-    const actualSupportOptions: string[] = [];
-    for (const supportOption of listOfSupportOptions) {
-      actualSupportOptions.push(await supportOption.getText());
+    const url = await browser.getUrl();
+    if (url.includes("qa")) {
+      const expectedSupportOptions: string[] =
+        language === "en"
+          ? ["About Us", "Contact Us", "How It Works", "FAQ", "Blog"]
+          : [
+              "Sobre Nosotros",
+              "Contáctenos",
+              "Cómo funciona",
+              "Preguntas Frecuentes",
+              "Blog",
+            ];
+      const listOfSupportOptions = await homePage.supportList;
+      const actualSupportOptions: string[] = [];
+      for (const supportOption of listOfSupportOptions) {
+        actualSupportOptions.push(await supportOption.getText());
+      }
+      console.log(actualSupportOptions);
+      expect(actualSupportOptions).toEqual(expectedSupportOptions);
+    } else if (url.includes("stage")) {
+      const expectedSupportOptions: string[] =
+        language === "en"
+          ? ["About Us", "Contact Us", "How It Works", "FAQ", "Blog"]
+          : [
+              "Sobre Nosotros",
+              "Contáctenos",
+              "Cómo funciona",
+              "Preguntas Frecuentes",
+              "Blog",
+            ];
+      const listOfSupportOptions = await homePage.supportList;
+      const actualSupportOptions: string[] = [];
+      for (const supportOption of listOfSupportOptions) {
+        actualSupportOptions.push(await supportOption.getText());
+      }
+      console.log(actualSupportOptions);
+      expect(actualSupportOptions).toEqual(expectedSupportOptions);
+    } else {
+      const expectedSupportOptions: string[] =
+        language === "en"
+          ? ["About Us", "Contact Us", "How It Works", "FAQ"]
+          : [
+              "Sobre Nosotros",
+              "Contáctenos",
+              "Cómo funciona",
+              "Preguntas Frecuentes",
+            ];
+      const listOfSupportOptions = await homePage.supportList;
+      const actualSupportOptions: string[] = [];
+      for (const supportOption of listOfSupportOptions) {
+        actualSupportOptions.push(await supportOption.getText());
+      }
+      console.log(actualSupportOptions);
+      expect(actualSupportOptions).toEqual(expectedSupportOptions);
     }
-    console.log(actualSupportOptions);
-    expect(actualSupportOptions).toEqual(expectedSupportOptions);
   });
   it("C29959 Website Main Pages: Verify the Terms of Use Page from the Home Page Footer.", async () => {
     await homePage.TermsOfUseLink.click();
