@@ -11,7 +11,7 @@ let url = {
   PROD_en: "https://viapromeds.com/en",
   QA_es: "https://qa.viapromeds.com/",
   STAGE_es: "https://stage.viapromeds.com/",
-  Prod_es: "https://viapromeds.com/",
+  PROD_es: "https://viapromeds.com/",
 };
 
 baseUrl = url[env];
@@ -77,7 +77,7 @@ export const config: Options.Testrunner = {
     ],
     test: ["./test/specs/aboutus_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
-    SanityEnglish: [
+    SanityQA: [
       "./test/specs/home_test.ts",
       "./test/specs/homeFooter_test.ts",
       "./test/specs/homeSocialMedia_test.ts",
@@ -100,7 +100,7 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
       "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
     ],
-    SanitySpanish: [
+    SanityStage: [
       "./test/specs/home_test.ts",
       "./test/specs/homeFooter_test.ts",
       "./test/specs/homeSocialMedia_test.ts",
@@ -120,7 +120,23 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsultEDSildenafil__invalid_test.ts",
       "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
       "./test/specs/iConsultPEParoxetine__test.ts",
-      "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
+      "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
+    ],
+
+    SanityProd: [
+      "./test/specs/home_test.ts",
+      "./test/specs/homeFooter_test.ts",
+      "./test/specs/homeSocialMedia_test.ts",
+      "./test/specs/productdetail_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/signIn_test.ts",
+      "./test/specs/sidemenu_test.ts",
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_ShippingAddress_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
+      "./test/specs/iConsultEDSildenafil__invalid_test.ts",
       "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
     ],
     AdminOrderApproved: [

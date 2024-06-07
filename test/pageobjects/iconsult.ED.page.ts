@@ -1,7 +1,5 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
-import * as path from "path";
-import * as fs from "fs";
 
 class iConsultEDFlow extends Page {
   public get startiConsultbutton() {
@@ -175,7 +173,6 @@ class iConsultEDFlow extends Page {
   }
 
   public get ship_select_address() {
-    //return $(".custom-field .radio-label:nth-last-child(1 of .radio-label)");
     return $('//h5[@data-aos="fade"]//ancestor::div/li');
   }
 
@@ -195,7 +192,6 @@ class iConsultEDFlow extends Page {
   }
 
   public get choose_card() {
-    //return $("[class$='custom-field Subscriptions_custom-field__d6rRh']");
     return $('//div[contains(@class,"Subscriptions_cards-derails-list")]/div');
   }
 
@@ -217,7 +213,6 @@ class iConsultEDFlow extends Page {
     );
   }
   public get submit_order() {
-    //return $("[class$='btn-primary btn-sm mw-100 text-uppercase']");
     return $('a[href="/en/iconsult/summary#"]');
   }
 
