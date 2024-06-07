@@ -1,13 +1,15 @@
 import LoginPage from "../pageobjects/vpm_login.page.js";
 import fs from "fs";
 import homePage from "../pageobjects/home.page.js";
-import vpm_loginPage from "../pageobjects/vpm_login.page.js";
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
 import profilePage from "../pageobjects/profile.page.js";
 
 describe("Customer Profile page", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29663 Profile: Verify User Profile page has user detail", async () => {
@@ -27,8 +29,6 @@ describe("Customer Profile page", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
     await homePage.aboutUs.waitForDisplayed();
     expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-    // await vpm_loginPage.hamburgericon.waitForClickable();
-    // await vpm_loginPage.hamburgericon.click();
 
     await browser.pause(2500);
     await profilesidemenuPage.profileOption.click();
@@ -36,11 +36,11 @@ describe("Customer Profile page", () => {
     await profilePage.profileSettings.waitForDisplayed();
 
     // Verify Profile Settings page elements based on language
-    const expectedProfileSettingsText =
+    const expectedProfileSettingsText: string =
       language === "en" ? "Profile Settings" : "Configuración de perfil";
-    const expectedUserDetailsText =
+    const expectedUserDetailsText: string =
       language === "en" ? "User Details" : "Detalles del Usuario";
-    const expectedCredentialsText =
+    const expectedCredentialsText: string =
       language === "en" ? "Credentials" : "Credenciales";
 
     expect(await profilePage.profileSettings.getText()).toEqual(

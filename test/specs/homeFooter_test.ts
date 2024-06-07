@@ -6,7 +6,8 @@ describe("Home Page Footer Links and Page Redirection", () => {
   let homePageData: any;
 
   before(async () => {
-    await homePage.openHomepage();
+    await browser.url("");
+    await browser.pause(2000);
     pagetitle = JSON.parse(
       fs.readFileSync("./test/data/pageTitles.json", "utf-8")
     );
@@ -207,7 +208,6 @@ describe("Home Page Footer Links and Page Redirection", () => {
   });
 
   it("C29681 Website Main Pages: Verify FAQ page opens error-free", async () => {
-    // expect(await homePage.aboutUs.isDisplayed()).toBe(true);
     await homePage.faqLink.click();
     await browser.pause(5000);
     const url: string = await browser.getUrl();

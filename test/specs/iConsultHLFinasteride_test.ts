@@ -5,7 +5,10 @@ import fs from "fs";
 
 describe("iConsult feature - End to End flow", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29656 iConsult: Verify iConsult flow for Hair loss - Finasteride medicine", async () => {

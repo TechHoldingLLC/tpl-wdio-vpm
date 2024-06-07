@@ -9,15 +9,6 @@ describe("Admin Panel features", () => {
     await adminPage.header.waitForDisplayed();
   });
 
-  /*
-    Pre-Requisite:
-        Please run iConsultPEHomePage_test.ts test before
-        running this test case
-
-        iConsultPEHomePage_test.ts test will generate the Order for which added card
-        is "0000 0000 0000 0000" and on sending order to EHR, it will be declined
-    */
-
   it("C29664 Admin Panel: Verify iConsult completed orders in the Admin Panel Pending Tab", async () => {
     const url = await browser.getUrl();
     if (url.includes("qa")) {

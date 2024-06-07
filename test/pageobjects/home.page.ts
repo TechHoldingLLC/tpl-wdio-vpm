@@ -421,10 +421,6 @@ class HomePage extends Page {
       "//h5[contains(text(), 'SUPPORT') or contains(text(), 'APOYO')]/parent::div/ul/li"
     );
   }
-
-  public openHomepage() {
-    return super.open("");
-  }
 }
 
 export default new HomePage();

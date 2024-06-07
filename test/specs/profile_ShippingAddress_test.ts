@@ -1,6 +1,5 @@
 import ProfileShipping from "../pageobjects/ProfileShippingAddress.page.js";
 import LoginPage from "../pageobjects/vpm_login.page.js";
-import homePage from "../pageobjects/home.page.js";
 import fs from "fs";
 
 describe("Profile Features", () => {
@@ -8,7 +7,10 @@ describe("Profile Features", () => {
   let logindata: any;
 
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
     shippingData = JSON.parse(
       fs.readFileSync("./test/data/profile_shipping.json", "utf-8")
     );

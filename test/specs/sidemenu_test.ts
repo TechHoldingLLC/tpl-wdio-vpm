@@ -7,7 +7,10 @@ describe("Side Menu Options", () => {
   let loginData: any;
 
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
     const logindata = JSON.parse(
       fs.readFileSync("./test/data/login.json", "utf-8")
     );

@@ -5,7 +5,10 @@ import fs from "fs";
 
 describe("iConsult Features", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29655 iConsult: Verify iConsult flow for Premature ejaculation - Paroxetine medicine", async () => {

@@ -6,7 +6,8 @@ describe("HomePage Features", () => {
   let homePageData: any;
 
   before(async () => {
-    await homePage.openHomepage();
+    await browser.url("");
+    await browser.pause(2000);
     pagetitle = JSON.parse(
       fs.readFileSync("./test/data/pageTitles.json", "utf-8")
     );
@@ -18,8 +19,6 @@ describe("HomePage Features", () => {
   it("C29672 Website Main Pages: Verify Landing Page opens error-free", async () => {
     //Verify all hyperlinks on the Homepage
     await browser.pause(5000);
-    //expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-
     const url: string = await browser.getUrl();
     const language: string = await homePage.getLanguageFromUrl(url);
 

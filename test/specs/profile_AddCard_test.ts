@@ -1,13 +1,14 @@
 import LoginPage from "../pageobjects/vpm_login.page.js";
 import fs from "fs";
-import homePage from "../pageobjects/home.page.js";
-import vpm_loginPage from "../pageobjects/vpm_login.page.js";
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
 import profileCardPage from "../pageobjects/profileCard.page.js";
 
 describe("Customer Profile - Saved Cards page", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
     const logindata = JSON.parse(
       fs.readFileSync("./test/data/login.json", "utf-8")
     );

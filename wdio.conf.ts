@@ -3,24 +3,18 @@ import allure from "allure-commandline";
 import * as fs from "fs-extra";
 import allureReporter from "@wdio/allure-reporter";
 
-// wdio.conf.js
+let baseUrl: string;
+let env = process.env.Env;
+let url = {
+  QA_en: "https://qa.viapromeds.com/en",
+  STAGE_en: "https://stage.viapromeds.com/en",
+  PROD_en: "https://viapromeds.com/en",
+  QA_es: "https://qa.viapromeds.com/",
+  STAGE_es: "https://stage.viapromeds.com/",
+  Prod_es: "https://viapromeds.com/",
+};
 
-// let baseUrl: string
-// let env = process.env.Env
-// let language = process.env.language
-
-// let urls = {
-//   "QA": "https://qa.viapromeds.com/",
-//   "STAGE": "https://stage.viapromeds.com/",
-// }
-
-// if(Object.keys(urls).includes(env)){
-//   baseUrl = language && language.trim()!== "" ? `${urls[env]}${language}` : urls[env]
-//   console.log('Base URL:', baseUrl)
-// }else {
-//   console.log("Can't Run Tests, Use command like - Env=QA/STAGE npx wdio wdio.conf.ts")
-//   process.exit()
-// }
+baseUrl = url[env];
 
 export const config: Options.Testrunner = {
   // ==========================
@@ -81,7 +75,7 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    test: ["./test/specs/home_test.ts", "./test/specs/sidemenu_test.ts"],
+    test: ["./test/specs/aboutus_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityEnglish: [
       "./test/specs/home_test.ts",
@@ -226,7 +220,7 @@ export const config: Options.Testrunner = {
   // gets prepended directly.
   // baseUrl: 'http://localhost:8080',
   //baseUrl: "https://qa.viapromeds.com",
-  //baseUrl: baseUrl,
+  baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 15000,
@@ -485,23 +479,23 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (): Promise<void> {
-    const reportError = new Error("Could not generate Allure report");
-    const generation = allure(["generate", "allure-results", "--clean"]);
-    return new Promise<void>((resolve, reject) => {
-      const generationTimeout = setTimeout(() => reject(reportError), 5000);
+  // onComplete: function (): Promise<void> {
+  //   const reportError = new Error("Could not generate Allure report");
+  //   const generation = allure(["generate", "allure-results", "--clean"]);
+  //   return new Promise<void>((resolve, reject) => {
+  //     const generationTimeout = setTimeout(() => reject(reportError), 5000);
 
-      generation.on("exit", function (exitCode) {
-        clearTimeout(generationTimeout);
+  //     generation.on("exit", function (exitCode) {
+  //       clearTimeout(generationTimeout);
 
-        if (exitCode !== 0) {
-          return reject(reportError);
-        }
-        console.log("Allure report successfully generated");
-        resolve();
-      });
-    });
-  },
+  //       if (exitCode !== 0) {
+  //         return reject(reportError);
+  //       }
+  //       console.log("Allure report successfully generated");
+  //       resolve();
+  //     });
+  //   });
+  // },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

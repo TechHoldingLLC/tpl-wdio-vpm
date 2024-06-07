@@ -5,7 +5,10 @@ import fs from "fs";
 
 describe("iConsult feature- End to End flow", () => {
   before(async () => {
-    await LoginPage.openSignin();
+    await browser.url("");
+    await browser.pause(2000);
+    await LoginPage.signinButton.click();
+    await browser.pause(2000);
   });
 
   it("C29654 iConsult: Verify iConsult flow for Erectile dysfunction- Sildenafil medicine", async () => {
@@ -38,7 +41,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(3000);
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
-    await browser.pause(5000);
+    await browser.pause(7000);
     await iConsult.iConsultEDselection.click();
     await browser.pause(5000);
     if (await iConsult.startNewiConsult.isDisplayed()) {

@@ -7,7 +7,8 @@ describe("Home Page Footer- Social Media Link verification", () => {
   let originalWindowHandle: string;
 
   before(async () => {
-    await homePage.openHomepage();
+    await browser.url("");
+    await browser.pause(2000);
     pagetitle = JSON.parse(
       fs.readFileSync("./test/data/pageTitles.json", "utf-8")
     );
