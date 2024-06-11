@@ -1,7 +1,5 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
-import * as path from "path";
-import * as fs from "fs";
 
 class iConsultPEFlow extends Page {
   public get startiConsultbutton() {
