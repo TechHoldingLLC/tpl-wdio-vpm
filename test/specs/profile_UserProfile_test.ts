@@ -17,7 +17,7 @@ describe("Customer Profile page", () => {
       fs.readFileSync("./test/data/login.json", "utf-8")
     );
     const url: string = await browser.getUrl();
-    const language: string = await profilePage.getLanguageFromUrl(url);
+
     let loginData: any;
     if (url.includes("qa")) {
       loginData = logindata.login_valid;
@@ -32,23 +32,26 @@ describe("Customer Profile page", () => {
 
     await browser.pause(2500);
     await profilesidemenuPage.profileOption.click();
-    await browser.pause(5000);
+    await browser.pause(2000);
     await profilePage.profileSettings.waitForDisplayed();
+    await browser.pause(2000);
 
     // Verify Profile Settings page elements based on language
-    const expectedProfileSettingsText: string =
-      language === "en" ? "Profile Settings" : "Configuración de perfil";
-    const expectedUserDetailsText: string =
-      language === "en" ? "User Details" : "Detalles del Usuario";
-    const expectedCredentialsText: string =
-      language === "en" ? "Credentials" : "Credenciales";
-
+    const expectedProfileSettingsText = url.includes("en")
+      ? "Profile Settings"
+      : "Configuración de perfil";
     expect(await profilePage.profileSettings.getText()).toEqual(
       expectedProfileSettingsText
     );
+    const expectedUserDetailsText = url.includes("en")
+      ? "User Details"
+      : "Detalles del Usuario";
     expect(await profilePage.userDetails.getText()).toEqual(
       expectedUserDetailsText
     );
+    const expectedCredentialsText = url.includes("en")
+      ? "Credentials"
+      : "Credenciales";
     expect(await profilePage.credentials.getText()).toEqual(
       expectedCredentialsText
     );

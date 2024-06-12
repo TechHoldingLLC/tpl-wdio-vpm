@@ -4,8 +4,17 @@ const { isEqual } = pkg;
 
 class AdminPage {
   public async launchAdminPortal() {
-    //await browser.url("https://admin.qa.viapromeds.com/");
-    await browser.url("https://admin.stage.viapromeds.com/");
+    await browser.url("");
+    let currentUrl = await browser.getUrl();
+    if (currentUrl.includes("qa")) {
+      await browser.url("http://admin.qa.viapromeds.com");
+    } else if (currentUrl.includes("stage")) {
+      await browser.url("http://admin.stage.viapromeds.com");
+    } else {
+      await browser.url("http://admin.viapromeds.com");
+    }
+    currentUrl = await browser.getUrl();
+    console.log(`Admin URL: ${currentUrl}`);
   }
 
   public get header() {

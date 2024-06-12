@@ -29,10 +29,7 @@ describe("Profile Features", () => {
       loginData = logindata.prod_login_valid;
     }
     await LoginPage.login(loginData.login_email, loginData.login_password);
-    // await homePage.hamburgericon.waitForDisplayed()
-    // expect(await homePage.hamburgericon.isDisplayed()).toBe(true)
-    // await homePage.hamburgericon.click()
-    await browser.pause(2000);
+    await browser.pause(5000);
     await ProfileShipping.addShippingAddress();
     const expectedSuccessToastMessage: string =
       language === "en"

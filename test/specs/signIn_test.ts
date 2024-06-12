@@ -64,6 +64,7 @@ describe("VPM Sign In Features", () => {
     await browser.pause(2000);
     await LoginPage.invalidAlert.waitForDisplayed();
     const actualToastMessage = await LoginPage.invalidAlert.getText();
+    await browser.pause(2000);
     expect(actualToastMessage).toEqual(expectedToastMessage);
 
     await browser.pause(2000);
@@ -79,6 +80,7 @@ describe("VPM Sign In Features", () => {
     await LoginPage.invalidAlert.waitForDisplayed();
 
     const ToastMessage = await LoginPage.invalidAlert.getText();
+    await browser.pause(2000);
     expect(ToastMessage).toEqual(expectedToastMessage);
   });
 
@@ -103,6 +105,7 @@ describe("VPM Sign In Features", () => {
     }
 
     await LoginPage.login(loginData.login_email, loginData.login_password);
+    await browser.pause(2000);
     await expect(LoginPage.profile_name).toHaveText(expectedUserName);
     await browser.pause(2000);
     await LoginPage.signOutButton.click();
