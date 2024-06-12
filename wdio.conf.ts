@@ -1,5 +1,4 @@
 import type { Options } from "@wdio/types";
-import * as fs from "fs-extra";
 import allureReporter from "@wdio/allure-reporter";
 
 let baseUrl: string;
@@ -74,7 +73,9 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    test: ["./test/specs/aboutus_test.ts"],
+    test: [
+      "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
+    ],
     Login: ["./test/specs/signIn_test.ts"],
     SanityQA: [
       "./test/specs/home_test.ts",
@@ -121,7 +122,6 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsultPEParoxetine__test.ts",
       "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
     ],
-
     SanityProd: [
       "./test/specs/home_test.ts",
       "./test/specs/homeFooter_test.ts",
@@ -136,6 +136,7 @@ export const config: Options.Testrunner = {
       "./test/specs/profile_ShippingAddress_test.ts",
       "./test/specs/profile_UserProfile_test.ts",
       "./test/specs/iConsultEDSildenafil__invalid_test.ts",
+      "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
       "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
     ],
     AdminOrderApproved: [
@@ -338,23 +339,23 @@ export const config: Options.Testrunner = {
    */
   // onPrepare: function (config, capabilities) {
   // },
-  onPrepare: async () => {
-    // Remove allure-results directory
-    try {
-      await fs.remove("./allure-results");
-      console.log("allure-results directory removed successfully");
-    } catch (err) {
-      console.error("Error removing allure-results directory:", err);
-    }
+  // onPrepare: async () => {
+  //   // Remove allure-results directory
+  //   try {
+  //     await fs.remove("./allure-results");
+  //     console.log("allure-results directory removed successfully");
+  //   } catch (err) {
+  //     console.error("Error removing allure-results directory:", err);
+  //   }
 
-    // Remove allure-report directory
-    try {
-      await fs.remove("./allure-report");
-      console.log("allure-report directory removed successfully");
-    } catch (err) {
-      console.error("Error removing allure-report directory:", err);
-    }
-  },
+  //   // Remove allure-report directory
+  //   try {
+  //     await fs.remove("./allure-report");
+  //     console.log("allure-report directory removed successfully");
+  //   } catch (err) {
+  //     console.error("Error removing allure-report directory:", err);
+  //   }
+  // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.

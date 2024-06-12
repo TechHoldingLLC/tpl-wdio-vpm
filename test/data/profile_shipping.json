@@ -1,9 +1,9 @@
 {
-    "shipping_firstname": "Wdio",
-    "shipping_lastname": "Automation",
-    "shipping_street" : "915 W Foothill Blvd #281",
-    "shipping_apartmentName": "Test Apartment",
-    "shipping_zipcode": "90035",
-    "shipping_address_success_message": "Address added successfully",
-    "shipping_address_success_message_es": "Dirección agregada correctamente"
+  "shipping_firstname": "Wdio",
+  "shipping_lastname": "Automation",
+  "shipping_street": "1224 Beverwil D",
+  "shipping_apartmentName": "Test Apartment",
+  "shipping_zipcode": "90035",
+  "shipping_address_success_message": "Address added successfully",
+  "shipping_address_success_message_es": "Dirección agregada correctamente"
 }

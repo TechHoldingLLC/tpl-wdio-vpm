@@ -4,7 +4,6 @@ describe("Admin Panel features", () => {
   let orderID: string;
 
   before(async () => {
-    // For stage, kindly change URL in the function - launchAdminPortal
     await adminPage.launchAdminPortal();
     await adminPage.header.waitForDisplayed();
   });
