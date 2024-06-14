@@ -22,7 +22,7 @@ class HomePage extends Page {
 
   public get faqLink() {
     return $(
-      "body > div:nth-child(2) > div:nth-child(4) > footer:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)"
+      "body > div:nth-child(2) > div:nth-child(4) > footer:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)"
     );
   }
 
@@ -400,6 +400,10 @@ class HomePage extends Page {
 
   public get footerHeaders() {
     return $$("//div[contains(@class, 'Footer_footer-menu')]/h5");
+  }
+
+  public get supportfooterHeaders() {
+    return $("div[class='Footer_support-menu__9DUOs'] div h5");
   }
 
   public async navigateToFooter(): Promise<void> {
