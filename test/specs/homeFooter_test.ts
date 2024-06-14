@@ -19,9 +19,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
   it("C29963 Website Main Pages: Verify the Headers options available in the Home Page Footer.", async () => {
     const language = await homePage.getLanguageFromUrl(await browser.getUrl());
     const expectedFooterHeaders: string[] =
-      language === "en"
-        ? ["PRODUCTS", "LEGAL", "SUPPORT"]
-        : ["PRODUCTOS", "LEGAL", "APOYO"];
+      language === "en" ? ["PRODUCTS", "LEGAL"] : ["PRODUCTOS", "LEGAL"];
     await homePage.navigateToFooter();
     const listOfFooterHeaders = await homePage.footerHeaders;
     const actualFooterHeaders: string[] = [];
@@ -30,6 +28,11 @@ describe("Home Page Footer Links and Page Redirection", () => {
     }
     console.log(actualFooterHeaders);
     expect(actualFooterHeaders).toEqual(expectedFooterHeaders);
+    const url: string = await browser.getUrl();
+    const expectedSupportHeader = url.includes("en") ? "SUPPORT" : "APOYO";
+    expect(await homePage.supportfooterHeaders.getText()).toEqual(
+      expectedSupportHeader
+    );
   });
 
   it("C29962 Website Main Pages: Verify the Product options available in the Home Page Footer.", async () => {

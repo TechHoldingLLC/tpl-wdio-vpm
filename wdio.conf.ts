@@ -73,9 +73,7 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    test: [
-      "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
-    ],
+    test: ["./test/specs/profile_ShippingAddress_test.ts"],
     Login: ["./test/specs/signIn_test.ts"],
     SanityQA: [
       "./test/specs/home_test.ts",
