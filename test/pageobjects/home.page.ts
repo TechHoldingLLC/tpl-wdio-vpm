@@ -21,9 +21,10 @@ class HomePage extends Page {
   }
 
   public get faqLink() {
-    return $(
-      "body > div:nth-child(2) > div:nth-child(4) > footer:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)"
-    );
+    // return $(
+    //   "body > div:nth-child(2) > div:nth-child(4) > footer:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1)"
+    // );
+    return $("//a[text() = 'FAQ' or text() = 'Preguntas Frecuentes']");
   }
 
   public get faqBanner() {
@@ -399,12 +400,12 @@ class HomePage extends Page {
   }
 
   public get footerHeaders() {
-    return $$("//div[contains(@class, 'Footer_footer-menu')]/h5");
+    return $$("//div[contains(@class, 'menu')]/descendant::h5");
   }
 
-  public get supportfooterHeaders() {
-    return $("div[class='Footer_support-menu__9DUOs'] div h5");
-  }
+  // public get supportfooterHeaders() {
+  //   return $("div[class='Footer_support-menu__9DUOs'] div h5");
+  // }
 
   public async navigateToFooter(): Promise<void> {
     await browser.pause(1500);
