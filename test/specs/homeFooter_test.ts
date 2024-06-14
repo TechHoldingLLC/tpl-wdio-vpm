@@ -229,7 +229,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
     await browser.pause(5000);
   });
 
-  it.only("C29681 Website Main Pages: Verify FAQ page opens error-free", async () => {
+  it("C29681 Website Main Pages: Verify FAQ page opens error-free", async () => {
     await homePage.faqLink.click();
     await browser.pause(5000);
     const url: string = await browser.getUrl();
