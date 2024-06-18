@@ -256,15 +256,18 @@ class iConsult extends Page {
     return $('h5[data-aos="fade"]');
   }
 
+  public get selectPhoto() {
+    return $('//*[@type="file"]');  
+  }
+
   public get uploadSaveAndContinueButton() {
     return $('button[type="submit"]');
   }
 
   public async uploadPhoto(filePath: string) {
-    const fileInput = await browser.$('[type$="file"]');
     const file = path.join(process.cwd(), filePath);
-    await fileInput.addValue(file);
-    await browser.pause(2000);
+    const remoteFilePath = await browser.uploadFile(file)
+    await this.selectPhoto.setValue(remoteFilePath)
     await this.uploadSaveAndContinueButton.click();
   }
 
