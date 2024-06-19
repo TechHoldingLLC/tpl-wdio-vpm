@@ -64,7 +64,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("Valley@9312");
+      await this.EHRPasswordField.setValue("9312Valley!Rosemead");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);
@@ -75,7 +75,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("Valley@9312");
+      await this.EHRPasswordField.setValue("9312Valley!Rosemead");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);
