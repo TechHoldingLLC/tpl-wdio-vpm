@@ -35,7 +35,6 @@ describe("Profile Features", () => {
       language === "en"
         ? shippingData.shipping_address_success_message
         : shippingData.shipping_address_success_message_es;
-    await ProfileShipping.ship_success_toast_message.waitForDisplayed();
     expect(await ProfileShipping.ship_success_toast_message).toHaveText(
       expectedSuccessToastMessage
     );
