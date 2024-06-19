@@ -104,6 +104,7 @@ describe("VPM Sign In Features", () => {
       expectedUserName = logindata.prod_login_userName;
     }
 
+    await LoginPage.inputUsername.waitForDisplayed({ timeout: 3000 });
     await LoginPage.login(loginData.login_email, loginData.login_password);
     await browser.pause(2000);
     await expect(LoginPage.profile_name).toHaveText(expectedUserName);

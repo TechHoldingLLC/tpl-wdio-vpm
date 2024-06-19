@@ -16,6 +16,7 @@ describe("iConsult feature- End to End flow", () => {
     const url: string = await browser.getUrl();
     const language: string = await iConsult.getLanguageFromUrl(url);
 
+    await await iConsult.startFreeiConsultbutton.waitForClickable({ timeout: 3000 });
     await iConsult.startFreeiConsultbutton.click();
     await browser.pause(2000);
     await iConsult.consentCheckbox.click();
