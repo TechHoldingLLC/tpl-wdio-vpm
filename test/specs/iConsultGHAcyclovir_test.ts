@@ -40,6 +40,7 @@ describe("iConsult feature- End to End flow", () => {
     await iConsult.startFreeiConsultbutton.click();
     await browser.pause(3000);
     await iConsult.consentCheckbox.click();
+    await iConsult.consentCheckbox.waitForClickable();
     await iConsult.consentContinueButton.click();
     await iConsult.problemAddressQuestionsScreen.waitForDisplayed();
     await iConsult.iConsultGHselection.click();
@@ -82,6 +83,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(1500);
 
     await iConsult.shippingAddressOptions.waitForDisplayed();
+    await iConsult.ship_select_address.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
     await iConsult.ship_save_btn.click();
