@@ -148,7 +148,7 @@ describe("iConsult Features", () => {
     );
     expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
       iConsult_SubscriptionPlanAmount
-    )
+    );
   });
 });
 

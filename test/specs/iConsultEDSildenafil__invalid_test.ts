@@ -84,6 +84,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(1000);
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);
+    
     await iConsult.shippingAddressOptions.waitForDisplayed();
     await iConsult.ship_select_address.waitForDisplayed();
     await iConsult.ship_select_address.click();
