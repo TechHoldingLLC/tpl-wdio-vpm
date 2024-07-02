@@ -31,12 +31,13 @@ describe("Profile Features", () => {
     await LoginPage.login(loginData.login_email, loginData.login_password);
     await browser.pause(5000);
     await ProfileShipping.addShippingAddress();
+      
     const expectedSuccessToastMessage: string =
-      language === "en"
-        ? shippingData.shipping_address_success_message
-        : shippingData.shipping_address_success_message_es;
-    expect(await ProfileShipping.ship_success_toast_message).toHaveText(
-      expectedSuccessToastMessage
-    );
+    language === "en"
+      ? shippingData.shipping_address_success_message
+      : shippingData.shipping_address_success_message_es;
+  expect(await ProfileShipping.ship_success_toast_message).toHaveText(
+    expectedSuccessToastMessage);
+    
   });
 });

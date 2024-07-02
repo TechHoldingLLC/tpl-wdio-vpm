@@ -50,7 +50,8 @@ class ProfileShippingAddress extends Page {
   }
 
   public get ship_success_toast_message() {
-    return $("[class*=Toastify__toast-body] div:nth-child(2) div").waitForDisplayed({timeout : 6000});
+    $("[class*=Toastify__toast-body] div:nth-child(2) div").waitForDisplayed({timeout : 6000});
+    return; 
   }
 
   public async addShippingAddress() {
@@ -70,6 +71,7 @@ class ProfileShippingAddress extends Page {
     await browser.pause(5000);
     await this.ship_street_field.setValue(shippingData.shipping_street);
     await browser.pause(5000);
+    (await this.ship_street_suggestion).waitForDisplayed();
     await this.ship_street_suggestion.click();
     await browser.pause(5000);
     await this.ship_save_address_btn.click();

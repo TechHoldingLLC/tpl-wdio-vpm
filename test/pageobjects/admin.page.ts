@@ -53,7 +53,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("Tech@123456@2");
+      await this.EHRPasswordField.setValue("Tech3@1234567890");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);
