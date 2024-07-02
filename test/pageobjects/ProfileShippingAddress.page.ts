@@ -71,7 +71,7 @@ class ProfileShippingAddress extends Page {
     await browser.pause(5000);
     await this.ship_street_field.setValue(shippingData.shipping_street);
     await browser.pause(5000);
-    (await this.ship_street_suggestion).waitForDisplayed();
+    await this.ship_street_suggestion.waitForDisplayed();
     await this.ship_street_suggestion.click();
     await browser.pause(5000);
     await this.ship_save_address_btn.click();
