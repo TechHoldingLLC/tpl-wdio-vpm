@@ -3,9 +3,7 @@ import Page from "./page.js";
 
 class ContactUs extends Page {
   public get contactUslink() {
-    return $(
-      "body > div:nth-child(2) > nav:nth-child(1) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(3) > a:nth-child(1)"
-    );
+    return $("//li[contains(@class,'Header')]/a[text()='Contact Us' or text()='Contáctenos']");
   }
   public get selectQuestion() {
     return $("select");

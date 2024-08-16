@@ -301,12 +301,12 @@ export const config: Options.Testrunner = {
         suiteId: 81,
         domain: "techholding.testrail.io",
         //username: process.env.TESTRAIL_USERNAME,
-        username: "prabhav.joshi@techholding.co",
+        username: "priyanka.shah@techholding.co",
         //apiToken: process.env.TESTRAIL_API_TOKEN,
-        apiToken: "68pRWqWih0lVLN1D9QcP-0GauRq7xFMFgWc9FKDuQ",
+        apiToken: "iFYXI8TlxCwtV0KKTQoY-6lrKDOHQE3nYZ5BCFmWi",
         //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
         //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-        runName: "TestRun_Testrail_Stage_Minor_Or_Major_release",
+        runName: "Test_Run_ReleaseName_ENV_Lang",
         oneReport: true,
         includeAll: true,
         caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
