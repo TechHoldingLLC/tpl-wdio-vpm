@@ -45,6 +45,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < FAQs.length; i++) {
       const collapse = FAQs[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -80,6 +81,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < generalFAQsQuestions.length; i++) {
       const collapse = generalFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -116,6 +118,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < generalMedicalFAQsQuestions.length; i++) {
       const collapse = generalMedicalFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -150,6 +153,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < EDFAQsQuestions.length; i++) {
       const collapse = EDFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -185,6 +189,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < PEFAQsQuestions.length; i++) {
       const collapse = PEFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -220,6 +225,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < HLFAQsQuestions.length; i++) {
       const collapse = HLFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");
@@ -256,6 +262,7 @@ class HomePage extends Page {
     );
     for (let i = 0; i < HLFAQsQuestions.length; i++) {
       const collapse = HLFAQsQuestions[i];
+      await collapse.scrollIntoView();
       await collapse.click();
       await browser.pause(2000);
       const text = await $$("//div[@class='answer-content ']/p[1]");

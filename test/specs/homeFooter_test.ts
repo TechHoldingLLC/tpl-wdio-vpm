@@ -130,6 +130,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
     }
   });
   it("C29959 Website Main Pages: Verify the Terms of Use Page from the Home Page Footer.", async () => {
+    await homePage.TermsOfUseLink.scrollIntoView();
     await homePage.TermsOfUseLink.click();
     const url: string = await browser.getUrl();
     const language: string = await homePage.getLanguageFromUrl(url);
@@ -166,8 +167,8 @@ describe("Home Page Footer Links and Page Redirection", () => {
   });
 
   it("C29958 Website Main Pages: Verify the Telehealth Consent Page from the Home Page Footer.", async () => {
+    await homePage.TeleHealthConsentLink.scrollIntoView();
     await homePage.TeleHealthConsentLink.click();
-
     const windowHandles = await browser.getWindowHandles();
     if (windowHandles.length < 2) {
       throw new Error("Telehealth Consent page did not open in a new window.");
@@ -201,6 +202,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
   });
 
   it("C29957 Website Main Pages: Verify the Privacy Policy Page from the Home Page Footer.", async () => {
+    await homePage.PrivacyPolicyLink.scrollIntoView();
     await homePage.PrivacyPolicyLink.click();
     const windowHandles = await browser.getWindowHandles();
     console.log(windowHandles);
@@ -230,6 +232,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
   });
 
   it("C29681 Website Main Pages: Verify FAQ page opens error-free", async () => {
+    await homePage.faqLink.scrollIntoView();
     await homePage.faqLink.click();
     await browser.pause(5000);
     const url: string = await browser.getUrl();
@@ -304,6 +307,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
   });
 
   it("C29682 Website Main Pages: Verify How It Works page opens error-free", async () => {
+    await homePage.howitworksLink.scrollIntoView();
     expect(await homePage.howitworksLink.isDisplayed()).toBe(true);
     await homePage.howitworksLink.click();
 

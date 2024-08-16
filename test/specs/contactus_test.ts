@@ -8,6 +8,7 @@ describe("Contact Us Feature", () => {
 
   before(async () => {
     await browser.url("");
+    
     await ContactUs.contactUslink.click();
     await browser.pause(2000);
     pageTitle = JSON.parse(
