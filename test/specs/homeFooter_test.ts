@@ -42,6 +42,7 @@ describe("Home Page Footer Links and Page Redirection", () => {
       "Paroxetine",
       "Finasteride",
       "Acyclovir",
+      "GLP-1 Semaglutide"
     ];
     const listOfProducts = await homePage.productList;
     const actualProducts: string[] = [];
