@@ -16,7 +16,9 @@ describe("iConsult feature- End to End flow", () => {
     const url: string = await browser.getUrl();
     const language: string = await iConsult.getLanguageFromUrl(url);
 
-    await await iConsult.startFreeiConsultbutton.waitForClickable({ timeout: 3000 });
+    await await iConsult.startFreeiConsultbutton.waitForClickable({
+      timeout: 3000,
+    });
     await iConsult.startFreeiConsultbutton.click();
     await browser.pause(2000);
     await iConsult.consentCheckbox.click();
@@ -30,7 +32,7 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(2000);
     const dobLessThan25Years = new Date(
       new Date().setFullYear(
-        new Date().getFullYear() - 25,
+        new Date().getFullYear() - 18,
         new Date().getMonth(),
         new Date().getDate() + 1
       )

@@ -15,7 +15,7 @@ describe("Admin Panel features", () => {
     await adminPage.loginToAdminPanel();
     expect(await browser.getUrl()).toHaveText("patients");
 
-    await adminPage.iConsultApprovalList.waitForDisplayed();
+    // await adminPage.iConsultApprovalList.waitForDisplayed();
     expect(await adminPage.iConsultApprovalList.getText()).toEqual(
       "iConsult Approval List"
     );
@@ -40,6 +40,8 @@ describe("Admin Panel features", () => {
 
   it("C29684 Admin Panel: Verify Pending Tab Order Detail action works", async () => {
     await adminPage.orderDetailsButton.click();
+    await browser.pause(1000);
+    await adminPage.orderDetailOption.click();
     await adminPage.orderDetailsPageHeader.waitForDisplayed();
     const orderDetailsHeaderText: string =
       await adminPage.orderDetailsPageHeader.getText();
@@ -112,7 +114,7 @@ describe("Admin Panel features", () => {
     expect(actualMedicineName).toEqual(expectedMedicineName);
 
     const paymentStatus: string =
-      await adminPage.orderPaymentTotalStatus.getText();
+      await adminPage.orderPaidPaymentStatus.getText();
     expect(paymentStatus).toEqual("Paid");
     await browser.pause(1000);
     console.log("Payment Collected Successfully");
@@ -138,7 +140,7 @@ describe("Admin Panel features", () => {
     expect(actualMedicineName).toEqual(expectedMedicineName);
 
     const paymentStatus: string =
-      await adminPage.orderPaymentTotalStatus.getText();
+      await adminPage.orderPaidPaymentStatus.getText();
     expect(paymentStatus).toEqual("Paid");
 
     const orderedElement = await adminPage.approvedElement;

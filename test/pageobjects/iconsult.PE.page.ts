@@ -10,8 +10,8 @@ class iConsultPEFlow extends Page {
     return $("label[class$='label-checkbox']");
   }
 
-  public get continueButton() {
-    return $('[class$="btn-primary btn-sm text-uppercase"]');
+  public get continueButtonQuestionnaire() {
+    return $("//button[@class='btn-primary btn-sm text-uppercase']");
   }
 
   public get selectCountry() {
@@ -65,7 +65,7 @@ class iConsultPEFlow extends Page {
   }
   public get option6forQuestion2() {
     // How did your ED start?
-    return $("[for$='option5']");
+    return $("//label[@for='option5']");
   }
   public get option2forQuestion3() {
     // Have you been diagnosed with any of the following?
@@ -130,14 +130,14 @@ class iConsultPEFlow extends Page {
     );
   }
   public get subscriptionOneMonthOption() {
-    return $("label[for='sub-17']");
+    return $("//label[@for='sub-43']");
   }
   public get fetch_subscription_plan() {
-    return $("label[for='sub-17'] span[class='radio-title']");
+    return $("label[for='sub-43'] span[class='radio-title']");
   }
   public get fetch_subscription_amount() {
     return $(
-      "label[for='sub-17'] span[class='radio-title text-orange-900 text-right']"
+      "label[for='sub-43'] span[class='radio-title text-orange-900 text-right']"
     );
   }
 
@@ -193,7 +193,7 @@ class iConsultPEFlow extends Page {
     return $("[class='title aos-init aos-animate']");
   }
   public get prescribed_medicine() {
-    return $("//h4[normalize-space()='Paroxetine']");
+    return $("//h4[@class='mb-0']");
   }
 
   public get choose_card() {
@@ -249,32 +249,37 @@ class iConsultPEFlow extends Page {
   public async iConsultPEQuestionsandAnswer() {
     await this.option4forQuestion1.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(3000);
     await this.option6forQuestion2.doubleClick();
-    await this.continueButton.click();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
     await this.option2forQuestion3.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await this.option2forQuestion4.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await this.option4forQuestion5.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await this.option3forQuestion6.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await this.option5forQuestion7.doubleClick();
     await browser.pause(2000);
-    await this.continueButton.click();
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
     await this.option2forQuestion8.click();
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2000);
     await this.option2forQuestion9.click();
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2000);
   }
 }

@@ -67,6 +67,12 @@ class ProductDetail extends Page {
     return $("h1");
   }
 
+  public get productName() {
+    return $(
+      "div[class='ProductDetail_product-detail-banner-content__Oz2u8'] h5"
+    );
+  }
+
   public get productfaq() {
     return $("h3");
   }

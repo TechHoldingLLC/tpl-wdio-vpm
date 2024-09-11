@@ -3,7 +3,9 @@ import Page from "./page.js";
 
 class ContactUs extends Page {
   public get contactUslink() {
-    return $("//li[contains(@class,'Header')]/a[text()='Contact Us' or text()='Contáctenos']");
+    return $(
+      "//li[contains(@class,'Header')]/a[text()='Contact Us' or text()='Contáctenos']"
+    );
   }
   public get selectQuestion() {
     return $("select");
@@ -29,7 +31,7 @@ class ContactUs extends Page {
   }
 
   public get submitButton() {
-    return $("[type$='submit']");
+    return $("//button[@type='submit']");
   }
 
   public get contactToastmessage() {
@@ -87,6 +89,7 @@ class ContactUs extends Page {
     );
     await this.phoneField.setValue(contactnumber);
     await this.descriptionField.setValue(description);
+    await browser.pause(3000);
     await this.submitButton.click();
   }
 
@@ -125,6 +128,7 @@ class ContactUs extends Page {
     await this.emailField.setValue(invalid_email);
     await this.phoneField.setValue(contactnumber);
     await this.descriptionField.setValue(description);
+    await browser.pause(2000);
     await this.submitButton.click();
   }
 

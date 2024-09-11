@@ -8,7 +8,7 @@ describe("Contact Us Feature", () => {
 
   before(async () => {
     await browser.url("");
-    
+
     await ContactUs.contactUslink.click();
     await browser.pause(2000);
     pageTitle = JSON.parse(
@@ -58,6 +58,7 @@ describe("Contact Us Feature", () => {
         contactdata.cu_description,
         "en"
       );
+
       await browser.waitUntil(
         async () =>
           (await ContactUs.contactToastmessage.getText()) ===
@@ -74,7 +75,7 @@ describe("Contact Us Feature", () => {
         contactdata.cu_description,
         ""
       );
-      await browser.pause(2000);
+
       const message = await ContactUs.contactToastmessage;
       await expect(message).toHaveText(
         contactdata.cu_contactSuccessmessage_spanish
@@ -84,6 +85,7 @@ describe("Contact Us Feature", () => {
 
   it("C29674 Website Main Pages: Verify Submit Contact Us form with Invalid details", async () => {
     const language = await ContactUs.getLanguageFromUrl(await browser.getUrl());
+    await browser.refresh();
     expect(await ContactUs.emailField.isDisplayed()).toBeTruthy();
     if (language === "en") {
       await ContactUs.contactUsPage_invalid(
@@ -94,11 +96,13 @@ describe("Contact Us Feature", () => {
         contactdata.cu_description,
         "en"
       );
+
       await browser.waitUntil(
         async () =>
           (await ContactUs.contacterrormessage.getText()) ===
           contactdata.cu_errorMessage
       );
+
       await expect(ContactUs.contacterrormessage).toHaveText(
         contactdata.cu_errorMessage
       );
@@ -111,11 +115,13 @@ describe("Contact Us Feature", () => {
         contactdata.cu_description,
         ""
       );
+
       await browser.waitUntil(
         async () =>
           (await ContactUs.contacterrormessage.getText()) ===
           contactdata.cu_errorMessage_spanish
       );
+
       await expect(ContactUs.contacterrormessage).toHaveText(
         contactdata.cu_errorMessage_spanish
       );

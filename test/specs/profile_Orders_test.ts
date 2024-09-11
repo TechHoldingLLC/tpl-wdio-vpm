@@ -40,8 +40,6 @@ describe("Profile Menu Options and Redirection from Orders", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed());
-      // await vpm_loginPage.hamburgericon.waitForClickable()
-      // await vpm_loginPage.hamburgericon.click()
       await browser.pause(5000);
 
       // Define the expected profile sub-menu list based on the language
@@ -80,11 +78,11 @@ describe("Profile Menu Options and Redirection from Orders", () => {
   it("C29660 Profile: Verify viewing Order Listing Details page", async () => {
     await browser.pause(3000);
     await profilesidemenuPage.ordersOption.click();
-    await profilesidemenuPage.myOrdersPage.waitForDisplayed();
+    await profilesidemenuPage.pageTitle.waitForDisplayed();
 
     // Get text of orders page and list
     const ordersPageText: string =
-      await profilesidemenuPage.myOrdersPage.getText();
+      await profilesidemenuPage.pageTitle.getText();
     const ordersListText: string =
       await profilesidemenuPage.myOrderList.getText();
 

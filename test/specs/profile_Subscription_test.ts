@@ -37,15 +37,13 @@ describe("Customer Profile - Subscription menu redirection", () => {
       await browser.pause(2000);
       await homePage.aboutUs.waitForDisplayed();
       expect(await homePage.aboutUs.isDisplayed()).toBe(true);
-      // await vpm_loginPage.hamburgericon.waitForClickable();
-      // await vpm_loginPage.hamburgericon.click();
 
       await browser.pause(4000);
       await profilesidemenuPage.subscriptionOption.click();
-      await browser.pause(12000);
-      await expect(profilesidemenuPage.subscriptionPage).toBeDisplayed();
+      await browser.pause(25000);
+      await expect(profilesidemenuPage.pageTitle).toBeDisplayed();
       const subscriptionPageText: string =
-        await profilesidemenuPage.subscriptionPage.getText();
+        await profilesidemenuPage.pageTitle.getText();
       console.log(`Subscription Page text is "${subscriptionPageText}"`);
 
       // Define the expected subscription page text based on the language

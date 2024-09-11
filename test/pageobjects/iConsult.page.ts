@@ -11,7 +11,7 @@ class iConsult extends Page {
   }
 
   public get consentContinueButton() {
-    return $('[class$="btn-primary btn-sm text-uppercase"]');
+    return $('//button[@class="btn-primary btn-sm text-uppercase mt-20"]');
   }
 
   public get problemAddressQuestionsScreen() {
@@ -117,26 +117,34 @@ class iConsult extends Page {
   }
 
   public get recommendationPills() {
-    return $('h5[data-aos="fade"]');
+    return $("//h5[@class='title aos-init aos-animate']");
   }
 
   public get pillName() {
-    return $('//h5[@class="title"]');
+    return $("//span[@class='ProductRecommendation_product-title__rTK2F']");
+  }
+
+  public get medicineName() {
+    return $(
+      "body > div:nth-child(2) > main:nth-child(1) > section:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > span:nth-child(2)"
+    );
   }
 
   public get productDescription() {
-    return $('//h5[@class="title"]/parent::div/p');
+    return $(
+      "//p[@class='ProductRecommendation_product-description__1QDn9']//p[1]"
+    );
   }
 
   public get productContinueButton() {
     return $(
-      '//div[contains(@class,"ProductRecommendation_product-detail")]/div[2]/div/button'
+      "//button[@class='btn-primary text-uppercase btn-sm mw-100 text-uppercase']"
     );
   }
 
   // Choose a subscription plan: Monthly/3 Months/6 Months
   public get subscriptionPlanOptions() {
-    return $('h5[data-aos="fade"]');
+    return $("//h5[@class='title aos-init aos-animate']");
   }
 
   public get subscriptionOneMonthOption() {
@@ -145,6 +153,10 @@ class iConsult extends Page {
 
   public get subscriptionThreeMonthOption() {
     return $('div[role="tabpanel"] li:nth-child(2)');
+  }
+
+  public get subscribeThreeMonthTL() {
+    return $("//label[@for='sub-42']");
   }
 
   public get subscriptionSixMonthOption() {
@@ -164,9 +176,7 @@ class iConsult extends Page {
   }
 
   public get subscriptionPlanContinueButton() {
-    return $(
-      '//div[@class="subscription-plan-tab"]/following-sibling::div/a/button'
-    );
+    return $("//button[@class='btn-primary text-uppercase']");
   }
 
   // In what state do you reside?
@@ -232,7 +242,7 @@ class iConsult extends Page {
   }
 
   public get ship_save_btn() {
-    return $('input[type="submit"]');
+    return $("input[class$='btn-primary text-uppercase']");
   }
 
   public async addNewShippingAddress() {
@@ -257,7 +267,7 @@ class iConsult extends Page {
   }
 
   public get selectPhoto() {
-    return $('//*[@type="file"]');  
+    return $('//*[@type="file"]');
   }
 
   public get uploadSaveAndContinueButton() {
@@ -266,8 +276,8 @@ class iConsult extends Page {
 
   public async uploadPhoto(filePath: string) {
     const file = path.join(process.cwd(), filePath);
-    const remoteFilePath = await browser.uploadFile(file)
-    await this.selectPhoto.setValue(remoteFilePath)
+    const remoteFilePath = await browser.uploadFile(file);
+    await this.selectPhoto.setValue(remoteFilePath);
     await this.uploadSaveAndContinueButton.click();
   }
 
@@ -287,7 +297,7 @@ class iConsult extends Page {
   }
 
   public get productName() {
-    return $('//div[contains(@class, "Summary_cart-item")]/div/h4');
+    return $("//h4[@class='mb-0']");
   }
 
   public get productSubscriptionPlan() {
@@ -336,7 +346,7 @@ class iConsult extends Page {
   }
 
   public get submitOrder() {
-    return $('a[href*="/iconsult/summary#"]');
+    return $("//a[@class='btn-primary btn-sm mw-100 text-uppercase']");
   }
 
   public get iConsultCompletionScreen() {
@@ -346,7 +356,9 @@ class iConsult extends Page {
   }
 
   public get viewOrderDetailsButton() {
-    return $("//a[contains(@href,'iconsult/complete')]");
+    return $(
+      "//a[@class='btn-primary btn-sm mt-15 text-uppercase aos-init aos-animate']"
+    );
   }
 
   public get orderDetailsScreen() {
@@ -358,7 +370,7 @@ class iConsult extends Page {
   }
 
   public get fetchOrderId() {
-    return $('//span[contains(@class,"MyOrder_order-id")]');
+    return $("//span[@class='MyOrder_order-id__wsMkB']");
   }
 
   public async getOrderID() {
@@ -370,19 +382,15 @@ class iConsult extends Page {
   }
 
   public get orderDetailProductName() {
-    return $('//div[contains(@class,"MyOrder_title")]/h4');
+    return $("//h4[@class='mb-0']");
   }
 
   public get orderDetailsProductSubscriptionPlan() {
-    return $(
-      "//div[contains(@class, 'MyOrder_cart-summary')]/div[contains(@class, 'MyOrder_title-item-price')]/span[contains(@class,'MyOrder_badge-month')]"
-    );
+    return $("//span[@class='badge bg-orange-200 MyOrder_badge-month__FhQJe']");
   }
 
   public get orderDetailsProductTotalPrice() {
-    return $(
-      "//div[contains(@class,'text-right MyOrder_total-price')]/span[contains(@class,'MyOrder_total-main-price')]"
-    );
+    return $("//span[@class='MyOrder_total-main-price__n2pqe']");
   }
 
   public async getOrderInformation(): Promise<{

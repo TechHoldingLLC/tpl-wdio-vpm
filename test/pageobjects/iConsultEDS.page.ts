@@ -22,11 +22,15 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get problemPresentOption5PlusYear() {
-    return $('[for$="option3"]');
+    return $('//label[@for="option3"]');
   }
 
   public get continueButton() {
     return $('//a[@class="btn-primary btn-sm text-uppercase"]');
+  }
+
+  public get continueButtonQuestionnnaire() {
+    return $("//button[@class='btn-primary btn-sm text-uppercase']");
   }
 
   public get EDStartQuestions() {
@@ -34,7 +38,7 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get EDStartGradually() {
-    return $('[for$="option0"]');
+    return $('//label[@for="option0"]');
   }
 
   public get EDStartSuddenly() {
@@ -51,7 +55,7 @@ class iConsultEDSlidenafil extends Page {
 
   public get noneOfTheAboveSelection() {
     // Have you been diagnosed with any of the following?
-    return $("[for$='option2']");
+    return $("//label[@for='option2']");
   }
 
   public get medicationDailyQuestions() {
@@ -63,7 +67,7 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get medicationNo() {
-    return $('[for$="option1"]');
+    return $("//label[@for='option1']");
   }
 
   public get takeAnyMedicationsQuestions() {
@@ -80,25 +84,41 @@ class iConsultEDSlidenafil extends Page {
     return $('h5[data-aos="fade"]');
   }
 
+  public get noneOfTheAboveOption() {
+    return $("//label[@for='option13']");
+  }
+
   public get shareWithDoctorAnyMedication() {
     return $('h5[data-aos="fade"]');
   }
 
   public get shareWithDoctorAnyMedicationTextBox() {
     // Please share with Dr. Linares any other medical conditions treated with medications:
-    return $("[class$='form-input ']");
+    return $("//textarea[@id='textarea0']");
   }
 
   public get allergicToAnyMedications() {
     return $('h5[data-aos="fade"]');
   }
 
+  public get notAllergicToAnyMedicationOption() {
+    return $("//label[@for='option4']");
+  }
+
   public get past3MonthsUsedAnySubstancesQuestions() {
     return $('h5[data-aos="fade"]');
   }
 
+  public get noDrugsUsed() {
+    return $("//label[@for='option4']");
+  }
+
   public get wakeUpWithErectionOptions() {
     return $('h5[data-aos="fade"]');
+  }
+
+  public get oneToThreeTimesOption() {
+    return $("//label[@for='option2']");
   }
 
   public get anyMedicationBeforeQuestions() {
@@ -106,7 +126,7 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get sildenafilMedicationOption() {
-    return $('label[for="option0"]');
+    return $("//label[@for='option0']");
   }
 
   public get tadalafilMedicationOption() {
@@ -150,7 +170,7 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get dosageStrengthHundredMG() {
-    return $("//span[normalize-space()='100mg']");
+    return $("//label[@for='dosage-option-4-1']");
   }
 
   public get fifteendosesSelection() {
@@ -158,80 +178,92 @@ class iConsultEDSlidenafil extends Page {
   }
 
   public get threeMonthsubscriptionOption() {
-    return $("label[for='sub-29']");
+    return $("//label[@for='sub-36']");
   }
   public get threeMonthsubscriptionText() {
-    return $("label[for='sub-29'] span[class='radio-title']");
+    return $("//span[@class='radio-title'][contains(text(),'3')]");
   }
 
   public get threeMonthsubscriptionAmount() {
-    return $(
-      "label[for='sub-29'] span[class='radio-title text-orange-900 text-right']"
-    );
+    return $("//span[normalize-space()='$139.95']");
   }
 
   public async iConsultEDSQuestionsandAnswers(): Promise<void> {
     await this.problemPresentQuestion.waitForDisplayed();
     await this.problemPresentOption5PlusYear.click();
-    await this.continueButton.click();
-    await browser.pause(1000);
+    // await this.continueButton.click();
+    await browser.pause(2000);
     await this.EDStartQuestions.waitForDisplayed();
-    await this.continueButton.click();
-    await browser.pause(1000);
+    await this.EDStartGradually.click();
+    await browser.pause(3000);
 
     await this.diagnosedWithAnyOfTheFollowing.waitForDisplayed();
     await this.noneOfTheAboveSelection.doubleClick();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await browser.pause(2000);
+    await this.continueButtonQuestionnnaire.click();
+    await browser.pause(3500);
 
     await this.medicationDailyQuestions.waitForDisplayed();
     await this.medicationNo.click();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    //await this.continueButton.click();
+    await browser.pause(3500);
 
     await this.takeAnyMedicationsQuestions.waitForDisplayed();
     await this.noneOfTheAboveSelectionForMedications.doubleClick();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await browser.pause(2000);
+    await this.continueButtonQuestionnnaire.scrollIntoView();
+    await browser.pause(1500);
+    await this.continueButtonQuestionnnaire.click();
+    await browser.pause(3500);
 
     await this.haveYouHadAnyOfConditionsQuestions.waitForDisplayed();
-    await this.continueButton.click();
+    await this.noneOfTheAboveOption.doubleClick();
+    await browser.pause(3500);
+    await this.continueButtonQuestionnnaire.scrollIntoView();
+    await browser.pause(1500);
+    await this.continueButtonQuestionnnaire.click();
     await browser.pause(3500);
 
     await this.shareWithDoctorAnyMedication.waitForDisplayed();
     await this.shareWithDoctorAnyMedicationTextBox.setValue(
       "Automation Testing"
     );
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await browser.pause(2000);
+    await this.continueButtonQuestionnnaire.click();
+    await browser.pause(3500);
 
     await this.allergicToAnyMedications.waitForDisplayed();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await this.notAllergicToAnyMedicationOption.doubleClick();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnnaire.click();
+    await browser.pause(3500);
 
     await this.past3MonthsUsedAnySubstancesQuestions.waitForDisplayed();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await this.noDrugsUsed.doubleClick();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnnaire.click();
+    await browser.pause(3500);
 
     await this.wakeUpWithErectionOptions.waitForDisplayed();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    await this.oneToThreeTimesOption.doubleClick();
+    //await this.continueButton.click();
+    await browser.pause(3500);
 
     await this.anyMedicationBeforeQuestions.waitForDisplayed();
     await browser.pause(3000);
     await this.sildenafilMedicationOption.click();
     await browser.pause(1000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2500);
 
     await this.dosageYouTakeOptions.waitForDisplayed();
     await this.hundredMgOption.click();
-    await this.continueButton.click();
-    await browser.pause(2500);
+    //await this.continueButton.click();
+    await browser.pause(3500);
 
     await this.medicationAgainQuestion.waitForDisplayed();
     await this.medicationAgainYes.click();
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(5000);
   }
 }
