@@ -28,7 +28,7 @@ describe("Product Details Feature", () => {
       const language: string = await ProductDetail.getLanguageFromUrl(url);
       if (language === "en") {
         await expect(browser).toHaveTitle(pagetitle.pg_title_tadalafil);
-        await expect(productdetailPage.productTitle).toHaveText(
+        await expect(productdetailPage.productName).toHaveText(
           productDetaildata.product_tadalafil
         );
         console.log(
@@ -72,7 +72,7 @@ describe("Product Details Feature", () => {
       const language: string = await ProductDetail.getLanguageFromUrl(url);
       if (language === "en") {
         await expect(browser).toHaveTitle(pagetitle.pg_title_sildenafil);
-        await expect(productdetailPage.productTitle).toHaveText(
+        await expect(productdetailPage.productName).toHaveText(
           productDetaildata.product_sildenafil
         );
         console.log(

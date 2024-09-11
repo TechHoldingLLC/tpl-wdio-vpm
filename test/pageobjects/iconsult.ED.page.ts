@@ -10,8 +10,8 @@ class iConsultEDFlow extends Page {
     return $('label[id$="termsAndConditions"]');
   }
 
-  public get continueButton() {
-    return $('[class$="btn-primary btn-sm text-uppercase"]');
+  public get continueButtonQuestionnaire() {
+    return $("//button[@class='btn-primary btn-sm text-uppercase']");
   }
 
   public get selectCountry() {
@@ -67,7 +67,7 @@ class iConsultEDFlow extends Page {
   }
   public get option4forQuestion3() {
     // Have you been diagnosed with any of the following?
-    return $("[for$='option2']");
+    return $("//label[@for='option2']");
   }
   public get option1forQuestion4() {
     // Are you taking any medication daily?
@@ -89,9 +89,9 @@ class iConsultEDFlow extends Page {
     // Please share with Dr. Linares any other medical conditions treated with medications:
     return $("[class$='form-input ']");
   }
-  public get option1forQuestion8() {
+  public get option5forQuestion8() {
     // Are you allergic to any of the following medications?
-    return $("[for$='option0']");
+    return $("//label[@for='option4']");
   }
   public get option6forQuestion9() {
     // In the past 3 months have you used, ingested, or smoked any of these substances?
@@ -101,17 +101,25 @@ class iConsultEDFlow extends Page {
     // How often do you wake up with an erection?
     return $("[for$='option2']");
   }
-  public get option3forQuestion11() {
-    // Have you tried any of these medications before?
-    return $("[for$='option2']");
-  }
   public get option2forQuestion11() {
+    // Have you tried any of these medications before?
+    return $("//label[@for='option1']");
+  }
+  public get optionforQuestion11() {
     // Have you tried any of these medications before?
     return $("[for$='option1']");
   }
   public get option1forQuestion11() {
     // Have you tried any of these medications before?
     return $("[for$='option0']");
+  }
+
+  public get dosageSelection() {
+    return $("//span[normalize-space()='10mg']");
+  }
+
+  public get chooseAgain() {
+    return $("//label[@for='option0']");
   }
 
   public get recommTitle() {
@@ -127,12 +135,10 @@ class iConsultEDFlow extends Page {
     );
   }
   public get fetch_subscription_plan() {
-    return $("label[for='sub-5'] span[class='radio-title']");
+    return $("//span[@class='radio-title'][contains(text(),'3')]");
   }
   public get fetch_subscription_amount() {
-    return $(
-      "label[for='sub-5'] span[class='radio-title text-orange-900 text-right']"
-    );
+    return $("//span[normalize-space()='$125.00']");
   }
 
   public get subscriptionPlan() {
@@ -188,7 +194,7 @@ class iConsultEDFlow extends Page {
     return $("[class='title aos-init aos-animate']");
   }
   public get prescribed_medicine() {
-    return $("//h4[normalize-space()='Tadalafil']");
+    return $("h4[class='mb-0']");
   }
 
   public get choose_card() {
@@ -244,41 +250,59 @@ class iConsultEDFlow extends Page {
   public async iConsultEDQuestionsandAnswer() {
     await this.option1forQuestion1.click();
     await browser.pause(2000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(3000);
     await this.option1forQuestion2.click();
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2000);
     await this.option4forQuestion3.doubleClick();
     await browser.pause(2000);
-    await this.continueButton.click();
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(1000);
+    await this.continueButtonQuestionnaire.click();
+    await browser.pause(2000);
     await this.option1forQuestion4.click();
     await browser.pause(2000);
-    await this.continueButton.click();
-    await this.option6forQuestion5.click();
+    //await this.continueButton.click();
+    // await this.option6forQuestion5.click();
+    // await browser.pause(2000);
+    await this.option5forQuestion5.doubleClick();
     await browser.pause(2000);
-    await this.option5forQuestion5.click();
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(1000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
-    await this.continueButton.click();
     await this.option14forQuestion6.doubleClick();
     await browser.pause(2000);
-    await this.continueButton.click();
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
     await this.formforQuestion7.setValue("Automation Testing");
     await browser.pause(2000);
-    await this.continueButton.click();
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
-    await this.option1forQuestion8.click();
-    await this.continueButton.click();
+    await this.option5forQuestion8.doubleClick();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
     await this.option6forQuestion9.doubleClick();
-    await this.continueButton.click();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
     await this.option3forQuestion10.click();
-    await this.continueButton.click();
+    // await this.continueButton.click();
     await browser.pause(2000);
-    await this.option3forQuestion11.click();
-    await this.continueButton.click();
+    await this.option2forQuestion11.click();
+    //await this.continueButtonQuestionnaire.click();
+    await browser.pause(2000);
+    await this.dosageSelection.click();
+    await browser.pause(2000);
+    await this.chooseAgain.click();
     await browser.pause(2000);
   }
 }

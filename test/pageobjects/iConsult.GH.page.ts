@@ -18,6 +18,10 @@ class iConsultGenitalHerpesPage extends Page {
     return $('//a[@class="btn-primary btn-sm text-uppercase"]');
   }
 
+  public get continueButtonQuestionnaire() {
+    return $("//button[@class='btn-primary btn-sm text-uppercase']");
+  }
+
   //How long has this problem been present?
   public get problemPresentQuestion() {
     return $('h5[data-aos="fade"]');
@@ -56,7 +60,7 @@ class iConsultGenitalHerpesPage extends Page {
     */
 
   public get herpeslocationQuestion() {
-    return $('h5[data-aos="fade"]');
+    return $("//h5[@class='title aos-init aos-animate']");
   }
 
   public get noneOfTheAboveSelection() {
@@ -161,14 +165,14 @@ class iConsultGenitalHerpesPage extends Page {
   public async iConsultGHQuestionsandAnswers(): Promise<void> {
     await this.diagnosedWithGHBeforeQuestions.waitForDisplayed();
     await this.diagnosedWithGHBeforeYes.click();
-    await browser.pause(1000);
-    await this.continueButton.click();
+    await browser.pause(2000);
+    //await this.continueButton.click();
     await browser.pause(1000);
 
     await this.problemPresentQuestion.waitForDisplayed();
     await this.problemPresentOption5PlusYear.click();
     await browser.pause(1000);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(1000);
 
     await this.medicalConditionQuestions.waitForDisplayed();
@@ -176,11 +180,11 @@ class iConsultGenitalHerpesPage extends Page {
     if (!(await this.noneOfTheseApplyMeOption.isSelected())) {
       await this.noneOfTheseApplyMeOption.doubleClick();
       await browser.pause(1500);
-      await this.continueButton.click();
+      await this.continueButtonQuestionnaire.click();
       await browser.pause(1000);
     } else {
       await browser.pause(1500);
-      await this.continueButton.click();
+      await this.continueButtonQuestionnaire.click();
     }
 
     await this.herpeslocationQuestion.waitForDisplayed();
@@ -188,47 +192,47 @@ class iConsultGenitalHerpesPage extends Page {
     if (!(await this.noneOfTheAboveSelection.isSelected())) {
       await this.noneOfTheAboveSelection.doubleClick();
       await browser.pause(1500);
-      await this.continueButton.click();
+      await this.continueButtonQuestionnaire.click();
       await browser.pause(1000);
     } else {
       await browser.pause(1500);
-      await this.continueButton.click();
+      await this.continueButtonQuestionnaire.click();
     }
 
     await this.notTakingMedicineGHOutBreakQuestion.waitForDisplayed();
     await this.GHOutBreakNo.click();
     await browser.pause(1500);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(1500);
 
     await this.medicationDailyQuestions.waitForDisplayed();
     await this.medicationDailyNoAnswer.click();
     await browser.pause(1500);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(1500);
 
     await this.allergicMedicationQuestions.waitForDisplayed();
     await this.allergicMedicationNoAnswer.click();
     await browser.pause(1500);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2000);
 
     await this.anyMedicationInPastQuestion.waitForDisplayed();
     await this.noneOfTheseMedicationAnswer.doubleClick();
     await browser.pause(1500);
-    await this.continueButton.click();
+    await this.continueButtonQuestionnaire.click();
     await browser.pause(1500);
 
     await this.reasonForPrescriptionTodayQuestion.waitForDisplayed();
     await this.believeOutBreakRightNow.click();
     await browser.pause(1500);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(1500);
 
     await this.outBreaksQuestion.waitForDisplayed();
     await this.onceAYearOutBreak.click();
     await browser.pause(1500);
-    await this.continueButton.click();
+    //await this.continueButton.click();
     await browser.pause(2000);
   }
 }

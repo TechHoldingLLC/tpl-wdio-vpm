@@ -53,7 +53,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("Tech@123456@2");
+      await this.EHRPasswordField.setValue("Tech3@1234567890");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);
@@ -208,7 +208,15 @@ class AdminPage {
   }
 
   public get orderDetailsButton() {
-    return $("//span[normalize-space()='Order Details']");
+    return $(
+      "//button[@class='btn-secondary btn-xs PatientList_action-btn__Y_iGX ']"
+    );
+  }
+
+  public get orderDetailOption() {
+    return $(
+      "//span[@class='PatientList_dropdwon-link__DTkj_ PatientList_dropdwon-link-current__be3eG']"
+    );
   }
 
   public get actionButton() {
@@ -222,7 +230,7 @@ class AdminPage {
   }
 
   public get orderDetailsPageHeader() {
-    return $("h5");
+    return $("//h5[@class='title MyOrder_add-title__kY6C6']");
   }
 
   public async getOrderInformation(): Promise<string> {
@@ -233,13 +241,15 @@ class AdminPage {
   }
 
   public get medicineName() {
-    return $("//div[contains(@class,'MyOrder_cart-item')]/div/h4");
+    return $("div[class='MyOrder_title-qty__X6JMm'] h4");
   }
 
   public get orderPaymentTotalStatus() {
-    return $(
-      "//div[contains(@class,'MyOrder_total-pay')]/div[@class='title-badge']/span[2]"
-    );
+    return $(".badge.badge-sm.undefined.MyOrder_orange-badge__yuTSW");
+  }
+
+  public get orderPaidPaymentStatus() {
+    return $(".badge.badge-sm.undefined.MyOrder_green-badge__9Tk0B");
   }
 
   public get orderedElement() {

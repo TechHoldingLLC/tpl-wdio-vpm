@@ -31,11 +31,11 @@ describe("Customer Profile - Saved Cards page", () => {
   it("C29662 Profile: Verify adding card to Saved Card Listing Details page", async () => {
     await browser.pause(2000);
     await profilesidemenuPage.savedCardOption.click();
-    await profilesidemenuPage.savedCardsPage.waitForDisplayed();
+    await profilesidemenuPage.pageTitle.waitForDisplayed();
     await browser.pause(3000);
-    expect(await profilesidemenuPage.savedCardsPage).toBeDisplayed();
+    expect(await profilesidemenuPage.pageTitle).toBeDisplayed();
     const savedCardsPageText: string =
-      await profilesidemenuPage.savedCardsPage.getText();
+      await profilesidemenuPage.pageTitle.getText();
     console.log(`Saved Cards Page text is ${savedCardsPageText}`);
     const url: string = await browser.getUrl();
     const expectedText = url.includes("en")

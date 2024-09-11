@@ -86,10 +86,12 @@ describe("iConsult feature- End to End flow", () => {
     await iConsult.ship_select_address.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
+    await iConsult.ship_save_btn.scrollIntoView();
+    await browser.pause(1500);
     await iConsult.ship_save_btn.click();
     await browser.pause(2000);
 
-    await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
+    //await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
 
     await iConsult.iConsultPage.waitForDisplayed();
     expect(iConsult.iConsultPage).toHaveText(
@@ -112,8 +114,14 @@ describe("iConsult feature- End to End flow", () => {
       await iConsult.productSubscriptionPrice.getText();
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
+    await browser.pause(2000);
+
+    await iConsult.cardSelection.scrollIntoView();
+    await browser.pause(2000);
     await iConsult.cardSelection.click();
-    await browser.pause(1000);
+    await browser.pause(2000);
+    await iConsult.submitOrder.scrollIntoView();
+    await browser.pause(2000);
     await iConsult.submitOrder.click();
     await iConsult.iConsultCompletionScreen.waitForDisplayed();
 

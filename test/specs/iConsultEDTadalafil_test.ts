@@ -23,6 +23,7 @@ describe("iConsult Features", () => {
     let loginData: any;
 
     const url = await browser.getUrl();
+    const language: string = await iConsult.getLanguageFromUrl(url);
     if (url.includes("qa")) {
       loginData = logindata.login_valid;
     } else if (url.includes("stage")) {
@@ -54,16 +55,25 @@ describe("iConsult Features", () => {
     await iConsultEDFlow.iConsultEDQuestionsandAnswer();
     await iConsult.recommendationPills.waitForDisplayed();
 
-    const Recommendation_medicine_title = await iConsult.pillName.getText();
-    console.log(`Recommended Medicine Name: ${Recommendation_medicine_title}`);
-    expect(Recommendation_medicine_title).toEqual(
-      iConsultEDData.iConsultED_MedicineName
+    const Recommendation_generic_medicine_title =
+      language === "en"
+        ? iConsultEDData.iConsult_GenericMedicineName_en
+        : iConsultEDData.iConsult_GenericMedicineName_es;
+    expect(await iConsult.pillName.getText()).toEqual(
+      Recommendation_generic_medicine_title
     );
 
-    const language: string = await iConsult.getLanguageFromUrl(url);
+    expect(await iConsult.medicineName.getText()).toEqual(
+      iConsultEDData.iConsultED_MedicineName
+    );
+    console.log(
+      `Recommended Medicine Name: ${iConsultEDData.iConsultED_MedicineName}`
+    );
+
+    //const language: string = await iConsult.getLanguageFromUrl(url);
     const expectedMedicineDescription =
       language === "en"
-        ? iConsultEDData.iConsultED_MedicineDescription
+        ? iConsultEDData.iConsultED_MedicineDescription_en
         : iConsultEDData.iConsultED_MedicineDescription_es;
     expect(await iConsult.productDescription.getText()).toEqual(
       expectedMedicineDescription
@@ -71,15 +81,24 @@ describe("iConsult Features", () => {
 
     await iConsult.productContinueButton.click();
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
-    await iConsult.subscriptionSixMonthOption.click();
+    await iConsult.subscribeThreeMonthTL.click();
     await browser.pause(1500);
 
     const iConsult_SubscriptionPlan =
       await iConsultEDFlow.fetch_subscription_plan.getText();
     const iConsult_SubscriptionPlanAmount =
       await iConsultEDFlow.fetch_subscription_amount.getText();
-    console.log(`Selected Subscription Plan: ${iConsult_SubscriptionPlan}`);
-    console.log(`Subscription Plan Amount: ${iConsult_SubscriptionPlanAmount}`);
+
+    const subscriptionPlanDurationValue: string =
+      await iConsultEDFlow.fetch_subscription_plan.getText();
+    console.log(
+      `Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`
+    );
+
+    const subscriptionPlanAmount: string =
+      await iConsultEDFlow.fetch_subscription_amount.getText();
+    console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`);
+
     await browser.pause(2000);
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);
@@ -88,22 +107,46 @@ describe("iConsult Features", () => {
     await iConsult.ship_select_address.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
+    await iConsult.ship_save_btn.scrollIntoView();
+    await browser.pause(1500);
     await iConsult.ship_save_btn.click();
     await browser.pause(2000);
 
-    await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
+    //await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
     await iConsult.iConsultPage.waitForDisplayed();
 
     expect(await iConsult.iConsultPage).toHaveText(
       iConsultEDData.iConsultED_SummaryTitle
     );
     await browser.pause(5000);
+
+    const actualProductName =
+      language === "en"
+        ? iConsultEDData.iConsultED_Summary_GenericMedicine_en
+        : iConsultEDData.iConsultED_Summary_GenericMedicine_es;
     await expect(iConsultEDFlow.prescribed_medicine).toHaveText(
-      iConsultEDData.iConsultED_MedicineName
+      actualProductName
     );
+    console.log(`Actual Product Name: ${actualProductName}`);
+
+    const prodSubscriptionPlan: string =
+      await iConsult.productSubscriptionPlan.getText();
+    console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
+    expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
+
+    const prodSubscriptionPrice: string =
+      await iConsult.productSubscriptionPrice.getText();
+    console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
+    expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
+
+    await iConsult.cardSelection.scrollIntoView();
+    await browser.pause(1000);
     await iConsult.cardSelection.click();
     await browser.pause(1000);
+    await iConsult.submitOrder.scrollIntoView();
+    await browser.pause(1000);
     await iConsult.submitOrder.click();
+    await browser.pause(1000);
 
     const completionMsg =
       language === "en"
@@ -127,7 +170,7 @@ describe("iConsult Features", () => {
     };
 
     const orderDetails: Record<string, string> = {};
-    orderDetails[Recommendation_medicine_title] = orderId;
+    orderDetails[iConsultEDData.iConsultED_MedicineName] = orderId;
 
     fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4));
     console.log("Order details have been written to orderDetails.json");
@@ -135,7 +178,7 @@ describe("iConsult Features", () => {
     const orderInformation = await iConsult.getOrderInformation();
     console.log(`Order Product Name is: "${orderInformation.productName}"`);
     expect(await iConsult.orderDetailProductName.getText()).toEqual(
-      Recommendation_medicine_title
+      Recommendation_generic_medicine_title
     );
     console.log(
       `Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`
@@ -151,6 +194,3 @@ describe("iConsult Features", () => {
     );
   });
 });
-
-
-

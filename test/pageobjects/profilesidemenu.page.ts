@@ -57,19 +57,11 @@ class ProfileSideMenuPage extends Page {
     return $("(//div[contains(@class,'Header_menu-item')])[5]/span[1]");
   }
 
-  public get myOrdersPage() {
-    return $("//h2[@class='d-none d-md-block']");
-  }
-
   public get myOrderList() {
     return $("//div[contains(@class,'MyOrder_order-list')]/h3");
   }
 
-  public get subscriptionPage() {
-    return $("//h2[@class='d-none d-md-block']");
-  }
-
-  public get savedCardsPage() {
+  public get pageTitle() {
     return $("//h2[@class='d-none d-md-block']");
   }
 

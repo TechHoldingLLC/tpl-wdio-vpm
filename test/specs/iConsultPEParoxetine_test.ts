@@ -76,12 +76,15 @@ describe("iConsult Features", () => {
     await iConsultPEFlow.subscriptionOneMonthOption.click();
     await browser.pause(1500);
 
-    const iConsult_SubscriptionPlan =
+    const subscriptionPlanDurationValue: string =
       await iConsultPEFlow.fetch_subscription_plan.getText();
-    const iConsult_SubscriptionPlanAmount =
+    console.log(
+      `Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`
+    );
+
+    const subscriptionPlanAmount: string =
       await iConsultPEFlow.fetch_subscription_amount.getText();
-    console.log(`Selected Subscription Plan: ${iConsult_SubscriptionPlan}`);
-    console.log(`Subscription Plan Amount: ${iConsult_SubscriptionPlanAmount}`);
+    console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`);
     await browser.pause(2000);
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);
@@ -90,21 +93,39 @@ describe("iConsult Features", () => {
     await iConsult.ship_select_address.waitForDisplayed();
     await iConsult.ship_select_address.click();
     await browser.pause(1500);
+    await iConsult.ship_save_btn.scrollIntoView();
+    await browser.pause(1500);
     await iConsult.ship_save_btn.click();
     await browser.pause(2000);
 
-    await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
+    //await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
     await iConsult.iConsultPage.waitForDisplayed();
     expect(await iConsult.iConsultPage).toHaveText(
       iConsultPEData.iConsultPE_SummaryTitle
     );
     await browser.pause(5000);
-    await expect(iConsultPEFlow.prescribed_medicine).toHaveText(
+    expect(await iConsultPEFlow.prescribed_medicine).toHaveText(
       iConsultPEData.iConsultPE_MedicineName
     );
+    const prodSubscriptionPlan: string =
+      await iConsult.productSubscriptionPlan.getText();
+    console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
+    expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
+
+    const prodSubscriptionPrice: string =
+      await iConsult.productSubscriptionPrice.getText();
+    console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
+    expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
+
+    await iConsult.cardSelection.scrollIntoView();
+    await browser.pause(1000);
     await iConsult.cardSelection.click();
     await browser.pause(1000);
+    await iConsult.submitOrder.scrollIntoView();
+    await browser.pause(2000);
     await iConsult.submitOrder.click();
+    await browser.pause(2000);
+
     if (currentUrl.includes("en")) {
       expect(await iConsultPEFlow.iConsultCompletedMessage).toHaveText(
         iConsultPEData.iConsultPE_CompletionMsg
@@ -143,13 +164,13 @@ describe("iConsult Features", () => {
       `Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`
     );
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
-      iConsult_SubscriptionPlan
+      subscriptionPlanDurationValue
     );
     console.log(
       `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
     );
     expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
-      iConsult_SubscriptionPlanAmount
+      subscriptionPlanAmount
     );
   });
 });

@@ -1,10 +1,14 @@
 {
   "iConsultED_fieldText": "Automation Testing",
   "iConsultED_MedicineName": "Tadalafil",
-  "iConsultED_MedicineDescription": "A generic erectile dysfunction medication that’s FDA approved and clinically proven to help men with ED get and maintain erections. Tadalafil contains the same active ingredient as brand name Cialis®, at a fraction of the cost.",
-  "iConsultED_MedicineDescription_es":"Un medicamento genérico para la disfunción eréctil que está aprobado por la FDA y clínicamente comprobado para ayudar a los hombres con DE a obtener y mantener erecciones. El tadalafil contiene el mismo ingrediente activo que el Cialis® de marca, a una fracción del costo.",
+  "iConsult_GenericMedicineName_en": "Generic Cialis®",
+  "iConsult_GenericMedicineName_es": "Genérico de Cialis®",
+  "iConsultED_MedicineDescription_en": "“A generic erectile dysfunction medication that’s FDA approved and clinically proven to help men with ED get and maintain erections. The active ingredient is Tadalafil. Better sex at a fraction of the cost of Cialis®.",
+  "iConsultED_MedicineDescription_es": "Un medicamento genérico para la disfunción eréctil que está aprobado por la FDA y clínicamente comprobado para ayudar a los hombres con DE a obtener y mantener erecciones. El ingrediente activo es Tadalafil. Mejor sexo a una fracción del costo de Cialis®.",
   "iConsultED_SummaryTitle": "iConsult Summary",
   "iConsultED_SummaryMedicine": "Tadalafil",
+  "iConsultED_Summary_GenericMedicine_en": "Generic Cialis®",
+  "iConsultED_Summary_GenericMedicine_es": "Genérico de Cialis®",
   "iConsultED_CompletionMsg": "Your iConsult is successfully completed",
   "iConsultED_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!",
   "iConsultED_InvalidAgeMessage_en": "Sorry, you’re not eligible to continue with the iConsult",
@@ -13,5 +17,4 @@
   "iConsultED_ValidAgeMessage_es": "¡Felicidades! Eres elegible para continuar con la consulta.",
   "letsGetStarted_en": "Lets get started!",
   "letsGetStarted_es": "¡Empecemos!"
-
 }
