@@ -11,6 +11,6 @@
   "iConsultEDS_Summary": "iConsult Summary",
   "iConsultEDS_SummaryMedicine_en": "Generic Viagra®",
   "iConsultEDS_SummaryMedicine_es": "Genérico de Viagra®",
-  "iConsultEDS_CompletionMsg": "Your iConsult is successfully completed",
-  "iConsultEDS_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!"
+  "iConsultEDS_CompletionMsg": "iConsult Completed",
+  "iConsultEDS_CompletionMsg_es": "iConsulta Completada"
 }

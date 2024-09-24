@@ -1,29 +1,38 @@
-import iConsultEDFlow from "../pageobjects/iconsult.ED.page.js";
-import LoginPage from "../pageobjects/vpm_login.page.js";
+import iConsultEDFlow from "../pageobjects/iConsult.ED_Tadalafil.page.js";
+import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 
+/**
+ * iConsult: Tadalafil E2E Flow
+ *
+ * This test case verifies the end-to-end flow for a Tadalafil prescription in the iConsult feature,
+ * including login, questionnaire completion, recommendation, subscription selection,
+ * and order completion. It also validates order details in the order summary screen.
+ */
+
 describe("iConsult Features", () => {
+  // Pre-condition: Login to the application and prepare for iConsult flow
   before(async () => {
-    await browser.url("");
+    await browser.url(""); // Navigate to the base URL
     await browser.pause(2000);
-    await LoginPage.signinButton.click();
-    await browser.pause(2000);
+    await LoginPage.signinButton.click(); // Click the sign-in button
+    await browser.pause(2000); // Pause to allow sign-in page to load
   });
 
   it("C29653 iConsult: Verify iConsult flow for Erectile dysfunction - Tadalafil Medicine", async () => {
-    const IDProofPath: string = "./test/data/IDProof.png";
-    const photoPath: string = "./test/data/Photo.jpg";
+    // Read login and iConsult data from external JSON files
     const logindata = JSON.parse(
-      fs.readFileSync("./test/data/login.json", "utf-8")
+      fs.readFileSync("./test/data/loginData.json", "utf-8")
     );
     const iConsultEDData = JSON.parse(
-      fs.readFileSync("./test/data/iConsultED.json", "utf-8")
+      fs.readFileSync("./test/data/iConsultEDTData.json", "utf-8")
     );
     let loginData: any;
 
+    // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
     const url = await browser.getUrl();
-    const language: string = await iConsult.getLanguageFromUrl(url);
+    const language: string = await iConsult.getLanguageFromUrl(url); // Detect the language from the URL
     if (url.includes("qa")) {
       loginData = logindata.login_valid;
     } else if (url.includes("stage")) {
@@ -31,30 +40,40 @@ describe("iConsult Features", () => {
     } else {
       loginData = logindata.prod_login_valid;
     }
+
+    // Log in to the application using credentials
     await LoginPage.login(loginData.login_email, loginData.login_password);
 
     await browser.pause(3000);
-    await iConsult.sidemenuCloseButton.waitForClickable({ timeout: 3000 });
-    await iConsult.sidemenuCloseButton.click();
+    await iConsult.sideMenuCloseButton.waitForClickable({ timeout: 3000 });
+    await iConsult.sideMenuCloseButton.click(); // Close side menu
     await browser.pause(2000);
-    await iConsult.startFreeiConsultbutton.waitForClickable({ timeout: 3000 });
-    await iConsult.startFreeiConsultbutton.click();
+
+    // Start the iConsult flow
+    await iConsult.startFreeiConsultButton.waitForClickable({ timeout: 3000 });
+    await iConsult.startFreeiConsultButton.click();
     await browser.pause(2000);
+
+    // Accept the consent form
     await iConsult.consentCheckbox.waitForClickable();
     await iConsult.consentCheckbox.click();
     await browser.pause(2000);
     await iConsult.consentContinueButton.click();
     await browser.pause(7000);
-    await iConsult.iConsultEDselection.click();
+
+    // Select Erectile Dysfunction and proceed
+    await iConsult.iConsultEDSelection.click();
     await browser.pause(5000);
     if (await iConsult.startNewiConsult.isDisplayed()) {
       await iConsult.startNewiConsult.click();
       await browser.pause(2000);
     }
 
-    await iConsultEDFlow.iConsultEDQuestionsandAnswer();
-    await iConsult.recommendationPills.waitForDisplayed();
+    // Answer iConsult questions
+    await iConsultEDFlow.iConsultEDQuestionsAndAnswer();
 
+    // Verify the recommended medicine name based on language
+    await iConsult.recommendationPills.waitForDisplayed();
     const Recommendation_generic_medicine_title =
       language === "en"
         ? iConsultEDData.iConsult_GenericMedicineName_en
@@ -63,6 +82,7 @@ describe("iConsult Features", () => {
       Recommendation_generic_medicine_title
     );
 
+    // Validate the medicine name
     expect(await iConsult.medicineName.getText()).toEqual(
       iConsultEDData.iConsultED_MedicineName
     );
@@ -70,7 +90,7 @@ describe("iConsult Features", () => {
       `Recommended Medicine Name: ${iConsultEDData.iConsultED_MedicineName}`
     );
 
-    //const language: string = await iConsult.getLanguageFromUrl(url);
+    // Validate the product description
     const expectedMedicineDescription =
       language === "en"
         ? iConsultEDData.iConsultED_MedicineDescription_en
@@ -79,75 +99,71 @@ describe("iConsult Features", () => {
       expectedMedicineDescription
     );
 
+    // Continue to subscription plan selection
     await iConsult.productContinueButton.click();
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
-    await iConsult.subscribeThreeMonthTL.click();
+    await iConsult.subscribeThreeMonthTL.click(); // Select 3-month subscription
     await browser.pause(1500);
 
+    // Fetch and log subscription plan details
     const iConsult_SubscriptionPlan =
-      await iConsultEDFlow.fetch_subscription_plan.getText();
+      await iConsultEDFlow.fetchSubscriptionPlan.getText();
     const iConsult_SubscriptionPlanAmount =
-      await iConsultEDFlow.fetch_subscription_amount.getText();
-
-    const subscriptionPlanDurationValue: string =
-      await iConsultEDFlow.fetch_subscription_plan.getText();
+      await iConsultEDFlow.fetchSubscriptionAmount.getText();
     console.log(
-      `Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`
+      `Subscription Plan selected by the User: ${iConsult_SubscriptionPlan}`
     );
+    console.log(`Subscription Plan Amount: ${iConsult_SubscriptionPlanAmount}`);
 
-    const subscriptionPlanAmount: string =
-      await iConsultEDFlow.fetch_subscription_amount.getText();
-    console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`);
-
-    await browser.pause(2000);
+    // Continue to shipping address
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);
-
     await iConsult.shippingAddressOptions.waitForDisplayed();
-    await iConsult.ship_select_address.waitForDisplayed();
-    await iConsult.ship_select_address.click();
+    await iConsult.shipSelectAddress.waitForDisplayed();
+    await iConsult.shipSelectAddress.click(); // Select existing shipping address
     await browser.pause(1500);
-    await iConsult.ship_save_btn.scrollIntoView();
-    await browser.pause(1500);
-    await iConsult.ship_save_btn.click();
+    await iConsult.shipSaveBtn.scrollIntoView(); // Save selected address
+    await iConsult.shipSaveBtn.click();
     await browser.pause(2000);
 
-    //await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
+    // Verify the iConsult page title (summary)
     await iConsult.iConsultPage.waitForDisplayed();
-
     expect(await iConsult.iConsultPage).toHaveText(
       iConsultEDData.iConsultED_SummaryTitle
     );
     await browser.pause(5000);
 
+    // Validate the product name in the order summary
     const actualProductName =
       language === "en"
         ? iConsultEDData.iConsultED_Summary_GenericMedicine_en
         : iConsultEDData.iConsultED_Summary_GenericMedicine_es;
-    await expect(iConsultEDFlow.prescribed_medicine).toHaveText(
+    await expect(iConsultEDFlow.prescribedMedicine).toHaveText(
       actualProductName
     );
     console.log(`Actual Product Name: ${actualProductName}`);
 
+    // Validate subscription plan and price in the order summary
     const prodSubscriptionPlan: string =
       await iConsult.productSubscriptionPlan.getText();
-    console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
-    expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
+    console.log(`ProdSubscriptionPlan is: ${prodSubscriptionPlan}`);
+    expect(prodSubscriptionPlan).toEqual(iConsult_SubscriptionPlan);
 
     const prodSubscriptionPrice: string =
       await iConsult.productSubscriptionPrice.getText();
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
-    expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
+    expect(prodSubscriptionPrice).toEqual(iConsult_SubscriptionPlanAmount);
 
+    // Complete the order
     await iConsult.cardSelection.scrollIntoView();
     await browser.pause(1000);
-    await iConsult.cardSelection.click();
+    await iConsult.cardSelection.click(); // Select payment card
     await browser.pause(1000);
     await iConsult.submitOrder.scrollIntoView();
-    await browser.pause(1000);
-    await iConsult.submitOrder.click();
+    await iConsult.submitOrder.click(); // Submit order
     await browser.pause(1000);
 
+    // Verify order completion message
     const completionMsg =
       language === "en"
         ? iConsultEDData.iConsultED_CompletionMsg
@@ -156,38 +172,29 @@ describe("iConsult Features", () => {
       completionMsg
     );
     await browser.pause(2000);
+
+    // View order details
     await iConsult.viewOrderDetailsButton.click();
     await iConsult.orderDetailsScreen.waitForDisplayed();
     await iConsult.orderListTab.waitForDisplayed();
 
+    // Log order ID and write to a JSON file
     const orderId: string = await iConsult.getOrderID();
     console.log(`My Order ID is: ${orderId}`);
-
     const jsonFilePath = "./test/data/generatedOrderDetails.json";
-    const clearOrderDetails = () => {
-      fs.writeFileSync(jsonFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
-      console.log(`Order details have been cleared from ${jsonFilePath}`);
-    };
-
     const orderDetails: Record<string, string> = {};
     orderDetails[iConsultEDData.iConsultED_MedicineName] = orderId;
-
     fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4));
     console.log("Order details have been written to orderDetails.json");
 
+    // Validate order details on the order summary screen
     const orderInformation = await iConsult.getOrderInformation();
     console.log(`Order Product Name is: "${orderInformation.productName}"`);
     expect(await iConsult.orderDetailProductName.getText()).toEqual(
       Recommendation_generic_medicine_title
     );
-    console.log(
-      `Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`
-    );
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       iConsult_SubscriptionPlan
-    );
-    console.log(
-      `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
     );
     expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
       iConsult_SubscriptionPlanAmount

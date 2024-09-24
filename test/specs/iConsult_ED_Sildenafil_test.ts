@@ -1,9 +1,21 @@
-import LoginPage from "../pageobjects/vpm_login.page.js";
+import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
-import iConsultEDS from "../pageobjects/iConsultEDS.page.js";
+import iConsultEDS from "../pageobjects/iConsult.ED_Sildenafil.page.js";
 import fs from "fs";
 
-describe("iConsult feature- End to End flow", () => {
+/**
+ * iConsult: End-to-End Test Case for Sildenafil Flow
+ *
+ * This test case automates the flow for verifying iConsult's process for Erectile Dysfunction
+ * with the recommendation of Sildenafil as the medicine. The test validates:
+ * - Logging into the application
+ * - Filling out the iConsult questionnaire for ED
+ * - Recommending and selecting the appropriate medicine and subscription plan
+ * - Completing the order and verifying the order details
+ */
+
+describe("iConsult feature - End to End flow", () => {
+  // Runs before all tests, sets up preconditions such as navigating to the base URL and signing in.
   before(async () => {
     await browser.url("");
     await browser.pause(2000);
@@ -11,20 +23,23 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(2000);
   });
 
-  it("C29654 iConsult: Verify iConsult flow for Erectile dysfunction- Sildenafil medicine", async () => {
-    const IDProofPath: string = "./test/data/IDProof.png";
-    const photoPath: string = "./test/data/Photo.jpg";
+  it("C29654 iConsult: Verify iConsult flow for Erectile Dysfunction - Sildenafil medicine", async () => {
+    // Paths to required test data
+    // const IDProofPath = "./test/data/IDProof.png";
+    // const photoPath = "./test/data/Photo.jpg";
     const logindata = JSON.parse(
-      fs.readFileSync("./test/data/login.json", "utf-8")
+      fs.readFileSync("./test/data/loginData.json", "utf-8")
     );
     const iConsultEDSData = JSON.parse(
-      fs.readFileSync("./test/data/iConsultEDS.json", "utf-8")
+      fs.readFileSync("./test/data/iConsultEDSData.json", "utf-8")
     );
 
-    const url: string = await browser.getUrl();
-    const language: string = await iConsult.getLanguageFromUrl(url);
+    // Get the current URL and detect the environment (QA, Stage, Prod)
+    const url = await browser.getUrl();
+    const language = await iConsult.getLanguageFromUrl(url);
 
-    let loginData: any;
+    // Login credentials based on the environment (QA/Stage/Prod)
+    let loginData;
     if (url.includes("qa")) {
       loginData = logindata.login_valid;
     } else if (url.includes("stage")) {
@@ -32,25 +47,43 @@ describe("iConsult feature- End to End flow", () => {
     } else {
       loginData = logindata.prod_login_valid;
     }
+
+    // Log in with the selected credentials
     await LoginPage.login(loginData.login_email, loginData.login_password);
 
     await browser.pause(3000);
-    await iConsult.sidemenuCloseButton.waitForClickable({ timeout: 3000 });
-    await iConsult.sidemenuCloseButton.click();
+
+    // Close side menu if present
+    await iConsult.sideMenuCloseButton.waitForClickable({ timeout: 3000 });
+    await iConsult.sideMenuCloseButton.click();
     await browser.pause(2000);
-    await iConsult.startFreeiConsultbutton.waitForClickable({ timeout: 3000 });
-    await iConsult.startFreeiConsultbutton.click();
+
+    // Start iConsult process
+    await iConsult.startFreeiConsultButton.waitForClickable({ timeout: 3000 });
+    await iConsult.startFreeiConsultButton.click();
     await browser.pause(3000);
+
+    // Accept consent and continue
     await iConsult.consentCheckbox.waitForClickable();
     await iConsult.consentCheckbox.click();
     await iConsult.consentContinueButton.click();
     await browser.pause(7000);
-    await iConsult.iConsultEDselection.click();
+
+    // Select Erectile Dysfunction as the concern
+    await iConsult.iConsultEDSelection.click();
     await browser.pause(5000);
+
+    // If restarting iConsult, start a new session
     if (await iConsult.startNewiConsult.isDisplayed()) {
       await iConsult.startNewiConsult.click();
     }
-    await iConsultEDS.iConsultEDSQuestionsandAnswers();
+
+    // Answer the Erectile Dysfunction questionnaire
+    await iConsultEDS.iConsultEDSQuestionsAndAnswers();
+    await browser.pause(2000);
+
+    // Wait for medicine recommendation and validate it
+    await browser.refresh();
     await iConsult.recommendationPills.waitForDisplayed();
     const Recommendation_medicine_title =
       language === "en"
@@ -60,6 +93,7 @@ describe("iConsult feature- End to End flow", () => {
       Recommendation_medicine_title
     );
 
+    // Verify the medicine description
     const expectedMedicineDescription =
       language === "en"
         ? iConsultEDSData.iConsultEDS_MedicineDescription
@@ -68,40 +102,45 @@ describe("iConsult feature- End to End flow", () => {
       expectedMedicineDescription
     );
 
+    // Select dosage and continue
     await iConsultEDS.dosageStrengthHundredMG.click();
     await iConsult.productContinueButton.click();
     await browser.pause(2000);
+
+    // Select subscription plan
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
-    //await iConsultEDS.fifteendosesSelection.click();
     await browser.pause(1000);
-    await iConsultEDS.threeMonthsubscriptionOption.click();
-    const subscriptionPlanDurationValue: string =
-      await iConsultEDS.threeMonthsubscriptionText.getText();
+    await iConsultEDS.threeMonthSubscriptionOption.click();
+    const subscriptionPlanDurationValue =
+      await iConsultEDS.threeMonthSubscriptionText.getText();
+    const subscriptionPlanAmount =
+      await iConsultEDS.threeMonthSubscriptionAmount.getText();
     console.log(
       `Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`
     );
-    const subscriptionPlanAmount: string =
-      await iConsultEDS.threeMonthsubscriptionAmount.getText();
     console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`);
-    await browser.pause(1000);
+
+    // Continue to the next step after selecting the plan
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);
 
+    // Select shipping address and proceed
     await iConsult.shippingAddressOptions.waitForDisplayed();
-    await iConsult.ship_select_address.waitForDisplayed();
-    await iConsult.ship_select_address.click();
+    await iConsult.shipSelectAddress.waitForDisplayed();
+    await iConsult.shipSelectAddress.click();
     await browser.pause(1500);
-    await iConsult.ship_save_btn.scrollIntoView();
-    await iConsult.ship_save_btn.click();
+    await iConsult.shipSaveBtn.scrollIntoView();
+    await iConsult.shipSaveBtn.click();
     await browser.pause(2000);
 
-    //await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
+    // Skip uploading ID Proof for now
     await iConsult.iConsultPage.waitForDisplayed();
     expect(iConsult.iConsultPage).toHaveText(
       iConsultEDSData.iConsultEDS_Summary
     );
     await browser.pause(5000);
 
+    // Verify the summary of the selected product
     const actualProductName =
       language === "en"
         ? iConsultEDSData.iConsultEDS_SummaryMedicine_en
@@ -109,18 +148,19 @@ describe("iConsult feature- End to End flow", () => {
     expect(await iConsult.productName.getText()).toEqual(actualProductName);
     console.log(`Actual Product Name: ${actualProductName}`);
 
-    const prodSubscriptionPlan: string =
+    // Verify the subscription plan and price in the summary
+    const prodSubscriptionPlan =
       await iConsult.productSubscriptionPlan.getText();
-    console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
-    expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
-
-    const prodSubscriptionPrice: string =
+    const prodSubscriptionPrice =
       await iConsult.productSubscriptionPrice.getText();
+    console.log(`ProdSubscriptionPlan: ${prodSubscriptionPlan}`);
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
+    expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
+    // Complete the order process
     await iConsult.cardSelection.scrollIntoView();
-    await browser.pause(2000);
+    await browser.pause(1000);
     await iConsult.cardSelection.click();
     await browser.pause(1000);
     await iConsult.submitOrder.scrollIntoView();
@@ -129,51 +169,39 @@ describe("iConsult feature- End to End flow", () => {
     await browser.pause(2000);
     await iConsult.iConsultCompletionScreen.waitForDisplayed();
 
+    // Verify order completion message
     const completionMsg =
       language === "en"
         ? iConsultEDSData.iConsultEDS_CompletionMsg
         : iConsultEDSData.iConsultEDS_CompletionMsg_es;
-    const iConsultCompletionMessage: string =
+    const iConsultCompletionMessage =
       await iConsult.iConsultCompletionScreen.getText();
-    console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`);
+    console.log(`iConsultCompletionMessage: ${iConsultCompletionMessage}`);
     expect(await iConsult.iConsultCompletionScreen.getText()).toEqual(
       completionMsg
     );
     await browser.pause(2000);
 
+    // View and verify order details
     await iConsult.viewOrderDetailsButton.click();
     await iConsult.orderDetailsScreen.waitForDisplayed();
     await iConsult.orderListTab.waitForDisplayed();
-
-    const orderId: string = await iConsult.getOrderID();
+    const orderId = await iConsult.getOrderID();
     console.log(`My Order ID is: ${orderId}`);
 
+    // Store order details in a JSON file
     const jsonFilePath = "./test/data/generatedOrderDetails.json";
-    const clearOrderDetails = () => {
-      fs.writeFileSync(jsonFilePath, JSON.stringify({}, null, 4)); // Write an empty object to the file
-      console.log(`Order details have been cleared from ${jsonFilePath}`);
-    };
-
-    const orderDetails: Record<string, string> = {};
+    const orderDetails = {};
     orderDetails[Recommendation_medicine_title] = orderId;
-
-    //const jsonFilePath = './test/testdata/orderDetails.json'
     fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4));
     console.log("Order details have been written to orderDetails.json");
 
-    const orderInformation = await iConsult.getOrderInformation();
-    console.log(`Order Product Name is: "${orderInformation.productName}"`);
+    // Verify order product name and subscription plan
     expect(await iConsult.orderDetailProductName.getText()).toEqual(
       Recommendation_medicine_title
     );
-    console.log(
-      `Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`
-    );
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       subscriptionPlanDurationValue
-    );
-    console.log(
-      `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
     );
     expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
       subscriptionPlanAmount

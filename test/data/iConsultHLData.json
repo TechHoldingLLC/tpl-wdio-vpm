@@ -4,6 +4,6 @@
   "iConsultHL_MedicineDescription_es": "El finasteride es una pastilla diaria clínicamente comprobada para reducir la pérdida de cabello y aumentar el crecimiento bloqueando la producción de una hormona masculina en el cuero cabelludo que detiene el crecimiento del cabello.",
   "iConsultHL_SummaryTitle": "iConsult Summary",
   "iConsultHL_SummaryMedicine": "Finasteride",
-  "iConsultHL_CompletionMsg": "Your iConsult is successfully completed",
-  "iConsultHL_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!"
+  "iConsultHL_CompletionMsg": "iConsult Completed",
+  "iConsultHL_CompletionMsg_es": "iConsulta Completada"
 }

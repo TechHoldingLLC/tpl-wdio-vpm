@@ -2,7 +2,10 @@ import Page from "./page.js";
 import * as path from "path";
 
 class iConsult extends Page {
-  public get startFreeiConsultbutton() {
+  /*
+   * Locators for the initial page
+   */
+  public get startFreeiConsultButton() {
     return $("#start-free-iconsult");
   }
 
@@ -14,29 +17,39 @@ class iConsult extends Page {
     return $('//button[@class="btn-primary btn-sm text-uppercase mt-20"]');
   }
 
+  /*
+   * Locators for the problem address questions screen
+   */
   public get problemAddressQuestionsScreen() {
     return $('h5[data-aos="fade"]');
   }
 
-  public get iConsultEDselection() {
+  /*
+   * Locators for iConsult condition selections
+   */
+  public get iConsultEDSelection() {
     return $('[for$="question1"]');
   }
 
-  public get iConsultPEselection() {
+  public get iConsultPESelection() {
     return $('[for$="question2"]');
   }
 
-  public get iConsultHLselection() {
+  public get iConsultHLSelection() {
     return $('[for$="question3"]');
   }
 
-  public get iConsultGHselection() {
+  public get iConsultGHSelection() {
     return $('[for$="question4"]');
   }
-  public get sidemenuCloseButton() {
+
+  public get sideMenuCloseButton() {
     return $('[class="btn-rounded Header_close-btn__rNA2L"]');
   }
 
+  /*
+   * Locators for date of birth page
+   */
   public get dobPage() {
     return $(
       "//h5[contains(text(), '¿Cuál es tu fecha de nacimiento?') or contains(text(), 'What is your date of birth?')]"
@@ -51,6 +64,9 @@ class iConsult extends Page {
     return $("//input[@type='submit']");
   }
 
+  /*
+   * Method to enter date of birth
+   */
   public async enterDOB(dob: string) {
     await this.dobInput.waitForDisplayed();
     await browser.pause(2000);
@@ -62,6 +78,9 @@ class iConsult extends Page {
     await this.dobContinueButton.click();
   }
 
+  /*
+   * Locators for eligibility and sign-in pages
+   */
   public get iConsultEligibilityText() {
     return $(
       "//h5[contains(text(),'Congratulations') or contains(text(),'Felicidades')]"
@@ -88,6 +107,9 @@ class iConsult extends Page {
     return $('[class$="btn-secondary mw-100 mt-15"]');
   }
 
+  /*
+   * Locators for age-related input
+   */
   public get insertAge() {
     return $("(//input[@id=':r0:'])[1]");
   }
@@ -97,31 +119,34 @@ class iConsult extends Page {
   }
 
   public get ageTitleMessage() {
-    return $("//h5[@class='title aos-init aos-animate']");
+    return $(".title.aos-init.aos-animate");
   }
 
-  public get ageSuccessContinuebtn() {
+  public get ageSuccessContinueBtn() {
     return $(
       "//a[@class='btn-primary btn-sm mt-15 text-uppercase aos-init aos-animate']"
     );
   }
 
-  public get backtoHomebtn() {
+  public get backToHomeBtn() {
     return $(
       "//a[@class='btn btn-secondary mt-15 w-100 mw-100 text-uppercase']"
     );
   }
 
   public get resumeiConsult() {
-    return $('//button[@class="btn-primary  mw-100 mt-10"]');
+    return $('//button[@class="btn-primary mw-100 mt-10"]');
   }
 
+  /*
+   * Locators for recommendations
+   */
   public get recommendationPills() {
-    return $("//h5[@class='title aos-init aos-animate']");
+    return $(".title.undefined.aos-init.aos-animate");
   }
 
   public get pillName() {
-    return $("//span[@class='ProductRecommendation_product-title__rTK2F']");
+    return $(".ProductRecommendation_product-title__rTK2F");
   }
 
   public get medicineName() {
@@ -142,9 +167,11 @@ class iConsult extends Page {
     );
   }
 
-  // Choose a subscription plan: Monthly/3 Months/6 Months
+  /*
+   * Locators for subscription plans
+   */
   public get subscriptionPlanOptions() {
-    return $("//h5[@class='title aos-init aos-animate']");
+    return $(".title.undefined.aos-init.aos-animate");
   }
 
   public get subscriptionOneMonthOption() {
@@ -179,7 +206,9 @@ class iConsult extends Page {
     return $("//button[@class='btn-primary text-uppercase']");
   }
 
-  // In what state do you reside?
+  /*
+   * Locators for address information
+   */
   public get stateResideOption() {
     return $('h5[data-aos="fade"]');
   }
@@ -188,19 +217,18 @@ class iConsult extends Page {
     return $('[class$="form-select"]');
   }
 
+  public get countryContinueBtn() {
+    return $('input[value="Continue"]');
+  }
+
   public async stateSelection(stateName: string) {
-    if ((await this.selectCountry).isDisplayed) {
+    if ((await this.selectCountry).isDisplayed()) {
       await browser.pause(5000);
       await this.selectCountry.selectByVisibleText(stateName);
       await this.countryContinueBtn.click();
     }
   }
 
-  public get countryContinueBtn() {
-    return $('input[value="Continue"]');
-  }
-
-  // Choose Shipping Address
   public get shippingAddressOptions() {
     return $('h5[data-aos="fade"]');
   }
@@ -209,59 +237,64 @@ class iConsult extends Page {
     return $('a[href="/en/addaddress"] button');
   }
 
-  public get ship_fn_field() {
+  public get shipFnField() {
     return $("#firstName");
   }
 
-  public get ship_ln_field() {
+  public get shipLnField() {
     return $("#lastName");
   }
 
-  public get ship_address_field() {
+  public get shipAddressField() {
     return $("#addressLine1");
   }
 
-  public get ship_apt_field() {
+  public get shipAptField() {
     return $("#addressLine2");
   }
 
-  public get ship_pin_field() {
+  public get shipPinField() {
     return $("#pincode");
   }
 
-  public get ship_suggestion_field() {
+  public get shipSuggestionField() {
     return $('[class$="suggestion-active"]');
   }
 
-  public get ship_continue_btn() {
+  public get shipContinueBtn() {
     return $('[type$="submit"]');
   }
 
-  public get ship_select_address() {
+  public get shipSelectAddress() {
     return $('//h5[@data-aos="fade"]//ancestor::div/li');
   }
 
-  public get ship_save_btn() {
+  public get shipSaveBtn() {
     return $("input[class$='btn-primary text-uppercase']");
   }
 
+  /*
+   * Method to add a new shipping address
+   */
   public async addNewShippingAddress() {
-    await this.ship_fn_field.setValue("WebDriverIO");
-    await this.ship_ln_field.setValue("Automation");
-    await this.ship_address_field.setValue("Test Street Address");
-    await this.ship_apt_field.setValue("Test Apartment Name");
-    await this.ship_pin_field.setValue("90035");
-    await this.ship_suggestion_field.waitForDisplayed();
-    await this.ship_suggestion_field.click();
+    await this.shipFnField.setValue("WebDriverIO");
+    await this.shipLnField.setValue("Automation");
+    await this.shipAddressField.setValue("Test Street Address");
+    await this.shipAptField.setValue("Test Apartment Name");
+    await this.shipPinField.setValue("90035");
+    await this.shipSuggestionField.waitForDisplayed();
+    await this.shipSuggestionField.click();
     await browser.pause(1500);
-    await this.ship_continue_btn.click();
-    await this.ship_select_address.click();
+    await this.shipContinueBtn.click();
+    await this.shipSelectAddress.click();
     await browser.pause(1500);
-    await this.ship_save_btn.click();
+    await this.shipSaveBtn.click();
     await browser.pause(2000);
   }
 
-  // Upload or take a photo of your ID
+  /*
+   * Locators for ID upload and photo
+   */
   public get uploadPhotoIDScreen() {
     return $('h5[data-aos="fade"]');
   }
@@ -274,6 +307,13 @@ class iConsult extends Page {
     return $('button[type="submit"]');
   }
 
+  public get uploadOrTakePhotoScreen() {
+    return $('h5[data-aos="fade"]');
+  }
+
+  /*
+   * Method to upload a photo
+   */
   public async uploadPhoto(filePath: string) {
     const file = path.join(process.cwd(), filePath);
     const remoteFilePath = await browser.uploadFile(file);
@@ -281,6 +321,9 @@ class iConsult extends Page {
     await this.uploadSaveAndContinueButton.click();
   }
 
+  /*
+   * Method to upload both ID and photo proofs
+   */
   public async uploadPhotoIDProofs(IDProof: string, PhotoProof: string) {
     await this.uploadPhotoIDScreen.waitForDisplayed();
     await this.uploadPhoto(IDProof);
@@ -288,61 +331,15 @@ class iConsult extends Page {
     await this.uploadPhoto(PhotoProof);
   }
 
-  public get uploadOrTakePhotoScreen() {
-    return $('h5[data-aos="fade"]');
+  /*
+   * Locators for payment details
+   */
+  public get cardSelection() {
+    return $('//div[contains(@class,"Subscriptions_cards-derails")]/div[1]');
   }
 
   public get iConsultPage() {
     return $('//h5[contains(@class, "title")]');
-  }
-
-  public get productName() {
-    return $("//h4[@class='mb-0']");
-  }
-
-  public get productSubscriptionPlan() {
-    return $('//div[contains(@class, "Summary_cart-summary")]/div/span[2]');
-  }
-
-  public get productSubscriptionPrice() {
-    return $(
-      '//div[contains(@class,"Summary_total-pay")]/div/span[contains(@class, "Summary_total-main-price")]'
-    );
-  }
-
-  public get addNewCard() {
-    return $('//div[contains(@class,"Summary_card-number")]/a');
-  }
-
-  public get cardIframe() {
-    return $("[name$='instamed']");
-  }
-
-  public get cardNumberInput() {
-    return $('//input[@name="CreditCardNumber"]');
-  }
-
-  public get expirationDateInput() {
-    return $('//input[@data-componentid="FormPatientPayment_ExpDate"]');
-  }
-
-  public get submitButton() {
-    return $(
-      '//div[@data-componentid="FormPatientPayment_container"]/div/div[3]'
-    );
-  }
-
-  public async addCardDetails(cardNumber: string, expirationDate: string) {
-    await this.cardNumberInput.waitForClickable();
-    await this.cardNumberInput.setValue(cardNumber);
-    await this.expirationDateInput.waitForClickable();
-    await this.expirationDateInput.setValue(expirationDate);
-    await this.submitButton.waitForClickable();
-    await this.submitButton.click();
-  }
-
-  public get cardSelection() {
-    return $('//div[contains(@class,"Subscriptions_cards-derails")]/div[1]');
   }
 
   public get submitOrder() {
@@ -350,9 +347,7 @@ class iConsult extends Page {
   }
 
   public get iConsultCompletionScreen() {
-    return $(
-      "//h5[contains(text(), '¡Genial, su receta de iConsult se completó con éxito!') or contains(text(), 'Your iConsult is successfully completed')]"
-    );
+    return $("//h5[@class='title text-orange-600 aos-init aos-animate']");
   }
 
   public get viewOrderDetailsButton() {
@@ -373,14 +368,6 @@ class iConsult extends Page {
     return $("//span[@class='MyOrder_order-id__wsMkB']");
   }
 
-  public async getOrderID() {
-    const orderInformation: string = await this.fetchOrderId.getText();
-    const orderId = await orderInformation.split(":")[1].trim();
-    console.log(`Order ID is: ${orderId}`);
-    await browser.pause(2000);
-    return orderId;
-  }
-
   public get orderDetailProductName() {
     return $("//h4[@class='mb-0']");
   }
@@ -393,6 +380,20 @@ class iConsult extends Page {
     return $("//span[@class='MyOrder_total-main-price__n2pqe']");
   }
 
+  /*
+   * Method to get order ID
+   */
+  public async getOrderID() {
+    const orderInformation: string = await this.fetchOrderId.getText();
+    const orderId = orderInformation.split(":")[1].trim();
+    console.log(`Order ID is: ${orderId}`);
+    await browser.pause(2000);
+    return orderId;
+  }
+
+  /*
+   * Method to get order information
+   */
   public async getOrderInformation(): Promise<{
     productName: string;
     subscriptionPlan: string;
@@ -409,6 +410,57 @@ class iConsult extends Page {
       subscriptionPlan,
       totalPrice,
     };
+  }
+
+  /*
+   * Method to add card details
+   */
+  public async addCardDetails(cardNumber: string, expirationDate: string) {
+    await this.cardNumberInput.waitForClickable();
+    await this.cardNumberInput.setValue(cardNumber);
+    await this.expirationDateInput.waitForClickable();
+    await this.expirationDateInput.setValue(expirationDate);
+    await this.submitButton.waitForClickable();
+    await this.submitButton.click();
+  }
+
+  /*
+   * Locators for payment fields
+   */
+  public get cardNumberInput() {
+    return $('//input[@name="CreditCardNumber"]');
+  }
+
+  public get expirationDateInput() {
+    return $('//input[@data-componentid="FormPatientPayment_ExpDate"]');
+  }
+
+  public get submitButton() {
+    return $(
+      '//div[@data-componentid="FormPatientPayment_container"]/div/div[3]'
+    );
+  }
+
+  public get cardIframe() {
+    return $("[name$='instamed']");
+  }
+
+  public get addNewCard() {
+    return $('//div[contains(@class,"Summary_card-number")]/a');
+  }
+
+  public get productName() {
+    return $("//h4[@class='mb-0']");
+  }
+
+  public get productSubscriptionPlan() {
+    return $('//div[contains(@class, "Summary_cart-summary")]/div/span[2]');
+  }
+
+  public get productSubscriptionPrice() {
+    return $(
+      '//div[contains(@class,"Summary_total-pay")]/div/span[contains(@class, "Summary_total-main-price")]'
+    );
   }
 }
 
