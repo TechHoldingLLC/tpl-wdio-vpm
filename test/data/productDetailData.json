@@ -1,0 +1,72 @@
+{
+  "product_tadalafil": "Genérico de Cialis®",
+  "product_sildenafil": "Genérico de Viagra®",
+  "product_paroxetine": "Paroxetine",
+  "product_finasteride": "Finasteride",
+  "product_acyclovir": "Acyclovir",
+  "product_glp_semaglutide": "GLP-1 Semaglutide",
+  "product_semaglutide": "Semaglutide",
+  "product_tadalafil_description": "A generic erectile dysfunction medication that’s FDA approved and clinically proven to help men with ED get and maintain erections. Tadalafil contains the same active ingredient as brand name Cialis®, at a fraction of the cost.",
+  "product_sildenafil_description": "An erectile dysfunction medication that's FDA approved and clinically proven to treat ED, sildenafil has the same active ingredient as Viagra®. Better sex, at a lower price.",
+  "product_paroxetine_description": "Paroxetine is a prescription medication that doctors can prescribe for the treatment of premature ejaculation, allowing you to control your climax and enjoy sex for longer.",
+  "product_finasteride_description": "Finasteride is a once-a-day pill that is clinically proven to reduce hair-loss and increase regrowth by blocking the body's production of a male hormone in the scalp that stops hair growth.",
+  "product_acyclovir_description": "A generic genital herpes medication that’s FDA approved and clinically proven to help stop the spread of the herpes virus in the body. Acyclovir can be taken to control a genital herpes outbreak, as well as preventing outbreaks from occurring in the future.",
+  "product_semaglutide_description": "Our Weight-loss treatment is currently available through our clinic. Please provide your name, email, and cell phone number, and someone from our clinic will contact you shortly.",
+  "product_tadalafil_description_es": "Un medicamento genérico para la disfunción eréctil que está aprobado por la FDA y clínicamente comprobado para ayudar a los hombres con DE a obtener y mantener erecciones. El tadalafil contiene el mismo ingrediente activo que el Cialis® de marca, a una fracción del costo.",
+  "product_sildenafil_description_es": "Un medicamento para la disfunción eréctil aprobado por la FDA y clínicamente comprobado para tratar la DE, el sildenafil tiene el mismo ingrediente activo que el Viagra®. Mejor sexo a un precio más bajo.",
+  "product_paroxetine_description_es": "La paroxetina es un medicamento con receta que los médicos pueden recetar para el tratamiento de la eyaculación precoz, permitiéndote controlar tu clímax y disfrutar del sexo por más tiempo.",
+  "product_finasteride_description_es": "El finasteride es una pastilla diaria clínicamente comprobada para reducir la pérdida de cabello y aumentar el crecimiento bloqueando la producción de una hormona masculina en el cuero cabelludo que detiene el crecimiento del cabello.",
+  "product_acyclovir_description_es": "Un medicamento genérico para el herpes genital aprobado por la FDA y clínicamente comprobado para ayudar a detener la propagación del virus del herpes en el cuerpo. El aciclovir se puede tomar para controlar un brote de herpes genital, así como para prevenir brotes en el futuro.",
+  "product_semaglutide_description_es": "Nuestro tratamiento de pérdida de peso está actualmente disponible a través de nuestra clínica. Proporcione su nombre, correo electrónico y número de teléfono celular, y alguien de nuestra clínica se comunicará con usted en breve.",
+  "product_semaglutide_form": {
+    "product_wl_firstname": "WdioAutomated",
+    "product_wl_lastname": "User",
+    "product_wl_cellnum": 8602949015,
+    "product_wl_email": "wdio_auto4@gmail.com",
+    "product_wl_success": "Thank You!",
+    "product_wl_success_es": "¡Gracias",
+    "product_fname_validation_message": "*First name is required",
+    "product_lname_validation_message": "*Last name is required",
+    "product_mobile_validation_message": "*Mobile number is required",
+    "product_email_validation_message": "*Email is required",
+    "product_fname_validation_message_es": "*El nombre es obligatorio",
+    "product_lname_validation_message_es": "*El apellido es obligatorio",
+    "product_mobile_validation_message_es": "*Se requiere un número de teléfono móvil",
+    "product_email_validation_message_es": "*Se requiere correo electrónico"
+  },
+  "product_faq_title_Tadalafil": "Erectile Dysfunction FAQs",
+  "product_faq_title_Sildanafil": "Erectile Dysfunction FAQs",
+  "product_faq_title_Paroxetine": "Premature Ejaculation FAQs",
+  "product_faq_title_Finasteride": "Hair Loss FAQs",
+  "product_faq_title_Acyclovir": "Genital Herpes FAQs",
+  "product_faq_title_Tadalafil_es": "Preguntas Frecuentes sobre la Disfunción Eréctil",
+  "product_faq_title_Sildanafil_es": "Preguntas Frecuentes sobre la Disfunción Eréctil",
+  "product_faq_title_Paroxetine_es": "Preguntas Frecuentes sobre la Eyaculación Precoz",
+  "product_faq_title_Finasteride_es": "Preguntas Frecuentes sobre la Caída del Cabello",
+  "product_faq_title_Acyclovir_es": "Preguntas Frecuentes sobre el Herpes Genital",
+  "Tadalafil": [
+    {
+      "text": "Enhances sexual performance with proven effectiveness\nOffers longer-lasting results for more spontaneous moments\nCan be taken as-needed or as a daily dose"
+    },
+    {
+      "text": "Tadalafil can be taken either as-needed or on a daily basis. It is a longer-lasting ED medication – its effects can last for 24-36 hours.&nbsp;\nPlease speak with our providers to advise what type of treatment plan is best for you. "
+    },
+    {
+      "text": "Side effects of this medication may include: headache, indigestion or heartburn, diarrhea, nausea, flushing, pain in the stomach, back, muscles, arms, or legs, cough. Contact your provider if any of these side effects are severe or persistent."
+    }
+  ],
+  "Tadalafil_ED_FAQs": [
+    {
+      "text": "Viapromeds is a telemedicine company that provides a discreet, convenient, and affordable way for you to receive erectile dysfunction (ED) treatment from a doctor or nurse practitioner—all without leaving the couch. If you’re interested in treatment, it starts with an online visit using our iConsult. The iConsult will ask you about your symptoms, your medical history, and other basic information. You’ll also be asked to upload a photo of your ID to verify your identity. Once you have done all of this, a doctor or nurse practitioner will review everything, determine if you’re a candidate for ED treatment through telemedicine, and craft a personalized treatment plan for you."
+    },
+    {
+      "text": "You can actually take either Sildenafil or Tadalafil every day just as long as you don’t exceed 100mg dose daily if taking Sildenafil or 20mg dose daily if taking Tadalafil. Also provided you have no pre-existing health issues and you are not taking any other ED medications."
+    },
+    {
+      "text": "To treat erectile dysfunction (ED), our providers recommend 2 choices in oral medications, Tadalafil (generic for Cialis®) and Sildenafil (generic for Viagra®)."
+    },
+    {
+      "text": "Tadalafil is the generic name for Cialis®, and Sildenafil is the generic name for Viagra®."
+    }
+  ]
+}

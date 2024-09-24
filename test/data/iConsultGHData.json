@@ -4,6 +4,6 @@
   "iConsultGH_MedicineDescription_es": "Un medicamento genérico para el herpes genital aprobado por la FDA y clínicamente comprobado para ayudar a detener la propagación del virus del herpes en el cuerpo. El aciclovir se puede tomar para controlar un brote de herpes genital, así como para prevenir brotes en el futuro.",
   "iConsultGH_SummaryTitle": "iConsult Summary",
   "iConsultGH_SummaryMedicine": "Acyclovir",
-  "iConsultGH_CompletionMsg": "Your iConsult is successfully completed",
-  "iConsultGH_CompletionMsg_es": "¡Genial, su receta de iConsult se completó con éxito!"
+  "iConsultGH_CompletionMsg": "iConsult Completed",
+  "iConsultGH_CompletionMsg_es": "iConsulta Completada"
 }
