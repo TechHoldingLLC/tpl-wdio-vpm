@@ -1,0 +1,16 @@
+{
+  "iConsultEDS_DOBPageText": "What is your date of birth?",
+  "iConsultEDS_DOBPageText_es": "¿Cuál es tu fecha de nacimiento?",
+  "iConsultEDS_EligibilityText": "Congratulations! You are eligible to continue with the consultation.",
+  "iConsultEDS_EligibilityText_es": "¡Felicidades! Eres elegible para continuar con la consulta.",
+  "iConsultEDS_fieldText": "Automation Testing",
+  "iConsultEDS_MedicineName_en": "Generic Viagra®",
+  "iConsultEDS_MedicineName_es": "Genérico de Viagra®",
+  "iConsultEDS_MedicineDescription": "An erectile dysfunction medication that's FDA approved and clinically proven to treat ED. The active ingredient is Sildenafil. Better sex, at a lower price.",
+  "iConsultEDS_MedicineDescription_es": "Un medicamento para la disfunción eréctil que está aprobado por la FDA y clínicamente comprobado para tratar la DE. El ingrediente activo es Sildenafil. Mejor sexo, a un precio más bajo.",
+  "iConsultEDS_Summary": "iConsult Summary",
+  "iConsultEDS_SummaryMedicine_en": "Generic Viagra®",
+  "iConsultEDS_SummaryMedicine_es": "Genérico de Viagra®",
+  "iConsultEDS_CompletionMsg": "iConsult Completed",
+  "iConsultEDS_CompletionMsg_es": "iConsulta Completada"
+}

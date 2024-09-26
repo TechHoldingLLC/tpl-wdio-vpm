@@ -1,29 +1,46 @@
-import LoginPage from "../pageobjects/vpm_login.page.js";
+import LoginPage from "../pageobjects/login.page.js";
 import fs from "fs";
 import homePage from "../pageobjects/home.page.js";
-import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
+import profilesidemenuPage from "../pageobjects/profileSideMenu.page.js";
 import { expect } from "chai";
 
+/**
+ * Test Suite: Profile Menu Options and Redirection from Orders
+ * This suite contains tests for verifying profile menu options and
+ * viewing the Orders page within the profile section.
+ */
 describe("Profile Menu Options and Redirection from Orders", () => {
+  /**
+   * Precondition: Log in to the application before running the tests.
+   * This hook runs once before all the tests in this suite.
+   */
   before(async () => {
-    await browser.url("");
-    await browser.pause(2000);
+    await browser.url(""); // Navigate to the base URL
+    await browser.pause(2000); // Pause to ensure the page loads
+
+    // Click the sign-in button to navigate to the login page
     await LoginPage.signinButton.click();
-    await browser.pause(2000);
+    await browser.pause(2000); // Pause to allow the login page to load
   });
 
+  /**
+   * Test Case: Verify the profile menu options are displayed correctly.
+   */
   it("C29953 Profile: Verify the profile menu options", async () => {
-    const loginDataPath: string = "./test/data/login.json";
+    const loginDataPath: string = "./test/data/loginData.json";
     let selectedLoginData: any;
 
     try {
+      // Load login data from JSON file
       const logindata = JSON.parse(fs.readFileSync(loginDataPath, "utf-8"));
+
+      // Determine the appropriate login data based on the environment
       const url: string = await browser.getUrl();
       const language: string = await profilesidemenuPage.getLanguageFromUrl(
         url
       );
 
-      // Select the appropriate login data based on the environment
+      // Select login data based on the environment
       if (url.includes("qa")) {
         selectedLoginData = logindata.login_valid;
       } else if (url.includes("stage")) {
@@ -37,12 +54,12 @@ describe("Profile Menu Options and Redirection from Orders", () => {
         selectedLoginData.login_email,
         selectedLoginData.login_password
       );
-      await browser.pause(2000);
+      await browser.pause(2000); // Pause to ensure login process completes
+
+      // Wait for "About Us" to be visible to confirm successful login
       await homePage.aboutUs.waitForDisplayed();
-      expect(await homePage.aboutUs.isDisplayed());
-      // await vpm_loginPage.hamburgericon.waitForClickable()
-      // await vpm_loginPage.hamburgericon.click()
-      await browser.pause(5000);
+      expect(await homePage.aboutUs.isDisplayed()).to.be.true;
+      await browser.pause(5000); // Pause for page stability
 
       // Define the expected profile sub-menu list based on the language
       let expectedProfileSubMenuList: string[] =
@@ -77,19 +94,24 @@ describe("Profile Menu Options and Redirection from Orders", () => {
     }
   });
 
+  /**
+   * Test Case: Verify viewing the Order Listing Details page.
+   */
   it("C29660 Profile: Verify viewing Order Listing Details page", async () => {
-    await browser.pause(3000);
+    await browser.pause(3000); // Pause to ensure the page is ready
+
+    // Navigate to the Orders page
     await profilesidemenuPage.ordersOption.click();
-    await profilesidemenuPage.myOrdersPage.waitForDisplayed();
+    await profilesidemenuPage.pageTitle.waitForDisplayed();
 
     // Get text of orders page and list
     const ordersPageText: string =
-      await profilesidemenuPage.myOrdersPage.getText();
+      await profilesidemenuPage.pageTitle.getText();
     const ordersListText: string =
       await profilesidemenuPage.myOrderList.getText();
 
     // Get language from URL
-    const url = await browser.getUrl();
+    const url: string = await browser.getUrl();
     const language: string = await profilesidemenuPage.getLanguageFromUrl(url);
 
     // Define expected texts based on language
@@ -98,11 +120,11 @@ describe("Profile Menu Options and Redirection from Orders", () => {
     const expectedOrderListText: string =
       language === "en" ? "Orders list" : "Lista de Pedidos";
 
-    // Log texts
+    // Log texts for debugging
     console.log(`Orders Page text is "${ordersPageText}"`);
     console.log(`Orders List text is "${ordersListText}"`);
 
-    // Assert expected texts
+    // Assert that the texts match the expected values
     expect(ordersPageText).to.be.equal(expectedOrderPageText);
     expect(ordersListText).to.be.equal(expectedOrderListText);
   });

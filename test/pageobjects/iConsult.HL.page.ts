@@ -2,9 +2,8 @@ import Page from "./page.js";
 
 class iConsultHairLossPage extends Page {
   /*
-    How long has this problem been present?
-    Problem been present since how long?
-    */
+   * Locators for problem presence question
+   */
   public get problemPresentQuestion() {
     return $('h5[data-aos="fade"]');
   }
@@ -25,13 +24,9 @@ class iConsultHairLossPage extends Page {
     return $('[for$="option3"]');
   }
 
-  public get continueButton() {
-    return $('//a[@class="btn-primary btn-sm text-uppercase"]');
-  }
-
   /*
-    Have you been diagnosed with any of the following?
-    */
+   * Locators for diagnosed condition question
+   */
   public get diagnosedQuestions() {
     return $('h5[data-aos="fade"]');
   }
@@ -40,12 +35,9 @@ class iConsultHairLossPage extends Page {
     return $('label[for="option5"]');
   }
 
-  // Continue button
-
   /*
-    Do you have any of these other medical conditions?
-    */
-
+   * Locators for medical condition question
+   */
   public get medicalConditionQuestions() {
     return $('h5[data-aos="fade"]');
   }
@@ -54,11 +46,9 @@ class iConsultHairLossPage extends Page {
     return $('label[for="option3"]');
   }
 
-  // Continue button
   /*
-    Are you taking any medication daily? Yes OR No
-    */
-
+   * Locators for daily medication question
+   */
   public get medicationDailyQuestions() {
     return $('h5[data-aos="fade"]');
   }
@@ -71,12 +61,9 @@ class iConsultHairLossPage extends Page {
     return $('label[for="option0"]');
   }
 
-  // Continue button
-
   /*
-    Are you allergic to any type of medication? Yes OR No
-    */
-
+   * Locators for allergic medication question
+   */
   public get allergicMedicationQuestions() {
     return $('h5[data-aos="fade"]');
   }
@@ -89,44 +76,55 @@ class iConsultHairLossPage extends Page {
     return $('label[for="option1"]');
   }
 
+  /*
+   * Locator for the continue button
+   */
+  public get continueButtonQuestionnaire() {
+    return $("//button[@class='btn-primary btn-sm text-uppercase']");
+  }
+
+  /*
+   * Method to handle the iConsult Hair Loss questionnaire flow
+   */
   public async iConsultHLQuestionsandAnswers(): Promise<void> {
-    await this.problemPresentOption3to5Year.doubleClick();
+    // Wait for and select the problem presence option
     await browser.pause(2000);
-    await this.problemPresentOption5PlusYear.doubleClick();
+    await this.problemPresentOption5PlusYear.click();
     await browser.pause(2000);
-    await this.continueButton.click();
-    await browser.pause(2500);
+
+    // Handle the diagnosed condition question
     if (!(await this.noneOfTheAboveProblem.isSelected())) {
       await this.noneOfTheAboveProblem.doubleClick();
       await browser.pause(1500);
-      await this.continueButton.click();
-      await browser.pause(1000);
-    } else {
-      await browser.pause(1500);
-      await this.continueButton.click();
     }
-    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await browser.pause(1000);
+    await this.continueButtonQuestionnaire.click();
+    await browser.pause(1000);
+
+    // Handle the medical condition question
     await this.medicalConditionQuestions.waitForDisplayed();
     if (!(await this.noneOfTheseApplyMeOption.isSelected())) {
       await this.noneOfTheseApplyMeOption.doubleClick();
       await browser.pause(1500);
-      await this.continueButton.click();
-      await browser.pause(1000);
-    } else {
-      await browser.pause(1500);
-      await this.continueButton.click();
     }
-    await browser.pause(2000);
+    await this.continueButtonQuestionnaire.scrollIntoView();
+    await this.continueButtonQuestionnaire.click();
+    await browser.pause(1000);
+
+    // Handle the daily medication question
     await this.medicationDailyQuestions.waitForDisplayed();
     await this.medicationDailyNoAnswer.click();
     await browser.pause(2000);
-    await this.continueButton.click();
-    await browser.pause(2000);
-    await this.allergicMedicationQuestions.waitForDisplayed();
+
+    // Handle the allergic medication question
+    await this.allergicMedicationNoAnswer.waitForDisplayed();
+    await this.allergicMedicationNoAnswer.scrollIntoView();
+    await browser.pause(1000);
     await this.allergicMedicationNoAnswer.click();
     await browser.pause(2000);
-    await this.continueButton.click();
-    await browser.pause(4000);
+    await this.allergicMedicationNoAnswer.click();
+    await browser.pause(2000);
   }
 }
 
