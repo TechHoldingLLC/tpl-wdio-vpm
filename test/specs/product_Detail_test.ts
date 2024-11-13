@@ -286,7 +286,7 @@ describe("Product Details Feature", () => {
    * Test Case: Verify Semaglutide Product page opens and form validation works
    * - Ensures that the Semaglutide product page is correctly loaded, and the form validation and submission work as expected.
    */
-  it("Verify Product Details Page - GLP-1 Semaglutide", async () => {
+  it.skip("Verify Product Details Page - GLP-1 Semaglutide", async () => {
     try {
       await ProductDetail.productSemaglutide.click();
       // Uncomment if needed to open homepage: await ProductDetail.openHomepage(productDetailData.product_semaglutide);

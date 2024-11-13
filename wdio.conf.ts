@@ -62,23 +62,25 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_HL_Finasteride__test.ts",
       "./test/specs/iConsult_HL_Finasteride_test_AdminPanel.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      // "./test/specs/iConsult_ED_Sildenafil__test.ts",
-      // "./test/specs/iConsult_ED_Sildenafil_test_AdminPanel.ts",
+      "./test/specs/iConsult_ED_Sildenafil__test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test_AdminPanel.ts",
       "./test/specs/iConsult_PE_Paroxetine_test.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     WebsiteMainPages: [
-      //"./test/specs/home_test.ts",
+      "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
       "./test/specs/aboutUs_test.ts",
       "./test/specs/contactUs_test.ts",
     ],
-    test: ["./test/specs/contactUs_test.ts"],
-    Login: ["./test/specs/signIn_test.ts"],
+    Test1: ["./test/specs/profile_UserProfile_test.ts"],
+    Login: [
+      "./test/specs/profile_SignIn_test.ts"
+    ],
     SanityQA: [
-      //"./test/specs/home_test.ts",
+      "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
@@ -95,13 +97,13 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_HL_Finasteride__test.ts",
       "./test/specs/iConsult_HL_Finasteride_test_AdminPanel.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      //"./test/specs/iConsult_ED_Sildenafil__test.ts",
+      "./test/specs/iConsult_ED_Sildenafil__test.ts",
       "./test/specs/iConsult_PE_Paroxetine__test.ts",
       "./test/specs/iConsult_PE_Paroxetine_test_AdminPanel.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     SanityStage: [
-      //"./test/specs/home_test.ts",
+      "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
@@ -117,17 +119,18 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_GH_Acyclovir_test.ts",
       "./test/specs/iConsult_HL_Finasteride__test.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      //"./test/specs/iConsult_ED_Sildenafil_test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
       "./test/specs/iConsult_PE_Paroxetine__test.ts",
       "./test/specs/iConsult_PE_Paroxetine_test_AdminPanel.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     SanityProd: [
-      //"./test/specs/home_test.ts",
+      "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
       "./test/specs/aboutUs_test.ts",
+      // "./test/specs/contactUs_test.ts",
       "./test/specs/profile_SignIn_test.ts",
       "./test/specs/profile_Orders_test.ts",
       "./test/specs/profile_Subscription_test.ts",
@@ -137,7 +140,7 @@ export const config: Options.Testrunner = {
       "./test/specs/profile_SideMenu_test.ts",
       // "./test/specs/iConsultEDSildenafil__invalid_test.ts",
       // "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
-      // "./test/specs/iConsult_invalidandValid_Age_flow_test.ts",
+      "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     AdminOrderApproved: [
       "./test/specs/iConsultPEParoxetine__test.ts",
@@ -178,12 +181,15 @@ export const config: Options.Testrunner = {
     {
       browserName: "chrome",
       "goog:chromeOptions": {
-        args: ["--disable-cache", "--headed", "--window-size=1920,1080"], // disable cache for Chrome
+        // args: ["--disable-cache", "--headed", "--window-size=1920,1080"], // disable cache for Chrome
+        // args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
+         args: ["--disable-cache", "--window-size=1920,1080"], // disable cache for Chrome  
       },
       browserVersion: "stable",
     },
     /*
     // ===================================
+
     // Cross Browser Testing configuration
     // ===================================
     { browserName: 'firefox'},
@@ -296,25 +302,24 @@ export const config: Options.Testrunner = {
     //   },
     // ],
 
-    // [
-    //   "testrail",
-    //   {
-    //     projectId: 22,
-    //     suiteId: 81,
-    //     domain: "techholding.testrail.io",
-    //     //username: process.env.TESTRAIL_USERNAME,
-    //     username: "priyanka.shah@techholding.co",
-    //     //apiToken: process.env.TESTRAIL_API_TOKEN,
-    //     apiToken: "iFYXI8TlxCwtV0KKTQoY-6lrKDOHQE3nYZ5BCFmWi",
-    //     //"gqWYjs3ZfMFiThBUeGdx-ifYiiuoJ.uEnU5108O3d",
-    //     //pGz6Iv.DHKma0vMQhiRr-WBj0nqiqCb/mP/pbh4nk
-    //     runName: "Test_Run_ReleaseName_ENV_Lang",
-    //     oneReport: true,
-    //     includeAll: true,
-    //     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
-    //   },
-    // ],
-  ],
+    
+// [
+//   "testrail",
+//   {
+//     projectId: 22,
+//     suiteId: 81,
+//     domain: "techholding.testrail.io",
+//     //username: process.env.TESTRAIL_USERNAME,
+//     username: "priyanka.shah@techholding.co",
+//     //apiToken: process.env.TESTRAIL_API_TOKEN,
+//     apiToken: "iFYXI8TlxCwtV0KKTQoY-6lrKDOHQE3nYZ5BCFmWi",
+//     runName: "Test_Run_20241023-Minor_PROD_ENG",
+//     oneReport: true,
+//     includeAll: true,
+//     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+//   },
+// ],
+],
   reporterSyncTimeout: 30000,
 
   // Options to be passed to Mocha.

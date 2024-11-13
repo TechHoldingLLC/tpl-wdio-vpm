@@ -6,9 +6,9 @@
   },
 
   "login_valid": {
-    "login_email": "prabhav.joshi@techholding.co",
-    "login_valid_phone_num": 6789296795,
-    "login_password": "Test@123"
+    "login_email": "priyanka.shah+75@techholding.co",
+    "login_valid_phone_num": 5454543322,
+    "login_password": "pP@1234567"
   },
   "stage_login_valid": {
     "login_email": "prabhav.joshi+8@techholding.co",
@@ -23,7 +23,7 @@
   "login_toastMessage": "Invalid Credentials",
   "login_toastMessage_es": "Credenciales no válidas",
   "login_successMessage": "Registration Successful!",
-  "login_userName": "Prabhav J",
+  "login_userName": "ums s",
   "stage_login_userName": "Test u",
   "prod_login_userName": "PriyaTest t",
   "login_email_required_message": "*Email or Mobile Number is required",

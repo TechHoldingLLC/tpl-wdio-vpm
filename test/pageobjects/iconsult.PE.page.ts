@@ -246,7 +246,7 @@ class iConsultPEFlow extends Page {
   }
 
   public get prescribedMedicine() {
-    return $("//h4[@class='mb-0']");
+    return $("//h4[@class='mb-5']");
   }
 
   public get chooseCard() {
