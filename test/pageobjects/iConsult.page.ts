@@ -343,7 +343,7 @@ class iConsult extends Page {
   }
 
   public get submitOrder() {
-    return $("//a[@class='btn-primary btn-sm mw-100 text-uppercase']");
+    return $("//*[@class='btn-primary btn-sm mw-100 text-uppercase']");
   }
 
   public get iConsultCompletionScreen() {
@@ -450,7 +450,7 @@ class iConsult extends Page {
   }
 
   public get productName() {
-    return $("//h4[@class='mb-0']");
+    return $("//h4[@class='mb-5']");
   }
 
   public get productSubscriptionPlan() {
