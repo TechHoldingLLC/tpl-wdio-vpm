@@ -187,18 +187,18 @@ class iConsult extends Page {
   }
 
   public get subscriptionSixMonthOption() {
-    return $('div[role="tabpanel"] li:nth-child(3)');
+    return $('div[role="tabpanel"] li:nth-child(2)');
   }
 
   public get subscriptionSixMonthOptionText() {
     return $(
-      'div[role="tabpanel"] li:nth-child(3) div[class="radio-detail"] div[class="radio-left-text"]'
+      'div[role="tabpanel"] li:nth-child(2) div[class="radio-detail"] div[class="radio-left-text"]'
     );
   }
 
   public get subscriptionSixMonthOptionValue() {
     return $(
-      'div[role="tabpanel"] li:nth-child(3) div[class="radio-detail"] div[class="radio-right-text"] span:nth-child(2)'
+      'div[role="tabpanel"] li:nth-child(2) div[class="radio-detail"] div[class="radio-right-text"] span:nth-child(2)'
     );
   }
 

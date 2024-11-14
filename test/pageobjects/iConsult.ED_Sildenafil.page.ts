@@ -291,7 +291,7 @@ class iConsultEDSlidenafil extends Page {
     await this.anyMedicationBeforeQuestions.waitForDisplayed();
     await browser.pause(3000);
     await this.sildenafilMedicationOption.click();
-    await browser.pause(1000);
+    await browser.pause(3000);
 
     await this.dosageYouTakeOptions.waitForDisplayed();
     await this.hundredMgOption.click();
