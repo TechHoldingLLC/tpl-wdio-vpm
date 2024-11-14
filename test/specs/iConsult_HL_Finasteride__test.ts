@@ -137,6 +137,7 @@ describe("iConsult Feature - End to End Flow", () => {
     await browser.pause(2000);
 
     // Validate order summary details
+    console.log(`verify title`);
     await iConsult.iConsultPage.waitForDisplayed(); // Wait for the summary page to load
     expect(iConsult.iConsultPage).toHaveText(
       iConsultHLData.iConsultHL_SummaryTitle
@@ -144,6 +145,7 @@ describe("iConsult Feature - End to End Flow", () => {
     await browser.pause(3000);
 
     // Validate product name in the summary
+    console.log(`verify product name`);
     const actualProductName: string = await iConsult.productName.getText();
     console.log(`Actual Product Name: ${actualProductName}`);
     expect(iConsult.productName).toHaveText(
@@ -151,11 +153,13 @@ describe("iConsult Feature - End to End Flow", () => {
     );
 
     // Validate subscription plan and price in the summary
+    console.log(`verify plan`);
     const prodSubscriptionPlan: string =
       await iConsult.productSubscriptionPlan.getText();
     console.log(`ProdSubscriptionPlan is : ${prodSubscriptionPlan}`);
     expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
 
+    console.log(`verify price`);
     const prodSubscriptionPrice: string =
       await iConsult.productSubscriptionPrice.getText();
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
