@@ -192,7 +192,7 @@ class iConsult extends Page {
 
   public get subscriptionSixMonthOptionText() {
     return $(
-      'div[role="tabpanel"] li:nth-child(2) div[class="radio-detail"] div[class="radio-left-text"]'
+      '//*[@for="sub-48"]/div/div[2]/span[2]'
     );
   }
 
