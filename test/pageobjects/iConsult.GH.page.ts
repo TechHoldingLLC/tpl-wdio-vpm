@@ -78,12 +78,12 @@ class iConsultGenitalHerpesPage extends Page {
   }
 
   // Daily medication
-  public get medicationDailyQuestions() {
+  public get takeMedicationQuestion() {
     return $('h5[data-aos="fade"]');
   }
 
-  public get medicationDailyNoAnswer() {
-    return $('label[for="option1"]');
+  public get takeMedicationAnswer() {
+    return $('label[for="option4"]');
   }
 
   public get medicationDailyYesAnswer() {
@@ -156,13 +156,11 @@ class iConsultGenitalHerpesPage extends Page {
     await this.diagnosedWithGHBeforeQuestions.waitForDisplayed();
     await this.diagnosedWithGHBeforeYes.click();
     await browser.pause(2000);
-    await browser.pause(1000);
 
     // Answer: Problem presence duration
     await this.problemPresentQuestion.waitForDisplayed();
     await this.problemPresentOption5PlusYear.click();
-    await browser.pause(1000);
-    await browser.pause(1000);
+    await browser.pause(2000);
 
     // Answer: Medical conditions
     await this.medicalConditionQuestions.waitForDisplayed();
@@ -200,19 +198,16 @@ class iConsultGenitalHerpesPage extends Page {
     // Answer: Symptoms before outbreak
     await this.notTakingMedicineGHOutBreakQuestion.waitForDisplayed();
     await this.GHOutBreakNo.click();
-    await browser.pause(1500);
-    await browser.pause(1500);
+    await browser.pause(2000);
 
-    // Answer: Daily medication
-    await this.medicationDailyQuestions.waitForDisplayed();
-    await this.medicationDailyNoAnswer.click();
-    await browser.pause(1500);
-    await browser.pause(1500);
+    // Answer: Do you take medication
+    await this.takeMedicationQuestion.waitForDisplayed();
+    await this.takeMedicationAnswer.click();
+    await browser.pause(2000);
 
     // Answer: Allergic to medication
     await this.allergicMedicationQuestions.waitForDisplayed();
     await this.allergicMedicationNoAnswer.click();
-    await browser.pause(1500);
     await browser.pause(2000);
 
     // Answer: Medications taken in the past
@@ -222,18 +217,16 @@ class iConsultGenitalHerpesPage extends Page {
     await this.continueButtonQuestionnaire.scrollIntoView();
     await browser.pause(1000);
     await this.continueButtonQuestionnaire.click();
-    await browser.pause(1500);
+    await browser.pause(2000);
 
     // Answer: Reason for prescription today
     await this.reasonForPrescriptionTodayQuestion.waitForDisplayed();
     await this.believeOutBreakRightNow.click();
-    await browser.pause(1500);
-    await browser.pause(1500);
+    await browser.pause(2000);
 
     // Answer: Outbreak frequency
     await this.outBreaksQuestion.waitForDisplayed();
     await this.onceAYearOutBreak.click();
-    await browser.pause(1500);
     await browser.pause(2000);
   }
 }

@@ -5,7 +5,7 @@
 import LoginPage from "../pageobjects/login.page.js";
 import fs from "fs";
 import homePage from "../pageobjects/home.page.js";
-import profilesidemenuPage from "../pageobjects/profileSideMenu.page.js";
+import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
 
 describe("Customer Profile - Subscription Menu Redirection", () => {
   let selectedLoginData: any; // Stores the appropriate login data based on environment
