@@ -192,7 +192,7 @@ class iConsult extends Page {
 
   public get subscriptionSixMonthOptionText() {
     return $(
-      '//*[@for="sub-48"]/div/div[2]/span[2]'
+      '//*[@for="sub-48"]/div/div[1]/span[1]'
     );
   }
 

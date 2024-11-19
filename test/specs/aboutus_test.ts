@@ -1,5 +1,5 @@
 import { expect } from "@wdio/globals";
-import aboutUsPage from "../pageobjects/aboutUs.page.js";
+import aboutUsPage from "../pageobjects/aboutus.page.js";
 import fs from "fs";
 
 /**
@@ -59,7 +59,7 @@ describe("About Us Feature", () => {
         await expect(browser).toHaveTitle(pageTitle.pg_title_about_us);
       } else {
         expectedHeaders = [
-          "Cerrando la brecha de atención médica para la gente latino",
+          "Mejorando las deficiencias en la atención médica para la comunidad latina",
           "El compromiso del Dr. Linares y el enfoque holístico de la plataforma",
           "Experto respetado y figura de confianza",
         ];
