@@ -1,5 +1,5 @@
 import { expect } from "@wdio/globals";
-import ProductDetail from "../pageobjects/productDetail.page.js";
+import ProductDetail from "../pageobjects/productdetail.page.js";
 import fs from "fs";
 
 describe("Product Details Feature", () => {

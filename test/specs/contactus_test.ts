@@ -1,5 +1,5 @@
 import { expect } from "@wdio/globals";
-import ContactUs from "../pageobjects/contactUs.page.js";
+import ContactUs from "../pageobjects/contactus.page.js";
 import fs from "fs";
 
 /**
@@ -82,7 +82,10 @@ describe("Contact Us Feature", () => {
    */
   it("C29675 Website Main Pages: Verify Submit Contact Us form with Valid details", async () => {
     // Get the language from the current URL
-    const language = await ContactUs.getLanguageFromUrl(await browser.getUrl());
+    const url: string = await browser.getUrl(); 
+    const language = await ContactUs.getLanguageFromUrl(url);
+
+    if (url.includes("qa") || url.includes("stage")) {
 
     // Verify the email field is displayed on the page
     expect(await ContactUs.emailField.isDisplayed()).toBeTruthy();
@@ -122,6 +125,10 @@ describe("Contact Us Feature", () => {
         contactdata.cu_contactSuccessmessage_spanish
       );
     }
+  }
+  else{
+    console.log("Test is executable only on QA & Stage Environments");
+  }
   });
 
   /**

@@ -23,7 +23,7 @@
   "login_toastMessage": "Invalid Credentials",
   "login_toastMessage_es": "Credenciales no válidas",
   "login_successMessage": "Registration Successful!",
-  "login_userName": "ums s",
+  "login_userName": "uma s",
   "stage_login_userName": "Test u",
   "prod_login_userName": "PriyaTest t",
   "login_email_required_message": "*Email or Mobile Number is required",

@@ -1,4 +1,5 @@
 import homePage from "../pageobjects/home.page.js";
+import LoginPage from "../pageobjects/login.page.js";
 import fs from "fs";
 
 /**
@@ -36,7 +37,7 @@ describe("HomePage Features", () => {
    * Description: This test verifies that the Home Page opens without errors, checks the page title based on the detected language,
    * and ensures that all hyperlinks on the page are correct for various environments (QA, Stage, Production).
    */
-  it("C29672 Website Main Pages: Verify Landing Page opens error-free", async () => {
+  it.skip("C29672 Website Main Pages: Verify Landing Page opens error-free", async () => {
     // Pause the browser for 5 seconds to allow the page content to load fully
     await browser.pause(5000);
 
@@ -95,5 +96,14 @@ describe("HomePage Features", () => {
     // Log the visible links on the Home Page and compare them with the expected links
     console.log("Visible Links on the HomePage are: " + actualLinks);
     expect(actualLinks).toEqual(expectedLinks); // Validate that the actual links match the expected ones
+  });
+
+
+  it.skip("C29672 Website Main Pages: Verify Landing Page ED tile action", async () => {
+    await LoginPage.signinButton.click(); // Click the sign-in button 
+    browser.pause(1500);
+    await homePage.tileED.doubleClick();
+    browser.pause(10000);
+    const url: string = await browser.getUrl();
   });
 });

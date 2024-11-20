@@ -63,7 +63,19 @@ class Signup extends Page {
     return $("//*[@class='btn-primary btn-sm mw-100 text-uppercase']");
   }
 
-  public async signUp(email: string, password: string, firstName: string, lastName: string, mobileNumber: number): Promise<void> {
+  public async generateRandomMobileNumber(){
+    const prefix = Math.floor(Math.random() * 9) + 1; 
+    const randomNumber = Math.floor(Math.random() * 1_000_000_000); 
+    return `${prefix}${randomNumber.toString().padStart(9, '0')}`;
+};
+
+  public async generateRandomEmail() {
+    const randomString = Math.random().toString(36).substring(2, 10); 
+    const domain = "yopmail.com"; 
+    return `${randomString}@${domain}`; 
+  };
+
+  public async signUp(email: string, password: string, firstName: string, lastName: string, mobileNumber: string): Promise<void> {
     await this.signUpLink.waitForClickable();
     await this.signUpLink.click();
     await this.emailInput.setValue(email);

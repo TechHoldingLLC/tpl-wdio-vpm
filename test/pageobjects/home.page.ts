@@ -668,6 +668,11 @@ class HomePage extends Page {
   public async navigateToFooter(): Promise<void> {
     await browser.pause(1500);
   }
+
+  public get tileED() {
+    return $("//*[@class='treatment-list']/div[1]/a");
+  }
+
 }
 
 export default new HomePage();
