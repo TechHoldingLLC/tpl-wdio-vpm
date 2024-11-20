@@ -50,7 +50,35 @@ export const config: Options.Testrunner = {
   //
   specs: ["./test/specs/*.ts"],
   suites: {
+    Tests_Headless: [
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
+      "./test/specs/profile_SignUp_test.ts",
+      "./test/specs/home_test.ts",
+      "./test/specs/home_Footer_test.ts",
+      "./test/specs/home_SocialMedia_test.ts",
+      "./test/specs/product_Detail_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/profile_SideMenu_test.ts",
+    ],
+    Tests_Headed: [
+      "./test/specs/profile_SignIn_test.ts",
+      "./test/specs/contactus_test.ts", 
+      "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
+      "./test/specs/profile_ShippingAddress_test.ts",
+      "./test/specs/iConsult_GH_Acyclovir_test.ts",
+      "./test/specs/iConsult_HL_Finasteride_test.ts",
+      "./test/specs/iConsult_ED_Tadalafil_test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
+      "./test/specs/iConsult_PE_Paroxetine_test.ts",
+    ],
+    Test1: ["./test/specs/home_test.ts"],
     Profile: [
+      "./test/specs/profile_SignUp_test.ts",
+      "./test/specs/profile_SignIn_test.ts",
+      "./test/specs/profile_SideMenu_test.ts",
       "./test/specs/profile_Orders_test.ts",
       "./test/specs/profile_Subscription_test.ts",
       "./test/specs/profile_AddCard_test.ts",
@@ -59,11 +87,10 @@ export const config: Options.Testrunner = {
     ],
     iConsult: [
       "./test/specs/iConsult_GH_Acyclovir_test.ts",
-      "./test/specs/iConsult_HL_Finasteride__test.ts",
+      "./test/specs/iConsult_HL_Finasteride_test.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      "./test/specs/iConsult_ED_Sildenafil__test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
       "./test/specs/iConsult_PE_Paroxetine_test.ts",
-      "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     WebsiteMainPages: [
       "./test/specs/home_test.ts",
@@ -71,31 +98,26 @@ export const config: Options.Testrunner = {
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
       "./test/specs/aboutus_test.ts",
-      "./test/specs/contactUs_test.ts",
-    ],
-    Test1: ["./test/specs/profile_SignUp_test.ts"],
-    Login: [
-      "./test/specs/profile_SignIn_test.ts"
+      "./test/specs/contactus_test.ts",
     ],
     SanityQA: [
       "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.s",
       "./test/specs/product_Detail_test.ts",
-      "./test/specs/aboutUs_test.ts",
-      "./test/specs/contactUs_test.ts",
+      "./test/specs/aboutus_test.ts",
+      "./test/specs/contactus_test.ts",
       "./test/specs/profile_SignIn_test.ts",
       "./test/specs/profile_Orders_test.ts",
       "./test/specs/profile_Subscription_test.ts",
       "./test/specs/profile_AddCard_test.ts",
-      "./test/specs/profile_ShippingAddress_test.ts",
       "./test/specs/profile_UserProfile_test.ts",
       "./test/specs/profile_SideMenu_test.ts",
       "./test/specs/iConsult_GH_Acyclovir_test.ts",
-      "./test/specs/iConsult_HL_Finasteride__test.ts",
+      "./test/specs/iConsult_HL_Finasteride_test.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      "./test/specs/iConsult_ED_Sildenafil__test.ts",
-      "./test/specs/iConsult_PE_Paroxetine__test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
+      "./test/specs/iConsult_PE_Paroxetine_test.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
     SanityProd: [
@@ -104,6 +126,7 @@ export const config: Options.Testrunner = {
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
       "./test/specs/aboutUs_test.ts",
+      "./test/specs/contactus_test.ts",
       "./test/specs/profile_SignIn_test.ts",
       "./test/specs/profile_Orders_test.ts",
       "./test/specs/profile_Subscription_test.ts",
@@ -113,14 +136,6 @@ export const config: Options.Testrunner = {
       "./test/specs/profile_SideMenu_test.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
       "./test/specs/iConsult_ED_Tadalafil_test.ts",
-    ],
-    AdminOrderApproved: [
-      "./test/specs/iConsultPEParoxetine__test.ts",
-      "./test/specs/iConsultPEParoxetine_adminPanel_test.ts",
-    ],
-    AdminOrderDeclined: [
-      "./test/specs/iConsultEDSildenafil__invalid_test.ts",
-      "./test/specs/iConsultEDSildenafil_invalid_AdminOrderDeclined_test.ts",
     ],
   },
   // Patterns to exclude.
@@ -154,13 +169,13 @@ export const config: Options.Testrunner = {
       browserName: "chrome",
       "goog:chromeOptions": {
         // args: ["--disable-cache", "--headed", "--window-size=1920,1080"], // disable cache for Chrome
-        // args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
-         args: ["--disable-cache", "--window-size=1920,1080"], // disable cache for Chrome  
+        args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
+        //  args: ["--disable-cache", "--window-size=1920,1080"], // disable cache for Chrome  
       },
       browserVersion: "stable",
-    },
+    }
     /*
-    // ===================================
+    // ===================================s
 
     // Cross Browser Testing configuration
     // ===================================

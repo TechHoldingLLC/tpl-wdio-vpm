@@ -3,7 +3,6 @@
 
 import SignUpPage from "../pageobjects/signup.page.js";
 import LoginPage from "../pageobjects/login.page.js";
-
 import fs from "fs";
 
 describe("VPM Sign Up Features", () => {
@@ -25,10 +24,18 @@ describe("VPM Sign Up Features", () => {
   });
 
   it("SingUp Test", async () => {
-    await SignUpPage.signUp(signupdata.email_value, signupdata.password_value, signupdata.firstname_value, signupdata.lastname_value, signupdata.mobilenumber_value);
-    await browser.pause(5000);
     const url: string = await browser.getUrl(); 
-    await expect(url).toContain("showAccountPanel=true");
+    if (url.includes("qa")) {
+      const email_value = await SignUpPage.generateRandomEmail();
+      const mobilenumber_value = await SignUpPage.generateRandomMobileNumber();
+      console.log('Generated Email Address:', email_value);
+      console.log('Generated Mobile Number:', mobilenumber_value);
+      await SignUpPage.signUp(email_value, signupdata.password_value, signupdata.firstname_value, signupdata.lastname_value, mobilenumber_value);
+      await browser.pause(5000);
+      const currentUrl: string = await browser.getUrl(); 
+      await expect(currentUrl).toContain("showAccountPanel=true");
+    } else {
+      console.log("Test is executable only on QA Env");
+    }
   }); 
-
 });
