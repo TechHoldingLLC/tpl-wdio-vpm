@@ -673,6 +673,9 @@ class HomePage extends Page {
     return $("//*[@class='treatment-list']/div[1]/a");
   }
 
+  public get tileStart_iConsultButton() {
+    return $("//a[@class = 'btn btn-primary btn-orange btn-iconsult']");
+  }
 }
 
 export default new HomePage();

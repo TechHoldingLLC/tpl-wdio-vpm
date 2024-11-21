@@ -1,7 +1,7 @@
 // Test Case: SideMenu: Verify side menu links are not broken (C29658)
 // Description: This test case verifies that all links in the side menu, such as Orders, Subscriptions, Saved Cards, Shipping Address, and Profile, are functional and direct to the correct pages without broken links.
 
-import SideMenuPage from "../pageobjects/sideMenu.page.js";
+import SideMenuPage from "../pageobjects/sidemenu.page.js";
 import LoginPage from "../pageobjects/login.page.js";
 import fs from "fs";
 

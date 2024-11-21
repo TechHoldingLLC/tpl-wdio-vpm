@@ -12,6 +12,12 @@ class SideMenuPage extends Page {
     );
   }
 
+   public get sideMenuCloseButton() {
+      return $(
+        "//span[@class='btn-rounded Header_close-btn__rNA2L']"
+      );
+  }
+
   /**
    * @description Opens the side menu by clicking on the side menu element.
    * @returns {Promise<void>}
