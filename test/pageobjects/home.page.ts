@@ -673,6 +673,18 @@ class HomePage extends Page {
     return $("//*[@class='treatment-list']/div[1]/a");
   }
 
+  public get tilePE () {
+    return $("//*[@class='treatment-list']/div[2]/a");
+  }
+
+  public get tileHL () {
+    return $("//*[@class='treatment-list']/div[3]/a");
+  }
+
+  public get tileGH () {
+    return $("//*[@class='treatment-list']/div[4]/a");
+  }
+
   public get tileStart_iConsultButton() {
     return $("//a[@class = 'btn btn-primary btn-orange btn-iconsult']");
   }
