@@ -102,7 +102,7 @@ describe("HomePage Features", () => {
   });
 
 
-  it("C29672 Website Main Pages: Verify Landing Page ED tile action - When iConsult user is logged-in", async () => {
+  it("Website Main Pages: Verify Landing Page ED tile action - When iConsult user is logged-in", async () => {
     await LoginPage.signinButton.click(); // Click the sign-in button 
      // Read login & iConsult data from external JSON files
     const logindata = JSON.parse(
@@ -161,6 +161,221 @@ describe("HomePage Features", () => {
 
     expect(actualQuestionString).toEqual(expectedFirstQuestionString);
   });
+
+it("Website Main Pages: Verify Landing Page ED tile action - when user is not logged-in", async () => {
+  await browser.pause(3000);
+  await homePage.tileED.waitForClickable();
+  await homePage.tileED.doubleClick();
+  await browser.pause(3000);
+  await iConsultPage.consentCheckbox.waitForDisplayed();
+  const url = await browser.getUrl();
+  await expect(url).toContain("start-iconsult");
+  await iConsultPage.consentCheckbox.click();
+  await iConsultPage.consentContinueButton.click();
+  await browser.pause(5000);
+  await iConsultPage.dobPage.waitForExist();
+  const isDisplayed = await iConsultPage.dobPage.isDisplayed();
+  await expect(isDisplayed).toBe(true);
+});
+
+it("Website Main Pages: Verify Landing Page ED tile - Start iConsult action - when user is not logged-in", async () => {
+  await browser.pause(3000);
+  await homePage.tileED.waitForDisplayed();
+  await homePage.tileED.moveTo();
+  await homePage.tileStart_iConsultButton.waitForDisplayed();
+  await homePage.tileStart_iConsultButton.doubleClick();
+  await browser.pause(3000);
+  await iConsultPage.consentCheckbox.waitForDisplayed();
+  const url = await browser.getUrl();
+  await expect(url).toContain("start-iconsult");
+  await iConsultPage.consentCheckbox.click();
+  await iConsultPage.consentContinueButton.click();
+  await browser.pause(5000);
+  await iConsultPage.dobPage.waitForExist();
+  const isDisplayed = await iConsultPage.dobPage.isDisplayed();
+  await expect(isDisplayed).toBe(true);
+});
+
+
+it("Website Main Pages: Verify Landing Page PE tile action - When iConsult user is logged-in", async () => {
+  await LoginPage.signinButton.click(); // Click the sign-in button 
+   // Read login & iConsult data from external JSON files
+  const logindata = JSON.parse(
+    fs.readFileSync("./test/data/loginData.json", "utf-8")
+  );
+  const iConsultPEData = JSON.parse(
+    fs.readFileSync("./test/data/iConsultPEData.json", "utf-8")
+  );
+  let loginData: any;
+
+  // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
+  let url;
+  url = await browser.getUrl();
+  const language: string = await LoginPage.getLanguageFromUrl(url);
+
+  if (url.includes("qa")) {
+    loginData = logindata.login_valid;
+  } else if (url.includes("stage")) {
+    loginData = logindata.stage_login_valid;
+  } else {
+    loginData = logindata.prod_login_valid;
+  }
+
+  // Log in using the determined credentials
+  await LoginPage.login(loginData.login_email, loginData.login_password);
+  await browser.pause(3000); // Wait for login to complete
+  await SideMenuPage.sideMenuCloseButton.waitForDisplayed();
+  await SideMenuPage.sideMenuCloseButton.click();
+  browser.pause(3000);
+
+  // Home page - tile verify
+  await homePage.tilePE.waitForClickable();
+  await homePage.tilePE.doubleClick();
+  browser.pause(3000);
+  await iConsultPage.consentCheckbox.waitForDisplayed();
+  url = await browser.getUrl();
+  await expect(url).toContain("start-iconsult");
+
+  // Accept the iConsult consent form
+  await iConsultPage.consentCheckbox.click();
+  await iConsultPage.consentContinueButton.click();
+  await browser.pause(5000);
+  await iConsultPage.startNewiConsult.waitForDisplayed();
+
+  // Ensure that problem selection question is skipped 
+  if (await iConsultPage.startNewiConsult.isDisplayed()) {
+    await iConsultPage.startNewiConsult.doubleClick();
+    await browser.pause(4000);
+  }
+  await iConsultPage.optionsListOfQuestion.waitForExist();
+  let actualQuestionString = await iConsultPage.firstQuestion.getText();
+  const expectedFirstQuestionString =
+  language === "en"
+    ? iConsultPEData.iConsultPE_firstQuestionString_en
+    : iConsultPEData.iConsultPE_firstQuestionString_es
+
+  expect(actualQuestionString).toEqual(expectedFirstQuestionString);
+});
+
+it("Website Main Pages: Verify Landing Page HL tile action - When iConsult user is logged-in", async () => {
+  await LoginPage.signinButton.click(); // Click the sign-in button 
+   // Read login & iConsult data from external JSON files
+  const logindata = JSON.parse(
+    fs.readFileSync("./test/data/loginData.json", "utf-8")
+  );
+  const iConsultHLData = JSON.parse(
+    fs.readFileSync("./test/data/iConsultHLData.json", "utf-8")
+  );
+  let loginData: any;
+
+  // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
+  let url;
+  url = await browser.getUrl();
+  const language: string = await LoginPage.getLanguageFromUrl(url);
+
+  if (url.includes("qa")) {
+    loginData = logindata.login_valid;
+  } else if (url.includes("stage")) {
+    loginData = logindata.stage_login_valid;
+  } else {
+    loginData = logindata.prod_login_valid;
+  }
+
+  // Log in using the determined credentials
+  await LoginPage.login(loginData.login_email, loginData.login_password);
+  await browser.pause(3000); // Wait for login to complete
+  await SideMenuPage.sideMenuCloseButton.waitForDisplayed();
+  await SideMenuPage.sideMenuCloseButton.click();
+  browser.pause(3000);
+
+  // Home page - tile verify
+  await homePage.tileHL.waitForClickable();
+  await homePage.tileHL.doubleClick();
+  browser.pause(3000);
+  await iConsultPage.consentCheckbox.waitForDisplayed();
+  url = await browser.getUrl();
+  await expect(url).toContain("start-iconsult");
+
+  // Accept the iConsult consent form
+  await iConsultPage.consentCheckbox.click();
+  await iConsultPage.consentContinueButton.click();
+  await browser.pause(5000);
+  await iConsultPage.startNewiConsult.waitForDisplayed();
+
+  // Ensure that problem selection question is skipped 
+  if (await iConsultPage.startNewiConsult.isDisplayed()) {
+    await iConsultPage.startNewiConsult.doubleClick();
+    await browser.pause(4000);
+  }
+  await iConsultPage.optionsListOfQuestion.waitForExist();
+  let actualQuestionString = await iConsultPage.firstQuestion.getText();
+  const expectedFirstQuestionString =
+  language === "en"
+    ? iConsultHLData.iConsultHL_firstQuestionString_en
+    : iConsultHLData.iConsultHL_firstQuestionString_es
+
+  expect(actualQuestionString).toEqual(expectedFirstQuestionString);
+});
+
+it("Website Main Pages: Verify Landing Page GH tile action - When iConsult user is logged-in", async () => {
+  await LoginPage.signinButton.click(); // Click the sign-in button 
+   // Read login & iConsult data from external JSON files
+  const logindata = JSON.parse(
+    fs.readFileSync("./test/data/loginData.json", "utf-8")
+  );
+  const iConsultGHData = JSON.parse(
+    fs.readFileSync("./test/data/iConsultGHData.json", "utf-8")
+  );
+  let loginData: any;
+
+  // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
+  let url;
+  url = await browser.getUrl();
+  const language: string = await LoginPage.getLanguageFromUrl(url);
+
+  if (url.includes("qa")) {
+    loginData = logindata.login_valid;
+  } else if (url.includes("stage")) {
+    loginData = logindata.stage_login_valid;
+  } else {
+    loginData = logindata.prod_login_valid;
+  }
+
+  // Log in using the determined credentials
+  await LoginPage.login(loginData.login_email, loginData.login_password);
+  await browser.pause(3000); // Wait for login to complete
+  await SideMenuPage.sideMenuCloseButton.waitForDisplayed();
+  await SideMenuPage.sideMenuCloseButton.click();
+  browser.pause(3000);
+
+  // Home page - tile verify
+  await homePage.tileGH.waitForClickable();
+  await homePage.tileGH.doubleClick();
+  browser.pause(3000);
+  await iConsultPage.consentCheckbox.waitForDisplayed();
+  url = await browser.getUrl();
+  await expect(url).toContain("start-iconsult");
+ 
+  // Accept the iConsult consent form
+  await iConsultPage.consentCheckbox.click();
+  await iConsultPage.consentContinueButton.click();
+  await browser.pause(5000);
+  await iConsultPage.startNewiConsult.waitForDisplayed();
+
+  // Ensure that problem selection question is skipped 
+  if (await iConsultPage.startNewiConsult.isDisplayed()) {
+    await iConsultPage.startNewiConsult.doubleClick();
+    await browser.pause(4000);
+  }
+  await iConsultPage.optionsListOfQuestion.waitForExist();
+  let actualQuestionString = await iConsultPage.firstQuestion.getText();
+  const expectedFirstQuestionString =
+  language === "en"
+    ? iConsultGHData.iConsultGH_firstQuestionString_en
+    : iConsultGHData.iConsultGH_firstQuestionString_es
+
+  expect(actualQuestionString).toEqual(expectedFirstQuestionString);
+});
 
 it("Website Main Pages: Verify Landing Page ED tile - Start iConsult action - When iConsult user is logged-in", async () => {
   await LoginPage.signinButton.click(); // Click the sign-in button 
@@ -224,39 +439,68 @@ it("Website Main Pages: Verify Landing Page ED tile - Start iConsult action - Wh
   expect(actualQuestionString).toEqual(expectedFirstQuestionString);
 });
 
-it("Website Main Pages: Verify Landing Page ED tile action - when user is not logged-in", async () => {
-  await browser.pause(3000);
-  await homePage.tileED.waitForClickable();
-  await homePage.tileED.doubleClick();
-  await browser.pause(3000);
-  await iConsultPage.consentCheckbox.waitForDisplayed();
-  const url = await browser.getUrl();
-  await expect(url).toContain("start-iconsult");
-  await iConsultPage.consentCheckbox.click();
-  await iConsultPage.consentContinueButton.click();
-  await browser.pause(5000);
-  await iConsultPage.dobPage.waitForExist();
-  const isDisplayed = await iConsultPage.dobPage.isDisplayed();
-  await expect(isDisplayed).toBe(true);
-});
+// it("Website Main Pages: Verify Landing Page PE tile - Start iConsult action - When iConsult user is logged-in", async () => {
+//   await LoginPage.signinButton.click(); // Click the sign-in button 
+//    // Read login & iConsult data from external JSON files
+//   const logindata = JSON.parse(
+//     fs.readFileSync("./test/data/loginData.json", "utf-8")
+//   );
+//   const iConsultPEData = JSON.parse(
+//     fs.readFileSync("./test/data/iConsultPEData.json", "utf-8")
+//   );
+//   let loginData: any;
 
-it("Website Main Pages: Verify Landing Page ED tile - Start iConsult action - when user is not logged-in", async () => {
-  await browser.pause(3000);
-  await homePage.tileED.waitForDisplayed();
-  await homePage.tileED.moveTo();
-  await homePage.tileStart_iConsultButton.waitForDisplayed();
-  await homePage.tileStart_iConsultButton.doubleClick();
-  await browser.pause(3000);
-  await iConsultPage.consentCheckbox.waitForDisplayed();
-  const url = await browser.getUrl();
-  await expect(url).toContain("start-iconsult");
-  await iConsultPage.consentCheckbox.click();
-  await iConsultPage.consentContinueButton.click();
-  await browser.pause(5000);
-  await iConsultPage.dobPage.waitForExist();
-  const isDisplayed = await iConsultPage.dobPage.isDisplayed();
-  await expect(isDisplayed).toBe(true);
-});
+//   // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
+//   let url;
+//   url = await browser.getUrl();
+//   const language: string = await LoginPage.getLanguageFromUrl(url);
+
+//   if (url.includes("qa")) {
+//     loginData = logindata.login_valid;
+//   } else if (url.includes("stage")) {
+//     loginData = logindata.stage_login_valid;
+//   } else {
+//     loginData = logindata.prod_login_valid;
+//   }
+
+//   // Log in using the determined credentials
+//   await LoginPage.login(loginData.login_email, loginData.login_password);
+//   await browser.pause(3000); // Wait for login to complete
+//   await SideMenuPage.sideMenuCloseButton.waitForDisplayed();
+//   await SideMenuPage.sideMenuCloseButton.click();
+//   browser.pause(3000);
+
+//   // Home page - tile verify
+//   await homePage.tilePE.waitForDisplayed();
+//   await homePage.tilePE.moveTo();
+//   await homePage.tileStart_iConsultButton.waitForDisplayed();
+//   await homePage.tileStart_iConsultButton.doubleClick();
+//   browser.pause(3000);
+//   await iConsultPage.consentCheckbox.waitForDisplayed();
+//   url = await browser.getUrl();
+//   await expect(url).toContain("start-iconsult");
+
+//   // Accept the iConsult consent form
+//   await iConsultPage.consentCheckbox.click();
+//   await iConsultPage.consentContinueButton.click();
+//   await browser.pause(5000);
+//   await iConsultPage.startNewiConsult.waitForDisplayed();
+
+//   // Ensure that problem selection question is skipped 
+//   if (await iConsultPage.startNewiConsult.isDisplayed()) {
+//     await iConsultPage.startNewiConsult.doubleClick();
+//     await browser.pause(4000);
+//   }
+//   await iConsultPage.optionsListOfQuestion.waitForExist();
+//   let actualQuestionString = await iConsultPage.firstQuestion.getText();
+//   const expectedFirstQuestionString =
+//   language === "en"
+//     ? iConsultPEData.iConsultPE_firstQuestionString_en
+//     : iConsultPEData.iConsultPE_firstQuestionString_es
+
+//   expect(actualQuestionString).toEqual(expectedFirstQuestionString);
+// });
+
 });
 
 

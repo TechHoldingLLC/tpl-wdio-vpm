@@ -69,10 +69,10 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
       "./test/specs/profile_ShippingAddress_test.ts",
       "./test/specs/iConsult_GH_Acyclovir_test.ts",
-      // "./test/specs/iConsult_HL_Finasteride_test.ts",
-      // "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      // "./test/specs/iConsult_ED_Sildenafil_test.ts",
-      // "./test/specs/iConsult_PE_Paroxetine_test.ts",
+      "./test/specs/iConsult_HL_Finasteride_test.ts",
+      "./test/specs/iConsult_ED_Tadalafil_test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
+      "./test/specs/iConsult_PE_Paroxetine_test.ts",
     ],
     Test1: ["./test/specs/home_test.ts"],
     Profile: [
@@ -168,9 +168,8 @@ export const config: Options.Testrunner = {
     {
       browserName: "chrome",
       "goog:chromeOptions": {
-        // args: ["--disable-cache", "--headed", "--window-size=1920,1080"], // disable cache for Chrome
-        args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
-        //  args: ["--disable-cache", "--window-size=1920,1080"], // disable cache for Chrome  
+        args: ["--disable-cache", "--headed", "--window-size=1920,1080"], // disable cache for Chrome
+        // args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
       },
       browserVersion: "stable",
     }
