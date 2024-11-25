@@ -18,8 +18,9 @@ describe("HomePage Features", () => {
    * Hook: Before All Tests
    * Description: Load the Home Page, pause for 2 seconds, and retrieve the page title and data from external JSON files.
    */
-  before(async () => {
+  beforeEach(async () => {
     // Navigate to the homepage (base URL)
+    await browser.reloadSession();
     await browser.url("");
 
     // Pause the browser for 2 seconds to allow the page to load
@@ -148,10 +149,10 @@ describe("HomePage Features", () => {
 
     // Ensure that problem selection question is skipped 
     if (await iConsultPage.startNewiConsult.isDisplayed()) {
-      await iConsultPage.startNewiConsult.click();
-      await browser.pause(2000);
+      await iConsultPage.startNewiConsult.doubleClick();
+      await browser.pause(4000);
     }
-    await browser.pause(3000);
+    await iConsultPage.optionsListOfQuestion.waitForExist();
     let actualQuestionString = await iConsultPage.firstQuestion.getText();
     const expectedFirstQuestionString =
     language === "en"
@@ -210,10 +211,10 @@ it("Website Main Pages: Verify Landing Page ED tile - Start iConsult action - Wh
 
   // Ensure that problem selection question is skipped 
   if (await iConsultPage.startNewiConsult.isDisplayed()) {
-    await iConsultPage.startNewiConsult.click();
-    await browser.pause(2000);
+    await iConsultPage.startNewiConsult.doubleClick();
+    await browser.pause(4000);
   }
-  await browser.pause(3000);
+  await iConsultPage.optionsListOfQuestion.waitForExist();
   let actualQuestionString = await iConsultPage.firstQuestion.getText();
   const expectedFirstQuestionString =
   language === "en"
