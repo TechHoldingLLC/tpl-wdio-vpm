@@ -466,6 +466,12 @@ class iConsult extends Page {
       '//div[contains(@class,"Summary_total-pay")]/div/span[contains(@class, "Summary_total-main-price")]'
     );
   }
+
+  public get optionsListOfQuestion(){
+    return $(
+      "//div[@class='mt-60 form-content']"
+    )
+  }
 }
 
 export default new iConsult();
