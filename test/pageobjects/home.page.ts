@@ -686,7 +686,7 @@ class HomePage extends Page {
   }
 
   public get tileStart_iConsultButton() {
-    return $("//a[@class = 'btn btn-primary btn-orange btn-iconsult']");
+    return $("//a[@class='btn btn-primary btn-orange btn-iconsult']");
   }
 }
 
