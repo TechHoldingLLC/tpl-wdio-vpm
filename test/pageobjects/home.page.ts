@@ -685,8 +685,24 @@ class HomePage extends Page {
     return $("//*[@class='treatment-list']/div[4]/a");
   }
 
-  public get tileStart_iConsultButton() {
-    return $("//a[@class='btn btn-primary btn-orange btn-iconsult']");
+  public get tileWL () {
+    return $("//*[@class='treatment-list']/div[5]/a");
+  }
+
+  public get tileED_StartiConsultButton() {
+    return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][1]");
+  }
+
+  public get tilePE_StartiConsultButton() {
+    return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][2]");
+  }
+
+  public get tileHL_StartiConsultButton() {
+    return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][3]");
+  }
+
+  public get tileGH_StartiConsultButton() {
+    return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][4]");
   }
 }
 
