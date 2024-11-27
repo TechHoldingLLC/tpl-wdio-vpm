@@ -55,6 +55,7 @@ describe("HomePage Features", () => {
 
     // Pause for 2 seconds before proceeding
     await browser.pause(2000);
+    await homePage.getStartediConsultButton.moveTo();
 
     // Determine the environment (QA, Stage, or Production) and verify the links accordingly
     let expectedLinks: string[];
