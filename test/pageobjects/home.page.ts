@@ -704,6 +704,10 @@ class HomePage extends Page {
   public get tileGH_StartiConsultButton() {
     return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][4]");
   }
+
+  public get tileWL_StartiConsultButton() {
+    return $("//*[@class='treatment-list']/div[1]/a//following::a[@class='btn btn-primary btn-orange btn-iconsult'][5]");
+  }
 }
 
 export default new HomePage();
