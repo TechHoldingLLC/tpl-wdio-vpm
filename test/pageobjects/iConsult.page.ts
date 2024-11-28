@@ -47,6 +47,10 @@ class iConsult extends Page {
     return $('//h5[@class="title undefined aos-init aos-animate"]');
   }
 
+  public get firstQuestionWL() {
+    return $('//h5[@class="title"]');
+  }
+
   public get sideMenuCloseButton() {
     return $('[class="btn-rounded Header_close-btn__rNA2L"]');
   }
