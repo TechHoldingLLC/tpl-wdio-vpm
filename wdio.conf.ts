@@ -62,6 +62,7 @@ export const config: Options.Testrunner = {
       "./test/specs/product_Detail_test.ts",
       "./test/specs/aboutus_test.ts",
       "./test/specs/profile_SideMenu_test.ts",
+      "./test/specs/semaglutideProductDetail_test.ts",
     ],
     Tests_Headed: [
       "./test/specs/profile_SignIn_test.ts",
@@ -74,7 +75,7 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_ED_Sildenafil_test.ts",
       "./test/specs/iConsult_PE_Paroxetine_test.ts",
     ],
-    Test1: ["./test/specs/home_test.ts"],
+    Test1: ["./test/specs/semaglutideProductDetail_test.ts"],
     Profile: [
       "./test/specs/profile_SignUp_test.ts",
       "./test/specs/profile_SignIn_test.ts",
