@@ -101,7 +101,7 @@ class ProductDetail extends Page {
 
   public get productName() {
     return $(
-      "div[class='ProductDetail_product-detail-banner-content__Oz2u8'] h5"
+      "//div[contains(@class,'ProductDetail_product-detail-banner-content')]/h1"
     );
   }
 
@@ -191,6 +191,7 @@ class ProductDetail extends Page {
     );
     for await (const [index, collapseOption] of productDetails.entries()) {
       await collapseOption.click();
+      await browser.scroll(0, 100);
       const textArray = await collapseOption.$$(
         "//div[contains(@class,'ProductDetail_accordion-content-contentfull')]"
       );
@@ -216,11 +217,14 @@ class ProductDetail extends Page {
   }
 
   public async FAQsInfo() {
+    const faqSection = browser.$("//h3");
+    await faqSection.scrollIntoView();
     const FAQs = await browser.$$("//div[@class='accordion-item']");
     for (let i = 0; i < FAQs.length; i++) {
       const collapse = FAQs[i];
       await collapse.click();
       await browser.pause(2000);
+      await browser.scroll(0, 100);
       const text = await $$("//div[@class='answer-content ']/p[1]");
       if (text.length === 0) {
         console.error(`No text found for FAQ ${i + 1}`);
@@ -234,7 +238,6 @@ class ProductDetail extends Page {
     }
     return true;
   }
-
   /**
    * Validation elements on the Semaglutide form.
    */

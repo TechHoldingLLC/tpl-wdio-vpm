@@ -110,17 +110,19 @@ describe("iConsult Feature - End to End Flow", () => {
     // Continue to subscription selection
     await iConsult.productContinueButton.click();
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
-    await iConsult.subscriptionSixMonthOption.click(); // Select 6-month subscription
+    await iConsult.subscriptionThreeMonthOption.click(); // Select 3-month subscription
+    await browser.pause(1000);
 
     // Validate subscription plan and amount
     const subscriptionPlanDurationValue: string =
-      await iConsult.subscriptionSixMonthOptionText.getText();
+      await iConsult.subscriptionThreeMonthOptionText.getText();
     console.log(
       `Subscription Plan selected by the User: ${subscriptionPlanDurationValue}`
     );
     const subscriptionPlanAmount: string =
-      await iConsult.subscriptionSixMonthOptionValue.getText();
+      await iConsult.subscriptionThreeMonthOptionValue.getText();
     console.log(`Subscription Plan Amount: ${subscriptionPlanAmount}`);
+
     await browser.pause(1000);
     await iConsult.subscriptionPlanContinueButton.click();
     await browser.pause(1500);

@@ -66,7 +66,7 @@ export const config: Options.Testrunner = {
     ],
     Tests_Headed: [
       "./test/specs/profile_SignIn_test.ts",
-      "./test/specs/contactus_test.ts", 
+      "./test/specs/contactus_test.ts",
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
       "./test/specs/profile_ShippingAddress_test.ts",
       "./test/specs/iConsult_GH_Acyclovir_test.ts",
@@ -173,7 +173,7 @@ export const config: Options.Testrunner = {
         // args: ["--disable-cache", "--headless", "--window-size=1920,1080"], // disable cache for Chrome
       },
       browserVersion: "stable",
-    }
+    },
     /*
     // ===================================s
 
@@ -232,7 +232,7 @@ export const config: Options.Testrunner = {
   baseUrl: baseUrl,
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 20000,
+  waitforTimeout: 30000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
@@ -289,24 +289,23 @@ export const config: Options.Testrunner = {
     //   },
     // ],
 
-    
-// [
-//   "testrail",
-//   {
-//     projectId: 22,
-//     suiteId: 81,
-//     domain: "techholding.testrail.io",
-//     //username: process.env.TESTRAIL_USERNAME,
-//     username: "priyanka.shah@techholding.co",
-//     //apiToken: process.env.TESTRAIL_API_TOKEN,
-//     apiToken: "iFYXI8TlxCwtV0KKTQoY-6lrKDOHQE3nYZ5BCFmWi",
-//     runName: "Test_Run_20241023-Minor_PROD_ENG",
-//     oneReport: true,
-//     includeAll: true,
-//     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
-//   },
-// ],
-],
+    // [
+    //   "testrail",
+    //   {
+    //     projectId: 22,
+    //     suiteId: 81,
+    //     domain: "techholding.testrail.io",
+    //     //username: process.env.TESTRAIL_USERNAME,
+    //     username: "priyanka.shah@techholding.co",
+    //     //apiToken: process.env.TESTRAIL_API_TOKEN,
+    //     apiToken: "iFYXI8TlxCwtV0KKTQoY-6lrKDOHQE3nYZ5BCFmWi",
+    //     runName: "Test_Run_20241023-Minor_PROD_ENG",
+    //     oneReport: true,
+    //     includeAll: true,
+    //     caseIdTagPrefix: "", // used only for multi-platform Cucumber Scenarios
+    //   },
+    // ],
+  ],
   reporterSyncTimeout: 30000,
 
   // Options to be passed to Mocha.

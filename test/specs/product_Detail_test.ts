@@ -52,7 +52,7 @@ describe("Product Details Feature", () => {
       } else {
         await expect(browser).toHaveTitle(pageTitle.pg_title_tadalafil_es);
         await expect(ProductDetail.productTitle).toHaveText(
-          productDetailData.product_tadalafil
+          productDetailData.product_tadalafil_es
         );
         console.log(
           "Product Description: " +
@@ -104,7 +104,7 @@ describe("Product Details Feature", () => {
       } else {
         await expect(browser).toHaveTitle(pageTitle.pg_title_sildenafil_es);
         await expect(ProductDetail.productTitle).toHaveText(
-          productDetailData.product_sildenafil
+          productDetailData.product_sildenafil_es
         );
         console.log(
           "Product Description: " +
