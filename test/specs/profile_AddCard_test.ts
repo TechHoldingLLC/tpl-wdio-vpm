@@ -1,7 +1,7 @@
 import LoginPage from "../pageobjects/login.page.js";
 import fs from "fs";
 import profilesidemenuPage from "../pageobjects/profilesidemenu.page.js";
-import profileCardPage from "../pageobjects/profile.Card.page.js";
+//import profileCardPage from "../pageobjects/profile.Card.page.js";
 
 /**
  * Test Suite: Customer Profile - Saved Cards Page
@@ -69,6 +69,8 @@ describe("Customer Profile - Saved Cards page", () => {
       : "Tarjetas Guardadas";
     expect(savedCardsPageText).toEqual(expectedText);
 
+    // Commenting the below code as Instamed is not available in the application
+    /*
     // Click the "Add Card" button
     await profilesidemenuPage.addCardButton.waitForClickable();
     await profilesidemenuPage.addCardButton.click();
@@ -95,8 +97,10 @@ describe("Customer Profile - Saved Cards page", () => {
         ? "Card added"
         : "Tarjeta agregada con éxito.";
       expect(toastMessageText).toContain(expectedMessage);
-    } catch (error) {
+    } 
+      catch (error) {
       console.error("Error occurred while waiting for toast message:", error);
     }
+    */
   });
 });
