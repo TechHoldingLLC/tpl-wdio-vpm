@@ -286,104 +286,51 @@ describe("Product Details Feature", () => {
    * Test Case: Verify Semaglutide Product page opens and form validation works
    * - Ensures that the Semaglutide product page is correctly loaded, and the form validation and submission work as expected.
    */
-  // it.skip("Verify Product Details Page - GLP-1 Semaglutide", async () => {
-  //   try {
-  //     await ProductDetail.productSemaglutide.click();
-  //     // Uncomment if needed to open homepage: await ProductDetail.openHomepage(productDetailData.product_semaglutide);
-  //     const url: string = await browser.getUrl();
-  //     const language: string = await ProductDetail.getLanguageFromUrl(url);
+  it("C29680 Website Main Pages: Verify Semaglutide Product page opens error-free", async () => {
+    try {
+      await ProductDetail.productSemaglutide.click();
+      await browser.pause(2000);
 
-  //     if (language === "en") {
-  //       await expect(ProductDetail.productTitle).toHaveText(
-  //         productDetailData.product_glp_semaglutide
-  //       );
-  //       // Uncomment if needed: console.log("Product Description: " + (await ProductDetail.productDescription.getText()));
-  //       // Uncomment if needed: expect(await ProductDetail.productDescription.getText()).toEqual(productDetailData.product_semaglutide_description);
-  //       await ProductDetail.wlcheckbox.scrollIntoView();
-  //       await ProductDetail.wlcheckbox.click();
-  //       await ProductDetail.wlconsentcheckbox.click();
-  //       await ProductDetail.btnSubmit.scrollIntoView();
-  //       await browser.pause(2000);
-  //       await ProductDetail.btnSubmit.click();
-  //       expect(
-  //         await ProductDetail.validationFnameOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_fname_validation_message
-  //       );
-  //       expect(
-  //         await ProductDetail.validationLnameOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_lname_validation_message
-  //       );
-  //       expect(
-  //         await ProductDetail.validationMobileOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_mobile_validation_message
-  //       );
-  //       expect(
-  //         await ProductDetail.validationEmailOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_email_validation_message
-  //       );
-  //       await ProductDetail.submitSemaglutideform(
-  //         productDetailData.product_semaglutide_form.product_wl_firstname,
-  //         productDetailData.product_semaglutide_form.product_wl_lastname,
-  //         productDetailData.product_semaglutide_form.product_wl_cellnum
-  //       );
-  //       await expect(ProductDetail.wlsuccessmessage).toHaveText(
-  //         productDetailData.product_semaglutide_form.product_wl_success
-  //       );
-  //     } else {
-  //       await expect(ProductDetail.productTitle).toHaveText(
-  //         productDetailData.product_glp_semaglutide
-  //       );
-  //       // Uncomment if needed: console.log("Product Description: " + (await ProductDetail.productDescription.getText()));
-  //       // Uncomment if needed: expect(await ProductDetail.productDescription.getText()).toEqual(productDetailData.product_semaglutide_description_es);
-  //       await ProductDetail.wlcheckbox.scrollIntoView();
-  //       await ProductDetail.wlcheckbox.click();
-  //       await ProductDetail.wlconsentcheckbox.click();
-  //       await ProductDetail.btnSubmit.scrollIntoView();
-  //       await browser.pause(2000);
-  //       await ProductDetail.btnSubmit.click();
-  //       expect(
-  //         await ProductDetail.validationFnameOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_fname_validation_message_es
-  //       );
-  //       expect(
-  //         await ProductDetail.validationLnameOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_lname_validation_message_es
-  //       );
-  //       expect(
-  //         await ProductDetail.validationMobileOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_mobile_validation_message_es
-  //       );
-  //       expect(
-  //         await ProductDetail.validationEmailOnSemaglutideForm.getText()
-  //       ).toEqual(
-  //         productDetailData.product_semaglutide_form
-  //           .product_email_validation_message_es
-  //       );
-  //       await ProductDetail.submitSemaglutideform(
-  //         productDetailData.product_semaglutide_form.product_wl_firstname,
-  //         productDetailData.product_semaglutide_form.product_wl_lastname,
-  //         productDetailData.product_semaglutide_form.product_wl_cellnum
-  //       );
-  //       await expect(ProductDetail.wlsuccessmessage).toHaveText(
-  //         productDetailData.product_semaglutide_form.product_wl_success_es
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error("An error occurred:", error);
-  //   }
-  // });
+      const url: string = await browser.getUrl();
+      const language: string = await ProductDetail.getLanguageFromUrl(url);
+
+      if (language === "en") {
+        await expect(browser).toHaveTitle(pageTitle.pg_title_semaglutide);
+        await expect(ProductDetail.productTitle).toHaveText(
+          productDetailData.product_glp_semaglutide
+        );
+        console.log(
+          "Product Description: " +
+            (await ProductDetail.productDescription.getText())
+        );
+        expect(await ProductDetail.productDescription.getText()).toEqual(
+          productDetailData.product_semaglutide_description
+        );
+        await expect(ProductDetail.productfaq).toHaveText(
+          productDetailData.product_faq_title_Semaglutide
+        );
+      } else {
+        await expect(browser).toHaveTitle(pageTitle.pg_title_semaglutide_es);
+        await expect(ProductDetail.productTitle).toHaveText(
+          productDetailData.product_glp_semaglutide_es
+        );
+        console.log(
+          "Product Description: " +
+            (await ProductDetail.productDescription.getText())
+        );
+        expect(await ProductDetail.productDescription.getText()).toEqual(
+          productDetailData.product_semaglutide_description_es
+        );
+        await expect(ProductDetail.productfaq).toHaveText(
+          productDetailData.product_faq_title_Semaglutide_es
+        );
+      }
+
+      // Check if product information and FAQs are displayed
+      expect(await ProductDetail.productInfo()).toBeTruthy();
+      expect(await ProductDetail.FAQsInfo()).toBeTruthy();
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  });
 });
