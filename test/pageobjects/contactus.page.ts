@@ -155,11 +155,8 @@ class ContactUs extends Page {
       `test_wdio_auto${Math.floor(Math.random() * 1e6)}@gmail.com`
     );
     await this.phoneField.setValue(contactnumber);
+    await this.descriptionField.scrollIntoView();
     await this.descriptionField.setValue(description);
-    await browser.pause(2000);
-
-    // Scroll to and click the submit button
-    await browser.scroll(0, 100);
     await browser.pause(1000);
     await this.submitButton.click();
   }
@@ -210,11 +207,8 @@ class ContactUs extends Page {
     await this.lastNameField.setValue(lastname);
     await this.emailField.setValue(invalid_email);
     await this.phoneField.setValue(contactnumber);
+    await this.descriptionField.scrollIntoView();
     await this.descriptionField.setValue(description);
-    await browser.pause(2000);
-
-    // Scroll to and click the submit button
-    await browser.scroll(0, 100);
     await browser.pause(1000);
     await this.submitButton.click();
   }

@@ -82,53 +82,51 @@ describe("Contact Us Feature", () => {
    */
   it("C29675 Website Main Pages: Verify Submit Contact Us form with Valid details", async () => {
     // Get the language from the current URL
-    const url: string = await browser.getUrl(); 
+    const url: string = await browser.getUrl();
     const language = await ContactUs.getLanguageFromUrl(url);
 
     if (url.includes("qa") || url.includes("stage")) {
+      // Verify the email field is displayed on the page
+      expect(await ContactUs.emailField.isDisplayed()).toBeTruthy();
 
-    // Verify the email field is displayed on the page
-    expect(await ContactUs.emailField.isDisplayed()).toBeTruthy();
+      if (language === "en") {
+        // Submit the Contact Us form with valid details in English
+        await ContactUs.contactUsPage(
+          contactdata.cu_firstname,
+          contactdata.cu_lastname,
+          contactdata.cu_contactnumber,
+          contactdata.cu_description,
+          "en"
+        );
 
-    if (language === "en") {
-      // Submit the Contact Us form with valid details in English
-      await ContactUs.contactUsPage(
-        contactdata.cu_firstname,
-        contactdata.cu_lastname,
-        contactdata.cu_contactnumber,
-        contactdata.cu_description,
-        "en"
-      );
-
-      // Wait until the success message appears and verify it
-      await browser.waitUntil(
-        async () =>
-          (await ContactUs.contactToastmessage.getText()) ===
+        // Wait until the success message appears and verify it
+        await browser.waitUntil(
+          async () =>
+            (await ContactUs.contactToastmessage.getText()) ===
+            contactdata.cu_contactSuccessmessage
+        );
+        await expect(ContactUs.contactToastmessage).toHaveText(
           contactdata.cu_contactSuccessmessage
-      );
-      await expect(ContactUs.contactToastmessage).toHaveText(
-        contactdata.cu_contactSuccessmessage
-      );
-    } else {
-      // Submit the form with valid details in Spanish
-      await ContactUs.contactUsPage(
-        contactdata.cu_firstname,
-        contactdata.cu_lastname,
-        contactdata.cu_contactnumber,
-        contactdata.cu_description,
-        ""
-      );
+        );
+      } else {
+        // Submit the form with valid details in Spanish
+        await ContactUs.contactUsPage(
+          contactdata.cu_firstname,
+          contactdata.cu_lastname,
+          contactdata.cu_contactnumber,
+          contactdata.cu_description,
+          ""
+        );
 
-      // Verify the success message appears in Spanish
-      const message = await ContactUs.contactToastmessage;
-      await expect(message).toHaveText(
-        contactdata.cu_contactSuccessmessage_spanish
-      );
+        // Verify the success message appears in Spanish
+        const message = await ContactUs.contactToastmessage;
+        await expect(message).toHaveText(
+          contactdata.cu_contactSuccessmessage_spanish
+        );
+      }
+    } else {
+      console.log("Test is executable only on QA & Stage Environments");
     }
-  }
-  else{
-    console.log("Test is executable only on QA & Stage Environments");
-  }
   });
 
   /**

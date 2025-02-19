@@ -276,7 +276,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("Tech3@1234567890");
+      await this.EHRPasswordField.setValue("Tech5@1234567890");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);
@@ -287,7 +287,7 @@ class AdminPage {
       await this.EHRContinueButton.click();
       await browser.pause(3000);
       await this.EHRPasswordField.waitForDisplayed();
-      await this.EHRPasswordField.setValue("9312Valley!Rosemead");
+      await this.EHRPasswordField.setValue("Rosemead@91770&9312");
       await this.EHRLoginButton.waitForClickable();
       await this.EHRLoginButton.click();
       await browser.pause(5000);

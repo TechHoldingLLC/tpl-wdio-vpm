@@ -130,3 +130,5 @@ dist
 .pnp.*
 allure-report/
 allure-results/
+
+test/data/generatedOrderDetails.json

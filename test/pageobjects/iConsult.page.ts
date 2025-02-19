@@ -187,7 +187,7 @@ class iConsult extends Page {
   }
 
   public get subscriptionThreeMonthOption() {
-    return $('div[role="tabpanel"] li:nth-child(2)');
+    return $('div[role="tabpanel"] li:nth-child(1)');
   }
 
   public get subscribeThreeMonthTL() {
@@ -199,9 +199,15 @@ class iConsult extends Page {
   }
 
   public get subscriptionSixMonthOptionText() {
-    return $(
-      '//*[@for="sub-48"]/div/div[1]/span[1]'
-    );
+    return $('//*[@for="sub-48"]/div/div[1]/span[1]');
+  }
+
+  public get subscriptionThreeMonthOptionText() {
+    return $("(//div[@class='radio-left-text'])[1]");
+  }
+
+  public get subscriptionThreeMonthOptionValue() {
+    return $("//div[@class='radio-right-text']/span[2]");
   }
 
   public get subscriptionSixMonthOptionValue() {
@@ -373,7 +379,8 @@ class iConsult extends Page {
   }
 
   public get fetchOrderId() {
-    return $("//span[@class='MyOrder_order-id__wsMkB']");
+    return $("//span[contains(@class,'MyOrder_order-id')]");
+    //return $("//span[@class='MyOrder_order-id__wsMkB']");
   }
 
   public get orderDetailProductName() {
@@ -381,11 +388,12 @@ class iConsult extends Page {
   }
 
   public get orderDetailsProductSubscriptionPlan() {
-    return $("//span[@class='badge bg-orange-200 MyOrder_badge-month__FhQJe']");
+    //return $("//span[@class='badge bg-orange-200 MyOrder_badge-month__FhQJe']");
+    return $("(//div[contains(@class,'MyOrder_cart-summary')])[1]/div/span");
   }
 
   public get orderDetailsProductTotalPrice() {
-    return $("//span[@class='MyOrder_total-main-price__n2pqe']");
+    return $("//span[contains(@class,'MyOrder_total-main-price')]");
   }
 
   /*
@@ -471,10 +479,8 @@ class iConsult extends Page {
     );
   }
 
-  public get optionsListOfQuestion(){
-    return $(
-      "//div[@class='mt-60 form-content']"
-    )
+  public get optionsListOfQuestion() {
+    return $("//div[@class='mt-60 form-content']");
   }
 }
 

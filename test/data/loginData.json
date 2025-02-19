@@ -4,7 +4,6 @@
     "login_invalid_phone_num": 1234557890,
     "login_password": "Test@1234"
   },
-
   "login_valid": {
     "login_email": "priyanka.shah+75@techholding.co",
     "login_valid_phone_num": 5454543322,
