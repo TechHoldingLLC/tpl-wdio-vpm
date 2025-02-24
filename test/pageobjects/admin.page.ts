@@ -58,7 +58,24 @@ class AdminPage {
    * Returns the admin side panel navigation list element.
    */
   public get adminSidePannelList() {
-    return $("//a[contains(@class, 'PatientList_navbar-link')]");
+    return $$("//a[contains(@class, 'PatientList_navbar-link')]");
+  }
+
+  /**
+   * Fetches the text from the admin side panel navigation list elements and stores it in an array.
+   *
+   * @returns {Promise<string[]>} - An array of text from the admin side panel navigation list elements.
+   */
+  public async getAdminSidePannelListText(): Promise<string[]> {
+    const elements = await this.adminSidePannelList;
+    const textArray: string[] = [];
+
+    for (const element of elements) {
+      const text = await element.getText();
+      textArray.push(text);
+    }
+
+    return textArray;
   }
 
   /**
@@ -85,7 +102,7 @@ class AdminPage {
   /**
    * Returns a list of rows in the order search result table.
    */
-  public get searchResulRow() {
+  public get searchResultRow() {
     return $$("//table[contains(@class,'PatientList_table-data')]/tbody/tr");
   }
 
@@ -130,32 +147,28 @@ class AdminPage {
    * Returns the order payment status in the 'In Progress' tab.
    */
   public get orderPaymentStatusInProgressTab() {
-    return $("//table/tbody/tr/td[7]");
+    return $("//table/tbody/tr/td[8]");
   }
 
   /**
    * Returns the order status in the 'In Progress' tab.
    */
   public get orderStatusInProgressTab() {
-    return $("//table/tbody/tr/td[8]/span");
+    return $("//table/tbody/tr/td[2]/span");
   }
 
   /**
    * Returns the order details button element.
    */
   public get orderDetailsButton() {
-    return $(
-      "//button[@class='btn-secondary btn-xs PatientList_action-btn__Y_iGX ']"
-    );
+    return $("//button[normalize-space()='Action']");
   }
 
   /**
    * Returns the order detail option element.
    */
   public get orderDetailOption() {
-    return $(
-      "//span[@class='PatientList_dropdwon-link__DTkj_ PatientList_dropdwon-link-current__be3eG']"
-    );
+    return $("(//span[contains(@class, 'PatientList_dropdwon-link')])[1]");
   }
 
   /**
@@ -169,16 +182,14 @@ class AdminPage {
    * Returns the action order details button element.
    */
   public get actionOrderDetailsBtn() {
-    return $(
-      "//span[@class='PatientList_dropdwon-link__DTkj_ PatientList_dropdwon-link-current__be3eG']"
-    );
+    return $("(//span[contains(@class, 'PatientList_dropdwon-link')])[1]");
   }
 
   /**
    * Returns the header element for the order details page.
    */
   public get orderDetailsPageHeader() {
-    return $("//h5[@class='title MyOrder_add-title__kY6C6']");
+    return $("h5");
   }
 
   /**
@@ -201,14 +212,14 @@ class AdminPage {
    * Returns the medicine name element in the order details.
    */
   public get medicineName() {
-    return $("div[class='MyOrder_title-qty__X6JMm'] h4");
+    return $("//div[contains(@class, 'MyOrder_title')]/h4");
   }
 
   /**
    * Returns the unpaid payment status element in the order details.
    */
   public get orderPaymentTotalStatus() {
-    return $(".badge.badge-sm.undefined.MyOrder_orange-badge__yuTSW");
+    return $("//div[@class='title-badge']/span[2]");
   }
 
   /**
@@ -361,30 +372,29 @@ class AdminPage {
    * @returns The number of rows found in the search results.
    */
   public async validateOrderSearch() {
-    const rows = await this.searchResulRow;
+    const rows = await this.searchResultRow;
     const length = rows.length;
     console.log(`Number of rows: ${length}`);
     return length;
   }
 
+  /**
+   * Retrieves the order payment status and order status from the search results.
+   * @returns An object containing the order status and order payment status.
+   */
   public async searchedOrderDetails(): Promise<{
-    orderId: string;
-    orderPaymentStatus: string;
     orderStatus: string;
+    orderPaymentStatus: string;
   }> {
-    // Extracting order details
-    const orderId = await $(
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(10) > div:nth-child(1)"
+    await browser.pause(1000);
+
+    const orderStatus = await $(
+      "//table[contains(@class,'PatientList_table-data')]/tbody/tr/td[3]"
     ).getText();
     const orderPaymentStatus = await $(
-      "//td[normalize-space()='Pending']"
+      "//table[contains(@class,'PatientList_table-data')]/tbody/tr/td[9]"
     ).getText();
-    await browser.pause(1000);
-    const orderStatus = await $(
-      "body > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(9) > span:nth-child(1)"
-    ).getText();
-    // Returning order details
-    return { orderId, orderPaymentStatus, orderStatus };
+    return { orderStatus, orderPaymentStatus };
   }
 
   /**

@@ -11,6 +11,7 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import iConsultGHPage from "../pageobjects/iConsult.GH.page.js";
 import fs from "fs";
+import payPalPage from "../pageobjects/paypal.page.js";
 
 describe("iConsult Feature - End to End Flow", () => {
   /**
@@ -39,6 +40,9 @@ describe("iConsult Feature - End to End Flow", () => {
     const logindata = JSON.parse(fs.readFileSync(loginDataPath, "utf-8"));
     const iConsultGHData = JSON.parse(
       fs.readFileSync("./test/data/iConsultGHData.json", "utf-8")
+    );
+    const payPalData = JSON.parse(
+      fs.readFileSync("./test/data/payPalData.json", "utf-8")
     );
 
     let loginData: any;
@@ -161,6 +165,17 @@ describe("iConsult Feature - End to End Flow", () => {
 
     await browser.pause(2000);
 
+    await payPalPage.switchToPayPalIframe();
+    await payPalPage.clickPayPalButton();
+    await payPalPage.switchToPayPalWindow();
+    await payPalPage.loginToPayPal(
+      payPalData.validLoginData.email,
+      payPalData.validLoginData.password
+    );
+    await payPalPage.confirmPayPalPayment();
+    await payPalPage.switchBackToMainWindow();
+
+    /*
     // Select payment method and place the order
     await iConsult.cardSelection.scrollIntoView(); // Scroll to card selection
     await browser.pause(2000);
@@ -185,7 +200,7 @@ describe("iConsult Feature - End to End Flow", () => {
     );
 
     await browser.pause(2000);
-
+*/
     // View order details
     await iConsult.viewOrderDetailsButton.click(); // Open order details
     await iConsult.orderDetailsScreen.waitForDisplayed();
