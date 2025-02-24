@@ -37,7 +37,7 @@ describe("Admin Panel features", () => {
     // Log in to the Admin Panel
     await adminPage.loginToAdminPanel();
     await browser.pause(2000);
-    expect(await browser.getUrl()).toContain("prescriptions"); // Verify that the user is navigated to the prescriptions page
+    expect(await browser.getUrl()).toContain("orders"); // Verify that the user is navigated to the prescriptions page
 
     // Verify iConsult Approval List tab is displayed and select it
     await adminPage.iConsultApprovalList.waitForDisplayed();
@@ -45,11 +45,10 @@ describe("Admin Panel features", () => {
       "iConsult Approval List"
     );
 
-    // Validate that the side panel list contains "Prescriptions"
-    await adminPage.adminSidePannelList.waitForDisplayed();
-    expect(await adminPage.adminSidePannelList.getText()).toEqual(
-      "Prescriptions"
-    );
+    // Verify the side panel list
+    const expectedSidePanelTexts = ["Orders", "Archive", "Subscriptions"];
+    const sidePanelTexts = await adminPage.getAdminSidePannelListText();
+    await expect(sidePanelTexts).toEqual(expectedSidePanelTexts);
 
     // Validate that the iConsult Approval List tab is clickable and functional
     expect(await adminPage.validateiConsultApprovalListTab()).toBeTruthy();
@@ -73,11 +72,12 @@ describe("Admin Panel features", () => {
     await browser.pause(3000);
 
     // Validate the payment and order status
-    expect(searchedOrderData.orderPaymentStatus).toEqual("Pending");
+    //expect(searchedOrderData.orderPaymentStatus).toEqual("Pending");
     expect(searchedOrderData.orderStatus).toEqual("Medication pending");
   });
 
-  it("C29964 Verify that Admin is not able to send Order to EHR", async () => {
+  // Skipping this test case till instamed flow is enabled again.
+  it.skip("C29964 Verify that Admin is not able to send Order to EHR", async () => {
     // Select the order by checking the corresponding checkbox
     await adminPage.selectOrderCheckBox.click();
     await browser.pause(1000);

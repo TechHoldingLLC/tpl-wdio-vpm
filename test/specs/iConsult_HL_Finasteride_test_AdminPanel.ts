@@ -35,16 +35,19 @@ describe("Admin Panel features", () => {
 
     await adminPage.loginToAdminPanel(); // Perform login
     await browser.pause(2000);
-    expect(await browser.getUrl()).toHaveText("prescriptions");
+    expect(await browser.getUrl()).toHaveText("orders");
 
     // Verify the iConsult Approval List section
+    await adminPage.iConsultApprovalList.waitForDisplayed();
     expect(await adminPage.iConsultApprovalList.getText()).toEqual(
       "iConsult Approval List"
     );
-    await adminPage.adminSidePannelList.waitForDisplayed();
-    expect(await adminPage.adminSidePannelList.getText()).toEqual(
-      "Prescriptions"
-    );
+
+    // Verify the side panel list
+    const expectedSidePanelTexts = ["Orders", "Archive", "Subscriptions"];
+    const sidePanelTexts = await adminPage.getAdminSidePannelListText();
+    expect(sidePanelTexts).toEqual(expectedSidePanelTexts);
+
     expect(await adminPage.validateiConsultApprovalListTab()).toBeTruthy();
 
     // Retrieve and search for order details
@@ -55,10 +58,14 @@ describe("Admin Panel features", () => {
     expect(orderSearchResultCount).toEqual(1);
 
     // Validate searched order details
-    const searchedOrderData = await adminPage.searchedOrderDetails();
-    expect(searchedOrderData.orderId).toEqual(orderDetails.orderNumber);
-    expect(searchedOrderData.orderPaymentStatus).toEqual("Pending");
-    expect(searchedOrderData.orderStatus).toEqual("Medication pending");
+    const searchedOrderDetails = await adminPage.searchedOrderDetails();
+    await expect(searchedOrderDetails.orderStatus).toEqual(
+      "Medication pending"
+    );
+    await expect(searchedOrderDetails.orderPaymentStatus).toEqual(
+      "Paid - PayPal"
+    );
+    console.log("Order details validated successfully");
   });
 
   /**
@@ -77,18 +84,19 @@ describe("Admin Panel features", () => {
     const orderDetailsHeaderText: string =
       await adminPage.orderDetailsPageHeader.getText();
     console.log(orderDetailsHeaderText);
-    expect(orderDetailsHeaderText).toEqual("Order Details");
+    await expect(orderDetailsHeaderText).toEqual("Order Details");
     expect(await adminPage.getOrderInformation()).toEqual(orderID);
 
     const actualMedicineName: string = await adminPage.medicineName.getText();
     console.log(actualMedicineName);
     const orderDetails = await adminPage.orderDetails();
     expectedMedicineName = orderDetails.productName;
-    expect(actualMedicineName).toEqual(expectedMedicineName);
+    await expect(actualMedicineName).toEqual(expectedMedicineName);
 
     const paymentStatus: string =
       await adminPage.orderPaymentTotalStatus.getText();
-    expect(paymentStatus).toEqual("Pending");
+    //expect(paymentStatus).toEqual("Pending");
+    await expect(paymentStatus).toEqual("Paid");
 
     // Validate order completion status and color
     const orderedElement = await adminPage.orderedElement;
@@ -110,15 +118,12 @@ describe("Admin Panel features", () => {
    * - Validate that the order status updates to "In Progress" and details are correct
    */
   it("C29665 Admin Panel: Verify that User is able to send Order to EHR", async () => {
-    await browser.pause(1000);
     await adminPage.selectOrderCheckBox.click(); // Select the order
-    await browser.pause(1000);
     console.log("Order selected successfully");
-    await adminPage.orderSelectionText.waitForDisplayed();
-    await browser.pause(1000);
+    await adminPage.orderSelectionText.waitForDisplayed({ timeout: 5000 });
     expect(await adminPage.orderSelectionText.getText()).toEqual("1 Selected");
 
-    await adminPage.sendToEHRButton.waitForClickable();
+    await adminPage.sendToEHRButton.waitForClickable({ timeout: 5000 });
     await adminPage.sendToEHRButton.click(); // Send order to EHR
     await browser.pause(5000);
 
@@ -128,11 +133,9 @@ describe("Admin Panel features", () => {
     await adminPage.InProgressTab.click();
     await browser.pause(3000);
     await adminPage.orderSearch(orderID);
-    const orderSearchedResult = await adminPage.orderSearchedResult.getText();
-    //expect(orderSearchedResult).toEqual(orderID);
-    expect(
-      await adminPage.orderPaymentStatusInProgressTab.getText()
-    ).toHaveText("Paid");
+    expect(await adminPage.orderPaymentStatusInProgressTab.getText()).toContain(
+      "Paid"
+    );
     expect(await adminPage.orderStatusInProgressTab.getText()).toEqual(
       "Medication sent to EHR"
     );

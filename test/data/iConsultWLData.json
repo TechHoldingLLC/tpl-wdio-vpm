@@ -1,4 +1,22 @@
 {
-  "iConsultWL_firstQuestionString_en": "What is your weight loss goal?",
-  "iConsultWL_firstQuestionString_es": "¿Cuál es su meta de pérdida de peso?"
+  "iConsultWL_MedicineName_en": "GLP-1 Semaglutide",
+  "iConsultWL_MedicineName_es": "GLP-1 Semaglutida",
+  "iConsultWL_SummaryTitle": "iConsult Summary",
+  "iConsultWL_CompletionMsg": "iConsult Completed",
+  "iConsultWL_CompletionMsg_es": "iConsulta Completada",
+  "iConsultWL_Question_1_String_en": "What is your weight loss goal?",
+  "iConsultWL_Question_1_String_es": "¿Cuál es su meta de pérdida de peso?",
+  "iConsultWL_MedicineDescription_en": [
+    "GLP-1 Semaglutide program",
+    "Begins with a 4 week starter kit",
+    "Free consultation, ongoing check-ins, instruction and video guide",
+    "Access to the Viapromeds Team"
+  ],
+  "iConsultWL_MedicineDescription_es": [
+    "Programa de Semaglutida GLP-1",
+    "Comienza con un kit de inicio de 4 semanas.",
+    "Consulta gratuita, revisiones periódicas, instrucciones y guía en video ",
+    "Acceso al equipo de Viapromeds",
+    ""
+  ]
 }

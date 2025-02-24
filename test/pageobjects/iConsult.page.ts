@@ -482,6 +482,20 @@ class iConsult extends Page {
   public get optionsListOfQuestion() {
     return $("//div[@class='mt-60 form-content']");
   }
+
+  public get iConsultWLSelection() {
+    return $('[for$="question5"]');
+  }
+
+  public get semaglutide4WeekKit() {
+    return $('//span[contains(text(),"4 week Starter Kit")]');
+  }
+
+  public get semaglutideProductDescription() {
+    return $$(
+      '//p[contains(@class,"ProductRecommendation_product-description")]//li'
+    );
+  }
 }
 
 export default new iConsult();

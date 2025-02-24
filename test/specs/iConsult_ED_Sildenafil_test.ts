@@ -2,6 +2,7 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import iConsultEDS from "../pageobjects/iConsult.ED_Sildenafil.page.js";
 import fs from "fs";
+import payPalPage from "../pageobjects/paypal.page.js";
 
 /**
  * iConsult: End-to-End Test Case for Sildenafil Flow
@@ -32,6 +33,9 @@ describe("iConsult feature - End to End flow", () => {
     );
     const iConsultEDSData = JSON.parse(
       fs.readFileSync("./test/data/iConsultEDSData.json", "utf-8")
+    );
+    const payPalData = JSON.parse(
+      fs.readFileSync("./test/data/payPalData.json", "utf-8")
     );
 
     // Get the current URL and detect the environment (QA, Stage, Prod)
@@ -158,6 +162,42 @@ describe("iConsult feature - End to End flow", () => {
     expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
+    await payPalPage.switchToPayPalIframe();
+    await payPalPage.clickPayPalButton();
+    await payPalPage.switchToPayPalWindow();
+    await payPalPage.loginToPayPal(
+      payPalData.validLoginData.email,
+      payPalData.validLoginData.password
+    );
+    await payPalPage.confirmPayPalPayment();
+    await payPalPage.switchBackToMainWindow();
+
+    // View and verify order details
+    await iConsult.viewOrderDetailsButton.click();
+    await iConsult.orderDetailsScreen.waitForDisplayed();
+    await iConsult.orderListTab.waitForDisplayed();
+    const orderId = await iConsult.getOrderID();
+    console.log(`My Order ID is: ${orderId}`);
+
+    // Store order details in a JSON file
+    const jsonFilePath = "./test/data/generatedOrderDetails.json";
+    const orderDetails = {};
+    orderDetails[Recommendation_medicine_title] = orderId;
+    fs.writeFileSync(jsonFilePath, JSON.stringify(orderDetails, null, 4));
+    console.log("Order details have been written to orderDetails.json");
+
+    // Verify order product name and subscription plan
+    expect(await iConsult.orderDetailProductName.getText()).toEqual(
+      Recommendation_medicine_title
+    );
+    expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
+      subscriptionPlanDurationValue
+    );
+    expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
+      subscriptionPlanAmount
+    );
+
+    /*
     // Complete the order process
     await iConsult.cardSelection.scrollIntoView();
     await browser.pause(1000);
@@ -206,5 +246,7 @@ describe("iConsult feature - End to End flow", () => {
     expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
       subscriptionPlanAmount
     );
+    
+    */
   });
 });
