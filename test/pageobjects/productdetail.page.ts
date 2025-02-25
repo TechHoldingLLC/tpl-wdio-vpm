@@ -101,7 +101,7 @@ class ProductDetail extends Page {
 
   public get productName() {
     return $(
-      "//div[contains(@class,'ProductDetail_product-detail-banner-content')]/h1"
+      "//div[contains(@class,'ProductDetail_product-detail-banner-content')]/h5"
     );
   }
 
