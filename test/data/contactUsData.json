@@ -1,0 +1,15 @@
+{
+    "cu_firstname" : "Test",
+    "cu_lastname": "User",
+    "cu_invalid_email" : "wdio@tech",
+    "cu_contactnumber": 3473913410,
+    "cu_description": "This is a sample Contact us form which is submitted via Wdio",
+    "cu_contactSuccessmessage" : "Your message has been sent",
+    "cu_contactSuccessmessage_spanish" : "Tu mensaje ha sido enviado.",
+    "cu_errorMessage" : "Failed to save query",
+    "cu_errorMessage_spanish" : "No se pudo guardar la consulta",
+    "cu_bannerMessage" : "Contact Our Team for Assistance",
+    "cu_bannerMessage_spanish" : "Póngase en contacto con nuestro equipo para su asistencia",
+    "cu_problemMessage" : "Contact Us",
+    "cu_problemMessage_spanish" : "Contáctenos"   
+}

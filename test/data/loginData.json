@@ -1,0 +1,32 @@
+{
+  "login_invalid": {
+    "login_email": "wdio.auto+1156@techholding.co",
+    "login_invalid_phone_num": 1234557890,
+    "login_password": "Test@1234"
+  },
+  "login_valid": {
+    "login_email": "priyanka.shah+75@techholding.co",
+    "login_valid_phone_num": 5454543322,
+    "login_password": "pP@1234567"
+  },
+  "stage_login_valid": {
+    "login_email": "prabhav.joshi+8@techholding.co",
+    "login_valid_phone_num": 3312762635,
+    "login_password": "Test@123"
+  },
+  "prod_login_valid": {
+    "login_email": "priyanka.shah+1@techholding.co",
+    "login_valid_phone_num": 6125047154,
+    "login_password": "pP@1234567"
+  },
+  "login_toastMessage": "Invalid Credentials",
+  "login_toastMessage_es": "Credenciales no válidas",
+  "login_successMessage": "Registration Successful!",
+  "login_userName": "uma s",
+  "stage_login_userName": "Test u",
+  "prod_login_userName": "PriyaTest t",
+  "login_email_required_message": "*Email or Mobile Number is required",
+  "login_password_required_message": "*Password is required",
+  "login_email_required_message_es": "*Se requiere correo electrónico o número de teléfono móvil",
+  "login_password_required_message_es": "*Se requiere contraseña"
+}
