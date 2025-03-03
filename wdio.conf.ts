@@ -430,17 +430,16 @@ export const config: Options.Testrunner = {
    */
  
 
-  // afterTest: async (_test, _context, { error }) => {
-  //   if (error) {
-  //     const browser = global.browser;
-  //     const screenshotData = await browser.takeScreenshot();
-  //     allureReporter.addAttachment(
-  //       "Failed Test Screenshot",
-  //       Buffer.from(screenshotData, "base64"),
-  //       "image/png"
-  //     );
-  //   }
-  // },
+  afterTest: async function (_test, _context, { error }) {
+    if (error) {
+      const screenshot = await browser.takeScreenshot();
+      allureReporter.addAttachment(
+        "Failed Test Screenshot",
+        Buffer.from(screenshot, "base64"),
+        "image/png"
+      );
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
