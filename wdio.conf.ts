@@ -1,5 +1,9 @@
 import type { Options } from "@wdio/types";
 import allureReporter from "@wdio/allure-reporter";
+import { exec } from "child_process";
+import * as fs from 'fs';
+import * as fsExtra from 'fs-extra';
+
 
 let baseUrl: string;
 let env = process.env.Env;
@@ -95,7 +99,7 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_WL_Semaglutide_test.ts",
     ],
     WebsiteMainPages: [
-      //"./test/specs/home_test.ts",
+      "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
       "./test/specs/home_SocialMedia_test.ts",
       "./test/specs/product_Detail_test.ts",
@@ -103,25 +107,10 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    SanityQA: [
-      "./test/specs/home_test.ts",
-      "./test/specs/home_Footer_test.ts",
-      "./test/specs/home_SocialMedia_test.s",
-      "./test/specs/product_Detail_test.ts",
-      "./test/specs/aboutus_test.ts",
+    Sanity_QA: [
+     "./test/specs/profile_SignIn_test.ts",
       "./test/specs/contactus_test.ts",
-      "./test/specs/profile_SignIn_test.ts",
-      "./test/specs/profile_Orders_test.ts",
-      "./test/specs/profile_Subscription_test.ts",
-      "./test/specs/profile_AddCard_test.ts",
-      "./test/specs/profile_UserProfile_test.ts",
-      "./test/specs/profile_SideMenu_test.ts",
-      "./test/specs/iConsult_GH_Acyclovir_test.ts",
-      "./test/specs/iConsult_HL_Finasteride_test.ts",
-      "./test/specs/iConsult_ED_Tadalafil_test.ts",
-      "./test/specs/iConsult_ED_Sildenafil_test.ts",
-      "./test/specs/iConsult_PE_Paroxetine_test.ts",
-      "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
+      "./test/specs/aboutUs_test.ts",
     ],
     SanityProd: [
       "./test/specs/home_test.ts",
@@ -272,14 +261,15 @@ export const config: Options.Testrunner = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-    // [
-    //   "allure",
-    //   {
-    //     outputDir: "allure-results",
-    //     disableWebdriverStepsReporting: true,
-    //     disableWebdriverScreenshotsReporting: false,
-    //   },
-    // ],
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+        cleanResults: true
+      },
+    ],
     // [
     //   "junit",
     //   {
@@ -332,23 +322,23 @@ export const config: Options.Testrunner = {
    */
   // onPrepare: function (config, capabilities) {
   // },
-  // onPrepare: async () => {
-  //   // Remove allure-results directory
-  //   try {
-  //     await fs.remove("./allure-results");
-  //     console.log("allure-results directory removed successfully");
-  //   } catch (err) {
-  //     console.error("Error removing allure-results directory:", err);
-  //   }
+  onPrepare: async () => {
+    // Remove allure-results directory
+    try {
+      await fsExtra.remove("./allure-results");
+      console.log("allure-results directory removed successfully");
+    } catch (err) {
+      console.error("Error removing allure-results directory:", err);
+    }
 
-  //   // Remove allure-report directory
-  //   try {
-  //     await fs.remove("./allure-report");
-  //     console.log("allure-report directory removed successfully");
-  //   } catch (err) {
-  //     console.error("Error removing allure-report directory:", err);
-  //   }
-  // },
+    // Remove allure-report directory
+    try {
+      await fsExtra.remove("./allure-report");
+      console.log("allure-report directory removed successfully");
+    } catch (err) {
+      console.error("Error removing allure-report directory:", err);
+    }
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -399,15 +389,23 @@ export const config: Options.Testrunner = {
    * Hook that gets executed before the suite starts
    * @param {object} suite suite details
    */
-  // beforeSuite: function (suite) {
-  // },
+
+  /**
+   * Function to be executed before a Suite (in Mocha/Jasmine) starts.
+   */
+  beforeSuite: async function () {
+    await browser.url(baseUrl);
+    await browser.maximizeWindow();
+    await browser.pause(2000);
+
+  },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  beforeTest: async function () {
-    await browser.maximizeWindow();
-    await browser.pause(1000);
-  },
+  // beforeTest: async function () {
+  //   await browser.maximizeWindow();
+  //   await browser.pause(1000);
+  // },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -430,30 +428,43 @@ export const config: Options.Testrunner = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: async function({ error }) {
-  //   if(error){
-  //     await browser.takeScreenshot()
+ 
+
+  // afterTest: async (_test, _context, { error }) => {
+  //   if (error) {
+  //     const browser = global.browser;
+  //     const screenshotData = await browser.takeScreenshot();
+  //     allureReporter.addAttachment(
+  //       "Failed Test Screenshot",
+  //       Buffer.from(screenshotData, "base64"),
+  //       "image/png"
+  //     );
   //   }
   // },
-
-  afterTest: async (_test, _context, { error }) => {
-    if (error) {
-      const browser = global.browser;
-      const screenshotData = await browser.takeScreenshot();
-      allureReporter.addAttachment(
-        "Failed Test Screenshot",
-        Buffer.from(screenshotData, "base64"),
-        "image/png"
-      );
-    }
-  },
 
   /**
    * Hook that gets executed after the suite has ended
    * @param {object} suite suite details
    */
-  // afterSuite: function (suite) {
+
+  // afterSuite: async function (suite) {
+  //   console.log(`Suite completed: ${suite.title}.`);
   // },
+
+  onComplete: async function () {
+    console.log("All tests completed. Generating Allure report...");
+
+   // Delete only `allure-report`, NOT `allure-results`
+   fs.existsSync("allure-report") && fs.rmSync("allure-report", { recursive: true, force: true });
+
+   // Generate and open Allure report
+   exec("npx allure generate allure-results --clean && npx allure open", (error, stdout, stderr) => {
+     if (error) return console.error(`❌ Error generating Allure report: ${error.message}`);
+     if (stderr) return console.error(`⚠️ Allure stderr: ${stderr}`);
+     console.log(`📊 Allure Report Generated:\n${stdout}`);
+   });
+  },
+
   /**
    * Runs after a WebdriverIO command gets executed
    * @param {string} commandName hook command name
