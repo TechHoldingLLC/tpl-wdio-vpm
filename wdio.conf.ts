@@ -1,9 +1,7 @@
 import type { Options } from "@wdio/types";
 import allureReporter from "@wdio/allure-reporter";
 import { exec } from "child_process";
-import * as fs from 'fs';
-import * as fsExtra from 'fs-extra';
-
+import * as fsExtra from "fs-extra";
 
 let baseUrl: string;
 let env = process.env.Env;
@@ -107,11 +105,33 @@ export const config: Options.Testrunner = {
       "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
     ],
-    Sanity_QA: [
-     "./test/specs/profile_SignIn_test.ts",
+    SanityQA: [
+      "./test/specs/home_test.ts",
+      "./test/specs/home_Footer_test.ts",
+      "./test/specs/home_SocialMedia_test.s",
+      "./test/specs/product_Detail_test.ts",
+      "./test/specs/aboutus_test.ts",
       "./test/specs/contactus_test.ts",
-      "./test/specs/aboutUs_test.ts",
+      "./test/specs/profile_SignIn_test.ts",
+      "./test/specs/profile_Orders_test.ts",
+      "./test/specs/profile_Subscription_test.ts",
+      "./test/specs/profile_AddCard_test.ts",
+      "./test/specs/profile_UserProfile_test.ts",
+      "./test/specs/profile_SideMenu_test.ts",
+      "./test/specs/iConsult_GH_Acyclovir_test.ts",
+      "./test/specs/iConsult_HL_Finasteride_test.ts",
+      "./test/specs/iConsult_ED_Tadalafil_test.ts",
+      "./test/specs/iConsult_ED_Sildenafil_test.ts",
+      "./test/specs/iConsult_PE_Paroxetine_test.ts",
+      "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
+
+    Allure_Report_Testing: [
+      "./test/specs/profile_SignIn_test.ts",
+      "./test/specs/aboutUs_test.ts",
+      "./test/specs/contactus_test.ts",
+    ],
+
     SanityProd: [
       "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
@@ -267,7 +287,7 @@ export const config: Options.Testrunner = {
         outputDir: "allure-results",
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
-        cleanResults: true
+        cleanResults: true,
       },
     ],
     // [
@@ -307,7 +327,7 @@ export const config: Options.Testrunner = {
     timeout: 600000,
   },
 
-  //
+
   // =====
   // Hooks
   // =====
@@ -320,22 +340,25 @@ export const config: Options.Testrunner = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
   onPrepare: async () => {
     // Remove allure-results directory
     try {
-      await fsExtra.remove("./allure-results");
-      console.log("allure-results directory removed successfully");
+      if (await fsExtra.pathExists("./allure-results")) {
+        await fsExtra.remove("./allure-results");
+        console.log("allure-results directory removed successfully");
+      }
     } catch (err) {
       console.error("Error removing allure-results directory:", err);
     }
 
     // Remove allure-report directory
     try {
-      await fsExtra.remove("./allure-report");
-      console.log("allure-report directory removed successfully");
-    } catch (err) {
+      if (await fsExtra.pathExists("./allure-report")) 
+        {
+          await fsExtra.remove("./allure-report");
+          console.log("allure-report directory removed successfully");
+        }
+   } catch (err) {
       console.error("Error removing allure-report directory:", err);
     }
   },
@@ -397,7 +420,6 @@ export const config: Options.Testrunner = {
     await browser.url(baseUrl);
     await browser.maximizeWindow();
     await browser.pause(2000);
-
   },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
@@ -428,7 +450,6 @@ export const config: Options.Testrunner = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
- 
 
   afterTest: async function (_test, _context, { error }) {
     if (error) {
@@ -445,23 +466,25 @@ export const config: Options.Testrunner = {
    * Hook that gets executed after the suite has ended
    * @param {object} suite suite details
    */
-
-  // afterSuite: async function (suite) {
-  //   console.log(`Suite completed: ${suite.title}.`);
-  // },
-
   onComplete: async function () {
     console.log("All tests completed. Generating Allure report...");
 
-   // Delete only `allure-report`, NOT `allure-results`
-   fs.existsSync("allure-report") && fs.rmSync("allure-report", { recursive: true, force: true });
+    // Delete only `allure-report`, NOT `allure-results`
+    fsExtra.existsSync("allure-report") &&
+      fsExtra.rmSync("allure-report", { recursive: true, force: true });
 
-   // Generate and open Allure report
-   exec("npx allure generate allure-results --clean && npx allure open", (error, stdout, stderr) => {
-     if (error) return console.error(`❌ Error generating Allure report: ${error.message}`);
-     if (stderr) return console.error(`⚠️ Allure stderr: ${stderr}`);
-     console.log(`📊 Allure Report Generated:\n${stdout}`);
-   });
+    // Generate and open Allure report
+    exec(
+      "npx allure generate allure-results --clean && npx allure open",
+      (error, stdout, stderr) => {
+        if (error)
+          return console.error(
+            `❌ Error generating Allure report: ${error.message}`
+          );
+        if (stderr) return console.error(`⚠️ Allure stderr: ${stderr}`);
+        console.log(`📊 Allure Report Generated:\n${stdout}`);
+      }
+    );
   },
 
   /**
@@ -490,31 +513,7 @@ export const config: Options.Testrunner = {
    */
   // afterSession: function (config, capabilities, specs) {
   // },
-  /**
-   * Gets executed after all workers got shut down and the process is about to exit. An error
-   * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} exitCode 0 - success, 1 - fail
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
-   */
-  // onComplete: function (): Promise<void> {
-  //   const reportError = new Error("Could not generate Allure report");
-  //   const generation = allure(["generate", "allure-results", "--clean"]);
-  //   return new Promise<void>((resolve, reject) => {
-  //     const generationTimeout = setTimeout(() => reject(reportError), 5000);
-
-  //     generation.on("exit", function (exitCode) {
-  //       clearTimeout(generationTimeout);
-
-  //       if (exitCode !== 0) {
-  //         return reject(reportError);
-  //       }
-  //       console.log("Allure report successfully generated");
-  //       resolve();
-  //     });
-  //   });
-  // },
+ 
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
