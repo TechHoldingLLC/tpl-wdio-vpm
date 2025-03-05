@@ -126,12 +126,6 @@ export const config: Options.Testrunner = {
       "./test/specs/iConsult_Valid_Invalid_Age_test.ts",
     ],
 
-    Allure_Report_Testing: [
-      "./test/specs/profile_SignIn_test.ts",
-      "./test/specs/aboutUs_test.ts",
-      "./test/specs/contactus_test.ts",
-    ],
-
     SanityProd: [
       "./test/specs/home_test.ts",
       "./test/specs/home_Footer_test.ts",
