@@ -281,7 +281,6 @@ export const config: Options.Testrunner = {
         outputDir: "allure-results",
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
-        cleanResults: true,
       },
     ],
     // [
@@ -464,8 +463,8 @@ export const config: Options.Testrunner = {
     console.log("All tests completed. Generating Allure report...");
 
     // Delete only `allure-report`, NOT `allure-results`
-    fsExtra.existsSync("allure-report") &&
-      fsExtra.rmSync("allure-report", { recursive: true, force: true });
+    fsExtra.pathExists("allure-report") &&
+      fsExtra.remove("allure-report");
 
     // Generate and open Allure report
     exec(
