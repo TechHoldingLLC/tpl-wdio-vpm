@@ -286,7 +286,8 @@ export const config: Options.Testrunner = {
       {
         outputDir: "allure-results",
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false
+        disableWebdriverScreenshotsReporting: false,
+        cleanResults: true,
       },
     ],
     // [
@@ -340,23 +341,27 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   onPrepare: async () => {
+    // Remove allure-results directory
     try {
-        // Remove allure-results directory if it exists
-        if (await fsExtra.pathExists("./allure-results")) {
-            await fsExtra.remove("./allure-results");
-            console.log("✅ allure-results directory removed successfully");
-        }
-
-        // Remove allure-report directory if it exists
-        if (await fsExtra.pathExists("./allure-report")) {
-            await fsExtra.remove("./allure-report");
-            console.log("✅ allure-report directory removed successfully");
-        }
+      if (await fsExtra.pathExists("./allure-results")) {
+        await fsExtra.remove("./allure-results");
+        console.log("allure-results directory removed successfully");
+      }
     } catch (err) {
-        console.error("❌ Error removing allure directories:", err);
+      console.error("Error removing allure-results directory:", err);
     }
-},
 
+    // Remove allure-report directory
+    try {
+      if (await fsExtra.pathExists("./allure-report")) 
+        {
+          await fsExtra.remove("./allure-report");
+          console.log("allure-report directory removed successfully");
+        }
+   } catch (err) {
+      console.error("Error removing allure-report directory:", err);
+    }
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -465,8 +470,8 @@ export const config: Options.Testrunner = {
     console.log("All tests completed. Generating Allure report...");
 
     // Delete only `allure-report`, NOT `allure-results`
-    fsExtra.pathExists("allure-report") &&
-      fsExtra.remove("allure-report");
+    fsExtra.existsSync("allure-report") &&
+      fsExtra.rmSync("allure-report", { recursive: true, force: true });
 
     // Generate and open Allure report
     exec(
@@ -507,7 +512,7 @@ export const config: Options.Testrunner = {
    * @param {Array.<String>} specs List of spec file paths that ran
    */
   // afterSession: function (config, capabilities, specs) {
-  // }, 
+  // },
  
   /**
    * Gets executed when a refresh happens.
