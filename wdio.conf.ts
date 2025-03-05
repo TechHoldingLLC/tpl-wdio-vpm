@@ -334,27 +334,22 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   onPrepare: async () => {
-    // Remove allure-results directory
     try {
-      if (await fsExtra.pathExists("./allure-results")) {
-        await fsExtra.remove("./allure-results");
-        console.log("allure-results directory removed successfully");
-      }
-    } catch (err) {
-      console.error("Error removing allure-results directory:", err);
-    }
-
-    // Remove allure-report directory
-    try {
-      if (await fsExtra.pathExists("./allure-report")) 
-        {
-          await fsExtra.remove("./allure-report");
-          console.log("allure-report directory removed successfully");
+        // Remove allure-results directory if it exists
+        if (await fsExtra.pathExists("./allure-results")) {
+            await fsExtra.remove("./allure-results");
+            console.log("✅ allure-results directory removed successfully");
         }
-   } catch (err) {
-      console.error("Error removing allure-report directory:", err);
+
+        // Remove allure-report directory if it exists
+        if (await fsExtra.pathExists("./allure-report")) {
+            await fsExtra.remove("./allure-report");
+            console.log("✅ allure-report directory removed successfully");
+        }
+    } catch (err) {
+        console.error("❌ Error removing allure directories:", err);
     }
-  },
+},
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
