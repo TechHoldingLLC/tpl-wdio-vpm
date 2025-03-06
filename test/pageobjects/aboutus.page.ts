@@ -1,7 +1,5 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
-import pkg from "lodash";
-const { isEqual } = pkg;
 
 class AboutUsPage extends Page {
   // ---------- Locators ----------

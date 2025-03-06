@@ -49,7 +49,7 @@ describe("About Us Feature", () => {
       if (language === "en") {
         expectedHeaders = [
           "Bridging the Healthcare Gap for Latinos",
-          "Dr. Linares' commitment & Platform holistic approach",
+          "Dr. Linares’ commitment & Platform holistic approach",
           "Respected Expert & Trusted Figure",
         ];
         aboutVPMText = aboutUsData.aboutVPM; // English content for About ViaProMeds
@@ -89,9 +89,7 @@ describe("About Us Feature", () => {
 
       // Validate that the header elements on the page match the expected content
       expect(await aboutUsPage.aboutUsContentItemHeaderList.map((i) => i.getText().then((text) => text.trim()))).toEqual(expectedHeaders);
-      
-
-
+    
       // Check if additional elements (icons, introductions) are displayed on the page
       await aboutUsPage.aboutUsPage();
       expect(await aboutUsPage.iConsultIntro).toBeDisplayed();
@@ -100,6 +98,5 @@ describe("About Us Feature", () => {
       console.error("An error occurred:", error);
       throw error;
     }
- 
   });
 });
