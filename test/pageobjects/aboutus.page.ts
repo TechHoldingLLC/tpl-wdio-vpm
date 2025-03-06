@@ -1,7 +1,5 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
-import pkg from "lodash";
-const { isEqual } = pkg;
 
 class AboutUsPage extends Page {
   // ---------- Locators ----------
@@ -72,49 +70,6 @@ class AboutUsPage extends Page {
     }
   }
 
-  /**
-   * Validates the content headers within the About Us section.
-   *
-   * @param expectedHeaders - Array of expected header texts.
-   * @returns Boolean - True if the actual headers match the expected headers.
-   */
-  public async validateAboutUsItemContent(
-    expectedHeaders: string[]
-  ): Promise<boolean> {
-    try {
-      const aboutUsContentHeaderList = await this.aboutUsContentItemHeaderList;
-
-      // Check if header list is available
-      if (aboutUsContentHeaderList.length === 0) {
-        throw new Error("No content headers found.");
-      }
-
-      const actualAboutUsItemContentHeaders: string[] = [];
-
-      // Extract and store all header texts
-      for (let i = 0; i < aboutUsContentHeaderList.length; i++) {
-        await aboutUsContentHeaderList[i].waitForDisplayed();
-        const headerText = await aboutUsContentHeaderList[i].getText();
-        console.log(headerText);
-        actualAboutUsItemContentHeaders.push(headerText);
-      }
-
-      console.log(
-        `Actual About Us Content Header List: "${actualAboutUsItemContentHeaders}"`
-      );
-
-      // Compare actual headers with expected headers
-      return isEqual(
-        actualAboutUsItemContentHeaders.sort(),
-        expectedHeaders.sort()
-      );
-    } catch (error) {
-      console.error(
-        "Error during About Us content validation: " + error.message
-      );
-      return false;
-    }
-  }
 }
 
 export default new AboutUsPage();
