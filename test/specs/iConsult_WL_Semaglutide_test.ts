@@ -3,6 +3,7 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
+import promoCodePage from "../pageobjects/promocodeHelper.js";
 
 /**
  * iConsult: Semaglutide E2E Flow
@@ -112,7 +113,6 @@ describe("iConsult Features", () => {
     console.log(`Subscription Plan Amount: ${iConsult_SubscriptionPlanAmount}`);
 
     // Continue to shipping address
-
     try {
       await iConsult.subscriptionPlanContinueButton.scrollIntoView();
       await iConsult.subscriptionPlanContinueButton.click();
@@ -141,7 +141,7 @@ describe("iConsult Features", () => {
       language === "en"
         ? iConsultWLData.iConsultWL_MedicineName_en
         : iConsultWLData.iConsultWL_MedicineName_es;
-    await expect(iConsultWLFlow.prescribedMedicine).toHaveText(
+    await expect(iConsult.prescribedMedicine).toHaveText(
       actualProductName
     );
     console.log(`Actual Product Name: ${actualProductName}`);
@@ -159,9 +159,13 @@ describe("iConsult Features", () => {
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(iConsult_SubscriptionPlanAmount);
 
-    // Complete the order
-    await iConsult.iConsultPage.scrollIntoView();
+    // Apply and Validate the Promo Code
+    const totalPrice: string = await promoCodePage.applyPromoCode(language, prodSubscriptionPrice);
+    await browser.pause(2000);
 
+    // Complete the order
+    await iConsult.prescribedMedicine.scrollIntoView();
+    await browser.pause(2000);
     await payPalPage.switchToPayPalIframe();
     await payPalPage.clickPayPalButton();
     await payPalPage.switchToPayPalWindow();
@@ -201,9 +205,7 @@ describe("iConsult Features", () => {
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       iConsult_SubscriptionPlan
     );
-    const productTotalPrice =
-      await iConsult.orderDetailsProductTotalPrice.getText();
-    const formattedPrice = productTotalPrice.replace(/\.00$/, "");
-    expect(formattedPrice).toEqual(iConsult_SubscriptionPlanAmount);
+    const productTotalPrice = await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
+    expect(productTotalPrice).toEqual(totalPrice.replace(/\.00$/, ""));
   });
 });
