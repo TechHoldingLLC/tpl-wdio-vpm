@@ -3,6 +3,7 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
+import promoCodePage from "../pageobjects/promocodeHelper.js";
 
 /**
  * iConsult: Tadalafil E2E Flow
@@ -157,14 +158,21 @@ describe("iConsult Features", () => {
       await iConsult.productSubscriptionPrice.getText();
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(iConsult_SubscriptionPlanAmount);
+  
+    // Apply and Validate the Promo Code
+    const totalPrice: string = await promoCodePage.applyPromoCode(language, prodSubscriptionPrice);
+    await browser.pause(2000);
 
+    // Complete the order
+    await iConsult.prescribedMedicine.scrollIntoView();
+    await browser.pause(2000);
     await payPalPage.switchToPayPalIframe();
     await payPalPage.clickPayPalButton();
     await payPalPage.switchToPayPalWindow();
     await payPalPage.loginToPayPal(
       payPalData.validLoginData.email,
       payPalData.validLoginData.password
-    );
+   );
     await payPalPage.confirmPayPalPayment();
     await payPalPage.switchBackToMainWindow();
 
@@ -191,8 +199,9 @@ describe("iConsult Features", () => {
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       iConsult_SubscriptionPlan
     );
-    expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
-      iConsult_SubscriptionPlanAmount
+    expect(await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""))).toEqual(
+      totalPrice.replace(/\.00$/, "")
+
     );
     /*
     // Complete the order

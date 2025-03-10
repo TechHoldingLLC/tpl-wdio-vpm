@@ -3,6 +3,7 @@ import iConsult from "../pageobjects/iConsult.page.js";
 import iConsultEDS from "../pageobjects/iConsult.ED_Sildenafil.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
+import promoCodePage from "../pageobjects/promocodeHelper.js";
 
 /**
  * iConsult: End-to-End Test Case for Sildenafil Flow
@@ -162,16 +163,22 @@ describe("iConsult feature - End to End flow", () => {
     expect(prodSubscriptionPlan).toEqual(subscriptionPlanDurationValue);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
+  // Apply and Validate the Promo Code
+    const totalPrice: string = await promoCodePage.applyPromoCode(language, prodSubscriptionPrice);
+    await browser.pause(2000);
+
+    // Complete the order
+    await iConsult.prescribedMedicine.scrollIntoView();
+    await browser.pause(2000);
     await payPalPage.switchToPayPalIframe();
     await payPalPage.clickPayPalButton();
     await payPalPage.switchToPayPalWindow();
     await payPalPage.loginToPayPal(
       payPalData.validLoginData.email,
       payPalData.validLoginData.password
-    );
+   );
     await payPalPage.confirmPayPalPayment();
     await payPalPage.switchBackToMainWindow();
-
     // View and verify order details
     await iConsult.viewOrderDetailsButton.click();
     await iConsult.orderDetailsScreen.waitForDisplayed();
@@ -193,8 +200,8 @@ describe("iConsult feature - End to End flow", () => {
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       subscriptionPlanDurationValue
     );
-    expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
-      subscriptionPlanAmount
+    expect(await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""))).toEqual(
+      totalPrice.replace(/\.00$/, "")
     );
 
     /*

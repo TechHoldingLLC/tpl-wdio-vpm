@@ -22,10 +22,7 @@ class iConsultWLFlow extends Page {
   public get iConsultCompletedMessage() {
     return $("//h5[@class='title text-orange-600 aos-init aos-animate']");
   }
-
-  public get prescribedMedicine() {
-    return $("h4[class='mb-5']");
-  }
+  
 
   // Eligible Screen
   public get successText() {
