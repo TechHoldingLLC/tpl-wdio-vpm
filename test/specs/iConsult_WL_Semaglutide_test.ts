@@ -3,7 +3,6 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
-import promoCodePage from "../pageobjects/promocodeHelper.js";
 
 /**
  * iConsult: Semaglutide E2E Flow
@@ -49,29 +48,26 @@ describe("iConsult Features", () => {
     // Log in to the application using credentials
     await LoginPage.login(loginData.login_email, loginData.login_password);
 
-    await browser.pause(3000);
+    await iConsult.homePageHeader.waitForDisplayed();
     await iConsult.sideMenuCloseButton.waitForClickable({ timeout: 3000 });
     await iConsult.sideMenuCloseButton.click(); // Close side menu
-    await browser.pause(2000);
 
     // Start the iConsult flow
     await iConsult.startFreeiConsultButton.waitForClickable({ timeout: 3000 });
     await iConsult.startFreeiConsultButton.click();
-    await browser.pause(2000);
 
     // Accept the consent form
-    await iConsult.consentCheckbox.waitForClickable();
+    await iConsult.consentCheckbox.waitForDisplayed();
     await iConsult.consentCheckbox.click();
-    await browser.pause(2000);
+    await browser.pause(1000);
     await iConsult.consentContinueButton.click();
-    await browser.pause(7000);
 
-    // Select Erectile Dysfunction and proceed
+    // Select Weight Loss and proceed
+    await iConsult.iConsultWLSelection.waitForDisplayed();
     await iConsult.iConsultWLSelection.click();
     await browser.pause(5000);
     if (await iConsult.startNewiConsult.isDisplayed()) {
       await iConsult.startNewiConsult.click();
-      await browser.pause(2000);
     }
 
     // Answer iConsult questions
@@ -100,7 +96,6 @@ describe("iConsult Features", () => {
     await iConsult.productContinueButton.click();
     await iConsult.subscriptionPlanOptions.waitForDisplayed();
     await iConsult.semaglutide4WeekKit.click(); // Select 4 Weeks Starter Kit
-    await browser.pause(3000);
 
     // Fetch and log subscription plan details
     const iConsult_SubscriptionPlan =
@@ -120,30 +115,25 @@ describe("iConsult Features", () => {
       await iConsult.subscriptionPlanContinueButton.scrollIntoView();
       await iConsult.subscriptionPlanContinueButton.click();
     }
-    await browser.pause(1500);
     await iConsult.shippingAddressOptions.waitForDisplayed();
     await iConsult.shipSelectAddress.waitForDisplayed();
     await iConsult.shipSelectAddress.click(); // Select existing shipping address
     await browser.pause(1500);
     await iConsult.shipSaveBtn.scrollIntoView(); // Save selected address
     await iConsult.shipSaveBtn.click();
-    await browser.pause(2000);
 
     // Verify the iConsult page title (summary)
     await iConsult.iConsultPage.waitForDisplayed();
     expect(await iConsult.iConsultPage).toHaveText(
       iConsultWLData.iConsultWL_SummaryTitle
     );
-    await browser.pause(5000);
 
     // Validate the product name in the order summary
     const actualProductName =
       language === "en"
         ? iConsultWLData.iConsultWL_MedicineName_en
         : iConsultWLData.iConsultWL_MedicineName_es;
-    await expect(iConsult.prescribedMedicine).toHaveText(
-      actualProductName
-    );
+    await expect(iConsult.prescribedMedicine).toHaveText(actualProductName);
     console.log(`Actual Product Name: ${actualProductName}`);
 
     // Validate subscription plan and price in the order summary
@@ -201,7 +191,11 @@ describe("iConsult Features", () => {
     expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
       iConsult_SubscriptionPlan
     );
-    const productTotalPrice = await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
-    expect(productTotalPrice).toEqual(prodSubscriptionPrice.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
+    const productTotalPrice = await iConsult.orderDetailsProductTotalPrice
+      .getText()
+      .then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
+    expect(productTotalPrice).toEqual(
+      prodSubscriptionPrice.replace(/[^\d.]/g, "").replace(/\.00$/, "")
+    );
   });
 });

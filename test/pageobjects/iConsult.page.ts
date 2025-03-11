@@ -9,6 +9,10 @@ class iConsult extends Page {
     return $("#start-free-iconsult");
   }
 
+  public get homePageHeader() {
+    return $('//h1[text()="VIAPROMEDS"]');
+  }
+
   public get consentCheckbox() {
     return $('label[id$="termsAndConditions"]');
   }
@@ -19,8 +23,8 @@ class iConsult extends Page {
 
   // Locators for iConsult Summary page
   public get prescribedMedicine() {
-      return $("h4[class='mb-5']");
-    }
+    return $("h4[class='mb-5']");
+  }
 
   /*
    * Locators for the problem address questions screen
@@ -57,7 +61,7 @@ class iConsult extends Page {
   }
 
   public get sideMenuCloseButton() {
-    return $('[class="btn-rounded Header_close-btn__rNA2L"]');
+    return $('//span[contains(@class,"btn-rounded Header_close-btn")]');
   }
 
   /*
