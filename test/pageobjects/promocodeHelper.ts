@@ -24,6 +24,12 @@ class PromoCode extends Page {
     return $('//span[contains(@class,"Summary_total-main-price")]');
   }
 
+  public get alertToast() {
+    return $(
+      '//div[@class="Toastify__toast Toastify__toast-theme--colored Toastify__toast--error Toastify__toast--close-on-click"]'
+    );
+  }
+
   // Valid PromoCode
   public async applyValidPromoCode(
     language: string,
@@ -35,18 +41,16 @@ class PromoCode extends Page {
     await this.promoCodeInputBox.setValue(validPromoCode);
     await this.applyCouponCodeButton.click();
 
-    //Verify the promo code validation
+    //Apply Promo Code
     await this.validationMessage.waitForDisplayed();
     console.log(await this.validationMessage.getText());
 
+    // Verify the promo code validation
     const validationText = await this.validationMessage.getText();
-
-    // Verify the promo code validation message
     const expectedMessage =
       language === "en"
         ? "Promo Applied Successfully!"
         : "¡Código aplicado con éxito!";
-
     expect(validationText).toContain(expectedMessage);
 
     // Parse Prices
@@ -70,6 +74,45 @@ class PromoCode extends Page {
     expect(discountedPrice).toEqual(parseFloat(totalDiscountedPrice));
 
     return totalDiscountedPrice;
+  }
+
+  // Invalid Promo Code
+  public async applyInvalidPromoCode(language: string): Promise<void> {
+    const invalidPromoCode: string = "INVALID";
+    await iConsult.iConsultPage.scrollIntoView();
+    await this.promoCodeInputBox.waitForDisplayed();
+    await this.promoCodeInputBox.setValue(invalidPromoCode);
+    await this.applyCouponCodeButton.click();
+
+    //Apply Promo Code
+    await this.validationMessage.waitForDisplayed();
+    console.log(await this.validationMessage.getText());
+
+    // Verify the promo code validation message
+    const validationText = await this.validationMessage.getText();
+    const expectedMessage =
+      language === "en"
+        ? "Promo Is Not Valid."
+        : "Código promocional inválido.";
+    expect(validationText).toContain(expectedMessage);
+  }
+
+  // Empty Promo Code
+  public async applyEmptyPromoCode(language: string): Promise<void> {
+    await iConsult.iConsultPage.scrollIntoView();
+    await this.promoCodeInputBox.waitForDisplayed();
+    await this.promoCodeInputBox.setValue("");
+    await this.applyCouponCodeButton.click();
+
+    // Verify the promo code validation message
+    await this.alertToast.waitForDisplayed();
+    console.log(await this.alertToast.getText());
+    const validationText = await this.alertToast.getText();
+    const expectedMessage =
+      language === "en"
+        ? "Please enter a promo code."
+        : "Por favor, ingrese un código promocional.";
+    expect(validationText).toContain(expectedMessage);
   }
 }
 export default new PromoCode();
