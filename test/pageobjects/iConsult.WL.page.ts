@@ -22,7 +22,6 @@ class iConsultWLFlow extends Page {
   public get iConsultCompletedMessage() {
     return $("//h5[@class='title text-orange-600 aos-init aos-animate']");
   }
-  
 
   // Eligible Screen
   public get successText() {

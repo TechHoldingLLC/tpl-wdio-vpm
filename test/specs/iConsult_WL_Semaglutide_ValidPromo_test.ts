@@ -3,7 +3,8 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
-import promoCodePage from "../pageobjects/promocodeHelper.js";
+import promoCodeActions from "../pageobjects/promocodeHelper.js";
+
 
 /**
  * iConsult: Semaglutide E2E Flow
@@ -159,6 +160,9 @@ describe("iConsult Features", () => {
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(iConsult_SubscriptionPlanAmount);
 
+    // Apply and Validate the Promo Code
+    const totalDiscountedPrice: string = await promoCodeActions.applyValidPromoCode(language, prodSubscriptionPrice);
+
     // Complete the order
     await iConsult.prescribedMedicine.scrollIntoView();
     await browser.pause(2000);
@@ -202,6 +206,6 @@ describe("iConsult Features", () => {
       iConsult_SubscriptionPlan
     );
     const productTotalPrice = await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
-    expect(productTotalPrice).toEqual(prodSubscriptionPrice.replace(/[^\d.]/g, "").replace(/\.00$/, ""));
+    expect(productTotalPrice).toEqual(totalDiscountedPrice.replace(/\.00$/, ""));
   });
 });
