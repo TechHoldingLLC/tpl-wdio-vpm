@@ -81,12 +81,8 @@ class PromoCode extends Page {
     expect(discountedPrice).toEqual(parseFloat(totalDiscountedPrice));
 
     // Validate Promo Code matches with the JSON
-    try {
-      const expectedDiscount = promoCodes[validPromoCode];
-      expect(appliedDiscount).toEqual(expectedDiscount);
-    } catch (error) {
-      console.log(chalk.red("Promo Code doesn't match with the database!"));
-    }
+    const expectedDiscount = promoCodes[validPromoCode];
+    expect(appliedDiscount).toEqual(expectedDiscount);
 
     return totalDiscountedPrice;
   }

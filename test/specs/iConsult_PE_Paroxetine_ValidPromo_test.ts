@@ -13,7 +13,6 @@ import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
 import promoCodeActions from "../pageobjects/promocodeHelper.js";
 
-
 describe("iConsult Features", () => {
   /**
    * Before All Hook
@@ -51,15 +50,15 @@ describe("iConsult Features", () => {
     let loginData: any;
 
     // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
-      const url = await browser.getUrl();
-      const language: string = await iConsult.getLanguageFromUrl(url); // Detect the language from the URL
-      if (url.includes("qa")) {
-        loginData = logindata.login_valid;
-      } else if (url.includes("stage")) {
-        loginData = logindata.stage_login_valid;
-      } else {
-        loginData = logindata.prod_login_valid;
-      }
+    const url = await browser.getUrl();
+    const language: string = await iConsult.getLanguageFromUrl(url); // Detect the language from the URL
+    if (url.includes("qa")) {
+      loginData = logindata.login_valid;
+    } else if (url.includes("stage")) {
+      loginData = logindata.stage_login_valid;
+    } else {
+      loginData = logindata.prod_login_valid;
+    }
 
     // Log in using the determined credentials
     await LoginPage.login(loginData.login_email, loginData.login_password);
@@ -101,9 +100,13 @@ describe("iConsult Features", () => {
     );
 
     // Validate the recommended medicine description based on the language
-    language === "en" 
-    ? expect(await iConsult.productDescription.getText()).toHaveText(iConsultPEData.iConsultPE_MedicineDescription)
-    : expect(await iConsult.productDescription.getText()).toHaveText(iConsultPEData.iConsultPE_MedicineDescription_es);
+    language === "en"
+      ? expect(await iConsult.productDescription.getText()).toHaveText(
+          iConsultPEData.iConsultPE_MedicineDescription
+        )
+      : expect(await iConsult.productDescription.getText()).toHaveText(
+          iConsultPEData.iConsultPE_MedicineDescription_es
+        );
 
     // Continue to subscription selection
     await iConsult.productContinueButton.click();
@@ -159,9 +162,12 @@ describe("iConsult Features", () => {
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
-
     // Apply and Validate the Promo Code
-    const totalDiscountedPrice: string = await promoCodeActions.applyValidPromoCode(language, prodSubscriptionPrice);
+    const totalDiscountedPrice: string =
+      await promoCodeActions.applyValidPromoCode(
+        language,
+        prodSubscriptionPrice
+      );
     await browser.pause(2000);
 
     // Complete the order
@@ -173,10 +179,10 @@ describe("iConsult Features", () => {
     await payPalPage.loginToPayPal(
       payPalData.validLoginData.email,
       payPalData.validLoginData.password
-   );
+    );
     await payPalPage.confirmPayPalPayment();
     await payPalPage.switchBackToMainWindow();
-    
+
     /*
     // Select payment method and place the order
     await iConsult.cardSelection.scrollIntoView(); // Scroll to card selection
@@ -200,7 +206,7 @@ describe("iConsult Features", () => {
     }
     await browser.pause(2000);
     */
-   
+
     // View order details
     await iConsult.viewOrderDetailsButton.click(); // Open order details
     await iConsult.orderDetailsScreen.waitForDisplayed();
@@ -235,8 +241,10 @@ describe("iConsult Features", () => {
     console.log(
       `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
     );
-    expect(await iConsult.orderDetailsProductTotalPrice.getText().then((text) => text.replace(/[^\d.]/g, ""))).toEqual(
-      totalDiscountedPrice.replace(/\.00$/, "")
-    );
+    expect(
+      await iConsult.orderDetailsProductTotalPrice
+        .getText()
+        .then((text) => text.replace(/[^\d.]/g, ""))
+    ).toEqual(totalDiscountedPrice.replace(/\.00$/, ""));
   });
 });

@@ -11,7 +11,6 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import iConsultGHPage from "../pageobjects/iConsult.GH.page.js";
 import fs from "fs";
-import payPalPage from "../pageobjects/paypal.page.js";
 import promocodeActions from "../pageobjects/promocodeHelper.js";
 
 describe("iConsult Feature - End to End Flow", () => {
@@ -41,9 +40,6 @@ describe("iConsult Feature - End to End Flow", () => {
     const logindata = JSON.parse(fs.readFileSync(loginDataPath, "utf-8"));
     const iConsultGHData = JSON.parse(
       fs.readFileSync("./test/data/iConsultGHData.json", "utf-8")
-    );
-    const payPalData = JSON.parse(
-      fs.readFileSync("./test/data/payPalData.json", "utf-8")
     );
 
     let loginData: any;
@@ -136,9 +132,6 @@ describe("iConsult Feature - End to End Flow", () => {
     await iConsult.shipSaveBtn.click(); // Confirm the address
     await browser.pause(2000);
 
-    // Upload ID proofs (currently commented out)
-    // await iConsult.uploadPhotoIDProofs(IDProofPath, photoPath);
-
     // Validate order summary details
     await iConsult.iConsultPage.waitForDisplayed(); // Wait for the summary page to load
     expect(iConsult.iConsultPage).toHaveText(
@@ -167,78 +160,5 @@ describe("iConsult Feature - End to End Flow", () => {
     // Apply Promo Code(Empty & Invalid)
     await promocodeActions.applyEmptyPromoCode(language);
     await promocodeActions.applyInvalidPromoCode(language);
-
-    // Complete Payment
-    await payPalPage.switchToPayPalIframe();
-    await payPalPage.clickPayPalButton();
-    await payPalPage.switchToPayPalWindow();
-    await payPalPage.loginToPayPal(
-      payPalData.validLoginData.email,
-      payPalData.validLoginData.password
-    );
-    await payPalPage.confirmPayPalPayment();
-    await payPalPage.switchBackToMainWindow();
-
-    /*
-    // Select payment method and place the order
-    await iConsult.cardSelection.scrollIntoView(); // Scroll to card selection
-    await browser.pause(2000);
-    await iConsult.cardSelection.click(); // Select the payment card
-    await browser.pause(2000);
-    await iConsult.submitOrder.scrollIntoView();
-    await browser.pause(2000);
-    await iConsult.submitOrder.click(); // Submit the order
-    await iConsult.iConsultCompletionScreen.waitForDisplayed();
-
-    // Validate order completion message
-    const completionMsg =
-      language === "en"
-        ? iConsultGHData.iConsultGH_CompletionMsg
-        : iConsultGHData.iConsultGH_CompletionMsg_es;
-    await browser.pause(1500);
-    const iConsultCompletionMessage: string =
-      await iConsult.iConsultCompletionScreen.getText();
-    console.log(`iConsultCompletionMessage is: ${iConsultCompletionMessage}`);
-    expect(await iConsult.iConsultCompletionScreen.getText()).toEqual(
-      completionMsg
-    );
-
-    await browser.pause(2000);
-*/
-    // View order details
-    await iConsult.viewOrderDetailsButton.click(); // Open order details
-    await iConsult.orderDetailsScreen.waitForDisplayed();
-    await iConsult.orderListTab.waitForDisplayed();
-
-    // Fetch and log Order ID
-    const orderId: string = await iConsult.getOrderID();
-    console.log(`My Order ID is: ${orderId}`);
-
-    // Store order details in a JSON file
-    const jsonOrderFilePath = "./test/data/generatedOrderDetails.json";
-    const orderDetails: Record<string, string> = {};
-    orderDetails[Recommendation_medicine_title] = orderId;
-
-    fs.writeFileSync(jsonOrderFilePath, JSON.stringify(orderDetails, null, 4));
-    console.log("Order details have been written to orderDetails.json");
-
-    // Validate product name and subscription in the order details
-    const orderInformation = await iConsult.getOrderInformation();
-    console.log(`Order Product Name is: "${orderInformation.productName}"`);
-    expect(await iConsult.orderDetailProductName.getText()).toEqual(
-      Recommendation_medicine_title
-    );
-    console.log(
-      `Order Details: Product Subscription Plan is: "${orderInformation.subscriptionPlan}"`
-    );
-    expect(await iConsult.orderDetailsProductSubscriptionPlan).toHaveText(
-      subscriptionPlanDurationValue
-    );
-    console.log(
-      `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
-    );
-    expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
-      subscriptionPlanAmount
-    );
   });
 });
