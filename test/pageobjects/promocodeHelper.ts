@@ -1,7 +1,6 @@
 import Page from "./page.js";
 import iConsult from "./iConsult.page.js";
 import fs from "fs";
-import chalk from "chalk";
 
 class PromoCode extends Page {
   // Locators for promo code
@@ -60,7 +59,7 @@ class PromoCode extends Page {
         : "¡Código aplicado con éxito!";
     expect(validationText).toContain(expectedMessage);
 
-    // Parse Prices and verify the pplied discount
+    // Parse Prices and verify the applied discount
     const originalPrice = parseFloat(
       await productSubscriptionPrice.replace(/[^\d.]/g, "")
     );
