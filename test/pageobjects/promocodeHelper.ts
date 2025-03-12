@@ -1,5 +1,7 @@
 import Page from "./page.js";
 import iConsult from "./iConsult.page.js";
+import fs from "fs";
+import chalk from "chalk";
 
 class PromoCode extends Page {
   // Locators for promo code
@@ -35,6 +37,11 @@ class PromoCode extends Page {
     language: string,
     productSubscriptionPrice: string
   ): Promise<string> {
+    // Load promo codes from JSON
+    const promoCodes = JSON.parse(
+      fs.readFileSync("./test/data/promoCodeData.json", "utf-8")
+    );
+
     const validPromoCode: string = "VIP10";
     await iConsult.iConsultPage.scrollIntoView();
     await this.promoCodeInputBox.waitForDisplayed();
@@ -53,7 +60,7 @@ class PromoCode extends Page {
         : "¡Código aplicado con éxito!";
     expect(validationText).toContain(expectedMessage);
 
-    // Parse Prices
+    // Parse Prices and verify the pplied discount
     const originalPrice = parseFloat(
       await productSubscriptionPrice.replace(/[^\d.]/g, "")
     );
@@ -72,6 +79,14 @@ class PromoCode extends Page {
       .getText()
       .then((text) => text.replace(/[^\d.]/g, ""));
     expect(discountedPrice).toEqual(parseFloat(totalDiscountedPrice));
+
+    // Validate Promo Code matches with the JSON
+    try {
+      const expectedDiscount = promoCodes[validPromoCode];
+      expect(appliedDiscount).toEqual(expectedDiscount);
+    } catch (error) {
+      console.log(chalk.red("Promo Code doesn't match with the database!"));
+    }
 
     return totalDiscountedPrice;
   }
