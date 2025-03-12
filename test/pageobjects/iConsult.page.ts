@@ -9,12 +9,21 @@ class iConsult extends Page {
     return $("#start-free-iconsult");
   }
 
+  public get homePageHeader() {
+    return $('//h1[text()="VIAPROMEDS"]');
+  }
+
   public get consentCheckbox() {
     return $('label[id$="termsAndConditions"]');
   }
 
   public get consentContinueButton() {
     return $('//button[@class="btn-primary btn-sm text-uppercase mt-20"]');
+  }
+
+  // Locators for iConsult Summary page
+  public get prescribedMedicine() {
+    return $("h4[class='mb-5']");
   }
 
   /*
@@ -52,7 +61,7 @@ class iConsult extends Page {
   }
 
   public get sideMenuCloseButton() {
-    return $('[class="btn-rounded Header_close-btn__rNA2L"]');
+    return $('//span[contains(@class,"btn-rounded Header_close-btn")]');
   }
 
   /*
@@ -488,7 +497,7 @@ class iConsult extends Page {
   }
 
   public get semaglutide4WeekKit() {
-    return $('//span[contains(text(),"4 week Starter Kit")]');
+    return $('//span[contains(@class,"radio-title text-font")]');
   }
 
   public get semaglutideProductDescription() {

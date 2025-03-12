@@ -23,10 +23,6 @@ class iConsultWLFlow extends Page {
     return $("//h5[@class='title text-orange-600 aos-init aos-animate']");
   }
 
-  public get prescribedMedicine() {
-    return $("h4[class='mb-5']");
-  }
-
   // Eligible Screen
   public get successText() {
     return $('//div[contains(@class,"infoData InfoScreen")]//p');
@@ -112,62 +108,62 @@ class iConsultWLFlow extends Page {
     // Select options for each question in the questionnaire
 
     // Question 1
+    await this.option1forQuestion1.waitForDisplayed();
     await this.option1forQuestion1.click();
-    await browser.pause(2000);
 
     // Question 2.1
+    await this.dropdownforQuestion2_1.waitForDisplayed();
     await this.dropdownforQuestion2_1.click();
     await this.answerforQuestion2_1.waitForDisplayed();
     await this.answerforQuestion2_1.click();
-    await browser.pause(2000);
 
     // Question 2.2
     await this.answerforQuestion2_2.clearValue();
     await this.answerforQuestion2_2.addValue("300");
     await this.continueButtonQuestionnaire.click();
-    await browser.pause(2000);
 
     // Confirmation Screen
-    await this.continueButtonQuestionnaire.click();
     await browser.pause(2000);
+    await this.continueButtonQuestionnaire.click();
 
     // Question 3
+    await this.option2forQuestion3.waitForDisplayed();
     await this.option2forQuestion3.click();
-    await browser.pause(2000);
 
     // Question 4
+    await this.option4forQuestion4.waitForDisplayed();
     await this.option4forQuestion4.click();
     await this.option4forQuestion4.click();
     await this.continueButtonQuestionnaire.click();
-    await browser.pause(2000);
 
     // Question 5
-    await this.option2forQuestion5.click();
     await browser.pause(2000);
+    await this.option2forQuestion5.click();
 
     // Question 6
-    await this.option2forQuestion6.click();
     await browser.pause(2000);
+    await this.option2forQuestion6.click();
 
     // Question 7
+    await this.option5forQuestion7.waitForDisplayed();
     await this.option5forQuestion7.click();
     await this.option5forQuestion7.click();
     await this.continueButtonQuestionnaire.scrollIntoView();
     await browser.pause(2000);
     await this.continueButtonQuestionnaire.click();
-    await browser.pause(2000);
 
     // Question 8
-    await this.option2forQuestion8.click();
     await browser.pause(2000);
+    await this.option2forQuestion8.click();
 
     // Question 9
+    await this.answerforQuestion9.waitForDisplayed();
     await this.answerforQuestion9.clearValue();
     await this.answerforQuestion9.addValue("No");
     await this.continueButtonQuestionnaire.click();
-    await browser.pause(2000);
 
     // Question 10
+    await browser.pause(2000);
     await this.answerforQuestion10.clearValue();
     await this.answerforQuestion10.addValue("No");
     await this.continueButtonQuestionnaire.click();

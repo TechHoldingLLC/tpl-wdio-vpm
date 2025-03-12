@@ -11,6 +11,7 @@ import LoginPage from "../pageobjects/login.page.js";
 import iConsult from "../pageobjects/iConsult.page.js";
 import fs from "fs";
 import payPalPage from "../pageobjects/paypal.page.js";
+import promoCodeActions from "../pageobjects/promocodeHelper.js";
 
 describe("iConsult Features", () => {
   /**
@@ -48,7 +49,7 @@ describe("iConsult Features", () => {
 
     let loginData: any;
 
-    // Determine the environment from the URL and load appropriate credentials
+    // Get the current URL and set login credentials based on the environment (QA/Stage/Prod)
     const url = await browser.getUrl();
     const language: string = await iConsult.getLanguageFromUrl(url); // Detect the language from the URL
     if (url.includes("qa")) {
@@ -99,9 +100,13 @@ describe("iConsult Features", () => {
     );
 
     // Validate the recommended medicine description based on the language
-   language === "en" 
-       ? expect(await iConsult.productDescription.getText()).toHaveText(iConsultPEData.iConsultPE_MedicineDescription)
-       : expect(await iConsult.productDescription.getText()).toHaveText(iConsultPEData.iConsultPE_MedicineDescription_es);
+    language === "en"
+      ? expect(await iConsult.productDescription.getText()).toHaveText(
+          iConsultPEData.iConsultPE_MedicineDescription
+        )
+      : expect(await iConsult.productDescription.getText()).toHaveText(
+          iConsultPEData.iConsultPE_MedicineDescription_es
+        );
 
     // Continue to subscription selection
     await iConsult.productContinueButton.click();
@@ -157,6 +162,17 @@ describe("iConsult Features", () => {
     console.log(`Product Subscription Price: ${prodSubscriptionPrice}`);
     expect(prodSubscriptionPrice).toEqual(subscriptionPlanAmount);
 
+    // Apply and Validate the Promo Code
+    const totalDiscountedPrice: string =
+      await promoCodeActions.applyValidPromoCode(
+        language,
+        prodSubscriptionPrice
+      );
+    await browser.pause(2000);
+
+    // Complete the order
+    await iConsult.prescribedMedicine.scrollIntoView();
+    await browser.pause(2000);
     await payPalPage.switchToPayPalIframe();
     await payPalPage.clickPayPalButton();
     await payPalPage.switchToPayPalWindow();
@@ -190,6 +206,7 @@ describe("iConsult Features", () => {
     }
     await browser.pause(2000);
     */
+
     // View order details
     await iConsult.viewOrderDetailsButton.click(); // Open order details
     await iConsult.orderDetailsScreen.waitForDisplayed();
@@ -224,8 +241,10 @@ describe("iConsult Features", () => {
     console.log(
       `Order Details: Product Total Price is: "${orderInformation.totalPrice}"`
     );
-    expect(await iConsult.orderDetailsProductTotalPrice.getText()).toEqual(
-      subscriptionPlanAmount
-    );
+    expect(
+      await iConsult.orderDetailsProductTotalPrice
+        .getText()
+        .then((text) => text.replace(/[^\d.]/g, ""))
+    ).toEqual(totalDiscountedPrice.replace(/\.00$/, ""));
   });
 });
